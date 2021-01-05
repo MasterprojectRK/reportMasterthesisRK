@@ -1,0 +1,17 @@
+*.aux
+*.bcf
+*.acn
+*.acr
+*.alg
+*.bbl
+*.kile*
+*.toc
+*.out
+*.blg
+*.glg
+*.glo
+*.gls
+*.ist
+*.log
+*.run.xml
+*.synctex*

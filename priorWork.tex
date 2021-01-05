@@ -1,0 +1,20 @@
+\section{Related work}
+The following sections will give an overwiew on existing work dealing with the prediction of 
+DNA-DNA interactions, in particular the prediction of Hi-C contact matrices.
+
+Additionally, 
+
+\subsection{Methods for predicting DNA-DNA interactions and contact matrices}
+As of 2020, there is quite a body of existing work in the field of predicting DNA-DNA interactions 
+from various experimental data, using several different techniques. Most methods
+make use of known correlations between certain chromatin factors and DNA looping or
+between chromatin factors and \acrfull{tad} boundaries, as
+shall be outlined below.
+
+One method to predict DNA-DNA interactions is HiC-Reg, which has been proposed
+by Zhang et. al in 2019 \cite{Zhang2019}. It is using random forest regression to predict interaction
+matrices using \acrshort{cs} data of 14 transcription factors and histone modifications as well
+as DNase-seq data and genomic distance. 
+The published results for five human cell lines are interesting, but could not be reproduced in two study projects at the university of Freiburg~\cite{Krauth2020,Bajorat2019}.
+
+\subsection{Generative machine learning techniques}
