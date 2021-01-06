@@ -1,20 +1,51 @@
 \section{Related work}
-The following sections will give an overwiew on existing work dealing with the prediction of 
-DNA-DNA interactions, in particular the prediction of Hi-C contact matrices.
+In the last five years, several approaches have been presented to determine DNA-DNA interactions \emph{in silico}, 
+using existing data from various experiments. \autoref{sec:prior:predictingInteractions} gives an overview about these methods.
+Furthermore, some methods originally developed for image synthesis and similar tasks in computer vision might also be useful 
+in the field of Hi-C matrix generation and are thus summarized in \autoref{sec:prior:generativeCV}.
 
-Additionally, 
+\subsection{Methods for predicting DNA-DNA interactions and contact matrices} \label{sec:prior:predictingInteractions}
+As of 2020, there is quite a body of existing work in the field of predicting DNA-DNA interactions, 
+using various approaches and different types of input data.
 
-\subsection{Methods for predicting DNA-DNA interactions and contact matrices}
-As of 2020, there is quite a body of existing work in the field of predicting DNA-DNA interactions 
-from various experimental data, using several different techniques. Most methods
-make use of known correlations between certain chromatin factors and DNA looping or
-between chromatin factors and \acrfull{tad} boundaries, as
-shall be outlined below.
+Two conceptually similar methods have been proposed by Brackley et al. in 2016 and MacPherson et al. in 2018 \cite{Brackley2016, MacPherson2018}.
+In both approaches, DNA is modeled as a ``beads-on-a-string'' polymer, and simulation techniques are employed to
+find energy-optimal spatial structures of these polymers.
+Apart from constraints derived from the molecule's DNA sequence itself, the models also consider spatial contact constraints derived from \acrshort{cs} experiments
+of chromatin factors which are known to mediate such DNA-DNA contacts.
+The interaction matrices derived from the simulations look interesting, 
+but the paper from Brackley et al. \cite{Brackley2016} is unfortunately lacking a comparison with ``true'' experimentally measured Hi-C matrices, 
+and the results from MacPherson et al. \cite{MacPherson2018} seem inferior to most other ones presented in this section.
 
-One method to predict DNA-DNA interactions is HiC-Reg, which has been proposed
-by Zhang et. al in 2019 \cite{Zhang2019}. It is using random forest regression to predict interaction
-matrices using \acrshort{cs} data of 14 transcription factors and histone modifications as well
-as DNase-seq data and genomic distance. 
-The published results for five human cell lines are interesting, but could not be reproduced in two study projects at the university of Freiburg~\cite{Krauth2020,Bajorat2019}.
+Another simulation-based method has been developed by di Pierro et al. in 2017 \cite{Pierro2017} and later extended by Qi and Zhang \cite{Qi2019}. 
+In both cases, a \acrfull{cnn} is trained to learn different ``open'' and ``closed'' chromatin states from 11 chromatin factors, 
+and the predicted chromatin states are then taken as constraints for beads-on-a-string models.
+The difference between \cite{Pierro2017} and \cite{Qi2019} lies mainly in the number of states considered and the simulation methods applied;
+the results are mathematically convincing in both cases.
 
-\subsection{Generative machine learning techniques}
+A further approach using chromatin states is due to Farr\`e and Emberly \cite{Farre2018}.
+Here, the conditional probability of two genomic regions being in contact, given their distance and the chromatin state around them,
+is estimated using Bayes' rule. 
+In this case, the chromatin state -- reduced to active or inactive -- is derived from \acrfull{damid} signals of 53 chromatin factors using probabilistic methods \cite{Zhou2016}.
+The conditional probabilities on the right side of Bayes' rule are either computed from training data or estimated with different probabilistic approaches, too.
+While the predicted contact matrices do not look like real Hi-C matrices with this approach, highly interacting regions are still often well identifiable.
+
+
+
+
+Conceptually probably the most simple method in this regard is HiC-Reg, 
+proposed by Zhang et. al in 2019~\cite{Zhang2019}. 
+It is a machine learning approach, using random forest regression to predict interactions
+between two genomic ``windows'', using \acrshort{cs} data of 13 chromatin features, i.\,e. transcription factors and histone modifications, as well
+as DNase-seq data and the genomic distance of the two windows. 
+The published results for five human cell lines look interesting, but could not be reproduced in two study projects at the university of Freiburg~\cite{Krauth2020,Bajorat2019}.
+
+Another machine-learning approach for direct prediction of interaction matrices was presented by Farr\`e et al. \cite{Farre2018a}
+in 2018. Here, a one-dimensional convolutional filter is used to convert \acrshort{cs} data from 50 chromatin factors into a 
+one-dimensional chromatin vector, which is then processed by a \acrfull{dnn} to predict interaction matrices. 
+The weights of the network are trained on experimental, distance-normalized Hi-C matrices.
+The published results for drosophila melanogaster chromosomes look again interesting, since the predicted matrices resemble the general structure of real matrices quite well.
+
+
+
+\subsection{Generative techniques from computer vision} \label{sec:prior:generativeCV}
