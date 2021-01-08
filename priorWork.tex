@@ -1,6 +1,6 @@
 \section{Related work}
 In the last five years, several approaches have been presented to determine DNA-DNA interactions \emph{in silico}, 
-using existing data from various experiments. \autoref{sec:prior:predictingInteractions} gives an overview about these methods.
+using existing data from various experiments. \Cref{sec:prior:predictingInteractions} gives an overview about these methods.
 Furthermore, some methods originally developed for image synthesis and similar tasks in computer vision might also be useful 
 in the field of Hi-C matrix generation and are thus summarized in \autoref{sec:prior:generativeCV}.
 
@@ -62,10 +62,11 @@ The work by Peng from 2017 \cite{peng2017} is an extension of SPEID, based on a 
 additionally taking into account a ``middle sequence'' between enhancer- and promoter sequences,
 CTCF motif counts within the sequences and genomic distance between two sequence snippets. 
 However, the network lacks generalization, i.\,e. the results are only good in training regions \cite[figs. 4, 5]{peng2017}.
-A conceptually similar method to the one by Peng \cite{peng2017}, but with a different neural network design has been presented by Schreiber et al., also in 2017, named Rambutan \cite{Schreiber2017}.
+A conceptually similar method to the one by Peng \cite{peng2017}, but with a different neural network design has been presented by Schreiber et al., also in 2017, 
+named Rambutan \cite{Schreiber2017}.
 It accepts sequence, DNase-seq data and distance between two genomic loci as inputs 
 and then uses a combination of \acrshort{cnn}s and a \acrshort{dnn} to predict whether the given two loci interact or not. 
-Unfortunately, it is difficult to decide whether the results of Schreiber et al. are useful in practice, since the evaluation is done only by statistical means 
+Unfortunately, it is difficult to decide whether the results of Schreiber et al. are useful for the task at hand, since the evaluation is done only by statistical means 
 and no actual Hi-C matrices have been published.
 The original paper \cite{Schreiber2017} also contains a known error and seems not to have appeared in a peer-reviewed journal in improved form 
 yet. 
@@ -76,20 +77,47 @@ converts one-dimensional representations to 2D, further processes the data with 
 Although Fudenberg et al. initally seemed to focus on determining the influence of DNA modifications on spatial structure \cite{Fudenberg2019},
 predicting complete Hi-C matrices is an integral part of their work, 
 and a large number of images of Hi-C matrices from the test set has been published alongside the article. 
-The predicted matrices often hardly look like Hi-C matrices, but mostly indicate highly interacting regions quite well.
+The predicted matrices often hardly look like experimental Hi-C matrices, but mostly still indicate highly interacting regions quite well.
 
 A further method by Schwessinger et al. \cite{Schwessinger2019} also makes use of DNA sequence and additional epigenetic data for its predictions,
 but is conceptually different from the ones presented so far.
 Here, \acrshort{cs} tracks are initially used to train a \acrshort{cnn} on the relationship between sequence and 
 the corresponding chromatin factors. The weights of this first network are then used to seed another \acrlong{cnn},
 which is responsible for predicting DNA-DNA interactions from DNA sequence.
-In this case, the results were blurry, but generally in good accordance with Hi-C experimental data.
-However, the neural network is large and thus requires long training times at small batch sizes.
+In this case, the results were blurry, but generally in good accordance with experimental Hi-C data.
+However, the neural network has a large number of weights and thus requires long training times at very small batch sizes.
 
-Yet another machine-learning concept based on sequence data has been proposed by Nikumbh and Pfeifer in 2017 \cite{Nikumbh2017}.
+Yet another machine-learning concept based on sequence data, Samarth, has been proposed by Nikumbh and Pfeifer in 2017 \cite{Nikumbh2017}.
 Here, a support vector machine is trained on 5C data, using a specific representation for DNA sequence called oligomer distance histograms.
 The results showed acceptable consensus with experimental Hi-C data and allowed some interesting conclusions
-about the importance of certain k-mers for DNA folding.
+about the importance of certain k-mers for DNA folding. 
+Unfortunately, none of the predicted matrices used for statistical evaluation has been published alongside the paper,
+making an assessment of the usefulness for the task at hand again difficult.
+
+\subsection{Image synthesis techniques from computer vision} \label{sec:prior:generativeCV}
+With the advent of deep learning, both the number of oppurtunities and the demand for using machine learning techniques 
+in image synthesis tasks have risen, as recently summarized by Tsirikoglou et al. \cite{Tsirikoglou2020}.
+Since Hi-C contact matrices can be seen as are square grayscale images, such techniques can also be relevant for this thesis.
+
+One of the first applications of computer vision methods for Hi-C matrices was presented by Liu and Wang in 2019 \cite{Liu2019b}.
+Here, deep \acrlong{cnn}s -- modified from established image super-resolution networks \xxx -- have been used to enhance low-resolution Hi-C matrices.
+
+Another technique from computer vision that has been transferred to Hi-C matrices are conditional \acrlong{gan}s (\acrshort{gan}s), 
+invented by Goodfellow, Mirza and colleagues in 2014 \cite{Goodfellow2014, mirza2014}. 
+Again, several works have employed this comparatively new and involved method to increase the resolution of given Hi-C matrices, 
+including the ones by Liu and colleagues \cite{Liu2019}, Hong et al. \cite{Hong2020} and Dimmick et al. \cite{Dimmick2020}.
+In general, all three works feature the typical GAN setup with two competitive networks -- a generator, 
+which is trained to produce realistic high-resolution Hi-C matrices from its low-resolution inputs, 
+and a discriminator, which tries to distinguish real Hi-C matrices from generated ones and thus serves as a ``critique'', an additional loss function, for the generator.
+While the convolutional building blocks for the discriminators and the residual building blocks for the generators are conceptually similar
+in all cases, the three works differ in the number of building blocks used and the activation functions applied within the blocks.
+Furthermore, Dimmick et al. and Hong et al. include additional loss functions beyond standard generator- and adversarial losses. 
+This includes perceptual losses derived from other (pre-trained) neural networks to obtain ``visually good'' Hi-C matrices and total variation loss to suppress noise
+while maintaining edges. 
+The method by Dimmick et al. outperformed the others for most test cases, but it is also the most elaborated.
+
+Since all of the methods presented above require existing Hi-C matrices for training \emph{and} prediction, none of them is suitable for the task at hand.
+However, some of the concepts mentioned might still be useful, cf.\,\cref{sec:hi-cGAN}.
 
 
-\subsection{Generative techniques from computer vision} \label{sec:prior:generativeCV}
+

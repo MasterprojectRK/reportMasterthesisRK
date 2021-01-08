@@ -3,7 +3,7 @@
 		11pt,
 		headsepline,
 		captions=tableheading,
-		english,
+		%english,
 		parskip=half,
 		bibliography=totoc,
 		twoside,
@@ -13,7 +13,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
-\usepackage[english]{babel}
+\usepackage[german, english]{babel}
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 \definecolor{darkblue}{rgb}{0,0,0.5} 
@@ -68,6 +68,7 @@
   xleftmargin=.05\textwidth, 
   xrightmargin=.03\textwidth
 }
+\usepackage[nameinlink]{cleveref}
 \usepackage{lscape}
 \usepackage{tabu}
 \usepackage{csquotes}
@@ -110,7 +111,7 @@
 \input{glossary.tex}
 
 \begin{document}
-
+\selectlanguage{english}
 \include{titlepage}
 \cleardoublepage
 \include{abstract}
