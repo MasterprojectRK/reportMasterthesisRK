@@ -12,7 +12,8 @@ The goal of this master thesis is thus to provide an approach for the prediction
 experiments with minimal pre- and postprocessing.
 
 \subsection{Hi-C process and contact matrices} \label{sec:intro:hic}
-\begin{wrapfigure}[36]{r}{0.3\textwidth}
+\begin{wrapfigure}[27]{r}{0.3\textwidth}
+ \vspace{-19mm}
  \resizebox{0.3\textwidth}{!}{
  \small
  \import{figures/}{HiC-lab.pdf_tex}}
@@ -60,14 +61,61 @@ which records the interaction count for all possible pairs of regions in the ref
 In the bioinformatics part of the Hi-C protocol, often just a small fraction of all reads 
 fulfill the selection criteria outlined above, for example due to reads not being chimeric or uniquely mappable.
 This makes Hi-C a comparatively inefficient, slow and thus expensive process.
-For example, creating the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several billions of reads being made. 
+For example, creating the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several \emph{billions} of reads being made. 
 Throughout this thesis, matrix resolutions of \SI{25000}{\bp} are used, unless otherwise noted.
 
-\Cref{fig:intro:HiC} and parts of the process description above 
+Parts of \cref{fig:intro:HiC} and the process description above 
 have been adapted from the preceding study project \cite{Krauth2020}.
 
-\xxx mod input steps
-\xxx mark regions a, b throughout the flowchart
+\xxx mod input steps in graph
+\xxx mark regions a, b throughout the graph
 
 \subsection{Goal of the thesis}
+\begin{wraptable}{r}{5.5cm}
+\vspace{-10mm}
+\centering
+\small
+\begin{tabular}{lcccc}
+cell line & \rotatebox[origin=l]{90}{TF ChIP-seq} & \rotatebox[origin=l]{90}{Histone ChIP-seq} & \rotatebox[origin=l]{90}{Dnase-seq} & \rotatebox[origin=l]{90}{Hi-C} \\ \hline
+K562     & 680 & 20 & 10 & 1 \\
+HepG2    & 668 & 15 & 3  & 1 \\
+A549     & 251 & 87 & 14 & 6 \\
+HEK293   & 231 & 6  &    &   \\
+GM12878  & 211 & 15 & 3  & 7 \\
+MCF-7    & 155 & 18 & 8  &   \\
+H1       & 88  & 55 & 3  &   \\
+HeLa-S3  & 77  & 15 & 4  & 1 \\
+SK-N-SH  & 62  & 21 & 2  &   \\
+IMR-90   & 16  & 34 & 2  & 2 \\
+HCT116   & 27  & 17 & 1  & 8 \\
+H9       &     & 35 & 7  &   \\
+GM23338  & 15  & 13 & 1  &   \\
+Ishikawa & 25  &    & 4  &   \\
+HEK293T  & 17  &    & 1  &   \\
+GM23248  & 2   & 13 & 1  & 1 \\ \hline
+\end{tabular}
+\caption{availability of selected assays in ENCODE (extract)} \label{tab:intro:assaysInEncode}
+\vspace{-10mm}
+\end{wraptable}
+Due to the high effort, Hi-C experiments have been conducted only by few labs and for comparatively few organisms and cell lines so far.
+For example, as of January 2021, Hi-C assays are available for just 26 of more than 150 human cell lines listed in the Encyclopedia of DNA elements \cite{Encode2012,Davis2017},
+and these have been conducted by only five US university labs.
+
+However, investigations and experiments with the available Hi-C data have shown correlations
+between the spatial DNA structure and the binding sites of certain transcription factors and histone modifications \cite{Rao2014, Bonev2016}.
+Detecting these binding sites experimentally is less involved than the Hi-C process and can be done by the well-established ChIP-seq method \cite{Johnson2007,Robertson2007}.
+\Cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, sorted by total number of selected assays available.
+It is obvious that even otherwise well-investigated cell lines like HEK293 and MCF-7 often lack Hi-C data, while ChIP-seq data is mostly available.
+
+The goal of this master thesis is thus to predict missing Hi-C data from existing ChIP-seq data,
+making use of the known correlations between the binding sites of transcription factors and histone modifications of the one hand 
+and Hi-C interaction counts on the other hand. 
+Since this is a wide field and lead time for a master thesis is limited, 
+the present work will focus on machine learning techniques,
+which have proven a good choice for exploiting complex patterns
+and relationships in various kinds of data. \xxx citations needed
+More specifically, the goal of this thesis is to develop an easy to use machine learning
+approach for predicting Hi-C interaction matrices from ChIP-seq data, 
+using standard in- and output formats with minimal pre- and postprocessing.
+
 \subsection{Structure of the thesis}
