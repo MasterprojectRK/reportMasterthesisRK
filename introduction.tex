@@ -22,8 +22,52 @@ experiments with minimal pre- and postprocessing.
 The Hi-C process is an elaborate biochemical procedure for investigating the 
 spatial structure of DNA by detecting DNA-DNA interactions within and 
 across chromosomes.
-The Hi-C workflow has originally been developed by Lieberman-Aiden et al. in 2009  \cite{LiebermanAiden2009}
-and is depicted in simplified form in \cref{fig:intro:HiC} \cite{Krauth2020}.
+The original Hi-C workflow has been developed by Lieberman-Aiden et al. in 2009  \cite{LiebermanAiden2009}
+and is depicted in simplified form in \cref{fig:intro:HiC}.
+
+The typical input (In) to Hi-C consists of several millions of cells,
+which are treated chemically to fix existing DNA-DNA contacts, 
+commoly using formaldehyde, before they are lysed.
+Next, the DNA is extracted and cut into fragments by certain restriction enzymes (1),
+usually HindIII or DpnII, 
+and the cut ends are repaired with nucleotides, some of which are marked by biotin (2).
+The free ends are then joined (3) under conditions which prefer
+ligations among open ends over ligations between different fragments.
+Originally, such conditions were achieved by high dilution of the fragments in
+solvents, but especially this part of the protocol has been replaced by 
+more efficient methods in later works \cite{Rao2014,Belaghzal2017}.
+The ligated fragments are then purified and cut into shorter sequences,
+some of which contain biotinylated nucleotides and some not (4).
+The fragments of interest -- the ones containing biotinylated nucleotides -- 
+are then selected by pulling down biotin (5), for example using magnetic tags,  
+and subjected to paired-end DNA-sequencing (6).
+In the end, the output of the Hi-C lab process is a large number of short genomic ``reads'',
+which are subsequently processed in the bioinformatics part of the Hi-C protocol 
+outlined in the following section.
+
+On the software side of the protocol, the reads first need to be mapped 
+to the corresponding reference genome.
+Here, only reads are kept where the ``left'' sequence (6)(a)
+uniquely maps to a different region of the reference genome than the ``right'' sequence (6)(b).
+These so-called chimeric reads are subjected to quality control, and those passing are counted as an interaction
+between the two genomic positions (1)(a) and (1)(b) to which the two ends belong.
+However, at reasonable read coverages, interactions cannot be counted per base pair. 
+Instead, the reference genome is split into equally sized bins (or regions), 
+and the reads are counted for those regions where they belong. 
+The final outcome of a Hi-C experiment is then a sparse matrix, henceforth referred to as ``Hi-C matrix'', 
+which records the interaction count for all possible pairs of regions in the reference genome.
+
+In the bioinformatics part of the Hi-C protocol, often just a small fraction of all reads 
+fulfill the selection criteria outlined above, for example due to reads not being chimeric or uniquely mappable.
+This makes Hi-C a comparatively inefficient, slow and thus expensive process.
+For example, creating the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several billions of reads being made. 
+Throughout this thesis, matrix resolutions of \SI{25000}{\bp} are used, unless otherwise noted.
+
+\Cref{fig:intro:HiC} and parts of the process description above 
+have been adapted from the preceding study project \cite{Krauth2020}.
+
+\xxx mod input steps
+\xxx mark regions a, b throughout the flowchart
 
 \subsection{Goal of the thesis}
 \subsection{Structure of the thesis}
