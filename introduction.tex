@@ -102,8 +102,36 @@ For example, the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin
 Parts of \cref{fig:intro:HiC} and the process description above 
 have been adapted from the preceding study project \cite{Krauth2020}.
 
+
+
 \xxx mod input steps in graph
 \xxx mark regions a, b throughout the graph
+
+\subsection{The ChIP-seq process for determining protein binding sites}
+The ChIP-seq process is a combination of Chromatin-Immunoprecipitation and DNA-sequencing, 
+designed for investigating DNA-protein interactions \cite{Johnson2007,Robertson2007}
+The typical input to ChIP-seq is a number of cells with DNA that has proteins, histones etc. attached to
+it, \autoref{fig:intro:chipseq-lab}, top. 
+As a first step, all these DNA-protein contacts get fixed, 
+e.\,g. by adding formaldehyde to the cells (1).
+The cells are then lysed, the DNA-protein structure is extracted and cut into fragments, 
+for example by sonication (2).
+Next, specific antibodies are added, designed to bind only to a certain protein of interest (3).
+These antibodies are additionally equipped with a tag, for example a magnetic one, so that 
+the DNA-protein-antibody structures can be precipitated, while fragments without antibodies are discarded (4).
+The proteins and antibodies are then removed (5), 
+the DNA is purified and finally sequenced (6).
+Typically, a control experiment is performed together with the ChIP-seq process, 
+which comprises all steps described above, except the immunoprecipitation.
+
+As with Hi-C and all other sequencing-based methods, the outcome of the ChIP-seq lab process is
+again a bunch of short genomic sequences, which are then fed into the bioinformatics part of the pipeline.
+
+The first data processing step for ChIP-seq, too, is quality control (QC), as with all other sequencing-based processes. 
+Those reads passing QC are next mapped to an appropriate reference genome, 
+to find out where the protein under investigation binds to DNA.
+Therefore the number of mapped reads per genomic position is counted and compared 
+to the numbers of reads stemming from the control experiment mentioned above.
 
 
 \subsection{Motivation and goal of the thesis}
@@ -156,4 +184,5 @@ using standard in- and output formats with minimal pre- and postprocessing.
 To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
 sorted by total number of selected assays available.
 It is obvious that even otherwise well-investigated cell lines like HEK293, MCF-7 and H1 lack Hi-C data, while ChIP-seq data is mostly available.
+
 
