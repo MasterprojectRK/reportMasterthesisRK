@@ -58,11 +58,23 @@ and the reads are counted for those regions where they belong.
 The final outcome of a Hi-C experiment is then a sparse matrix, henceforth referred to as ``Hi-C matrix'', 
 which records the interaction count for all possible pairs of regions in the reference genome.
 
+For the thesis at hand, Hi-C matrices can abstractly be considered as sets of sparse, square matrices; one matrix for each chromosome.
+The individual elements $m_{i,j}$ of the matrices are counts of interactions between the bins with indices $i,j \in \{0,1,...,l\}$,
+where the last index $l$ is given by the chromosome size $cs$ and the binsize $b$ in basepairs as $l=   \left \lceil{\frac{cs}{b}}\right \rceil -1$.
+Because interaction counts do not have a ``direction'', it holds that $m_{i,j} = m_{j,i}$, so Hi-C matrices are always symmetric.
+
+A bin with index $n$ then corresponds to the genomic region $p_n = [\,n\cdot b, \; (n+1)\cdot b\,)$, 
+except the last bin $l$, where $p_{l} = [\,l \cdot b, \; cs \,]$, with $l,b,cs$ as above.
+As an example, if $m_{0,10}=22$ for a matrix with binsize $b=\SI{25}{\kilo\bp}$, this means that in the underlying experiment, 
+22 interactions have been counted between region $p_0$, ranging from 0 to \SI{24999}{\bp} and region $p_{10}$, 
+ranging from 250000 to \SI{274999}{\bp}. 
+Due to insufficient read coverage, $b=\SI{1}{\bp}$ is impossible in practice. 
+Instead, common values include $b \in \{1, 5, 10, 25, 50, 100, 1000\}$\,kbp.
+
 In the bioinformatics part of the Hi-C protocol, often just a small fraction of all reads 
 fulfill the selection criteria outlined above, for example due to reads not being chimeric or uniquely mappable.
 This makes Hi-C a comparatively inefficient, slow and thus expensive process.
-For example, creating the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several \emph{billions} of reads being made. 
-Throughout this thesis, matrix resolutions of \SI{25000}{\bp} are used, unless otherwise noted.
+For example, the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several \emph{billions} of reads being made. 
 
 Parts of \cref{fig:intro:HiC} and the process description above 
 have been adapted from the preceding study project \cite{Krauth2020}.
