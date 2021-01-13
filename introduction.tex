@@ -12,24 +12,25 @@ and the current thesis attempts to improve on these.
 
 \subsection{Spatial structure of DNA}
 In the late 1970s, Watson and Crick \xxx discovered the now well-known double helix structure of DNA molecules.
-However, this is not the only relevant spatial structure of DNA. 
-At larger scales, DNA molecules can be wound around protein-complexes, so called histones, forming structures named nucleosomes.
+However, this is not the only relevant spatial structure of genomes. 
+At larger scales, DNA molecules can be wound around certain proteins, so-called histones, forming DNA-protein complexes named nucleosomes.
 Several of these can further be compacted into fibres, which in turn can be ``supercoiled'' into the also well-known chromosomes.
 \xxx hier muss das bild hin \xxx
 
-While the spatial structure of DNA and chromatin (DNA-protein compounds) usually comes with a compaction, 
+While the spatial structure of chromatin outlined above brings along compaction (fig. \xxx from left to right), 
 e.\,g. to make chromosomes fit into eucaryotic cell nuclei,
 it also has other functional implications.
 One well known effect of spatial structure is the regulation of gene transcription by establishing or releasing contacts
-between gene enhancers and the relevant promoters. \xxx citation needed.
+between gene enhancers and the relevant promoters \cite{Smallwood2013,Gorkin2014}.
 Since enhancers can be up to a million basepairs away from the promoters, 
 the two can only interact by means of spatial DNA structure.
-Many other effects of spatial structure are currently under investigation, 
+Many effects of spatial structure are still under investigation, 
 two recent studies have for example found dependencies between chromatin conformation 
-and cell differentiation as well as phase transitions \cite{Chathoth2019,Zhang2019b}.
+and cell differentiation in Drosophila Melanogaster \cite{Chathoth2019}
+and investigated spatial structure dynamics during phase transitions in murine cells \cite{Zhang2019b}.
 
 While the driving mechanisms behind the formation of spatial chromatin structures are partially still under research,
-certain proteins like CTCF or modified histones are already well known to mediate or prevent DNA-DNA contacts. \xxx citation needed.
+certain proteins like CTCF or modified histones are already well known to mediate or prevent DNA-DNA contacts \cite{Phillips2009,PhillipsCremins2013,Dixon2015}.
 
 In the last two decades, DNA-sequencing-based techniques have increasingly been utilized to capture the spatial structure of DNA experimentally.
 The method of choice within this thesis is called Hi-C and shall be explained in the following section.
@@ -108,31 +109,37 @@ have been adapted from the preceding study project \cite{Krauth2020}.
 \xxx mark regions a, b throughout the graph
 
 \subsection{The ChIP-seq process for determining protein binding sites}
-The ChIP-seq process is a combination of Chromatin-Immunoprecipitation and DNA-sequencing, 
-designed for investigating DNA-protein interactions \cite{Johnson2007,Robertson2007}
-The typical input to ChIP-seq is a number of cells with DNA that has proteins, histones etc. attached to
-it, \autoref{fig:intro:chipseq-lab}, top. 
-As a first step, all these DNA-protein contacts get fixed, 
-e.\,g. by adding formaldehyde to the cells (1).
+The ChIP-seq process is a combination of Chromatin-Immunoprecipitation (ChIP) and DNA-sequencing, 
+designed for investigating DNA-protein interactions \cite{Johnson2007,Robertson2007}.
+As with Hi-C, the input consists of a sufficient number of cells, which are first fixed with formaldehyde.
 The cells are then lysed, the DNA-protein structure is extracted and cut into fragments, 
-for example by sonication (2).
+usually by sonication (2).
 Next, specific antibodies are added, designed to bind only to a certain protein of interest (3).
 These antibodies are additionally equipped with a tag, for example a magnetic one, so that 
 the DNA-protein-antibody structures can be precipitated, while fragments without antibodies are discarded (4).
 The proteins and antibodies are then removed (5), 
 the DNA is purified and finally sequenced (6).
 Typically, a control experiment is performed together with the ChIP-seq process, 
-which comprises all steps described above, except the immunoprecipitation.
+which comprises all steps described above, except the immunoprecipitation (3),(4).
 
-As with Hi-C and all other sequencing-based methods, the outcome of the ChIP-seq lab process is
-again a bunch of short genomic sequences, which are then fed into the bioinformatics part of the pipeline.
+The outcome of the ChIP-seq lab process is again a bunch of short genomic sequences, 
+which are then fed into the bioinformatics part of the pipeline.
 
-The first data processing step for ChIP-seq, too, is quality control (QC), as with all other sequencing-based processes. 
-Those reads passing QC are next mapped to an appropriate reference genome, 
-to find out where the protein under investigation binds to DNA.
-Therefore the number of mapped reads per genomic position is counted and compared 
-to the numbers of reads stemming from the control experiment mentioned above.
+On the software side of the process, the reads are filtered for quality and mapped to an appropriate reference genome.
+The number of mapped reads per genomic position can then be simply be counted.
+It is common to process reads from the control experiment in the same way as reads from the ChIP-seq experiment
+and then use special software to call ``peaks'', i.\,e. protein binding sites,
+at those genomic positions where the read count from ChIP-seq
+is statistically significant compared to the read count from the control group.
 
+For the thesis at hand, the reads from the ChIP-seq experiment have been used directly
+and binned by taking the mean over all reads inside each bin.
+For $n$ ChIP-seq experiments, given chromsize $cs$ and binsize $b$,
+this corresponds to an $l\times n$ array with $l=\left \lceil{\frac{cs}{b}}\right \rceil -1$.
+The element $m_{i,j}$ in this array is then the mean read count
+of the $j$-th ChIP-seq experiment in genomic region $[\,i\cdot b, \; (i+1)\cdot b \,)$, or $[\,l\cdot b,\; cs\,]$ in case $i = l$.
+For ChIP-seq experiments, taking a binsize of one is in principle possible, but yields very sparse arrays.
+Thus, binsizes that evenly divide the binsizes of the corresponding matrices have been chosen for this thesis, namely \SI{5}{\kilo\bp} and \SI{25}{\kilo\bp}.
 
 \subsection{Motivation and goal of the thesis}
 \begin{wraptable}{r}{5.5cm}
