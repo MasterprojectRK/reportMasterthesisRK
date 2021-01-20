@@ -134,11 +134,7 @@ is statistically significant compared to the read count from the control group.
 
 For the thesis at hand, the reads from the ChIP-seq experiment have been used directly
 and binned by taking the mean over all reads inside each bin.
-For $n$ ChIP-seq experiments, given chromsize $cs$ and binsize $b$,
-this corresponds to an $l\times n$ array with $l=\left \lceil{\frac{cs}{b}}\right \rceil -1$.
-The element $m_{i,j}$ in this array is then the mean read count
-of the $j$-th ChIP-seq experiment in genomic region $[\,i\cdot b, \; (i+1)\cdot b \,)$, or $[\,l\cdot b,\; cs\,]$ in case $i = l$.
-For ChIP-seq experiments, taking a binsize of one is in principle possible, but yields very sparse arrays.
+Contrary to Hi-C matrices, choosing a binsize of one is in principle possible for ChIP-seq experiments, but yields very sparse vectors.
 Thus, binsizes that evenly divide the binsizes of the corresponding matrices have been chosen for this thesis, namely \SI{5}{\kilo\bp} and \SI{25}{\kilo\bp}.
 
 \subsection{Motivation and goal of the thesis}
@@ -191,5 +187,6 @@ using standard in- and output formats with minimal pre- and postprocessing.
 To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
 sorted by total number of selected assays available.
 It is obvious that even otherwise well-investigated cell lines like HEK293, MCF-7 and H1 lack Hi-C data, while ChIP-seq data is mostly available.
+\xxx data for H1 is available in 
 
 

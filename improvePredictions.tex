@@ -1,12 +1,108 @@
 \section{Advancing predictions of Hi-C interaction matrices}
-\subsection{Deep Neural Network approach}
+In the following subsections, two conceptually different approaches towards the goal of the thesis,
+predicting Hi-C matrices from ChIP-seq data, will be explored.
+While the first approach is a dense neural network based on work by Farr\'e et al. \cite{Farre2018a},
+the second is a novel method based on conditional generative adversarial networks.
+
+\subsection{Dense Neural Network approach}\label{sec:DNNapproach}
+In their 2008 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
+propose a combination of a 1D convolutional filter with a three-layer dense neural network 
+which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing.
+Here, we try to build on the success of their method by extending the comparatively simple neural network
+in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
+
 \subsubsection{Basic network setup}
+The basic network setup from this thesis has been taken over from Farr\'e et al. \cite{Farre2018a}
+and is shown in simplied form in \xxx.
+
+Since the network implements a supervised learning technique,
+it requires two kinds of inputs for training -- ChIP-seq data of the chosen chromatin factors and
+target Hi-C matrices for each training chromosome.
+The target matrices are just taken as submatrices of size $w \times w$ 
+with fixed windowsize $w$ and centered at the diagonal of the 
+original Hi-C Matrix.
+The ChIP-seq data is provided as an $l\times n$ array with $l=\left \lceil{\frac{cs}{b}}\right \rceil -1$
+with chromsize $cs$, binsize $b$ and the number of ChIP-seq experiments $n$. 
+The element $m_{i,j}$ in this array is then the mean read count
+of the $j$-th ChIP-seq experiment in genomic region $[\,i\cdot b, \; (i+1)\cdot b \,)$, or $[\,l\cdot b,\; cs\,]$ in case $i = l$.
+
+Training samples are then obtained from the input data by sliding 
+the window along the diagonal of the target Hi-C matrix, \xxx.
+Here, the window for the ChIP-seq data has a size of $3w$,
+because it considers flanking windows to the left- and right of the 
+corresponding matrix window, as in the original paper \cite{Farre2018a}.
+
+A 1D convolutional filter now compresses the $n \times 3w$ inputs to a 1D vector
+of size $3w \times 1$, and three dense layers further process the compressed input.
+The number of neurons in the last dense layer corresponds to the number of bins
+in the upper triangular part of the target matrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons.
+See \cref{sec:methods:denseNN} for more details.
+
 \subsubsection{Modifying the convolutional part of the network}
+\begin{itemize}
+ \item 1. more filters
+ \item 2. wider filters
+ \item 3. more \emph{and} wider filters at the same time
+ \item 4. bin the proteins at finer resolution and use wider filters with strides gt. 1
+ \item rationale 1: capture more correlations that depend on more than one chromatin factor 
+ \item rationale 2: capture correlations that span more than one bin
+ \item rationale 4: allow the network to capture finer details w/o need for higher-resolution matrices
+\end{itemize}
+
 \subsubsection{Modifying the loss function}
-\subsubsection{Modifying resolution and windowsize}
+\begin{itemize}
+ \item MSE is known to produce blurry images in regression tasks
+ \item others have used TV loss, Perception loss to improve on this
+ \item SSIM can also be used as to improve perception, but caution needed
+ \item additionally, an insulation-score-based approach to get sharper boundaries 
+            at highly interacting regions
+\end{itemize}
+
+\subsubsection{Modifying binsize and windowsize}
+\begin{itemize}
+ \item rationale: smaller binsizes - predict smaller structures, larger binsizes - predict larger structures
+ \item then combine the predictions (e.g. sum them up, take the mean or even use a NN)
+\end{itemize}
+
 \subsubsection{DNA sequence as an additional network input branch}
+\begin{itemize}
+ \item use DNA as an additional input
+ \item rationale a): allow the network to figure out true binding sites in conjunction with cs data
+ \item rationale b): given the success of pure DNA based methods, allow the network to find yet unknown sequence structure correlations
+ \item probably not the most important subsection, leave it out in case of time problems
+\end{itemize}
+
 \subsection{Hi-cGAN approach} \label{sec:hi-cGAN}
 \subsubsection{Pix2Pix as a generic generative network}
+Describe the basic setup of pix2pix and what it is currently used for
+Pix2Pix using 2D input, but we have n times 1D. Bad. 2 ideas how to come around,
+using DNN like Farre et al, potentially pretrained, or using new CNN. Maybe mention restriction of $2^x$ for image size
 \subsubsection{Using a DNN for 1D - 2D conversion}
+\begin{itemize}
+\item use network like Farre et al for converting inputs to 2D
+\item rationale: this nw has been shown to create comparatively good Hi-C matrices 
+\item rationale: pix2pix could then improve them
+\item rationale: transfer learning can be employed
+\end{itemize}
+
 \subsubsection{Using a CNN for 1D - 2D conversion}
+\begin{itemize}
+ \item use somewhat deep CNN for conversion
+ \item rationale: the DNN approach didn't work
+ \item rationale: downsampling like in image processing, just in 1D
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

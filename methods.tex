@@ -1,13 +1,59 @@
 \section{Method details}
 \subsection{Input data}
+\begin{itemize}
+ \item source of data
+ \item how it has been processed
+\end{itemize}
+
 \subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
+\begin{itemize}
+ \item GEO numbers
+ \item processing with cooler coarsen
+\end{itemize}
+Contrary to the paper, which is using a distance-aware normalization, 
+these matrices have not been normalized or scaled for the thesis at hand
+due to bad experiences during the previous study project \cite{Krauth2020}.
+
 \subsubsection{ChIP-seq data}
-\subsection{Deep Neural Network approach}
+\begin{itemize}
+ \item ENCODE as source
+ \item Scaling to [0...1] for processing
+ \item refrain from whitening, etc. -- the data is no image with inherent correlations
+\end{itemize}
+
+\subsection{Dense Neural Network approach} \label{sec:methods:denseNN}
+\subsubsection{Basic setup}
+\begin{itemize}
+ \item nr neurons
+ \item activations
+ \item initialization
+ \item optimizer, learning rate
+ \item refrain from mirroring, little benefit for doubling input sample numbers
+\end{itemize}
+
 \subsubsection{Modifying kernel size, number of filter layers and filters}
+maybe not needed
 \subsubsection{Modifying input resolution}
+maybe not needed
+
 \subsubsection{Custom loss function based on TAD insulation score}
+\begin{itemize}
+ \item computation details, custom layer
+ \item full insulation score takes too long, simplified
+\end{itemize}
+
 \subsubsection{Combination of mean squared error, perception loss and TV loss}
+maybe not needed
+
 \subsection{HiC-GAN approach}
 \subsubsection{Using a DNN for 1D-2D conversion}
 \subsubsection{Using a pre-trained DNN for 1D-2D conversion}
 \subsubsection{Using a CNN for 1D-2D conversion}
+
+
+
+
+
+
+
+
