@@ -14,12 +14,16 @@ Contrary to the paper, which is using a distance-aware normalization,
 these matrices have not been normalized or scaled for the thesis at hand
 due to bad experiences during the previous study project \cite{Krauth2020}.
 
-\subsubsection{ChIP-seq data}
+\subsubsection{ChIP-seq data} \label{sec:methods:chipseq}
 \begin{itemize}
  \item ENCODE as source
  \item Scaling to [0...1] for processing
  \item refrain from whitening, etc. -- the data is no image with inherent correlations
 \end{itemize}
+The ChIP-seq data is provided as an $l\times n$ array with $l=\left \lceil{\frac{cs}{b}}\right \rceil -1$
+with chromsize $cs$, binsize $b$ and the number of ChIP-seq experiments $n$. 
+The element $m_{i,j}$ in this array is then the mean read count
+of the $j$-th ChIP-seq experiment in genomic region $[\,i\cdot b, \; (i+1)\cdot b \,)$, or $[\,l\cdot b,\; cs\,]$ in case $i = l$.
 
 \subsection{Dense Neural Network approach} \label{sec:methods:denseNN}
 \subsubsection{Basic setup}
