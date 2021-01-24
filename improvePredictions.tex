@@ -67,21 +67,21 @@ As already noted in \cref{sec:intro:chipseq}, the ChIP-seq data can usually
 safely be binned at smaller binsizes than Hi-C data due to the nature of 
 the process. 
 This can be exploited to capture finer details in the ChIP-seq data without a need for higher (training-)matrix resolutions.
-To this end, the initial network can be modified by binning the ChIP-seq data at $k$ times the bin size of the matrices, 
+To this end, the initial network can be generalized by binning the ChIP-seq data at $k$ times the bin size of the matrices, 
 whereby $k \in \mathbb{N}^{\geq1}$. 
 This yields an input data size of $k \cdot 3w \times n$, which is then again compressed to a $3w \times 1$ vector 
 by a 1D convolutional filter with kernel size $n$ and strides $k$. 
-The basic network from \cref{sec:improve:basicNetwork} can be seen as a special case of this more general setup
-with $k=1$. 
 For practical reasons, $k=5$ was chosen for the thesis at hand, 
-and the results for binsize $b_{mat}=\SI{25}{\kilo\bp}$ are shown in \xxx.
+and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \xxx.
+The technical details are to be found in \cref{sec:methods:inputBinning}.
+Note, for $k=1$, one would again get the basic network described in \cref{sec:improve:basicNetwork}. 
 
 \subsubsection{Modifying the loss function}
 \begin{itemize}
  \item MSE is known to produce blurry images in regression tasks
  \item others have used TV loss, Perception loss to improve on this
  \item SSIM can also be used as to improve perception, but caution needed
- \item additionally, an insulation-score-based approach to get sharper boundaries 
+ \item additionally, insulation-score-based approach to get sharper boundaries 
             at highly interacting regions
 \end{itemize}
 
@@ -89,8 +89,9 @@ and the results for binsize $b_{mat}=\SI{25}{\kilo\bp}$ are shown in \xxx.
 \begin{itemize}
  \item rationale: smaller binsizes - predict smaller structures, larger binsizes - predict larger structures
  \item then combine the predictions (e.g. sum them up, take the mean or even use a NN)
- \item use trapezoids, i.e. capped larger submatrices
+ \item use trapezoids, i.e. capped larger submatrices and flankingsize smaller than windowsize
  \item rationale: larger windowsize without increasing training time too much 
+ \item train on matrices/features with different binsizes in the same training run (e.g. two matrices with 25k, 50k and bin at 25k, 50k or 5k, 10k)
  \end{itemize}
 
 \subsubsection{DNA sequence as an additional network input branch}

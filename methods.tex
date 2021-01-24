@@ -1,44 +1,197 @@
 \section{Method details}
 \subsection{Input data}
-\begin{itemize}
- \item source of data
- \item how it has been processed
-\end{itemize}
+For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
+The exact data sources and data processing will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}
+
 
 \subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
-\begin{itemize}
- \item GEO numbers
- \item processing with cooler coarsen
-\end{itemize}
-Contrary to the paper, which is using a distance-aware normalization, 
-these matrices have not been normalized or scaled for the thesis at hand
-due to bad experiences during the previous study project \cite{Krauth2020}.
+Hi-C data due to Rao et al. \cite{Rao2014} was downloaded 
+in .hic format from Gene Expression Omnibus under accession key GSE63525.
+Here, the quality-filtered ``combined\_30'' matrices were taken, which contain only high-quality reads from 
+both replicates.
+
+Next, matrices at \SI{5}{\kilo\bp} binsize were extracted and converted to cooler format using \texttt{hic2cool}
+and subsequently coarsened to resolutions of 10, 25, 50 and \SI{100}{\kilo\bp} using \texttt{cooler coarsen}.
+
+Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using a distance-based normalization,
+and many others in the field which are using ICE- or KR-normalization, 
+these matrices have not been normalized for the thesis at hand
+because no benefit of doing so was found during the study project \cite{Krauth2020}.
+
+In the cGAN approach outlined in \cref{sec:hi-cGAN}, the matrices are essentially treated as images and were
+thus scaled to a value range of [0...1] in 32-bit floating point format.
 
 \subsubsection{ChIP-seq data} \label{sec:methods:chipseq}
+For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used, cf.~\cref{tab:methods:csdata}.
+Here, ChIP-seq data for the 13 features was downloaded in .bam format from the ENCODE project \xxx for both replicate one and two,
+and DNaseI-seq data was downloaded in .bam format from \xxx; the download links are also given in \cref{tab:methods:csdata}.
+\begin{table}[ht!]
+\centering
+ \begin{tabular}{ll}
+ \hline
+  feature name & download link \\  \hline
+  CTCF & \\
+  DNaseI &\\
+  H3k27ac & \\
+  H3k27me3 &\\
+  H3k36me3 &\\
+  H3k4me1 &\\
+  H3k4me2 &\\
+  H3k4me3 &\\
+  H3k79me2 &\\
+  H3k9ac &\\
+  H3k9me3 &\\
+  H4k20me1 &\\
+  Rad21 &\\
+  Smc3 & \\ \hline
+ \end{tabular}
+ \caption{chromatin features used for the thesis} \label{tab:methods:csdata}
+\end{table}
+
+The data were then converted to bigwig format, which is more convenient to handle, and the replicates were merged into 
+one bigwig file. Pseudocode for the full conversion process is given in \xxx.
+
 \begin{itemize}
  \item ENCODE as source
  \item Scaling to [0...1] for processing
  \item refrain from whitening, etc. -- the data is no image with inherent correlations
 \end{itemize}
-The ChIP-seq data is provided as an $l\times n$ array with $l=\left \lceil{\frac{cs}{b}}\right \rceil -1$
-with chromsize $cs$, binsize $b$ and the number of ChIP-seq experiments $n$. 
-The element $m_{i,j}$ in this array is then the mean read count
-of the $j$-th ChIP-seq experiment in genomic region $[\,i\cdot b, \; (i+1)\cdot b \,)$, or $[\,l\cdot b,\; cs\,]$ in case $i = l$.
+
 
 \subsection{Dense Neural Network approach} \label{sec:methods:denseNN}
-\subsubsection{Basic setup}
+\subsubsection{Basic setup} \label{sec:methods:basicSetup}
+
+In the basic setup, the chromatin features were binned to the same binsize $b_{feat}$ as the training matrices using pybigwig \xxx
+and stacked into a $l \times n$ array, where $l=\left \lceil{\frac{cs}{b_{feat}}}\right \rceil -1$
+with chromsize $cs$ and $n=14$ the number of ChIP-seq experiments. 
+Hi-C matrices were taken as provided by the cooler format, cf. \cref{sec:methods:hicMatrices}, 
+i.\,e. as $(l \times l)$-matrices with $l$ as above, since by design $b_{mat} = b_{feat}$ and $cs$ is a constant.
+
+To create training samples for the neural network, subarrays of the feature array of size $(3w_{mat} \times n)$ 
+were cut out such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_{mat}$
+of the full array. 
+Sliding the window along the array with stepsize one obviously yields $N=l-3w_{mat}+1$ training samples.
+The corresponding Hi-C matrices were then cut out along the diagonal of the original matrix 
+as submatrices with corner indices [$j,\;j$], [$j,\;j+w_{mat}$], [$j+w_{mat},\;j+w_{mat}$], [$j+w_{mat},\;j$] in clockwise order, where $j=i+w_{mat}$.
+The idea here is that the first $0,\,1,\,\dots \,w_{mat}$ columns of each feature sample form the left flanking region of the training matrix, 
+the next $w_{mat}+1,\,w_{mat}+2,\,\dots \,2w_{mat}$ correspond to the matrix' region and the last $2w_{mat}+1,\,2w_{mat}+2,\,\dots \,3w_{mat}$ columns form the right flanking region.
+
+Because Hi-C matrices are symmetric by definition, it is enough to use the upper triangular part of the matrices, including the diagonal,
+and the neural network's last layer thus also needs exactly the corresponding number of output neurons, which is $\frac{w_{mat} \cdot (w_{mat}+1)}{2}$.
+Note that the size of the left and right flanking regions was chosen as $w_{mat}$ in accordance with \cite{Farre2018a},
+but generally needs not be the same as the size of the training matrix. 
+\Cref{fig:methods:sample_gen} exemplarily shows the sample generation process for a $(15\times15)$-matrix with $w_{mat}=4$ and $n=3$ chromatin features.
+In this case, five training samples would be generated -- the one encircled in green and four more to the right.
+\begin{figure}
+ \begin{minipage}{0.60\textwidth}
+   \centering
+    \small
+    \import{figures/}{sample_generation_process.pdf_tex}
+    \caption{Sample generation process}
+    \label{fig:methods:sample_gen}
+ \end{minipage}\hfill
+ \begin{minipage}{0.3\textwidth}
+ \scriptsize
+  \begin{enumerate}[label=\Alph*:]
+   \raggedright
+    \item left flanking region
+    \item matrix region
+    \item right flanking region
+    \item $n=3$ chromatin features, binned into array
+    \item sliding direction for sample generation windows
+    \item first $w=4$ diagonals of a $15\times15$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item first training matrix, corrsponding to feature window A-B-C
+\end{enumerate}
+ \end{minipage}
+
+
+\end{figure}
+
+
+Since the neural network $G$ with its weights $\omega$ described above is meant for supervised learning, 
+one needs to find weights $\omega^*$ such that the mean squared error $L_2$ 
+between the predicted submatrices $M_s = G_s(\omega)$ and the training submatrices $T_s$
+becomes minimal for $s \in (1,2,\dots, N)$. 
+Formally, one needs to optimize
+\begin{equation}
+ \omega^* = {arg\,min}_\omega L_2(\omega) = {arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
+\end{equation} 
+For the thesis at hand, stochastic gradient with learning rate $1e^{-5}$  was used to find $w^*$.
+Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
+to prevent location-dependent effects and improve generalization.
+The last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
+
+The network and its learning algorithm was implemented in python using tensorflow deep learning framework with keras \xxx citation, see \xxx repository.
+
+
+
+
 \begin{itemize}
  \item nr neurons
  \item activations
  \item initialization
  \item optimizer, learning rate
  \item refrain from mirroring, little benefit for doubling input sample numbers
+ \item train- and test sample preparation
+ \item rebuilding the predicted matrix.
 \end{itemize}
 
 \subsubsection{Modifying kernel size, number of filter layers and filters}
 maybe not needed
-\subsubsection{Modifying input resolution}
-maybe not needed
+
+\subsubsection{Generalization of feature binning} \label{sec:methods:inputBinning}
+The binning procedure described above in \cref{sec:methods:basicSetup} mostly also works if the binsize relation $k=\frac{b_{mat}}{b_{feat}}$
+is not equal to one.
+
+The training matrices remain unchanged, i.\,e. $(l \times l)$-arrays, from which training submatrices of size  $w_{mat} \times w_{mat} $
+can be extracted. 
+With $k \in \mathbb{N}^{>1}$, one bin on the matrix diagonal corresponds to $k$ bins of the feature array,
+so the feature windowsize needs to be $k$ times the submatrix windowsize, $w_{feat} = k \cdot w_{mat}$.
+However, the number of bins along the matrix diagonal is generally not $k$ times the number of bins in the feature array,
+see \cref{eq:methods:binning}.
+\begin{equation}
+ l_{feat} = \left \lceil{\frac{cs}{b_{feat}}}\right \rceil -1 
+                = \left \lceil{\frac{cs}{k \cdot b_{mat}}}\right \rceil -1 
+                \not = k \cdot (\left \lceil{\frac{cs}{ b_{mat}}}\right \rceil -1)
+                = k \cdot l_{mat} \label{eq:methods:binning}
+\end{equation}
+
+For the training process, this discrepancy has been resolved by simply dropping the last training sample, 
+if the feature window belonging to it has missing bins.
+For the prediction process, the feature array has been padded with zeros on its upper end.
+This ensures that no errors are introduced into the training process by imputing values,
+but keeps the size of the predicted matrix consistent with the training
+matrix binsizes.
+
+\Cref{fig:methods:sample_gen_generalized} shows the generalized training process with a $(15\times15)$-training matrix and $k=2$. 
+If $14\cdot b_{mat} + b_{feat} \geq cs > 14\cdot b_{mat} + 1$ holds for the chromosome size $cs$ in the example,
+then the number of matrix bins will be $=15$, while the number of chromatin feature bins will be $29 \not = 2 \cdot 15$.
+\begin{figure}
+ \begin{minipage}{0.60\textwidth}
+   \centering
+    \small
+    \import{figures/}{sample_generation_process_generalized.pdf_tex}
+    \caption{Generalized sample generation process for $k=2$}
+    \label{fig:methods:sample_gen_generalized}
+ \end{minipage}\hfill
+ \begin{minipage}{0.3\textwidth}
+ \scriptsize
+  \begin{enumerate}[label=\Alph*:]
+   \raggedright
+    \item left flanking region
+    \item matrix region
+    \item right flanking region
+    \item $n=3$ chromatin features, binned into array
+    \item sliding direction for sample generation windows
+    \item first $w=4$ diagonals of a $15\times15$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item first training matrix, corrsponding to feature window A-B-C
+\end{enumerate}
+ \end{minipage}
+\end{figure}
+In this case, the 5th sample would be dropped for training,
+while a column with (three) zero bins would be added for to the feature array for prediction
+so that the resulting matrix would have the desired size of $15 \times 15$.
+
 
 \subsubsection{Custom loss function based on TAD insulation score}
 \begin{itemize}
