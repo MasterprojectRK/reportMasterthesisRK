@@ -12,14 +12,17 @@ Here, we try to build on the success of their method by extending the comparativ
 in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
 
 \subsubsection{Basic network setup} \label{sec:improve:basicNetwork}
-The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \xxx.
+The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \xxx,
+see \cref{sec:methods:basicSetup} for technical details.
 
 Since the network implements a supervised learning technique,
 it requires two kinds of inputs for training -- ChIP-seq data of the chosen chromatin factors and
-target Hi-C matrices for each training chromosome.
+target Hi-C matrices for each training chromosome, and it employs a sliding window approach 
+to generate training samples from these.
+
 The target matrices are just taken as submatrices of size $w \times w$ 
 with fixed windowsize $w$, centered at the diagonal of the 
-original Hi-C Matrix, cf. \cref{sec:methods:hicMatrices}.
+original Hi-C Matrices, cf. \cref{sec:methods:hicMatrices}.
 The ChIP-seq data is taken as $3w \times n$ subarray of the original array, cf. \cref{sec:methods:chipseq},
 whereby the middle $w$ bins are aligned with the position of the submatrix,
 the first $w$ bins correspond to the left flanking region and the last $w$ bins correspond to 
@@ -63,8 +66,7 @@ spanning more than one bin and more than one chromatin feature.
 Another approach to potentially improve the predictions that goes somewhat into
 the direction of the ``wider'' network has been proposed, but not implemented by Farr\'e et al. 
 in their paper \cite{Farre2018a}.
-As already noted in \cref{sec:intro:chipseq}, the ChIP-seq data can usually
-safely be binned at smaller binsizes than Hi-C data due to the nature of 
+ChIP-seq experiments can usually be binned at smaller binsizes than Hi-C data due to the nature of 
 the process. 
 This can be exploited to capture finer details in the ChIP-seq data without a need for higher (training-)matrix resolutions.
 To this end, the initial network can be generalized by binning the ChIP-seq data at $k$ times the bin size of the matrices, 
