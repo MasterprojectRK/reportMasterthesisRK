@@ -12,8 +12,16 @@ Here, we try to build on the success of their method by extending the comparativ
 in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
 
 \subsubsection{Basic network setup} \label{sec:improve:basicNetwork}
-The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \xxx,
+The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \cref{fig:improve:priciple_basic_dnn},
 see \cref{sec:methods:basicSetup} for technical details.
+\begin{figure}[hbp]
+    \small
+    \centering
+    \resizebox{\textwidth}{!}{
+    \import{figures/}{explanation_dnn_hic.pdf_tex}}
+    \caption{Principle of basic dense neural network}
+    \label{fig:improve:priciple_basic_dnn}
+\end{figure}
 
 Since the network implements a supervised learning technique,
 it requires two kinds of inputs for training -- ChIP-seq data of the chosen chromatin factors and
@@ -31,7 +39,7 @@ Training samples are then obtained from the input data by sliding
 the input windows along the diagonal of the target Hi-C matrix, \xxx.
 
 Within the network, a 1D convolutional filter compresses the $3w \times n$ inputs to a 1D vector
-of size $3w \times 1$, and three dense layers further process the compressed input.
+of size $3w \times 1$, and four dense layers further process the compressed input.
 The number of neurons in the last dense layer corresponds to the number of bins
 in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons.
 
@@ -76,7 +84,6 @@ by a 1D convolutional filter with kernel size $n$ and strides $k$.
 For practical reasons, $k=5$ was chosen for the thesis at hand, 
 and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \xxx.
 The technical details are to be found in \cref{sec:methods:inputBinning}.
-Note, for $k=1$, one would again get the basic network described in \cref{sec:improve:basicNetwork}. 
 
 \subsubsection{Modifying the loss function}
 \begin{itemize}
