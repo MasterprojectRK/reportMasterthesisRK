@@ -1,4 +1,183 @@
 \section{Results}
-\subsection{Dense Neural Network approaches}
+\subsection{Dense Neural Network approaches} 
+
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
+The basic network was trained for 3000 epochs as explained in \xxx.
+The validation error (MSE) for the basic neural network reached a minimum of about \SI{150000}{} after 500 epochs, \cref{fig:results:basicDNN_lossEpochs}.
+Beyond that, the learning curve indicates overfitting, but differences between predictions at 500 and 1000 epochs are hard to spot in the matrix plots from the test set, 
+\cref{fig:results:00500_19_030-040} and \ref{fig:results:01000_19_030-040}.
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/basic_dnn_results/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress for basic DNN} \label{fig:results:basicDNN_lossEpochs}
+\end{figure}
+To asses the quality of the predictions, distance-stratified Pearson correlations were computed between predicted and real matrices,
+up to the maximum distance from the diagonal given by windowsize and binsize, i\,e. for distances up to $80\cdot \SI{25}{\kilo\bp}=\SI{2}{\mega\bp}$ in the basic setting.
+While the suitability of Pearson correlation as metric for seems debatable for Hi-C matrices \xxx, it is quite common in the field and thus useful at least for comparisons.
+\Cref{fig:results:basicDNN_pearson} shows the Pearson correlations alongside area under the correlation curve (AUC) for the five test chromosomes at hand.
+The red lines in each correlation plot show the correlation between the corresponding training matrix from GM12878 and the target matrix from K562.
+It is obvious that all predicted test matrices have a strictly positive Pearson correlation, but are not better than transferring data from the training cell line.
+
+The predicted matrices themselves looked modest when plotted with pygenometracks \xxx. 
+While some of the highly interacting regions, for example between \xxx and \xxx of chromosome 19 were
+well predicted, other structures, especially larger ones like the one between \xxx and \xxx in chromosome 19 
+or between \xxx and \xxx in chromosome 21 are not predicted at all.
+
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, basic DNN, test chromosomes}
+    \label{fig:results:basicDNN_pearson}
+\end{figure}
+
+\begin{figure}[p]
+    \scriptsize
+    \import{figures/basic_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
+    \caption{example prediction, 500 epochs} \label{fig:results:00500_21_030-040}
+\end{figure}
+\begin{figure}[p]
+    \scriptsize
+    \import{figures/basic_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
+    \caption{example prediction, 500 epochs} \label{fig:results:00500_19_030-040}
+\end{figure}
+\begin{figure}[p]
+    \scriptsize
+    \import{figures/basic_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+    \caption{example prediction, 1000 epochs} \label{fig:results:01000_19_030-040}
+\end{figure}
+
+\subsubsection{Results for variations of the convolutional part}
+
+
+The predictions from the ``wider'' variant were generally similar to the initial results,
+both in terms of Pearson correlations and in terms of matrix plots, \cref{fig:results:widerDNN_pearson}.
+Given the small increase in the number of trainable parameters, this is not surprising.
+Overfitting was less obvious than with the initial setup and the training process looked more smooth overall, 
+but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, ``wider'' variant of DNN,  test chromosomes}
+    \label{fig:results:widerDNN_pearson}
+\end{figure}
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/wider_dnn_results/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress for wider DNN} \label{fig:results:widerDNN_lossEpochs}
+\end{figure}
+
+The predictions from the ``longer'' variant were partially better for the test set than the initial ones in terms of
+Pearson correlations, \cref{fig:results:longerDNN_pearson}.
+Interestingly, no predictions were available for certain distances after 250 and 500 epochs, 
+while predictions for all distances were available after 1000 epochs.
+The reason for this behavior is unknown, but due to the network setup, 
+comparatively few neurons are responsible for certain distances.
+Since the longer network setup has considerably more trainable parameters,
+500 epochs might not be enough to fully adjust the weights of these (outer) neuros.
+The learning process in itself looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs}.
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/longer_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/longer_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/longer_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/longer_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/longer_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, ``longer'' variant of DNN,  test chromosomes}
+    \label{fig:results:longerDNN_pearson}
+\end{figure}
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/longer_dnn_results/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress for longer DNN} \label{fig:results:longerDNN_lossEpochs}
+\end{figure}
+
+\subsubsection{Results for variations of the loss function}
+\subsubsection{Results for different binsizes and windowsizes}
+
 \subsection{HiC-GAN approaches}

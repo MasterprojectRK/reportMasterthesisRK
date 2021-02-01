@@ -30,23 +30,25 @@ to generate training samples from these.
 
 The target matrices are just taken as submatrices of size $w \times w$ 
 with fixed windowsize $w$, centered at the diagonal of the 
-original Hi-C Matrices, cf. \cref{sec:methods:hicMatrices}.
-The ChIP-seq data is taken as $3w \times n$ subarray of the original array, cf. \cref{sec:methods:chipseq},
+original Hi-C Matrices, \cref{fig:improve:priciple_basic_dnn} top.
+The ChIP-seq data is taken as $3w \times n$ subarray of the original array,
 whereby the middle $w$ bins are aligned with the position of the submatrix,
 the first $w$ bins correspond to the left flanking region and the last $w$ bins correspond to 
-the right flanking region of the current submatrix region. 
+the right flanking region of the current submatrix region, \cref{fig:improve:priciple_basic_dnn} bottom. 
 Training samples are then obtained from the input data by sliding 
-the input windows along the diagonal of the target Hi-C matrix, \xxx.
+the input windows along the diagonal of the target Hi-C matrix. 
+The exact sample generation process is described in more details in \cref{sec:methods:sample_gen}.
 
-Within the network, a 1D convolutional filter compresses the $3w \times n$ inputs to a 1D vector
-of size $3w \times 1$, and four dense layers further process the compressed input.
+Within the network, a 1D convolutional filter compresses the $3w \times n$ input arrays to 1D vectors
+of size $3w \times 1$, and four dense layers further process the compressed input, \cref{fig:improve:priciple_basic_dnn} middle.
 The number of neurons in the last dense layer corresponds to the number of bins
-in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons.
+in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons,
+exploiting the symmetry of Hi-C matrices.
 
 Training of the network is performed by minimizing the mean squared error of the predicted matrix
 versus the target Hi-C matrix using stochastic gradient descent.
-The technical details are given in \cref{sec:methods:denseNN}
-and the initial results for our basic setup are shown in \cref{sec:initialDNNresults}.
+The technical details are given in \cref{sec:methods:basicSetup}
+and the initial results for the basic setup are shown in \cref{sec:initialDNNresults}.
 
 The network shown above is quite simple, and immediately offers some opportunities
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.

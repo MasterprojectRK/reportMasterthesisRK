@@ -1,7 +1,8 @@
 \section{Method details}
+
 \subsection{Input data}
 For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
-The exact data sources and data processing will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
+The exact data sources and data preprocessing will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
 
 
 \subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
@@ -57,44 +58,12 @@ one bigwig file. Pseudocode for the full conversion process is given in \xxx.
  \item refrain from whitening, etc. -- the data is no image with inherent correlations
 \end{itemize}
 
+\subsubsection{Sample generation process} \label{sec:methods:sample_gen}
+With machine learning approaches, success heavily depends on the availability of training data.
+Since many organisms feature only a small number of unique chromsomes, learning Hi-C matrices 
+for complete chromosomes at once is generally infeasible.
+This thesis thus follows a sliding window approach, as proposed by Farr\'e et al. \cite{Farre2018a}.
 
-\subsection{Dense Neural Network approach} \label{sec:methods:denseNN}
-\subsubsection{Basic setup} \label{sec:methods:basicSetup}
-The basic setup for the dense neural network approach follows the proposal by Farr\'e et al. \cite{Farre2018a}.
-It consists of five trainable layers; one convolutional layer and four densely connected layers, \cref{fig:methods:basic_dnn}.
-For brevity, the sigmoid activation of the 1D convolution and the ReLU activations of the Dense layers are not shown.
-The dense layers all use a ``L2'' kernel regularizer and the dropout layers following all but the last dense layer have a dropout probability of $10\%$.
-\begin{figure}[htb]
-    \small
-    \centering
-    \import{figures/}{DNN_basic_model.pdf_tex}
-    \caption{Basic dense neural network}
-    \label{fig:methods:basic_dnn}
-\end{figure}
-
-The network is using a supervised learning approach combined with a sliding window approach 
-to learn submatrices of a training Hi-C matrix from ChIP-seq data.
-Its feature input consists of a $(3w \times n)$-subarray of chromatin feature data,  
-where $w$ is the size of the sliding window and $n$ is the number of chromatin features.
-The training input, i.\,e. the matrices to learn from, are ($w\times w$)-submatrices of a ``real'' Hi-C matrix.
-The generation of training samples with the required shapes is not self-explanatory and will thus be explained below in more detail.
-
-The training goal for the neural network $G$ is to find weights $\omega^*$ for its five trainable layers 
-such that the mean squared error $L_2$ between the predicted submatrices $M_s = G_s(\omega)$ 
-and the training submatrices $T_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
-Here, $M_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
-part of a symmetric $(w\times w)$ Hi-C matrix.
-Formally, one needs to optimize
-\begin{equation}
- \omega^* = {arg\,min}_\omega L_2(\omega) = {arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
-\end{equation} 
-For the thesis at hand, stochastic gradient with learning rate $1e^{-5}$  was used to find $\omega^*$.
-Initial values $\omega_{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
-Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
-to prevent location-dependent effects and improve generalization.
-The last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
-
-Generally, the sample generation process for the neural network is rather involved and slightly differs from the approach by Farr\'e et al. \cite{Farre2018a}.
 First, all chromatin features were binned to binsize $b_{feat}$ by splitting each chromosome of size $cs$ into 
 $l_{feat}=\left \lceil{\frac{cs}{b_{feat}}}\right \rceil -1$ non-overlapping bins of size $b_{feat}$
 and taking the mean feature value within the genomic region belonging to each bin.
@@ -102,9 +71,9 @@ All $n$ chromatin factors were processed in this way and then stacked into a $l 
 
 Hi-C matrices were taken as provided by the cooler format, cf. \cref{sec:methods:hicMatrices}, 
 i.\,e. as $(l_{mat} \times l_{mat})$-matrices, $l_{mat}=\left \lceil{\frac{cs}{b_{mat}}}\right \rceil -1$ being the number of bins in the given chromosome. 
-For the basic setup, only $b_{feat} = b_{mat}$ was used, which leads to $l_{feat} = l_{mat}$, because $cs$ is a constant for a given chromosome.
+Initially, $b_{feat} = b_{mat}$ was used, which leads to $l_{feat} = l_{mat}$, because $cs$ is a constant for a given chromosome.
 
-A sliding window approach was now applied to generate training samples for the network $G$ described above.
+A sliding window approach was now applied to generate training samples for the networks $G$ described below.
 Here, subarrays of size $(3w_{mat} \times n)$ were cut out from the feature array 
 such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_{mat}$ of the full array. 
 Sliding the window along the array with stepsize one obviously yields $N=l-3w_{mat}+1$ training samples.
@@ -113,12 +82,12 @@ as submatrices with corner indices [$j,\;j$], [$j,\;j+w_{mat}$], [$j+w_{mat},\;j
 The idea here is that the first $0,\,1,\,\dots \,w_{mat}$ columns of each feature sample form the left flanking region of the training matrix, 
 the next $w_{mat}+1,\,w_{mat}+2,\,\dots \,2w_{mat}$ correspond to the matrix' region and the last $2w_{mat}+1,\,2w_{mat}+2,\,\dots \,3w_{mat}$ columns form the right flanking region.
 Since Hi-C matrices are symmetric by definition, again only the upper triangular part of the submatrices was used, 
-flattened into a $w\cdot (w+1)/2$ vector to match the output $M_s(\omega)$ of the network.
+flattened into a $w\cdot (w+1)/2$ vector.
 
 \Cref{fig:methods:sample_gen} exemplarily shows the sample generation process for a $(15\times15)$-matrix with $w_{mat}=4$ and $n=3$ chromatin features.
-In this case, five training samples would be generated -- the one encircled in green and four more to the right, where the right flanking regions hits the end of the
-feature array. 
-\begin{figure}
+In this case, five training samples would be generated -- the one encircled in green and four more to the right, as the window is sliding from left to right until the
+right flanking region hits the feature array boundary.
+\begin{figure}[hbp]
  \begin{minipage}{0.60\textwidth}
    \centering
     \small
@@ -141,12 +110,12 @@ feature array.
  \end{minipage}
 \end{figure}
 
-The sample generation process for the predicting matrices was the same as for training,
-but the samples were presented to the network in their natural order
-and the last, potentially incomplete batch was not dropped.
+The sample generation process for predicting (unknown) matrices was the same as for training,
+except that no matrix window was generated.
 Due to the sliding window approach, the output of the network is a set of overlapping submatrices along the main diagonal of the actual target Hi-C matrix.
 To generate the final submatrix, all submatrices were added up in a position-aware fashion 
 and finally all values were divided by the number of overlaps for their position.
+Furthermore, the output matrices were scaled to value range [0...1000] for better visualisation and then stored in cooler format.
 \Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with windowsize $w=4$ for a $15\times15$ matrix.
 Note that the first and last $w$ bins in each row (matrix diagonal) always remain empty due to the flanking regions,
 as do all bins outside the main diagonal and the first $w-1$ side diagonals.
@@ -176,34 +145,22 @@ as do all bins outside the main diagonal and the first $w-1$ side diagonals.
 
 The network and its learning algorithm was implemented in python using tensorflow deep learning framework with keras \xxx citation, see \xxx repository.
 The basic network was used with parameters $n=14$, $w=80$ and $b_{feat}=b_{mat} = \SI{25}{\kilo\bp}$. 
-Unless otherwise noted, training samples were drawn from chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22, 
-validation samples from chromosomes 6, 8, 12 and 15 and test samples from chromosome 3, 5, 10, 19 and 21.
 
-\begin{itemize}
- \item refrain from mirroring, little benefit for doubling input sample numbers
-\end{itemize}
-
-\subsubsection{Modifying kernel size, number of filter layers and filters}
-For the ``wider'' variant, the kernel size of the of the 1D convolutional layer has been increased to 4,
-using mirror-type padding to maintain the output shape of the original network.
-
-For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
-were used in place of the basic network's single convolutional layer.
-This replacement was also made for the ``wider-longer''-variant, 
-additionally increasing the respective kernel sizes to 4.
-In both cases, the dropout rate was increased to 20\%
-
+Training samples were drawn from chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of GM12878, 
+validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21,
+see table \xxx for details.
+Test samples were processed through the network and the resulting submatrices were subsequently re-assembled into full Hi-C matrices in cooler format.
 
 \subsubsection{Generalization of feature binning} \label{sec:methods:inputBinning}
-Most of the binning- and sample generation procedures described above in \cref{sec:methods:basicSetup} 
+Most of the binning- and sample generation procedures described above 
 also work for binsize relations $k=\frac{b_{mat}}{b_{feat}} \in \mathbb{N}^{>1}$.
 
 The training matrices remain unchanged, i.\,e. $(l \times l)$-arrays, from which training submatrices of size  $w_{mat} \times w_{mat} $
 can be extracted. 
 With $k \in \mathbb{N}^{>1}$, one bin on the matrix diagonal corresponds to $k$ bins of the feature array,
 so the feature windowsize needs to be $k$ times the submatrix windowsize, $w_{feat} = k \cdot w_{mat}$.
-This can simply be achieved by setting the strides parameter of the (first) convolutional layer to $k$ or $4k$ for the ``wider'' and ``wider-longer'' variants, 
-leaving the rest of the network unchanged.
+Since the first layer of all neural networks used in this thesis is a 1D convolution,
+this can be achieved by setting the filter width and strides parameters of the (first) convolutional layer to $k$, leaving the rest of the network unchanged.
 However, the number of bins along the matrix diagonal is generally not $k$ times the number of bins in the feature array,
 see \cref{eq:methods:binning}.
 \begin{equation}
@@ -213,12 +170,11 @@ see \cref{eq:methods:binning}.
                 = k \cdot l_{mat} \label{eq:methods:binning}
 \end{equation}
 
-For the training process, this discrepancy has been resolved by simply dropping the last training sample, 
-if the feature window belonging to it has missing bins.
-For the prediction process, the feature array has been padded with zeros on its upper end.
-This ensures that no errors are introduced into the training process by imputing values,
-but keeps the size of the predicted matrix consistent with the training
-matrix binsizes.
+For the training process, this discrepancy was resolved by simply dropping the last training sample, 
+if the feature window belonging to it had missing bins.
+For the prediction process, the feature array was padded with zeros on its end.
+This procedure ensures that no errors are introduced into the \emph{training} process by imputing values,
+but keeps the size of the \emph{predicted} matrix consistent with the training matrix binsizes.
 
 \Cref{fig:methods:sample_gen_generalized} shows the generalized training process with a $(15\times15)$-training matrix and $k=2$. 
 If $14\cdot b_{mat} + b_{feat} \geq cs > 14\cdot b_{mat} + 1$ holds for the chromosome size $cs$ in the example,
@@ -248,6 +204,55 @@ then the number of bins on the matrix diagonal will be $l_{mat}=15$, while the n
 In this case, the 5th sample would be dropped for training,
 while a column with zero bins -- symbolized by pink crosses in \cref{fig:methods:sample_gen_generalized} -- would be added for to the feature array for prediction
 so that the resulting matrix would have the desired size of $15 \times 15$.
+
+
+
+
+\subsection{Dense neural network approach}
+
+\subsubsection{Basic setup} \label{sec:methods:basicSetup}
+The basic setup for the dense neural network approach follows the proposal by Farr\'e et al. \cite{Farre2018a}.
+It consists of five trainable layers; one convolutional layer and four densely connected layers, \cref{fig:methods:basic_dnn}.
+For brevity, the sigmoid activation of the 1D convolution and the ReLU activations of the Dense layers are not shown.
+The dense layers all use a ``L2'' kernel regularizer and the dropout layers following all but the last dense layer have a dropout probability of $10\%$.
+\begin{figure}[htb]
+    \small
+    \centering
+    \import{figures/}{DNN_basic_model.pdf_tex}
+    \caption{Basic dense neural network}
+    \label{fig:methods:basic_dnn}
+\end{figure}
+
+The training goal for the neural network $G$ is to find weights $\omega^*$ for its five trainable layers 
+such that the mean squared error $L_2$ between the predicted submatrices $M_s = G_s(\omega)$ 
+and the training submatrices $T_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
+Here, $M_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
+part of a symmetric $(w\times w)$ Hi-C matrix.
+Formally, one needs to optimize
+\begin{equation}
+ \omega^* = {arg\,min}_\omega L_2(\omega) = {arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
+\end{equation} 
+For the thesis at hand, stochastic gradient with learning rate $1e^{-5}$  was used to find $\omega^*$.
+Initial values $\omega_{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
+Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
+to prevent location-dependent effects and improve generalization.
+For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
+
+
+\subsubsection{Modifying kernel size, number of filter layers and filters}
+For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
+where $k=b_{mat}/b_{feat}$ is the relation beetween matrix- and feature binsize.
+Mirror-type padding was used to maintain the output dimensions of the basic network, which now had \SI{7486478} trainable weights
+for $k=1$.
+
+For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
+were used in place of the basic network's single convolutional layer.
+This replacement was also made for the ``wider-longer''-variant, 
+additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4.
+In both cases, the dropout rate was increased to 20\%.
+The ``longer'' variant had \SI{9142665} trainable weights and the ``wider-longer''
+had \xxx for $k=1$.
+
 
 
 \subsubsection{Custom loss function based on TAD insulation score}
