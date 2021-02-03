@@ -77,11 +77,10 @@ or between \xxx and \xxx in chromosome 21 are not predicted at all.
 \end{figure}
 
 \subsubsection{Results for variations of the convolutional part}
-
-
 The predictions from the ``wider'' variant were generally similar to the initial results,
-both in terms of Pearson correlations and in terms of matrix plots, \cref{fig:results:widerDNN_pearson}.
-Given the small increase in the number of trainable parameters, this is not surprising.
+both in terms of Pearson correlations and in terms of matrix plots, \cref{fig:results:widerDNN_pearson} and \xxx.
+Given the small increase in the number of trainable parameters at overall similar network topology, this is not surprising.
+However, it is interesting that hardly any improvement was found.
 Overfitting was less obvious than with the initial setup and the training process looked more smooth overall, 
 but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
 \begin{figure}[p]
@@ -177,7 +176,96 @@ The learning process in itself looked more smooth and reached a lower validation
  \caption{learning progress for longer DNN} \label{fig:results:longerDNN_lossEpochs}
 \end{figure}
 
+The Pearson correlations for predictions from the ``wider-longer'' variant are shown in \cref{fig:results:wider-longerDNN_pearson}.
+While improvements can be seen for 3 of 5 test chromosomes compared to the initial network, 
+the results were worse than the ones from the highly similar ``longer''-variant alone,
+and the remaining validation error was also higher.
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider-longer_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider-longer_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider-longer_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider-longer_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/wider-longer_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, ``wider-longer'' variant of DNN,  test chromosomes}
+    \label{fig:results:wider-longerDNN_pearson}
+\end{figure}
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/wider-longer_dnn_results/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress for ``wider-longer'' DNN} \label{fig:results:wider-longerDNN_lossEpochs}
+\end{figure}
+
 \subsubsection{Results for variations of the loss function}
 \subsubsection{Results for different binsizes and windowsizes}
 
-\subsection{HiC-GAN approaches}
+\subsection{Hi-cGAN approaches}
+\subsubsection{Initial results}
+The results at windowsize 64 bins were encouraging \xxx
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, GAN, windowsize 64, test chromosomes}
+    \label{fig:results:GAN64_pearson}
+\end{figure}
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/GAN_64/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress cGAN, windowsize 64} \label{fig:results:GAN64_lossEpochs}
+\end{figure}
