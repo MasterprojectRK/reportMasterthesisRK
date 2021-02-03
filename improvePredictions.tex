@@ -88,6 +88,39 @@ and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo
 The technical details are to be found in \cref{sec:methods:inputBinning}.
 
 \subsubsection{Modifying the loss function}
+In image regression tasks, optimizing for mean squared error is known to produce blurry images,
+because it is computed independently for each image pixel, ignoring spatial proximity \cite{Isola2017,Lu2019}.
+Another approach to improve the predictions of the basic neural network is thus using a different loss function.
+
+It has been shown that loss functions based on the (multiscale-)structural similarity index (SSIM) \cite{Wang2003}. 
+can outperform mean squared error (L2) and mean absolute error (L1) in image regression tasks.
+While Zhao et al. used a combination of L1- and multiscale SSIM loss \cite{Zhao2017},
+Lu proposed a custom level-weighted SSIM loss \cite{Lu2019}.
+The results were better than with L1- or L2 loss alone, but sometimes not much -- depending on the machine learning model in use.
+
+Another type of loss function used in image processing is the so-called perceptual- or perception loss.
+The idea here is not to compute L1 or L2 loss directly from the output of the network to be trained,
+but instead use a pre-trained loss network to determine structures in ``predicted'' and ``real'' images
+and then compute e.\,g. L1 or L2 loss on these structures, \cref{fig:improve:perceptual_loss}.
+\begin{figure}[htb]
+    \small
+    \centering
+    %\resizebox{\textwidth}{!}{
+    \import{figures/}{explanation_perceptual_loss.pdf_tex}%}
+    \caption{perceptual loss}
+    \label{fig:improve:perceptual_loss}
+\end{figure}
+The optimization of the trainable weights can be performed as usual, for example with gradient descent and backpropagation, 
+simply keeping the weights of the loss networks constant.
+Often, complex image classification networks like VGG-16 \cite{Simonyan2015} are taken as loss network, e.\,g. in the well-known style-transfer network by Johnson et al. \cite{Johnson2016},
+because these are known to be good at detecting relevant structures in images.
+A combined loss including a perceptional part has also been used by Hong et al. for their Hi-C resolution enhancement network DeepHiC \cite{Hong2020}, 
+which outperformed other networks based on per-pixel loss functions.
+
+
+
+
+
 \begin{itemize}
  \item MSE is known to produce blurry images in regression tasks
  \item others have used TV loss, Perception loss to improve on this
