@@ -58,7 +58,7 @@ one bigwig file. Pseudocode for the full conversion process is given in \xxx.
  \item refrain from whitening, etc. -- the data is no image with inherent correlations
 \end{itemize}
 
-\subsubsection{Sample generation process} \label{sec:methods:sample_gen}
+\subsubsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
 With machine learning approaches, success heavily depends on the availability of training data.
 Since many organisms feature only a small number of unique chromsomes, learning Hi-C matrices 
 for complete chromosomes at once is generally infeasible.
@@ -149,7 +149,18 @@ The basic network was used with parameters $n=14$, $w=80$ and $b_{feat}=b_{mat} 
 Training samples were drawn from chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of GM12878, 
 validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21,
 see table \xxx for details.
-Test samples were processed through the network and the resulting submatrices were subsequently re-assembled into full Hi-C matrices in cooler format.
+Test samples were processed through the network and the resulting submatrices -- actually, vectors corresponding to their upper triangular parts -- were subsequently re-assembled into full Hi-C matrices in cooler format.
+
+\subsubsection{Sample generation for the cGAN}
+The samples for the cGAN were generated the same way as the samples for the dense neural network described 
+in \cref{sec:methods:sample_gen}, with two exceptions.
+First, Hi-C (sub-)matrices were not entered as vectors corresponding to their upper triangular part, 
+but were instead taken as $w\times w \times 1$ grayscale images with 32-bit floating point value range [0...1].
+Second, for the cGAN approach the input matrices need not only be square,
+but their sizes also needed to be powers of two. 
+This ensured the required shapes for the connected up- and downsampling operations in the generator, 
+which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
+Within the thesis, windowsizes of $w=\{64,128,256\}$ were used, see \xxx.
 
 \subsubsection{Generalization of feature binning} \label{sec:methods:inputBinning}
 Most of the binning- and sample generation procedures described above 
@@ -205,9 +216,6 @@ In this case, the 5th sample would be dropped for training,
 while a column with zero bins -- symbolized by pink crosses in \cref{fig:methods:sample_gen_generalized} -- would be added for to the feature array for prediction
 so that the resulting matrix would have the desired size of $15 \times 15$.
 
-
-
-
 \subsection{Dense neural network approach}
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
@@ -239,7 +247,7 @@ to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
 
 
-\subsubsection{Modifying kernel size, number of filter layers and filters}
+\subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
 where $k=b_{mat}/b_{feat}$ is the relation beetween matrix- and feature binsize.
 Mirror-type padding was used to maintain the output dimensions of the basic network, which now had \SI{7486478} trainable weights
@@ -251,7 +259,7 @@ This replacement was also made for the ``wider-longer''-variant,
 additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4.
 In both cases, the dropout rate was increased to 20\%.
 The ``longer'' variant had \SI{9142665} trainable weights and the ``wider-longer''
-had \xxx for $k=1$.
+had \SI{9143313} for $k=1$.
 
 
 
@@ -262,9 +270,33 @@ had \xxx for $k=1$.
 \end{itemize}
 
 \subsubsection{Combination of mean squared error, perception loss and TV loss}
-maybe not needed
+For computing the combined MSE, perception- and TV-loss,
+input features were first passed through the network as normal,
+and mean squared error was computed on the predicted ``upper triangular vectors'' vs. the real vectors.
+Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
+$w \times w \times 1$ tensors, where $w$ is again the windowsize.
+TV loss was then computed by simply using the appropriate tensorflow function on the predicted images.
+For perception loss, the predicted images and the true images were first fed through a pre-trained VGG16 network truncated at layer \xxx.
+The loss was then computed as mean squared error between the ``predicted'' and ``true'' activations at the output of that network.
+
+Let $M_s=G_s(\omega)$ again be the output of the neural network $G$ described above, and $T_s$ the true matrices for training samples $s$ in vector form,
+and let $M^\prime_s$ and $T^\prime_s$ be their grayscale image counterparts as described above.
+Furthermore, let $tv(x)$ be the total variation of image $x$ and $vgg(x)$ the output of the perception loss network for image $x$.
+The goal of the modified network was now to find weights $w^*$ such that
+\begin{equation}
+ \omega^* = {arg\,min}_\omega (  \lambda_{pix} \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 
+                                                     + \lambda_{tv} \sum_{s=0}^N tv( M^\prime_s) 
+                                                     + \lambda_{percept} \frac{1}{N} \sum_{s=0}^N (vgg(M^\prime_s) - vgg(T^\prime_s))^2 )
+\end{equation}
+Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
+The weights for the VGG16 network were taken from the pre-trained keras implementation and can here be considered as constants.
+In addition, the usage of VGG16 imposes the restriction $w \geq 32$ on the windowsize $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
+
+The network $G(\omega)$ could in principle be any of the variants described above in \cref{sec:methods:variants},
+but for the thesis at hand, only the initial network from \cref{sec:methods:basicSetup} was used.
 
 \subsection{HiC-GAN approach}
+\subsubsection{Pix2Pix network layout}
 \subsubsection{Using a DNN for 1D-2D conversion}
 \subsubsection{Using a pre-trained DNN for 1D-2D conversion}
 \subsubsection{Using a CNN for 1D-2D conversion}
