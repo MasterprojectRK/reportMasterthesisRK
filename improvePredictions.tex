@@ -8,8 +8,9 @@ the second is a novel method based on conditional generative adversarial network
 In their 2008 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
 propose a combination of a 1D convolutional filter with a three-layer dense neural network 
 which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing.
-Here, we try to build on the success of their method by extending the comparatively simple neural network
+This thesis tries to build on the success of their method by extending the comparatively simple neural network
 in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
+As a start, the basic network has been rebuilt and used on well-known data from human cell lines GM12878 and K562.
 
 \subsubsection{Basic network setup} \label{sec:improve:basicNetwork}
 The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \cref{fig:improve:priciple_basic_dnn},
@@ -25,30 +26,36 @@ see \cref{sec:methods:basicSetup} for technical details.
 
 Since the network implements a supervised learning technique,
 it requires two kinds of inputs for training -- ChIP-seq data of the chosen chromatin factors and
-target Hi-C matrices for each training chromosome, and it employs a sliding window approach 
-to generate training samples from these.
+target Hi-C matrices for each training chromosome.
+However, it is generally infeasible to learn Hi-C matrices for complete chromosomes at once with machine learning approaches, 
+because the latter heavily depend on availability of training data.
 
-The target matrices are just taken as submatrices of size $w \times w$ 
+The target matrices are thus taken as submatrices of size $w \times w$ 
 with fixed windowsize $w$, centered at the diagonal of the 
-original Hi-C Matrices, \cref{fig:improve:priciple_basic_dnn} top.
+original Hi-C matrices, \cref{fig:improve:priciple_basic_dnn} top.
 The ChIP-seq data is taken as $3w \times n$ subarray of the original array,
 whereby the middle $w$ bins are aligned with the position of the submatrix,
 the first $w$ bins correspond to the left flanking region and the last $w$ bins correspond to 
 the right flanking region of the current submatrix region, \cref{fig:improve:priciple_basic_dnn} bottom. 
 Training samples are then obtained from the input data by sliding 
 the input windows along the diagonal of the target Hi-C matrix. 
-The exact sample generation process is described in more details in \cref{sec:methods:sample_gen}.
+For the technical details of the sample generation process, see \cref{sec:methods:sample_gen}.
 
 Within the network, a 1D convolutional filter compresses the $3w \times n$ input arrays to 1D vectors
 of size $3w \times 1$, and four dense layers further process the compressed input, \cref{fig:improve:priciple_basic_dnn} middle.
 The number of neurons in the last dense layer corresponds to the number of bins
 in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons,
-exploiting the symmetry of Hi-C matrices.
+exploiting the symmetry of Hi-C matrices. 
+For implementation details, please refer to \cref{sec:methods:basicSetup}.
 
 Training of the network is performed by minimizing the mean squared error of the predicted matrix
 versus the target Hi-C matrix using stochastic gradient descent.
-The technical details are given in \cref{sec:methods:basicSetup}
-and the initial results for the basic setup are shown in \cref{sec:initialDNNresults}.
+The technical details are also given in \cref{sec:methods:basicSetup}
+
+Farr\'e et al. propose a windowsize of $w=80$ at $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
+but larger binsizes of $b_{feat} = b_{mat} = \SI{25}{\kilo\bp}$ were found beneficial for 
+the data used throughout this master thesis.
+The results are shown in \cref{sec:initialDNNresults}.
 
 The network shown above is quite simple, and immediately offers some opportunities
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.
@@ -57,12 +64,12 @@ These will be explored below.
 \subsubsection{Modifying the convolutional part of the network}
 One starting point for modifying the neural network is its convolutional part.
 
-With only a single 1D convolutional filter in one layer, there is little chance of capturing complex relationships 
+With only a single 1D convolutional filter in one layer, the network might have difficulties capturing complex relationships 
 between Hi-C interaction counts and more than one of the chromatin features.
-For this reason, an extended ``longer'' network has been created, 
+For this reason, an extended ``longer'' network was created, 
 comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respectively.
 This is still a comparatively low number of layers and filters,
-but the choice seems justified in order to avoid overfitting to the low-dimensional input.
+but the choice seemed justified in order to avoid overfitting to the low-dimensional input.
 
 Next, a ``wider'' network was created, featuring the same setup as the basic network
 except the width of the filter kernel, which was set to 4 instead of 1.
@@ -80,14 +87,14 @@ ChIP-seq experiments can usually be binned at smaller binsizes than Hi-C data du
 the process. 
 This can be exploited to capture finer details in the ChIP-seq data without a need for higher (training-)matrix resolutions.
 To this end, the initial network can be generalized by binning the ChIP-seq data at $k$ times the bin size of the matrices, 
-whereby $k \in \mathbb{N}^{\geq1}$. 
+whereby $k \in \mathbb{N}^{\geq1}$, cf.~\cref{sec:methods:inputBinning} for the technical details.
 This yields an input data size of $k \cdot 3w \times n$, which is then again compressed to a $3w \times 1$ vector 
 by a 1D convolutional filter with kernel size $n$ and strides $k$. 
 For practical reasons, $k=5$ was chosen for the thesis at hand, 
 and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \xxx.
-The technical details are to be found in \cref{sec:methods:inputBinning}.
 
-\subsubsection{Modifying the loss function}
+
+\subsubsection{Using a combination of MSE-, TV- and perceptual loss}
 In image regression tasks, optimizing for mean squared error is known to produce blurry images,
 because it is computed independently for each image pixel, ignoring spatial proximity \cite{Isola2017,Lu2019}.
 Another approach to improve the predictions of the basic neural network is thus using a different loss function.
@@ -114,11 +121,68 @@ The optimization of the trainable weights can be performed as usual, for example
 simply keeping the weights of the loss networks constant.
 Often, complex image classification networks like VGG-16 \cite{Simonyan2015} are taken as loss network, e.\,g. in the well-known style-transfer network by Johnson et al. \cite{Johnson2016},
 because these are known to be good at detecting relevant structures in images.
-A combined loss including a perceptional part has also been used by Hong et al. for their Hi-C resolution enhancement network DeepHiC \cite{Hong2020}, 
-which outperformed other networks based on per-pixel loss functions.
 
+To check whether the given learning task benefits from using a perceptual loss, a custom combined loss function was generated,
+consisting of mean squared error $l_\mathit{MSE}$ between true- and predicted matrices, perceptual loss $l_\mathit{VGG}$ based on VGG-16 and 
+total variation loss $l_\mathit{TV}$ to reduce noise in the output while preserving edges \cite{Rudin1992}. 
+This choice was inspired by the custom loss function used by Hong et al. in their successful Hi-C super-resolution network DeepHiC \cite{Hong2020},
+which is otherwise not similar to the network used here.
+In short, the combined loss function $L$ is shown in \cref{eq:combined_loss_short}, see \cref{sec:methods:combined_loss} for details,
+\begin{equation}
+ L_\mathit{combined} = \lambda_\mathit{MSE} \; l_\mathit{MSE} + \lambda_\mathit{VGG} \; l_\mathit{VGG} + \lambda_\mathit{TV} \; l_\mathit{TV} \label{eq:combined_loss_short}
+\end{equation}
+with individual loss weights $\lambda$.
 
+Unfortunately, there is no straightforward way for determining the optimal parameters $\lambda$,
+and an exhaustive parameter search was infeasible due to the computation time requirements of about 4:30\,min per epoch.
+Therefore, only few runs were conducted with different sets of parameters,
+and the results for $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$,
+which should not be considered optimal, are shown in \cref{sec:results:loss_functions}.
 
+\subsubsection{Using a TAD-based loss function}
+Looking at the results obtained from the networks so far, see \xxx, it seemed that highly interacting regions,
+especially topologically interacting domains (TADs), were not well predicted and either absent
+in the matrix plots or blurred.
+Assuming availability of a TAD scoring function $\mathit{tad}(z)$, where $z$ is a predicted submatrix,
+this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
+\begin{equation}
+ L_\mathit{combined} = \lambda_\mathit{MSE} + \lambda_\mathit{TAD} \, \mathit{tad}(z) \label{eq:combined_loss_tad}
+\end{equation}
+However, this approach suffers from several restrictions.
+First and foremost, there seems no consensus on the exact definition of TADs, 
+and no less than 22 algorithms for TAD detection existed as of 2018 \cite{Dali2017,Zufferey2018}.
+Additionally, many of these algorithms have several tuning parameters, are notoriously parameter-dependent
+and may not even yield any results if parametrized in an unfavorable way \cite{Zufferey2018}. 
+A further restriction results from the context -- since the loss function needs to be optimized,
+one needs to be able to compute gradients of the loss function with respect to the network's weights.
+This is generally not the case, or at least very difficult to implement in a computationally efficient way,
+for all known TAD calling algorithms.
+
+To overcome the limitations, a novel loss function based on TAD insulation scores \cite{Crane2015} was developed.
+\Cref{fig:improve:tad_score_loss_function} shows the generation of the score vectors for a $16\times16$ submatrix
+with windowsize 4.
+
+\begin{figure}[hbt]
+ \begin{minipage}{0.60\textwidth}
+   \centering
+    \small
+    \import{figures/}{tad_score_loss_function.pdf_tex}
+    \caption{score vector generation for TAD-based loss}
+    \label{fig:improve:tad_score_loss_function}
+ \end{minipage}\hfill
+ \begin{minipage}{0.3\textwidth}
+ \scriptsize
+  \begin{enumerate}[label=\Alph*:,leftmargin=*]
+   \raggedright
+    \item first ``diamond''
+    \item first 4 diagonals of a $16\times16$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item sliding direction for score generation
+    \item score vector (mean values within diamonds)
+    \item line plot of score vector
+    \item possible TAD boundaries
+\end{enumerate}
+ \end{minipage}
+\end{figure}
 
 
 \begin{itemize}
