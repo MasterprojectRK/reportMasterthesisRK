@@ -222,7 +222,13 @@ and the remaining validation error was also higher.
  \caption{learning progress for ``wider-longer'' DNN} \label{fig:results:wider-longerDNN_lossEpochs}
 \end{figure}
 
-\subsubsection{Results for variations of the loss function}
+\subsubsection{Results for variations of the loss function} \label{sec:results:loss_functions}
+
+While the influences of the MSE- and VGG-loss-weights were hard to estimate, 
+it was found that the TV loss weight needed to be much smaller than the two other weights.
+Otherwise, many true interactions outside the first few matrix diagonals were considered as noise and optimized away early in the training process.
+\xxx maybe put one figure here from \texttt{2020-12-05\_tvLoss}
+
 \subsubsection{Results for different binsizes and windowsizes}
 
 \subsection{Hi-cGAN approaches}
