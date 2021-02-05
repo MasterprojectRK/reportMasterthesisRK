@@ -226,10 +226,10 @@ Here, $M_s$ is given by the activations of the last dense layer, which are to be
 part of a symmetric $(w\times w)$ Hi-C matrix.
 Formally, one needs to optimize
 \begin{equation}
- \omega^* = {arg\,min}_\omega L_2(\omega) = {arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
+ \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
 For the thesis at hand, stochastic gradient with learning rate $1e^{-5}$  was used to find $\omega^*$.
-Initial values $\omega_\textrm{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
+Initial values $\omega_\mathit{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
 Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
@@ -254,7 +254,7 @@ so the factor for the relation between the two binsizes was $k=25/5=5$.
 This yields input feature arrays of size $3w\cdot k \times n = 3\cdot80\cdot5 \times 14 = 1200\times 14$.
 Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$,
 this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
-The rest of the network remained the same so that the number of trainable parameters increased only slightly to \xxx.
+The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}.
 
 \subsubsection{Custom loss function based on TAD insulation score}
 \begin{itemize}
@@ -287,6 +287,8 @@ In addition, the usage of VGG16 imposes the restriction $w \geq 32$ on the windo
 
 The network $G(\omega)$ could in principle be any of the variants described above in \cref{sec:methods:variants},
 but for the thesis at hand, only the initial network from \cref{sec:methods:basicSetup} was used.
+
+\subsubsection{Combination of mean squared error and score-based loss}
 
 \subsection{HiC-GAN approach}
 \subsubsection{Pix2Pix network layout}
