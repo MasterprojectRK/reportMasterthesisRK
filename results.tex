@@ -2,27 +2,37 @@
 \subsection{Dense Neural Network approaches} 
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
-The basic network was trained for 3000 epochs as explained in \xxx.
-The validation error (MSE) for the basic neural network reached a minimum of about \SI{150000}{} after 500 epochs, \cref{fig:results:basicDNN_lossEpochs}.
-Beyond that, the learning curve indicates overfitting, but differences between predictions at 500 and 1000 epochs are hard to spot in the matrix plots from the test set, 
-\cref{fig:results:00500_19_030-040} and \ref{fig:results:01000_19_030-040}.
+The basic network was trained as explained in \xxx.
+The validation error (MSE) for the basic neural network reached a minimum of about \SI{150000}{} 
+after about 500 epochs for 25k binsize and about 400 epochs for 10k binsize, \cref{fig:results:basicDNN_lossEpochs}.
+Beyond that, the learning curve indicated overfitting, but this was often hard to spot in the matrix plots from the test set, 
+compare e.\,g. \cref{fig:results:00500_19_030-040} and \ref{fig:results:01000_19_030-040}.
 \begin{figure}[hbp]
- \centering
+ \begin{subfigure}{0.45\textwidth}
+ \resizebox{\textwidth}{!}{
  \scriptsize
- \import{figures/basic_dnn_results/}{lossOverEpochs.pdf_tex}
+ \import{figures/basic_dnn_results/}{lossOverEpochs.pdf_tex}}
+ \caption{25k}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.45\textwidth}
+ \resizebox{\textwidth}{!}{
+ \scriptsize
+ \import{figures/basic10k_dnn_results/}{lossOverEpochs.pdf_tex}}
+ \caption{10k}
+ \end{subfigure}
  \caption{learning progress for basic DNN} \label{fig:results:basicDNN_lossEpochs}
 \end{figure}
-To asses the quality of the predictions, distance-stratified Pearson correlations were computed between predicted and real matrices,
-up to the maximum distance from the diagonal given by windowsize and binsize, i\,e. for distances up to $80\cdot \SI{25}{\kilo\bp}=\SI{2}{\mega\bp}$ in the basic setting.
-While the suitability of Pearson correlation as metric for seems debatable for Hi-C matrices \xxx, it is quite common in the field and thus useful at least for comparisons.
-\Cref{fig:results:basicDNN_pearson} shows the Pearson correlations alongside area under the correlation curve (AUC) for the five test chromosomes at hand.
+
+
+\Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} show the Pearson correlations alongside area under the correlation curve (AUC) for the five test chromosomes
+at 25 and \SI{10}{\kilo\bp} binsizes, respectively.
 The red lines in each correlation plot show the correlation between the corresponding training matrix from GM12878 and the target matrix from K562.
 It is obvious that all predicted test matrices have a strictly positive Pearson correlation, but are not better than transferring data from the training cell line.
 
 The predicted matrices themselves looked modest when plotted with pygenometracks \xxx. 
 While some of the highly interacting regions, for example between \xxx and \xxx of chromosome 19 were
 well predicted, other structures, especially larger ones like the one between \xxx and \xxx in chromosome 19 
-or between \xxx and \xxx in chromosome 21 are not predicted at all.
+or between \xxx and \xxx in chromosome 21 were not predicted at all.
 
 \begin{figure}[p]
     \begin{subfigure}{0.45\textwidth}
@@ -56,8 +66,45 @@ or between \xxx and \xxx in chromosome 21 are not predicted at all.
         \import{figures/basic_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
     \end{subfigure}
-    \caption{Pearson correlations, basic DNN, test chromosomes}
+    \caption{Pearson correlations, basic DNN, \SI{25}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_pearson}
+\end{figure}
+
+%10k
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic10k_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic10k_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic10k_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic10k_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/basic10k_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, basic DNN, \SI{10}{\kilo\bp}, test chromosomes}
+    \label{fig:results:basicDNN_10k_pearson}
 \end{figure}
 
 \begin{figure}[p]
@@ -324,7 +371,7 @@ Otherwise, many true interactions outside the first few matrix diagonals were co
 
 \subsubsection{Results for different binsizes and windowsizes}
 
-\subsection{Hi-cGAN approaches}
+\subsection{Hi-cGAN approaches} \label{sec:results:cgan}
 \subsubsection{Initial results}
 The results at windowsize 64 bins were encouraging \xxx
 \begin{figure}[p]
