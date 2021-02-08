@@ -52,10 +52,12 @@ Training of the network is performed by minimizing the mean squared error of the
 versus the target Hi-C matrix using stochastic gradient descent.
 The technical details are also given in \cref{sec:methods:basicSetup}
 
-Farr\'e et al. propose a windowsize of $w=80$ at $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
-but larger binsizes of $b_{feat} = b_{mat} = \SI{25}{\kilo\bp}$ were found beneficial for 
-the data used throughout this master thesis.
-The results are shown in \cref{sec:initialDNNresults}.
+Farr\'e et al. propose a windowsize of $w=80$ at $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$.
+However, larger binsizes of $b_{feat} = b_{mat} = \SI{25}{\kilo\bp}$ were found beneficial for 
+most of the data used throughout this master thesis.
+Additionally, larger binsizes allow for a higher coverage of the target matrix at the same windowsize,
+because obviously $10\, w < 25\, w$.
+Results for both binsize 10 and \SI{25}{\kilo\bp} are shown in \cref{sec:initialDNNresults}.
 
 The network shown above is quite simple, and immediately offers some opportunities
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.
