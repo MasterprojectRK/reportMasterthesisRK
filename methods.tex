@@ -130,14 +130,49 @@ as do all bins outside the main diagonal and the first $w-1$ side diagonals.
  \end{minipage}
 \end{figure}
 
-The network and its learning algorithm was implemented in python using tensorflow deep learning framework with keras \xxx citation, see \xxx repository.
-The basic network was used with parameters $n=14$ (cf.~\cref{sec:methods:chipseq}), $w=80$ and $b_\mathit{feat}=b_\mathit{mat} = \SI{25}{\kilo\bp}$. 
-
 Training samples were drawn from GM12878, chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of GM12878, 
-validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21,
-see table \xxx for details.
-Test samples were processed through the network and the resulting submatrices -- actually, vectors corresponding to their upper triangular parts -- were subsequently re-assembled into full Hi-C matrices.
-Finally, the output matrices were scaled to value range [0...1000] for better visualisation and then stored in cooler format.
+validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21.
+This approximately implements a 60:20:20 train:validation:test split, see \cref{tab:methods:samples} for details.
+Note that windowsize $w=80$ is not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
+to train a network with more than seven million parameters, cf.~\cref{sec:methods:basicSetup}.
+\begin{table}[hbp]
+\centering
+\begin{tabular}{lrrrrrrr}
+\hline
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{chrom.}}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{length/bp}}} & \multicolumn{6}{c}{\textbf{samples at w=80 and binsize...}}                                                                                                \\
+\multicolumn{1}{c}{}                                     & \multicolumn{1}{c}{}                                    & \multicolumn{1}{c}{5k} & \multicolumn{1}{c}{10k} & \multicolumn{1}{c}{25k} & \multicolumn{1}{c}{50k} & \multicolumn{1}{c}{250k} & \multicolumn{1}{c}{500k} \\ \hline
+1                                                        & 249250621                                               & 49612                  & 24687                   & 9732                    & 4747                    & 759                      & 260                      \\
+2                                                        & 243199373                                               & 48401                  & 24081                   & 9489                    & 4625                    & 734                      & 248                      \\
+4                                                        & 191154276                                               & 37992                  & 18877                   & 7408                    & 3585                    & 526                      & 144                      \\
+7                                                        & 159138663                                               & 31589                  & 15675                   & 6127                    & 2944                    & 398                      & 80                       \\
+9                                                        & 141213431                                               & 28004                  & 13883                   & 5410                    & 2586                    & 326                      & 44                       \\
+11                                                       & 135006516                                               & 26763                  & 13262                   & 5162                    & 2462                    & 302                      & 32                       \\
+13                                                       & 115169878                                               & 22795                  & 11278                   & 4368                    & 2065                    & 222                      &                          \\
+14                                                       & 107349540                                               & 21231                  & 10496                   & 4055                    & 1908                    & 191                      &                          \\
+16                                                       & 90354753                                                & 17832                  & 8797                    & 3376                    & 1569                    & 123                      &                          \\
+17                                                       & 81195210                                                & 16001                  & 7881                    & 3009                    & 1385                    & 86                       &                          \\
+18                                                       & 78077248                                                & 15377                  & 7569                    & 2885                    & 1323                    & 74                       &                          \\
+20                                                       & 63025520                                                & 12367                  & 6064                    & 2283                    & 1022                    & 14                       &                          \\
+22                                                       & 51304566                                                & 10022                  & 4892                    & 1814                    & 788                     &                          &                          \\
+\multicolumn{2}{r}{$\mathbf{\sum}$ \textbf{train samples}}                                                                         & 337986                 & 167442                  & 65118                   & 31009                   & 3755                     & 808                      \\
+                                                         &                                                         &                        &                         &                         &                         &                          &                          \\
+6                                                        & 171115067                                               & 33985                  & 16873                   & 6606                    & 3184                    & 446                      & 104                      \\
+8                                                        & 146364022                                               & 29034                  & 14398                   & 5616                    & 2689                    & 347                      & 54                       \\
+12                                                       & 133851895                                               & 26532                  & 13147                   & 5116                    & 2439                    & 297                      & 29                       \\
+15                                                       & 102531392                                               & 20268                  & 10015                   & 3863                    & 1812                    & 172                      &                          \\
+\multicolumn{2}{r}{$\mathbf{\sum}$ \textbf{validation samples}}                                                                    & 109819                 & 54433                   & 21201                   & 10124                   & 1262                     & 187                      \\
+                                                         &                                                         &                        &                         &                         &                         &                          &                          \\
+3                                                        & 198022430                                               & 39366                  & 19564                   & 7682                    & 3722                    & 554                      & 158                      \\
+5                                                        & 180915260                                               & 35945                  & 17853                   & 6998                    & 3380                    & 485                      & 123                      \\
+10                                                       & 135534747                                               & 26868                  & 13315                   & 5183                    & 2472                    & 304                      & 33                       \\
+19                                                       & 59128983                                                & 11587                  & 5674                    & 2127                    & 944                     &                          &                          \\
+21                                                       & 48129895                                                & 9387                   & 4574                    & 1687                    & 724                     &                          &                          \\
+\multicolumn{2}{r}{$\mathbf{\sum}$ \textbf{test samples}}                                                                          & \textbf{123153}        & \textbf{60980}          & \textbf{23677}          & \textbf{11242}          & \textbf{1343}            & \textbf{314}             \\
+                                                         &                                                         & \multicolumn{1}{l}{}   & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}     & \multicolumn{1}{l}{}     \\
+\multicolumn{2}{r}{$\mathbf{\sum}$ \textbf{total samples}}                                                                         & \textbf{570958}        & \textbf{282855}         & \textbf{109996}         & \textbf{52375}          & \textbf{6360}            & \textbf{1309}            \\ \hline
+\end{tabular}
+\caption{training, validation and test samples for sliding window approach} \label{tab:methods:samples}
+\end{table}
 
 \subsubsection{Sample generation for the cGAN}
 The samples for the cGAN were generated the same way as the samples for the dense neural network described 
