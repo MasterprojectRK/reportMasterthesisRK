@@ -154,11 +154,10 @@ and no less than 22 algorithms for TAD detection existed as of 2018 \cite{Dali20
 Additionally, many of these algorithms have several tuning parameters, are notoriously parameter-dependent
 and may not even yield any results if parametrized in an unfavorable way \cite{Zufferey2018}. 
 A further restriction results from the context -- since the loss function needs to be optimized,
-one needs to be able to compute gradients of the loss function with respect to the network's weights.
-This is generally not the case, or at least very difficult to implement in a computationally efficient way,
-for all known TAD calling algorithms.
+one needs to be able to compute gradients of it with respect to the network's weights.
+Due to their complexity, this is generally very difficult to implement in a computationally efficient way for all known TAD calling algorithms.
 
-To overcome the limitations, a novel loss function based on TAD insulation scores \cite{Crane2015} was developed.
+To overcome the limitations, a novel loss function based on TAD scores \cite{Crane2015} was developed.
 \Cref{fig:improve:tad_score_loss_function} exemplarily shows its basic idea for a $16\times16$ submatrix
 with windowsize 4.
 \begin{figure}[hbt]
@@ -185,18 +184,19 @@ with windowsize 4.
 First, the mean is taken from diamond-shaped (or rhombus-shaped) matrix cutouts along the diagonal, \cref{fig:improve:tad_score_loss_function}\,(A, C),
 and stored in a score vector, \cref{fig:improve:tad_score_loss_function}\,(D / E). 
 The size of the diamonds, 2 in the figure, is configurable, but a reasonable balance with the submatrix size, i.\,e. the size of the sliding window $w$,
-and the expected size of TADs in the matrix must of course be maintained.
-Next, loss is computed by taking the mean squared error between the score vectors of the ``real'' submatrices and the ``predicted'' submatrices,
-similar to the way it is computed for the perception loss.
-This way, the loss function is well defined, efficiently computable and tensorflow standard functionality can be used to compute gradients with respect to weights.
+and the expected size of TADs in the matrix must be maintained.
+Next, loss is computed by taking the mean squared error between the score vectors of the ``real'' submatrices and the ``predicted'' submatrices.
 
-The idea behind the score-based approach is visualized in \cref{fig:improve:tad_score_loss_function}\,(E) 
--- local minima, i.\,e. bends in the line plot of the score values, \cref{fig:improve:tad_score_loss_function}\,(F),
+The idea behind the score-based approach is visualized in \cref{fig:improve:tad_score_loss_function}\,(E).
+Local minima, i.\,e. dents in the line plot of the score values, \cref{fig:improve:tad_score_loss_function}\,(F),
 often correspond with highly interacting regions in the matrix, since the mean of diamonds from \emph{inside} TADs is normally significantly higher than the mean of diamonds \emph{outside} TADs.
-Indeed, some TAD calling algorithms follow the same approach, i\,e. they first compute insulation scores and then use diverse techniques to detect meaningful local minima in the score values \xxx.
-However, these techniques usually consider scores from several diamond sizes, leading to computationally involved and thus slow calculations.
+Indeed, some TAD calling algorithms like TopDom \cite{Shin2015} and hicFindTADs \cite[W12f.]{Wolff2018} do compute insulation scores -- usually for more than one diamond size -- 
+and then use diverse techniques to detect meaningful local minima in the score values.
+However, finding meaningful local minima in the given context is still computationally involved,
+so it was left to the network to make sense out of the score vectors.
+This way, the loss function was well defined, efficiently computable and tensorflow standard functionality could be used to compute gradients with respect to weights.
 
-For the thesis at hand, again windowsize $w=80$ and diamond sizes $ds={10,15}$ were used at binsizes of \SI{25}{\kilo\bp}.
+For the thesis at hand, windowsize $w=80$ and diamond size $ds={12}$ were used at binsizes of \SI{25}{\kilo\bp}.
 The score-based loss was always used in combination with mean squared error, as shown above in \cref{eq:combined_loss_tad}.
 For technical details please refer to \cref{sec:methods:score_loss}.
 
