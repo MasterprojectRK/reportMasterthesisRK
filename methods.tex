@@ -4,7 +4,6 @@
 For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
 The exact data sources and data preprocessing will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
 
-
 \subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
 Hi-C data due to Rao et al. \cite{Rao2014} was downloaded 
 in .hic format from Gene Expression Omnibus under accession key GSE63525.
@@ -56,9 +55,10 @@ First, all chromatin features were binned to binsize $b_\mathit{feat}$ by splitt
 $l_\mathit{feat}=\left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil$ non-overlapping bins of size $b_\mathit{feat}$
 and taking the mean feature value within the genomic region belonging to each bin.
 All $n$ chromatin factors were processed in this way and then stacked into a $l_\mathit{feat} \times n$ array.
+Here, the number of chromatin features was constant for all investigations within this thesis, $n=14$ (cf.~\cref{sec:methods:chipseq}). 
 
-Hi-C matrices were taken as provided by the cooler format, cf. \cref{sec:methods:hicMatrices}, 
-i.\,e. as $(l_\mathit{mat} \times l_\mathit{mat})$-matrices, $l_\mathit{mat}=\left \lceil{\frac{cs}{b_\mathit{mat}}}\right \rceil$ being the number of bins in the given chromosome. 
+Separate Hi-C matrices for each chromosome were derived from the cooler format as $(l_\mathit{mat} \times l_\mathit{mat})$-matrices, 
+$l_\mathit{mat}=\left \lceil{\frac{cs}{b_\mathit{mat}}}\right \rceil$ being the number of bins in the given chromosome. 
 Initially, $b_\mathit{feat} = b_\mathit{mat}$ was used, which leads to $l_\mathit{feat} = l_\mathit{mat}$, because $cs$ is a constant for a given chromosome.
 
 A sliding window approach was now applied to generate training samples for the neural networks $G$ described below.
@@ -106,6 +106,9 @@ and finally all values were divided by the number of overlaps for their respecti
 \Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with windowsize $w=4$ for a $16\times16$ matrix.
 Note that the first and last $w$ bins in each row (matrix diagonal) always remain empty due to the flanking regions,
 as do all bins outside the main diagonal and the first $w-1$ side diagonals.
+To improve visualisation, all predicted matrices were scaled to value range 0...1000 after re-assembly and stored in cooler format for further processing.
+Conveniently, cooler also supports storing only the upper triangular part of symmetric matrices, minimizing conversion effort for the data at hand.
+
 \begin{figure}
  \begin{minipage}{0.60\textwidth}
    \centering
@@ -174,7 +177,7 @@ to train a network with more than seven million parameters, cf.~\cref{sec:method
 \caption{training, validation and test samples for sliding window approach} \label{tab:methods:samples}
 \end{table}
 
-\subsubsection{Sample generation for the cGAN}
+\subsubsection{Sample generation for the cGAN} \label{sec:methods:sample_gen_cgan}
 The samples for the cGAN were generated the same way as the samples for the dense neural network described 
 in \cref{sec:methods:sample_gen}, with two exceptions.
 First, Hi-C (sub-)matrices were not entered as vectors corresponding to their upper triangular part, 
@@ -183,7 +186,7 @@ Second, for the cGAN approach the input matrices need not only be square,
 but their sizes also needed to be powers of two. 
 This ensured the required shapes for the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
-Within the thesis, windowsizes of $w=\{64,128,256\}$ were used, see \xxx.
+Within the thesis, windowsizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
 
 \subsubsection{Generalization of feature binning} \label{sec:methods:inputBinning}
 Most of the binning- and sample generation procedures described above 
@@ -259,9 +262,11 @@ where the changes made within this thesis seemed particularly obvious.
 \subsection{Dense neural network approach}
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
-The basic setup for the dense neural network approach follows the proposal by Farr\'e et al. \cite{Farre2018a}.
-It consists of five trainable layers; one convolutional layer and four densely connected layers with 7,486,436 trainable weights in total, \cref{fig:methods:basic_dnn}.
-For brevity, the sigmoid activation of the 1D convolution and the ReLU activations of the Dense layers are not shown.
+The basic setup for the dense neural network approach closely follows the proposal by Farr\'e et al. \cite{Farre2018a},
+so a windowsize of $w=80$ and $b_\mathit{feat}=b_\mathit{mat} = \SI{10}{\kilo\bp}$ was initially used.
+With these parameters, the network has a total of 7,486,436 trainable weights in five trainable layers; 
+one convolutional layer and four densely connected layers, \cref{fig:methods:basic_dnn}.
+For brevity, the sigmoid activation after the 1D convolution and the ReLU activations after the Dense layers are not shown.
 The dense layers all use a ``L2'' kernel regularizer and the dropout layers following all but the last dense layer have a dropout probability of $10\%$.
 \begin{figure}[htb]
     \small
@@ -286,6 +291,8 @@ Following \cite{Farre2018a}, optimization was performed on minibatches of 30 sam
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
 
+The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{tensorflow2015-whitepaper,chollet2015keras}, 
+see repository \xxx.
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
