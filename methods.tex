@@ -204,6 +204,23 @@ In this case, the 5th sample would be dropped for training,
 while a column with zero bins -- symbolized by pink crosses in \cref{fig:methods:sample_gen_generalized} -- would be added to the feature array for prediction
 so that the resulting matrix would still have the desired size of $16 \times 16$.
 
+\subsection{Quality metrics}
+To asses the quality of the predicted matrices within this thesis, distance-stratified Pearson correlations were computed between predicted and real matrices.
+While the suitability of suchlike correlations as a quality metric for Hi-C matrices seems debatable in general \cite{Yang2017}, 
+distance stratified Pearson correlation is quite common in practice and thus useful at least for comparisons with other approaches.
+
+To compute the correlations, the $w$ bins at the left and right boundaries of the investigated matrices were first removed, because these remain zero 
+in the predictions due to the chosen sample generation approach, 
+cf.~\cref{sec:methods:sample_gen}, \cref{fig:methods:prediction} and \ref{sec:methods:sample_gen_cgan}.
+Next, the remaining values were grouped according to their genomic distance, up to the maximum distance $w$, 
+and then Pearson correlations were computed as usual, separately for each group.
+Additionally, the area under the correlation curve (AUC) was computed for all curves in each plot to obtain a single-valued, albeit very abstract quality metric.
+Furthermore, all Pearson correlation plots show the correlation between the ``true'' GM12878 matrix and the corresponding target matrix as a baseline,
+i.\,e. the Pearson correlation that is obtained when simply using the relevant GM12878 matrix as a ``prediction'' for a given target matrix.
+
+Since relying on metrics alone seemed problematic, pygenometracks \cite{LopezDelisle2020} was used to plot selected areas of the test set 
+where the changes made within this thesis seemed particularly obvious.
+
 \subsection{Dense neural network approach}
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
