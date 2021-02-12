@@ -247,23 +247,54 @@ a second, widely unrelated approach was made.
 Since their invention by Goodfellow, Mirza and colleagues \cite{Goodfellow2014, mirza2014},
 Generative Adversarial Networks have become increasingly popular for image processing tasks of many kinds,
 and especially for image synthesis \cite{Wang2020}. 
-In the following sections, an approach based on conditional generative adversarial networks will be explored.
+Among their strenghts is image synthesis from textual descriptions \cite{Reed2016,Zhang2019c,Zhu2019,Tao2020} --
+and from an abstract point of view, this task is not very different from the goal of the thesis at hand.
+Considering the chromatin features on the input side as a ``description'' of how the target Hi-C (sub-)matrices should look like,
+formulating the goal of the thesis as a cGAN-problem should be possible.
+In the following sections, such an approach will be explored.
 
-\subsubsection{Pix2Pix as a generic generative network}
-Several GANs already exist to generate images e.g. from text or from labels.
-From abstract point of view, similar to the task at hand.
-Chromatin features as ``description'' how the Hi-C matrices could look like.
-State of the art approaches have on the order of 50 mio parameters \cite{brock2018}.
-But these are used for synthesizing images from many different classes, like in imageNet.
-For our task, all Hi-C matrices are superficially similar. So try more simple approach.
+\subsubsection{General setup of the cGAN approach}
+Although numerous variants exist, conditional GANs generally comprise at least two neural networks -- 
+a generator $G(x,z)$, which tries to generate realistic outputs from its inputs $x$ and random noise $z$, and a discriminator $D(x,y)$,
+which tries to discern true inputs $y$, e.\,g. experimentally derived Hi-C matrices, from generated inputs $G(x,z)$.
+The optimal weights for the networks can then be found by searching an equilibrium in a two-player minimax game:
+The generator tries to fool the discriminator, while the discriminator tries to detect the generator's fakes, 
+see equations \ref{eq:improve:cGAN-simple-loss} and \ref{eq:improve:cGAN-simple-opt} \cite{Isola2017}.
+\begin{align}
+ L_\mathit{cGAN}(G, D) &= \mathbb{E}_{x,y}[\log D(x,y)] + \mathbb{E}_{x,z}[\log(1-D(x, G(x,z)))] \label{eq:improve:cGAN-simple-loss} \\
+ G^* &=  \mathit{arg\,min}_G \mathit{max}_D \; L_\mathit{cGAN}(G, D) \label{eq:improve:cGAN-simple-opt}
+\end{align}
 
-Pix2Pix rather simple but popular approach for different tasks like image infill, image from labels, image from sketch etc.
-Provide citations. 
+Many different layouts and training processes for the Generator and Discriminator networks have been proposed.
+For the thesis at hand, the well-known ``pix2pix'' proposal by Isola et al. from 2017 was followed \cite{Isola2017}, 
+amended by a convolutional embedding network for the chromatin features, which serve as the conditional input $x$ here.
+The overall setup is shown in \cref{fig:improve:cGAN-approach}.
+\begin{figure}[hbp]
+ \caption{cGAN approach} \label{fig:improve:cGAN-approach}
+\end{figure}
+Compared to other cGAN architectures, pix2pix is rather simple, but well studied for different applications like label-to-image transfer,
+sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
+Since the problem at hand has likely not been tackled by a specialized GAN yet, 
+choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
 
-Describe the basic setup of pix2pix
-Pix2Pix using image input, but we have n times 1D. Bad. 2 ideas how to come around,
-using DNN like Farre et al, potentially pretrained, or using new CNN. Maybe mention restriction of $2^x$ for image size
-\subsubsection{Using a DNN for feature embedding}
+For sample generation, we relied on the same method as described for the dense neural network described above
+with a few minor adaptations, see \cref{sec:methods:sample_gen_cgan}.
+
+However, since pix2pix operates on images, as its name already implies, 
+a method to add the essentially one-dimensional chromatin feature data as conditional input images into the network was needed.
+Unfortunately, this task seems to be without examples in literature, so two different approaches were tried,
+which will be discussed below in sections \ref{sec:improve:DNN_embedding} and \ref{sec:improve:DNN_embedding}.
+Both approaches are somewhat related to the text-encoders used by text-to-image synthesis networks 
+\cite{Reed2016b,Xu2018}, but much less sophisticated. 
+However, a complex encoding is not needed here, since -- contrary to image captions -- the chromatin features are already in a format that can be processed directly by neural networks.
+
+%State of the art approaches have 80 mio parameters \cite{Brock2019}.
+%But these are used for synthesizing images from many different classes, like in imageNet.
+%our approach is much more simple
+
+
+
+\subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
 \begin{itemize}
 \item use network like Farre et al for embedding/converting inputs to 2D
 \item rationale: this nw has been shown to create comparatively good Hi-C matrices 
@@ -271,7 +302,7 @@ using DNN like Farre et al, potentially pretrained, or using new CNN. Maybe ment
 \item rationale: transfer learning can be employed
 \end{itemize}
 
-\subsubsection{Using a CNN for feature embedding}
+\subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
 \begin{itemize}
  \item use somewhat deep CNN for conversion/embedding
  \item rationale: the DNN approach didn't work
