@@ -76,10 +76,10 @@ flattened into a $w\cdot (w+1)/2$ vector.
 In this case, five training samples would be generated -- the one encircled in green and four more to the right, as the window is sliding from left to right until the
 right flanking region hits the feature array boundary.
 \begin{figure}[hbp]
- \begin{minipage}{0.60\textwidth}
-   \centering
+ \begin{minipage}{0.65\textwidth}
+   \resizebox{\textwidth}{!}{
     \small
-    \import{figures/}{sample_generation_process.pdf_tex}
+    \import{figures/}{sample_generation_process.pdf_tex}}
     \caption{Sample generation process}
     \label{fig:methods:sample_gen}
  \end{minipage}\hfill
@@ -110,10 +110,10 @@ To improve visualisation, all predicted matrices were scaled to value range 0...
 Conveniently, cooler also supports storing only the upper triangular part of symmetric matrices, minimizing conversion effort for the data at hand.
 
 \begin{figure}
- \begin{minipage}{0.60\textwidth}
-   \centering
+ \begin{minipage}{0.65\textwidth}
+   \resizebox{\textwidth}{!}{
     \small
-    \import{figures/}{prediction_process2.pdf_tex}
+    \import{figures/}{prediction_process2.pdf_tex}}
     \caption{Prediction process}
     \label{fig:methods:prediction}
  \end{minipage}\hfill
@@ -217,10 +217,10 @@ but keeps the size of the \emph{predicted} matrix consistent with the training m
 If  $15\cdot b_\mathit{mat} + 1 \leq cs < 15\cdot b_\mathit{mat} + b_\mathit{feat}$ held for the chromosome size $cs$ in the example,
 then the number of bins on the matrix diagonal would be $l_\mathit{mat}=16$, while the number of chromatin feature bins would be $l_\mathit{feat}=31 \not = 2 \cdot l_\mathit{mat}$.
 \begin{figure}
- \begin{minipage}{0.60\textwidth}
-   \centering
+ \begin{minipage}{0.65\textwidth}
+   \resizebox{\textwidth}{!}{
     \small
-    \import{figures/}{sample_generation_process_generalized.pdf_tex}
+    \import{figures/}{sample_generation_process_generalized.pdf_tex}}
     \caption{Generalized sample generation process f. $k=2$}
     \label{fig:methods:sample_gen_generalized}
  \end{minipage}\hfill
