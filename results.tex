@@ -1,5 +1,5 @@
 \section{Results}
-\subsection{Dense Neural Network approaches} 
+\subsection{Dense Neural Network approaches} \label{sec:results:DNN}
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
 The basic network was trained as explained in \xxx.
@@ -316,7 +316,7 @@ The learning curve was smooth and showed signs of slight overfitting beyond 300 
  \caption{learning progress for DNN with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$} \label{fig:results:25k5DNN_lossEpochs}
 \end{figure}
 
-\subsubsection{Results for variations of the loss function} \label{sec:results:loss_functions}
+\subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
 The Pearson correlations for a combined loss function according to \cref{eq:methods:combined_loss} with weighting parameters $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$ are shown in \cref{fig:results:combilossDNN_pearson}.
 For all test chromosomes, the results were highly similar to the inital network's results.
 \begin{figure}[p]
@@ -369,7 +369,7 @@ Otherwise, many true interactions outside the first few matrix diagonals were co
 \xxx Runtime score based loss about 7:00 per epoch (excl. validation)
 
 
-\subsubsection{Results for different binsizes and windowsizes}
+\subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
 
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
 \subsubsection{Initial results}
