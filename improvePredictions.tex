@@ -187,7 +187,7 @@ First, the mean is taken from diamond-shaped (or rhombus-shaped) matrix cutouts 
 and stored in a score vector, \cref{fig:improve:tad_score_loss_function}\,(D / E). 
 The size of the diamonds, 2 in the figure, is configurable, but a reasonable balance with the submatrix size, i.\,e. the size of the sliding window $w$,
 and the expected size of TADs in the matrix must be maintained.
-Next, loss is computed by taking the mean squared error between the score vectors of the ``real'' submatrices and the ``predicted'' submatrices.
+Next, loss is computed by taking the mean squared error between the score vectors of the ``real'' submatrices and the ``predicted'' submatrices, \cref{eq:combined_loss_tad}.
 
 The idea behind the score-based approach is visualized in \cref{fig:improve:tad_score_loss_function}\,(E).
 Local minima, i.\,e. dents in the line plot of the score values, \cref{fig:improve:tad_score_loss_function}\,(F),
@@ -199,7 +199,6 @@ so it was left to the network to make sense out of the score vectors.
 This way, the loss function was well defined, efficiently computable and tensorflow standard functionality could be used to compute gradients with respect to weights.
 
 For the thesis at hand, windowsize $w=80$ and diamond size $ds={12}$ were used at binsizes of \SI{25}{\kilo\bp}.
-The score-based loss was always used in combination with mean squared error, as shown above in \cref{eq:combined_loss_tad}.
 For technical details please refer to \cref{sec:methods:score_loss}.
 
 \subsubsection{Modifying binsize and windowsize}
@@ -230,6 +229,8 @@ with the idea of allowing the network itself to figure out how to combine predic
  \item rationale: larger windowsize without increasing training time too much 
  \item train on matrices/features with different binsizes in the same training run (e.g. two matrices with 25k, 50k and bin at 25k, 50k or 5k, 10k)
  \end{itemize}
+ 
+ 
 
 \subsubsection{DNA sequence as an additional network input branch}
 \begin{itemize}
@@ -249,20 +250,30 @@ and especially for image synthesis \cite{Wang2020}.
 In the following sections, an approach based on conditional generative adversarial networks will be explored.
 
 \subsubsection{Pix2Pix as a generic generative network}
-Describe the basic setup of pix2pix and what it is currently used for
-Pix2Pix using 2D input, but we have n times 1D. Bad. 2 ideas how to come around,
+Several GANs already exist to generate images e.g. from text or from labels.
+From abstract point of view, similar to the task at hand.
+Chromatin features as ``description'' how the Hi-C matrices could look like.
+State of the art approaches have on the order of 50 mio parameters \cite{brock2018}.
+But these are used for synthesizing images from many different classes, like in imageNet.
+For our task, all Hi-C matrices are superficially similar. So try more simple approach.
+
+Pix2Pix rather simple but popular approach for different tasks like image infill, image from labels, image from sketch etc.
+Provide citations. 
+
+Describe the basic setup of pix2pix
+Pix2Pix using image input, but we have n times 1D. Bad. 2 ideas how to come around,
 using DNN like Farre et al, potentially pretrained, or using new CNN. Maybe mention restriction of $2^x$ for image size
-\subsubsection{Using a DNN for 1D - 2D conversion}
+\subsubsection{Using a DNN for feature embedding}
 \begin{itemize}
-\item use network like Farre et al for converting inputs to 2D
+\item use network like Farre et al for embedding/converting inputs to 2D
 \item rationale: this nw has been shown to create comparatively good Hi-C matrices 
 \item rationale: pix2pix could then improve them
 \item rationale: transfer learning can be employed
 \end{itemize}
 
-\subsubsection{Using a CNN for 1D - 2D conversion}
+\subsubsection{Using a CNN for feature embedding}
 \begin{itemize}
- \item use somewhat deep CNN for conversion
+ \item use somewhat deep CNN for conversion/embedding
  \item rationale: the DNN approach didn't work
  \item rationale: downsampling like in image processing, just in 1D
 \end{itemize}
