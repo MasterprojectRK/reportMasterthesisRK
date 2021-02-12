@@ -295,20 +295,18 @@ However, a complex encoding is not needed here, since -- contrary to image capti
 
 
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
-\begin{itemize}
-\item use network like Farre et al for embedding/converting inputs to 2D
-\item rationale: this nw has been shown to create comparatively good Hi-C matrices 
-\item rationale: pix2pix could then improve them
-\item rationale: transfer learning can be employed
-\end{itemize}
+First, the deep neural network developed above was employed to turn chromatin features into Hi-C submatrices, which can be seen as grayscale images.
+The rationale here was to use the DNN for converting the conditional input into a coarse Hi-C matrix first and then
+use the GAN to refine the predictions.
+Additionally, the network could be pre-trained as shown above, saving time compared to an embedding that has to be trained alongside the GAN.
+Potentially pre-training might also improve stability or enable convergence of the network in general.
+
+
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
-\begin{itemize}
- \item use somewhat deep CNN for conversion/embedding
- \item rationale: the DNN approach didn't work
- \item rationale: downsampling like in image processing, just in 1D
-\end{itemize}
-
+Second, a short convolutional network was used to embed the one-dimensional chromatin feature vectors in a 2D image.
+Here, the idea was to use a fast trainable embedding that keeps the localization information in the chromatin feature data,
+has less parameters than a dense embedding and can efficiently be trained along with the rest of the network, allowing for a standalone solution.
 
 
 
