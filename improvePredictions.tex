@@ -220,6 +220,14 @@ For technical details please refer to \cref{sec:methods:score_loss}.
 \end{itemize}
 
 \subsection{Hi-cGAN approach} \label{sec:hi-cGAN}
+Because none of the results from the dense neural network approach presented in \cref{sec:results:DNN} were overly convincing,
+a second, widely unrelated approach was made.
+
+Since their invention by Goodfellow, Mirza and colleagues \cite{Goodfellow2014, mirza2014},
+Generative Adversarial Networks have become increasingly popular for image processing tasks of many kinds,
+and especially for image synthesis \cite{Wang2020}. 
+In the following sections, an approach based on conditional generative adversarial networks will be explored.
+
 \subsubsection{Pix2Pix as a generic generative network}
 Describe the basic setup of pix2pix and what it is currently used for
 Pix2Pix using 2D input, but we have n times 1D. Bad. 2 ideas how to come around,
