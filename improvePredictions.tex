@@ -145,10 +145,10 @@ which should not be considered optimal, are shown in \cref{sec:results:loss_func
 Looking at the results obtained from the networks so far, see \xxx, it seemed that highly interacting regions,
 especially topologically interacting domains (TADs), were not well predicted and either absent
 in the matrix plots or blurred.
-Assuming availability of a TAD scoring function $\mathit{tad}(z)$, where $z$ is a predicted submatrix,
+Assuming availability of a TAD scoring function $\mathit{tad}(z_\mathit{pred})$, where $z_\mathit{pred}$ is a predicted submatrix,
 this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
 \begin{equation}
- L_\mathit{combined} = \lambda_\mathit{MSE} + \lambda_\mathit{TAD} \, \mathit{tad}(z) \label{eq:combined_loss_tad}
+ L_\mathit{combined} = \lambda_\mathit{MSE}\;l_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(z_\mathit{true}) - \mathit{tad}(z_\mathit{pred}))^2 \label{eq:combined_loss_tad}
 \end{equation}
 However, this approach suffers from several restrictions.
 First and foremost, there seems no consensus on the exact definition of TADs, 
