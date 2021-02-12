@@ -260,6 +260,8 @@ i.\,e. the Pearson correlation that is obtained when simply using the relevant G
 Since relying on one metric alone seemed problematic, pygenometracks \cite{LopezDelisle2020} was used to plot selected areas of the test set 
 where the characteristics of the results seemed particularly distinct.
 
+\xxx maybe mention SSIM, PSNR, FIS \xxx
+
 \subsection{Dense neural network approach}
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
@@ -292,7 +294,7 @@ Following \cite{Farre2018a}, optimization was performed on minibatches of 30 sam
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
 
-The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{tensorflow2015-whitepaper,chollet2015keras}, 
+The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{Abadi2015,Chollet2015}, 
 see repository \xxx.
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
