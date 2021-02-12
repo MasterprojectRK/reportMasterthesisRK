@@ -203,6 +203,26 @@ The score-based loss was always used in combination with mean squared error, as 
 For technical details please refer to \cref{sec:methods:score_loss}.
 
 \subsubsection{Modifying binsize and windowsize}
+In the results presented so far, larger structures were often absent.
+In order to improve on this, two approaches were tried.
+
+First, predictions were made at binsizes $b_\mathit{feat} = b_\mathit{mat} = \SI{50}{\kilo\bp}$, 
+keeping the windowsize at 80 bins, which then corresponded to \SI{4}{\mega\bp}.
+The idea here was to capture predominantly larger structures further away from the diagonal and
+then investigate various methods to combine predictions at smaller and larger binsizes.
+However, such a merging process was never actually developed,
+since the predictions at \SI{50}{\kilo\bp} proved useless, \cref{sec:results:binsize_winsize}.
+
+Unfortunately, doubling the (matrix-)binsizes from 25 to \SI{50}{\kilo\bp} directly leads to a reduction in the number of available training samples by a factor of about two, 
+if the windowsizes are kept constant at 80 bins, see \cref{tab:methods:samples}.
+For this reason, a second approach was made -- using training samples at $b_\mathit{feat} = b_\mathit{mat} = \SI{25}{\kilo\bp},\;w=80$
+and $b_\mathit{feat} = b_\mathit{mat} = \SI{50}{\kilo\bp},\;w=80$ at the same time.
+This is easily possible, since the neural network topology only depends on the windowsize \emph{in bins} and the relation $k=b_\mathit{mat}/b_\mathit{feat}$
+between the binsizes of features and matrices.
+This approach obviously increases the number of training samples,
+with the idea of allowing the network itself to figure out how to combine predictions at smaller and larger binsizes.
+
+
 \begin{itemize}
  \item rationale: smaller binsizes - predict smaller structures, larger binsizes - predict larger structures
  \item then combine the predictions (e.g. sum them up, take the mean or even use a NN)
