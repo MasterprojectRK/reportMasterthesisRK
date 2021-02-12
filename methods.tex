@@ -243,9 +243,10 @@ while a column with zero bins -- symbolized by pink crosses in \cref{fig:methods
 so that the resulting matrix would still have the desired size of $16 \times 16$.
 
 \subsection{Quality metrics}
-To asses the quality of the predicted matrices within this thesis, distance-stratified Pearson correlations were computed between predicted and real matrices.
+Assessing the quality of synthetically generated images is a long-standing problem, which has not yet been solved, see e\,g. \cite[p.\,19]{Wang2020}.
+Within this thesis, distance-stratified Pearson correlations were computed between predicted and real matrices to measure the quality of the predictions.
 While the suitability of suchlike correlations as a quality metric for Hi-C matrices seems debatable in general \cite{Yang2017}, 
-distance stratified Pearson correlation is quite common in practice and thus useful at least for comparisons with other approaches.
+distance stratified Pearson correlation is quite common in the field of Hi-C matrices and thus useful at least for comparisons with other approaches.
 
 To compute the correlations, the $w$ bins at the left and right boundaries of the investigated matrices were first removed, because these remain zero 
 in the predictions due to the chosen sample generation approach, 
@@ -256,8 +257,8 @@ Additionally, the area under the correlation curve (AUC) was computed for all cu
 Furthermore, all Pearson correlation plots show the correlation between the ``true'' GM12878 matrix and the corresponding target matrix as a baseline,
 i.\,e. the Pearson correlation that is obtained when simply using the relevant GM12878 matrix as a ``prediction'' for a given target matrix.
 
-Since relying on metrics alone seemed problematic, pygenometracks \cite{LopezDelisle2020} was used to plot selected areas of the test set 
-where the changes made within this thesis seemed particularly obvious.
+Since relying on one metric alone seemed problematic, pygenometracks \cite{LopezDelisle2020} was used to plot selected areas of the test set 
+where the characteristics of the results seemed particularly distinct.
 
 \subsection{Dense neural network approach}
 
@@ -315,12 +316,6 @@ Replacing the first convolutional layer of the basic network by a 1D convolution
 this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}.
 
-\subsubsection{Custom loss function based on TAD insulation score}
-\begin{itemize}
- \item computation details, custom layer
- \item full insulation score takes too long, simplified
-\end{itemize}
-
 \subsubsection{Combination of mean squared error, perception loss and TV loss} \label{sec:methods:combined_loss}
 For computing the combined MSE, perception- and TV-loss,
 input features were first passed through the network as normal,
@@ -348,7 +343,7 @@ The network $G(\omega)$ could in principle be any of the variants described abov
 but for the thesis at hand, only the initial network from \cref{sec:methods:basicSetup} was used.
 
 \subsubsection{Combination of mean squared error and TAD-score-based loss} \label{sec:methods:score_loss}
-Formally, the combination between mean squared error and TAD-score-based loss can be defined as the following optimization task:
+Formally, the the following optimization task can be defined by means of a combination between MSE and TAD-score based loss:
 \begin{equation}
  \omega^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2
                                                     + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(M^\prime_s,ds) - \mathit{score}(T^\prime_s,ds))^2 \label{eq:methods:score_loss}
@@ -358,7 +353,7 @@ where $M_s$ is again the Hi-C submatrix predicted by the network $G(\omega)$ for
 To compute the TAD-score-based loss $\mathit{score}(\cdot,\cdot)$, the predictions and true Hi-C matrices $M$ and $T$ in vector form (upper triangular part)
 were first converted back to complete, symmetric Hi-C matrices $M^\prime,\; T^\prime$. 
 Next, in a custom network layer, all diamonds with size $ds$ inside the submatrices of size $w$ were cut out using tensor slicing and the values inside the diamonds were reduced to their respective mean.
-This yields score vectors -- more exactly, tensors with shape $(w - 2*ds, 1)$.
+This yields score vectors -- more exactly, tensors with shape $(w - 2\,ds, 1)$.
 After computing the latter for both predicted- and real Hi-C submatrices, the mean squared error between them was computed as usual and weighted with 
 a user-selected loss weight $\lambda_\mathit{score}$, see \cref{eq:methods:score_loss}.
 
@@ -366,10 +361,10 @@ While it would also have been possible, and probably faster, to slice the output
 this is rather unintuitive and was therefore not done for the thesis. 
 
 \subsection{HiC-GAN approach}
-\subsubsection{Pix2Pix network layout}
-\subsubsection{Using a DNN for 1D-2D conversion}
-\subsubsection{Using a pre-trained DNN for 1D-2D conversion}
-\subsubsection{Using a CNN for 1D-2D conversion}
+\subsubsection{Modified Pix2Pix network layout}
+\subsubsection{Using a DNN for 1D-2D embedding}
+\subsubsection{Using a pre-trained DNN for 1D-2D embedding}
+\subsubsection{Using a CNN for 1D-2D embedding}
 
 
 
