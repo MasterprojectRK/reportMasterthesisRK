@@ -125,13 +125,13 @@ Often, complex image classification networks like VGG-16 \cite{Simonyan2015} are
 because these are known to be good at detecting relevant structures in images.
 
 To check whether the given learning task benefits from using a perceptual loss, a custom combined loss function was generated,
-consisting of mean squared error $l_\mathit{MSE}$ between true- and predicted matrices, perceptual loss $l_\mathit{VGG}$ based on VGG-16 and 
-total variation loss $l_\mathit{TV}$ to reduce noise in the output while preserving edges \cite{Rudin1992}. 
+consisting of mean squared error $L_\mathit{MSE}$ between true- and predicted matrices, perceptual loss $L_\mathit{VGG}$ based on VGG-16 and 
+total variation loss $L_\mathit{TV}$ to reduce noise in the output while preserving edges \cite{Rudin1992}. 
 This choice was inspired by the custom loss function used by Hong et al. in their successful Hi-C super-resolution network DeepHiC \cite{Hong2020},
 which is otherwise not similar to the network used here.
 In short, the combined loss function $L$ is shown in \cref{eq:combined_loss_short}, see \cref{sec:methods:combined_loss} for details,
 \begin{equation}
- L_\mathit{combined} = \lambda_\mathit{MSE} \; l_\mathit{MSE} + \lambda_\mathit{VGG} \; l_\mathit{VGG} + \lambda_\mathit{TV} \; l_\mathit{TV} \label{eq:combined_loss_short}
+ L_\mathit{combined} = \lambda_\mathit{MSE} \; L_\mathit{MSE} + \lambda_\mathit{VGG} \; L_\mathit{VGG} + \lambda_\mathit{TV} \; L_\mathit{TV} \label{eq:combined_loss_short}
 \end{equation}
 with individual loss weights $\lambda$.
 
@@ -148,7 +148,7 @@ in the matrix plots or blurred.
 Assuming availability of a TAD scoring function $\mathit{tad}(z_\mathit{pred})$, where $z_\mathit{pred}$ is a predicted submatrix,
 this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
 \begin{equation}
- L_\mathit{combined} = \lambda_\mathit{MSE}\;l_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(z_\mathit{true}) - \mathit{tad}(z_\mathit{pred}))^2 \label{eq:combined_loss_tad}
+ L_\mathit{combined} = \lambda_\mathit{MSE}\;L_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(z_\mathit{true}) - \mathit{tad}(z_\mathit{pred}))^2 \label{eq:combined_loss_tad}
 \end{equation}
 However, this approach suffers from several restrictions.
 First and foremost, there seems no consensus on the exact definition of TADs, 
@@ -223,11 +223,8 @@ with the idea of allowing the network itself to figure out how to combine predic
 
 
 \begin{itemize}
- \item rationale: smaller binsizes - predict smaller structures, larger binsizes - predict larger structures
- \item then combine the predictions (e.g. sum them up, take the mean or even use a NN)
  \item use trapezoids, i.e. capped larger submatrices and flankingsize smaller than windowsize
- \item rationale: larger windowsize without increasing training time too much 
- \item train on matrices/features with different binsizes in the same training run (e.g. two matrices with 25k, 50k and bin at 25k, 50k or 5k, 10k)
+ \item rationale: larger windowsize without increasing training time too much
  \end{itemize}
  
  
@@ -272,9 +269,14 @@ The overall setup is shown in \cref{fig:improve:cGAN-approach}.
 \begin{figure}[hbp]
  \caption{cGAN approach} \label{fig:improve:cGAN-approach}
 \end{figure}
+The generator has a so-called U-net architecture \xxx Ronneberger,
+while the discriminator is implemented as a patchGAN-discriminator \cite{Isola2017}.
+The latter splits the images into patches and tries to decide which of them are real and which are fake.
+Note that pix2pix does not explicitly add noise $z$, but by design only relies on dropout layers for that purpose. 
+
 Compared to other cGAN architectures, pix2pix is rather simple, but well studied for different applications like label-to-image transfer,
 sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
-Since the problem at hand has likely not been tackled by a specialized GAN yet, 
+Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
 choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
 
 For sample generation, we relied on the same method as described for the dense neural network described above
@@ -284,15 +286,25 @@ However, since pix2pix operates on images, as its name already implies,
 a method to add the essentially one-dimensional chromatin feature data as conditional input images into the network was needed.
 Unfortunately, this task seems to be without examples in literature, so two different approaches were tried,
 which will be discussed below in sections \ref{sec:improve:DNN_embedding} and \ref{sec:improve:DNN_embedding}.
-Both approaches are somewhat related to the text-encoders used by text-to-image synthesis networks 
+Both approaches are distantly related to the text-encoders used by text-to-image synthesis networks 
 \cite{Reed2016b,Xu2018}, but much less sophisticated. 
 However, a complex encoding is not needed here, since -- contrary to image captions -- the chromatin features are already in a format that can be processed directly by neural networks.
+
+Many ways for training a cGAN exists, and achieving a stable, converging training process can be tricky.
+For the thesis at hand, we relied on the  extended loss function proposed by Isola et al. \cite{Isola2017}, 
+amended by an additional TV loss function $L_\mathit{TV}$ for noise reduction, \cref{eq:improve:cGAN_loss}.
+\begin{align}
+ L_\mathit{total} = \lambda_\mathit{cGAN} \; L_\mathit{cGAN}(G,D) + \lambda_\mathit{MAE}L_\mathit{MAE}(G) + \lambda_\mathit{TV}L_\mathit{TV}(G) \label{eq:improve:cGAN_loss}
+\end{align}
+Here, $L_MAE$ is the mean absolute error (L1 error) between the generated output $G(x,z)$ and the true outputs $y$ 
+and $l_\mathit{TV}$ is a total variation loss as in \ref{eq:combined_loss_short}.
+This loss function was optimized with the Adam optimizer,
+alternately training generator and discriminator.
+
 
 %State of the art approaches have 80 mio parameters \cite{Brock2019}.
 %But these are used for synthesizing images from many different classes, like in imageNet.
 %our approach is much more simple
-
-
 
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
 First, the deep neural network developed above was employed to turn chromatin features into Hi-C submatrices, which can be seen as grayscale images.
@@ -300,8 +312,6 @@ The rationale here was to use the DNN for converting the conditional input into 
 use the GAN to refine the predictions.
 Additionally, the network could be pre-trained as shown above, saving time compared to an embedding that has to be trained alongside the GAN.
 Potentially pre-training might also improve stability or enable convergence of the network in general.
-
-
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
 Second, a short convolutional network was used to embed the one-dimensional chromatin feature vectors in a 2D image.
