@@ -366,8 +366,54 @@ it was found that the TV loss weight needed to be much smaller than the two othe
 Otherwise, many true interactions outside the first few matrix diagonals were considered as noise and optimized away early in the training process.
 \xxx maybe put one figure here from \texttt{2020-12-05\_tvLoss}
 
-\xxx Runtime score based loss about 7:00 per epoch (excl. validation)
-
+\subsubsection{Results for score-based loss function} \label{sec:results:scorebased}
+The Pearson correlations for the DNN with score-based loss function with parameters $\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$ 
+are shown in figure \ref{fig:results:scoreLossDNN_pearson}.
+While a slight improvement was achieved for test chromosome 21, the Pearson correlations of the others remained widely unchanged,
+but at about \SI{7}{min} per epoch, the training time was much longer than for the initial network.
+It is well possible that a stronger improvement \emph{can} be achieved by targeted parameter tuning. 
+However, the results achieved by manual parameter tuning were also not encouraging towards a tedious grid- or tree-search.
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/scoreLoss_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/scoreLoss_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/scoreLoss_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/scoreLoss_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/scoreLoss_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}
+    \caption{Pearson correlations, score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)}
+    \label{fig:results:scoreLossDNN_pearson}
+\end{figure}
+\begin{figure}[hbp]
+ \centering
+ \scriptsize
+ \import{figures/scoreLoss_dnn_results/}{lossOverEpochs.pdf_tex}
+ \caption{learning progress for DNN with score-based loss function\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_lossEpochs}
+\end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
 
