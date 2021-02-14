@@ -324,9 +324,16 @@ input features were first passed through the network as normal,
 and mean squared error was computed on the predicted ``upper triangular vectors'' vs. the real vectors.
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
 $w \times w \times 1$ tensors, where $w$ is again the windowsize.
-TV loss was then computed by simply using the appropriate tensorflow function on the predicted images.
-For perception loss, the predicted images and the true images were first fed through a pre-trained VGG16 network truncated at layer \xxx.
-The loss was then computed as mean squared error between the ``predicted'' and ``true'' activations at the output of that network.
+
+For an image, total variation can be defined as the sum of the absolute differences for neighboring pixel-values in an image, \cref{eq:methods:tv} \cite{Rudin1992}
+\begin{equation}
+ \sum_{i,j}\sqrt{|y_{i+1,j} - y_{i,j}|^2 + |y_{i,j+1} - y_{i,j} |^2 } \label{eq:methods:tv}
+\end{equation}
+For simplicity the tensorflow implementation from tf.image.total\_variation was used,
+taking the \xxx sum \xxx mean across batches, as recommended in the tensorflow documentation.
+
+For perception loss, the predicted images and the true images were first fed through a pre-trained VGG-16 network with fixed weights, truncated at layer \xxx.
+The loss was then computed as mean squared error between the ``predicted'' and ``true'' output activations of the truncated VGG-16 network.
 
 Let $M_s=G_s(\omega)$ again be the output of the neural network $G$ described above, and $T_s$ the true matrices for training samples $s$ in vector form,
 and let $M^\prime_s$ and $T^\prime_s$ be their grayscale image counterparts as described above.
