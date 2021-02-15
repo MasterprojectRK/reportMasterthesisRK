@@ -96,10 +96,10 @@ For practical reasons, $k=5$ was chosen for the thesis at hand,
 and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \xxx.
 
 
-\subsubsection{Using a combination of MSE-, TV- and perceptual loss}
+\subsubsection{Using a combination of MSE-, TV- and perceptual loss} \label{sec:improve:combined_loss}
 In image regression tasks, optimizing for mean squared error is known to produce blurry images,
 because it is computed independently for each image pixel, ignoring spatial proximity \cite{Isola2017,Lu2019}.
-Another approach to improve the predictions of the basic neural network is thus using a different loss function.
+Thus, another approach for improving the predictions of the basic neural network is to use a different loss function.
 
 It has been shown that loss functions based on the (multiscale-)structural similarity index (SSIM) \cite{Wang2003}. 
 can outperform mean squared error (L2) and mean absolute error (L1) in image regression tasks.
@@ -129,11 +129,10 @@ consisting of mean squared error $L_\mathit{MSE}$ between true- and predicted ma
 total variation loss $L_\mathit{TV}$ to reduce noise in the output while preserving edges \cite{Rudin1992}. 
 This choice was inspired by the custom loss function used by Hong et al. in their successful Hi-C super-resolution network DeepHiC \cite{Hong2020},
 which is otherwise not similar to the network used here.
-In short, the combined loss function $L$ is shown in \cref{eq:combined_loss_short}, see \cref{sec:methods:combined_loss} for details,
+In short, the combined loss function $L$ is shown in \cref{eq:combined_loss_short}. Here, the $\lambda$ are individual loss weights, see \cref{sec:methods:combined_loss} for details.
 \begin{equation}
  L_\mathit{combined} = \lambda_\mathit{MSE} \; L_\mathit{MSE} + \lambda_\mathit{VGG} \; L_\mathit{VGG} + \lambda_\mathit{TV} \; L_\mathit{TV} \label{eq:combined_loss_short}
 \end{equation}
-with individual loss weights $\lambda$.
 
 Unfortunately, there is no straightforward way for determining the optimal parameters $\lambda$,
 and an exhaustive parameter search was infeasible due to the computation time requirements of about 4:30\,min per epoch.
@@ -267,21 +266,23 @@ For the thesis at hand, the well-known ``pix2pix'' proposal by Isola et al. from
 amended by a convolutional embedding network for the chromatin features, which serve as the conditional input $x$ here.
 The overall setup is shown in \cref{fig:improve:cGAN-approach}.
 \begin{figure}[hbp]
+ \import{figures/}{Hi-cGAN.pdf_tex}
  \caption{cGAN approach} \label{fig:improve:cGAN-approach}
 \end{figure}
-The generator has a so-called U-net architecture \xxx Ronneberger,
+The generator architecture is based the well known U-Net architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
 while the discriminator is implemented as a patchGAN-discriminator \cite{Isola2017}.
-The latter splits the images into patches and tries to decide which of them are real and which are fake.
+The latter splits the images into patches and tries to decide which of them are real and which are fake, using convolutions.
 Note that pix2pix does not explicitly add noise $z$, but by design only relies on dropout layers for that purpose. 
 
 Compared to other cGAN architectures, pix2pix is rather simple, but well studied for different applications like label-to-image transfer,
 sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
 Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
 choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
+Another advantage towards pix2pix, and U-Net architectures in general, 
+is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
 For sample generation, we relied on the same method as described for the dense neural network described above
 with a few minor adaptations, see \cref{sec:methods:sample_gen_cgan}.
-
 However, since pix2pix operates on images, as its name already implies, 
 a method to add the essentially one-dimensional chromatin feature data as conditional input images into the network was needed.
 Unfortunately, this task seems to be without examples in literature, so two different approaches were tried,
@@ -290,16 +291,21 @@ Both approaches are distantly related to the text-encoders used by text-to-image
 \cite{Reed2016b,Xu2018}, but much less sophisticated. 
 However, a complex encoding is not needed here, since -- contrary to image captions -- the chromatin features are already in a format that can be processed directly by neural networks.
 
-Many ways for training a cGAN exists, and achieving a stable, converging training process can be tricky.
-For the thesis at hand, we relied on the  extended loss function proposed by Isola et al. \cite{Isola2017}, 
-amended by an additional TV loss function $L_\mathit{TV}$ for noise reduction, \cref{eq:improve:cGAN_loss}.
+Many ways for training a cGAN exist, and achieving a stable, converging training process can be tricky.
+For the thesis at hand, we therefore relied on the  extended loss function proposed by Isola et al. \cite{Isola2017}, 
+amended by a TV loss function $L_\mathit{TV}$ for noise reduction, \cref{eq:improve:cGAN_loss}.
 \begin{align}
  L_\mathit{total} = \lambda_\mathit{cGAN} \; L_\mathit{cGAN}(G,D) + \lambda_\mathit{MAE}L_\mathit{MAE}(G) + \lambda_\mathit{TV}L_\mathit{TV}(G) \label{eq:improve:cGAN_loss}
 \end{align}
-Here, $L_MAE$ is the mean absolute error (L1 error) between the generated output $G(x,z)$ and the true outputs $y$ 
-and $l_\mathit{TV}$ is a total variation loss as in \ref{eq:combined_loss_short}.
-This loss function was optimized with the Adam optimizer,
-alternately training generator and discriminator.
+Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between the generated output $G(x,z)$ and the true Hi-C submatrices $y$ (as grayscale images), 
+and $l_\mathit{TV}$ is a total variation loss as in \cref{eq:combined_loss_short} and \cref{eq:methods:tv}.
+The original idea behind using mean absolute error and PatchGAN in combination is that optimizing for MAE 
+will minimize low-frequency errors, while optimizing the PatchGAN-loss with its small patches helps reducing high-frequency errors \cite{Isola2017}.
+The TV loss has been added for edge-aware noise removal, in line with other works in the field \cite{Hong2020}, cf.~\cref{sec:improve:combined_loss}.
+
+Finally, the loss function was optimized with the Adam optimizer,
+alternately training discriminator and generator,
+see \cref{sec:methods:cGAN_initial} for details.
 
 
 %State of the art approaches have 80 mio parameters \cite{Brock2019}.
