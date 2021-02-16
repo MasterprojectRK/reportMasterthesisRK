@@ -4,25 +4,9 @@
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
 The basic network was trained as explained in \xxx.
 The validation error (MSE) for the basic neural network reached a minimum of about \SI{150000}{} 
-after about 500 epochs for 25k binsize and about 400 epochs for 10k binsize, \cref{fig:results:basicDNN_lossEpochs}.
+after about 500 epochs for 25k binsize and about 400 epochs for 10k binsize, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
 Beyond that, the learning curve indicated overfitting, but this was often hard to spot in the matrix plots from the test set, 
 compare e.\,g. \cref{fig:results:00500_19_030-040} and \ref{fig:results:01000_19_030-040}.
-\begin{figure}[hbp]
- \begin{subfigure}{0.45\textwidth}
- \resizebox{\textwidth}{!}{
- \scriptsize
- \import{figures/basic_dnn_results/}{lossOverEpochs.pdf_tex}}
- \caption{25k}
- \end{subfigure}\hfill
- \begin{subfigure}{0.45\textwidth}
- \resizebox{\textwidth}{!}{
- \scriptsize
- \import{figures/basic10k_dnn_results/}{lossOverEpochs.pdf_tex}}
- \caption{10k}
- \end{subfigure}
- \caption{learning progress for basic DNN} \label{fig:results:basicDNN_lossEpochs}
-\end{figure}
-
 
 \Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} show the Pearson correlations alongside area under the correlation curve (AUC) for the five test chromosomes
 at 25 and \SI{10}{\kilo\bp} binsizes, respectively.
@@ -65,8 +49,14 @@ or between \xxx and \xxx in chromosome 21 were not predicted at all.
         \resizebox{\textwidth}{!}{
         \import{figures/basic_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/basic_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress}\label{fig:results:basicDNN_lossEpochs_25}
     \end{subfigure}
-    \caption{Pearson correlations, basic DNN, \SI{25}{\kilo\bp}, test chromosomes}
+    \caption{results\,/\,metrics, basic DNN, \SI{25}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_pearson}
 \end{figure}
 
@@ -102,8 +92,14 @@ or between \xxx and \xxx in chromosome 21 were not predicted at all.
         \resizebox{\textwidth}{!}{
         \import{figures/basic10k_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+     \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/basic10k_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress}\label{fig:results:basicDNN_lossEpochs_10}
     \end{subfigure}
-    \caption{Pearson correlations, basic DNN, \SI{10}{\kilo\bp}, test chromosomes}
+    \caption{results\,/\,metrics, basic DNN, \SI{10}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_10k_pearson}
 \end{figure}
 
@@ -161,15 +157,15 @@ but the remaining validation error was slightly higher than for the initial appr
         \resizebox{\textwidth}{!}{
         \import{figures/wider_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/wider_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress for wider DNN} \label{fig:results:widerDNN_lossEpochs}
     \end{subfigure}
     \caption{Pearson correlations, ``wider'' variant of DNN,  test chromosomes}
     \label{fig:results:widerDNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/wider_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for wider DNN} \label{fig:results:widerDNN_lossEpochs}
 \end{figure}
 
 The predictions from the ``longer'' variant were partially better for the test set than the initial ones in terms of
@@ -212,15 +208,15 @@ The learning process in itself looked more smooth and reached a lower validation
         \resizebox{\textwidth}{!}{
         \import{figures/longer_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/longer_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress for longer DNN} \label{fig:results:longerDNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, ``longer'' variant of DNN,  test chromosomes}
+    \caption{results\,/\,metrics, ``longer'' variant of DNN,  test chromosomes}
     \label{fig:results:longerDNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/longer_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for longer DNN} \label{fig:results:longerDNN_lossEpochs}
 \end{figure}
 
 The Pearson correlations for predictions from the ``wider-longer'' variant are shown in \cref{fig:results:wider-longerDNN_pearson}.
@@ -258,15 +254,15 @@ and the remaining validation error was also higher.
         \resizebox{\textwidth}{!}{
         \import{figures/wider-longer_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/wider-longer_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:wider-longerDNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, ``wider-longer'' variant of DNN,  test chromosomes}
+    \caption{results\,/\,metrics, ``wider-longer'' variant of DNN,  test chromosomes}
     \label{fig:results:wider-longerDNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/wider-longer_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for ``wider-longer'' DNN} \label{fig:results:wider-longerDNN_lossEpochs}
 \end{figure}
 
 The Pearson correlations for the variant with feature binsize \SI{5}{\kilo\bp} and matrix binsize \SI{25}{\kilo\bp}
@@ -305,15 +301,15 @@ The learning curve was smooth and showed signs of slight overfitting beyond 300 
         \resizebox{\textwidth}{!}{
         \import{figures/25k5_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/25k5_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:25k5DNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, ``5k -- 25k'' variant of DNN,  test chromosomes}
+    \caption{results\,/\,metrics, ``5k -- 25k'' variant of DNN with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$,  test chromosomes}
     \label{fig:results:25k5DNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/25k5_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for DNN with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$} \label{fig:results:25k5DNN_lossEpochs}
 \end{figure}
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
@@ -350,15 +346,15 @@ For all test chromosomes, the results were highly similar to the inital network'
         \resizebox{\textwidth}{!}{
         \import{figures/combiloss_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/combiloss_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:combilossDNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, combined loss function (MSE, TV, VGG-16),  test chromosomes}
+    \caption{results\,/\,metrics, DNN with combined loss function (MSE, TV, VGG-16),  test chromosomes}
     \label{fig:results:combilossDNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/combiloss_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for DNN with combined loss function (MSE, TV, VGG-16)} \label{fig:results:combilossDNN_lossEpochs}
 \end{figure}
 
 While manually finding parameters $\lambda$ for MSE- and VGG-loss that made the results better was not successful,
@@ -398,28 +394,37 @@ However, the results achieved by manual parameter tuning were also not encouragi
         \import{figures/scoreLoss_dnn_results/}{pearson_chr19.pdf_tex}}
         \caption{chr19}
     \end{subfigure}\\[3mm]
-    \centering
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/scoreLoss_dnn_results/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/scoreLoss_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:scoreLossDNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)}
-    \label{fig:results:scoreLossDNN_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/scoreLoss_dnn_results/}{lossOverEpochs.pdf_tex}
- \caption{learning progress for DNN with score-based loss function\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_lossEpochs}
+    \caption{results\,/\,metrics, DNN with score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_pearson}
 \end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
 
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
 \subsubsection{Initial results}
-The results at windowsize 64 bins were encouraging \xxx
+The results from the cGAN were generally better than the best results from the DNN,
+and from windowsize 128, they were also close to the baseline or better.
+Interestingly, acceptable results were obtained already after only 25 epochs.
+Fast convergence is well known from pix2pix \cite{Isola2017}, but it is still surprising that
+this property was maintained despite the changes made to the original network.
+
+For windowsizes 64 and 128 bins, the optimal number of epochs seemed to be around 80,
+while for windowsize 256, a number greater 100 epochs might have been favorable.
+However, this would have come at a large computation time, 
+since average training time was around \SI{108}{\min} per epoch on the given hardware.
+
+
 \begin{figure}[p]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -445,24 +450,21 @@ The results at windowsize 64 bins were encouraging \xxx
         \import{figures/GAN_64/}{pearson_chr19.pdf_tex}}
         \caption{chr19}
     \end{subfigure}\\[3mm]
-    \centering
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_64/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN64_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, GAN, windowsize 64, test chromosomes}
-    \label{fig:results:GAN64_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/GAN_64/}{lossOverEpochs.pdf_tex}
- \caption{learning progress cGAN, windowsize 64} \label{fig:results:GAN64_lossEpochs}
+    \caption{results\,/\,metrics cGAN, windowsize 64, test chromosomes}   \label{fig:results:GAN64_pearson}
 \end{figure}
 
-The results at 128k were even better \xxx
 \begin{figure}[p]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -494,17 +496,54 @@ The results at 128k were even better \xxx
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_128/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_128/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN128_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, GAN, windowsize 128, test chromosomes}
-    \label{fig:results:GAN128_pearson}
-\end{figure}
-\begin{figure}[hbp]
- \centering
- \scriptsize
- \import{figures/GAN_128/}{lossOverEpochs.pdf_tex}
- \caption{learning progress cGAN, windowsize 128} \label{fig:results:GAN128_lossEpochs}
+    \caption{results\,/\,metrics cGAN, windowsize 128, test chromosomes}   \label{fig:results:GAN128_pearson}
 \end{figure}
 
-
-
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN256_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics cGAN, windowsize 256, test chromosomes}   \label{fig:results:GAN256_pearson}
+\end{figure}
 
