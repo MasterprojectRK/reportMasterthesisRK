@@ -296,7 +296,7 @@ Formally, one needs to optimize
 \begin{equation}
  \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
-For the thesis at hand, stochastic gradient with learning rate $1e^{-5}$  was used to find $\omega^*$.
+For the thesis at hand, stochastic gradient descent (SGD) with learning rate $10^{-5}$  was used to find $\omega^*$.
 Initial values $\omega_\mathit{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
 Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
 to prevent location-dependent effects and improve generalization.
@@ -375,7 +375,7 @@ After computing the latter for both predicted- and real Hi-C submatrices, the me
 a user-selected loss weight $\lambda_\mathit{score}$, see \cref{eq:methods:score_loss}.
 
 While it would also have been possible, and probably faster, to slice the outputs of the networks directly in vector form, 
-this is rather unintuitive and was therefore not done for the thesis. 
+this is rather unintuitive and was therefore not implemented for the thesis. 
 
 \subsection{HiC-GAN approach}
 \subsubsection{Modified Pix2Pix network}\label{sec:methods:cGAN_initial}
