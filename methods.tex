@@ -379,10 +379,21 @@ this is rather unintuitive and was therefore not implemented for the thesis.
 
 \subsection{HiC-GAN approach}
 \subsubsection{Modified Pix2Pix network}\label{sec:methods:cGAN_initial}
+\begin{enumerate}
+ \item basic setup pix2pix like C512-C512-...
+ \item of course with image
+ \item which layers are left out for 64, 128
+ \item the number of trainable parameters
+ \item the symmetrization process, how and where
+ \item activation sigmoid vs. tanh, check again. sigmoid because matrices contain only 0-1 values.
+ \item support only powers of two gt. 64 as w 
+\end{enumerate}
+
 \subsubsection{Using a DNN for 1D-2D embedding}
 \subsubsection{Using a CNN for 1D-2D embedding}
 
-
+\subsection{Hardware}
+\xxx Three machines, give number of cores, GPUs in a table \xxx
 
 
 
