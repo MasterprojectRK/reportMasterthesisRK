@@ -265,22 +265,21 @@ see equations \ref{eq:improve:cGAN-simple-loss} and \ref{eq:improve:cGAN-simple-
 Many different layouts and training processes for the Generator and Discriminator networks have been proposed.
 For the thesis at hand, the well-known ``pix2pix'' proposal by Isola et al. from 2017 was followed \cite{Isola2017}, 
 amended by a convolutional embedding network for the chromatin features, which serve as the conditional input $x$ here.
-The overall setup is shown in \cref{fig:improve:cGAN-approach}.
+The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be explained in more detail below.
 \begin{figure}[hbp]
  \import{figures/}{Hi-cGAN.pdf_tex}
  \caption{cGAN approach} \label{fig:improve:cGAN-approach}
 \end{figure}
 The generator architecture is based the well known U-Net architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
-while the discriminator is implemented as a patchGAN-discriminator \cite{Isola2017}.
-The latter splits the images into patches and tries to decide which of them are real and which are fake, using convolutions.
+while the discriminator is implemented as a patchGAN-discriminator developed by Isola et al. especially for pix2pix \cite{Isola2017}.
+This type of discriminator splits the images into patches and tries to decide which of them are real and which are fake, using convolutions.
 Note that pix2pix does not explicitly add noise $z$, but by design only relies on dropout layers for that purpose. 
 
-Compared to other cGAN architectures, pix2pix is rather simple, but well studied for different applications like label-to-image transfer,
-sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
-Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
-choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
-Another advantage towards pix2pix, and U-Net architectures in general, 
-is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
+For the thesis at hand, few modifications were made to the actual pix2pix network.
+Since Hi-C matrices are symmetric by definition, symmetry of the outputs was enforced
+by adding additional layers to the network at the appropriate places, see \cref{sec:methods:cGAN_initial} for details.
+Furthermore, some layers in the generator and discriminator were made optional to allow processing smaller images of sizes $64\times64$
+and $128\times128$ aside the $256\times256$-images of the original implementation, again refer to \cref{sec:methods:cGAN_initial} for details.
 
 For sample generation, we relied on the same method as described for the dense neural network described above
 with a few minor adaptations, see \cref{sec:methods:sample_gen_cgan}.
@@ -308,6 +307,12 @@ Finally, the loss function was optimized with the Adam optimizer,
 alternately training discriminator and generator,
 see \cref{sec:methods:cGAN_initial} for details.
 
+Compared to other cGAN architectures, pix2pix is rather simple, but well studied for different applications like label-to-image transfer,
+sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
+Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
+choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
+Another advantage towards pix2pix, and U-Net architectures in general, 
+is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
 %State of the art approaches have 80 mio parameters \cite{Brock2019}.
 %But these are used for synthesizing images from many different classes, like in imageNet.
