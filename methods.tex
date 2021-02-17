@@ -379,6 +379,21 @@ this is rather unintuitive and was therefore not implemented for the thesis.
 
 \subsection{HiC-GAN approach}
 \subsubsection{Modified Pix2Pix network}\label{sec:methods:cGAN_initial}
+Several implementations of the original pix2pix network exist on the internet for example the one by \xxx. 
+However, certain adaptations needed to be made for the thesis at hand, see \cref{fig:methods:GAN_arch:generator} and \ref{fig:methods:GAN_arch:discriminator}.
+First, certain layers in the generator...
+\begin{figure}[p]
+    \tiny
+    \import{figures/GAN_arch/}{generatorModel.pdf_tex}
+    \caption{Adapted generator model from pix2pix} \label{fig:methods:GAN_arch:generator}
+\end{figure}
+\begin{figure}[p]
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{discriminatorModel.pdf_tex}
+    \caption{Adapted discriminator model from pix2pix} \label{fig:methods:GAN_arch:discriminator}
+\end{figure}
+
 \begin{enumerate}
  \item basic setup pix2pix like C512-C512-...
  \item of course with image
