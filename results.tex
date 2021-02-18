@@ -410,6 +410,102 @@ However, the results achieved by manual parameter tuning were also not encouragi
 \end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
+Training the network with matrix- and feature binsizes of \SI{50}{\kilo\bp} (``50k direct'') did not improve the results in the desired way, \cref{fig:results:DNN50k_pearson}.
+Larger structures in the test matrices were not more prominent than before, \xxx, 
+and simply coarsening the results from \SI{25}{\kilo\bp} yielded better results in all test regions except chromosome 21.
+The same held for re-using the initial network trained at \SI{25}{\kilo\bp} to predict at \SI{50}{\kilo\bp}, \cref{fig:results:DNN50k_pearson} (``initial 25k$\rightarrow$50k'').
+Additionally, the training process for 50k collapsed after about 420 epochs for unknown reasons -- 
+which was not considered too problematic here, because the optimum validation error had already been reached between 150 and 250 epochs, \cref{fig:results:50k_lossEpochs}. 
+Faster convergence in itself would not be surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, cf. \cref{tab:methods:samples}.
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/50k_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/50k_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/50k_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/50k_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/50k_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress 50k direct} \label{fig:results:50k_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics, various DNNs at \SI{50}{\kilo\bp}} \label{fig:results:DNN50k_pearson}
+\end{figure}
+
+Simultaneously training a network with matrix- and feature binsizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp}
+turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
+but the predictions at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
+than the initial predictions at that binsize, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
+\begin{figure}[p]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/25plus50_dnn_results/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/25plus50_dnn_results/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/25plus50_dnn_results/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/25plus50_dnn_results/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/25plus50_dnn_results/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/25plus50_dnn_results/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:25plus50_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics, DNN trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously} \label{fig:results:DNN25plus50_pearson}
+\end{figure}
+
+
+
+
+
+
 
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
 \subsubsection{Initial results}
