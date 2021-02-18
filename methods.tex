@@ -379,9 +379,39 @@ this is rather unintuitive and was therefore not implemented for the thesis.
 
 \subsection{HiC-GAN approach}
 \subsubsection{Modified Pix2Pix network}\label{sec:methods:cGAN_initial}
-Several implementations of the original pix2pix network exist on the internet for example the one by \xxx. 
-However, certain adaptations needed to be made for the thesis at hand, see \cref{fig:methods:GAN_arch:generator} and \ref{fig:methods:GAN_arch:discriminator}.
-First, certain layers in the generator...
+Several implementations of the original pix2pix network are publicly available, usually for the original image size of $256\times256$.
+For the thesis at hand, implementation concepts from two tutorials \xxx were combined and the code was adapted to the given requirements.
+
+Within the generator, two of the down- and upsampling layers inside the U-Net portion were made optional 
+to allow processing smaller images of sizes $64\times64$ and $128\times128$, see \cref{fig:methods:GAN_arch:generator}.
+Note that the generator (still) only supports square images with edge lengths that are powers of two and at least 64.
+Furthermore, symmetry of the output was enforced by adding its transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
+The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} are custom blocks 
+detailed in \xxx. 
+All 2D-convolutions and 2D-deconvolutions had kernel size $(4,4)$ and were initialized with values drawn from a normal distribution with mean $\mu=0$ and
+standard deviation $\sigma=0.02$.
+Finally, the activation of the output layer was changed from tanh to sigmoid, because better results were observed
+in conjunction with the given Hi-C matrices, probably because these contain no negative values by definition.
+
+Within the discriminator, compared to the original pix2pix setup, 
+one downsampling layer was omitted for windowsize $w=\{256,128\}$ and another one for $w=64$.
+This made the discriminator patches larger, especially for the smaller windowsizes,
+cf. \cref{fig:methods:GAN_arch:discriminator}.
+Symmetry was enforced after all convolutions in the same way as in the generator.
+Kernel sizes and initializations for all 2D convolutions also were the same as for the generator,
+and leaky ReLU-activations were used with parameter $\alpha=0.2$, as in all up- and downsampling layers.
+
+Both the discriminator and the generator feature their own, trainable embedding network
+to convert the conditional input, i.\,e. the chromatin feature data of shape $(3w, n)$,
+into grayscale images of shape $(w,w,1)$. 
+These networks will be discussed below in \cref{sec:methods:dnn-embedding}
+and \cref{sec:methods:cnn-embedding}.
+
+The loss function was implemented as shown in \ref{eq:improve:cGAN_loss}
+with parameters $\lambda_\mathit{cGAN}=10^{-5}, \lambda_\mathit{MAE}=1.0, \lambda_\mathit{TV}=10^{-12}$.
+Optimization was performed on minibatches of size 32,4 and 2 for windowsizes 64, 128 and 256, respectively, 
+using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
+
 \begin{figure}[p]
     \tiny
     \import{figures/GAN_arch/}{generatorModel.pdf_tex}
@@ -395,17 +425,11 @@ First, certain layers in the generator...
 \end{figure}
 
 \begin{enumerate}
- \item basic setup pix2pix like C512-C512-...
- \item of course with image
- \item which layers are left out for 64, 128
  \item the number of trainable parameters
- \item the symmetrization process, how and where
- \item activation sigmoid vs. tanh, check again. sigmoid because matrices contain only 0-1 values.
- \item support only powers of two gt. 64 as w 
 \end{enumerate}
 
-\subsubsection{Using a DNN for 1D-2D embedding}
-\subsubsection{Using a CNN for 1D-2D embedding}
+\subsubsection{Using a DNN for 1D-2D embedding} \label{sec:methods:dnn-embedding}
+\subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
 
 \subsection{Hardware}
 \xxx Three machines, give number of cores, GPUs in a table \xxx
