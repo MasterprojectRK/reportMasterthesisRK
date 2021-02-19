@@ -1,0 +1,144 @@
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'embedding_network.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{352.37732654bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.34712404)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{embedding_network.pdf}}%
+    \put(0.01457025,1.31753821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input layer\end{tabular}}}}%
+    \put(0.23052789,1.32022477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,1.28080227){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32822303,1.32022477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3w,n$)]\end{tabular}}}}%
+    \put(0.32822303,1.28080227){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3w,n$)]\end{tabular}}}}%
+    \put(0.01457025,1.18542916){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 1\end{tabular}}}}%
+    \put(0.23052789,1.20513791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,1.1657154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,1.20513791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,n$)\end{tabular}}}}%
+    \put(0.32856371,1.16571541){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,1024$)\end{tabular}}}}%
+    \put(0.01457025,1.07027995){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 2\end{tabular}}}}%
+    \put(0.23052789,1.0899887){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,1.0505662){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,1.0505662){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,512$)\end{tabular}}}}%
+    \put(0.32856371,1.0899887){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,1024$)\end{tabular}}}}%
+    \put(0.01457025,0.95513082){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 3\end{tabular}}}}%
+    \put(0.23052789,0.97483957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.93541704){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.97483957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,512$)\end{tabular}}}}%
+    \put(0.32856371,0.93541704){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,512$)\end{tabular}}}}%
+    \put(0.01457025,0.83998208){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 4\end{tabular}}}}%
+    \put(0.23052789,0.85969079){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.82026826){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.82026826){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,256$)\end{tabular}}}}%
+    \put(0.32856371,0.85969079){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,512$)\end{tabular}}}}%
+    \put(0.01457025,0.72483243){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 5\end{tabular}}}}%
+    \put(0.23052789,0.74454117){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.70511868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.74454117){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,256$)\end{tabular}}}}%
+    \put(0.32856371,0.70511868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,256$)\end{tabular}}}}%
+    \put(0.01457025,0.60968323){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 6\end{tabular}}}}%
+    \put(0.23052789,0.62939198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.58996948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.58996948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,128$)\end{tabular}}}}%
+    \put(0.32856371,0.62939198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,256$)\end{tabular}}}}%
+    \put(0.01457025,0.4945341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 7\end{tabular}}}}%
+    \put(0.23052789,0.51424285){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.47482022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.51424285){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,128$)\end{tabular}}}}%
+    \put(0.32856371,0.47482022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,128$)\end{tabular}}}}%
+    \put(0.01457025,0.37938536){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}convBlock 8\end{tabular}}}}%
+    \put(0.23052789,0.39909423){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.35967161){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.35967161){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,64$)\end{tabular}}}}%
+    \put(0.32856371,0.39909423){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,128$)\end{tabular}}}}%
+    \put(0.01457025,0.28126336){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}conv1D\end{tabular}}}}%
+    \put(0.23052789,0.28394491){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.24452248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.24452248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.32856371,0.28394491){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w,64$)\end{tabular}}}}%
+    \put(0.01457025,0.14908703){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}symmetrization\end{tabular}}}}%
+    \put(0.23052789,0.16879578){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.12937322){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.12937322){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.32856371,0.16879578){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.01457025,0.05096497){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reshape\end{tabular}}}}%
+    \put(0.23052789,0.05364665){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.23052789,0.01422408){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.32856371,0.01422408){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w,1$)\end{tabular}}}}%
+    \put(0.32856371,0.05364665){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.65069522,0.97215802){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}conv1D\end{tabular}}}}%
+    \put(0.80705762,0.97483957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.80705762,0.93541704){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.90509355,0.97483957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,\cdot$)\end{tabular}}}}%
+    \put(0.90509355,0.93541704){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,y$)\end{tabular}}}}%
+    \put(0.65069522,0.83998169){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}batchNorm\end{tabular}}}}%
+    \put(0.80705762,0.8596904){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.80705762,0.82026787){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.90509355,0.8596904){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,y$)\end{tabular}}}}%
+    \put(0.90509355,0.82026787){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,y$)\end{tabular}}}}%
+    \put(0.65069522,0.73760289){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}leaky ReLU\end{tabular}}}}%
+    \put(0.80705762,0.74454124){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.80705762,0.70511868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.90509355,0.74454124){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,y$)\end{tabular}}}}%
+    \put(0.90509355,0.70511868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $a,y$)\end{tabular}}}}%
+    \put(0.01457025,1.28348381){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chromatin features\end{tabular}}}}%
+    \put(0.01457025,0.01495728){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature embedding\end{tabular}}}}%
+    \put(0.55315586,0.64021461){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$y=\{1024,512,512,256,256,128,128,64\}$}\end{tabular}}}}%
+    \put(0.65069522,0.93384682){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{kernel size 4}\end{tabular}}}}%
+    \put(0.65069522,0.70397959){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$\alpha=0.2$}\end{tabular}}}}%
+    \put(0.55315586,0.61041701){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{for convBlocks 1...8}\end{tabular}}}}%
+    \put(0.01457025,0.24424513){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{kernel size 4}\end{tabular}}}}%
+    \put(0.5338999,0.03901441){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}shape of a square grayscale image\end{tabular}}}}%
+    \put(0.55315586,1.3127891){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: windowsize}\end{tabular}}}}%
+    \put(0.55315586,1.2829915){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$n$: no. of chromatin features}\end{tabular}}}}%
+    \put(0.55315586,1.25319389){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

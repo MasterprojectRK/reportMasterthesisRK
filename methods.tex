@@ -430,6 +430,21 @@ using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ fo
 
 \subsubsection{Using a DNN for 1D-2D embedding} \label{sec:methods:dnn-embedding}
 \subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
+The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
+as shown in \cref{fig:methods:GAN_arch:embedding_network}.
+Each of the convolution blocks start with a 1D convolution with kernel size 4, strides 1, padding ``same'' 
+and ``L2'' kernel regularization with parameter $l=0.02$, followed by batch normalization and leaky ReLU activation
+with parameter $\alpha=0.2$. 
+The last 1D convolution consists of $w$ filters with kernel size 4, strides 3 and padding ``same'',
+followed by sigmoid activation; this last convolution layer was not using kernel regularization.
+All kernel weights of the 1D convolutions in the embedding network were initialized by a Xavier initializer.
+
+\begin{figure}[p]
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{embedding_network.pdf_tex}
+    \caption{Embedding network} \label{fig:methods:GAN_arch:embedding_network}
+\end{figure}
 
 \subsection{Hardware}
 \xxx Three machines, give number of cores, GPUs in a table \xxx
