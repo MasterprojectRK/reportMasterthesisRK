@@ -81,5 +81,23 @@ for CTCF/Histones, DNase, RAD21/SMC3, respectively. The pdf version of this docu
 \end{minipage}
 
 
+\clearpage
+\begin{landscape}
+\subsection{Hardware}
+ \begin{table}[hbp]
+\small
+\centering
+\begin{tabular}{c|lllllllccll}
+\hline
+\textbf{}        &    & \multicolumn{5}{c}{\textbf{CPU}}                               &  & \multicolumn{2}{c}{\textbf{GPU}} &  & \multicolumn{1}{c}{\textbf{RAM}} \\
+\textbf{machine} & \# & \multicolumn{1}{c}{make/model} & freq. & L1   & L2    & L3     &  & make/model              & memory &  & in GB                            \\ \hline
+1                & 8  & AMD EPYC 7742 64-Core          & 2.25  & 64   & 512   & 16384  &  & NVIDIA Tesla T4 TU104GL & 15109  &  & 20                               \\
+2                & 40 & Intel Xeon E5-2630 v4          & 2.20  & 32   & 4096  & 16384  &  & NVIDIA Tesla T4 TU104GL & 15109  &  & 116                              \\
+3                & 20 & AMD EPYC 7351P 16-Core         & 2.40  & 1300 & 10000 & 320000 &  & --                      & --     &  & 116                              \\ \hline
+\end{tabular}
+\caption{key figures of hardware used throughout the thesis}\label{tab:appendix:hardware}
+\end{table}
+Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main memory) in GB
+\end{landscape}
 
 
