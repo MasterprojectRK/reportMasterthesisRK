@@ -19,34 +19,40 @@ these matrices have not been normalized for the thesis at hand
 because no benefit of doing so was found during the study project \cite{Krauth2020}.
 
 \subsubsection{ChIP-seq data} \label{sec:methods:chipseq}
-For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used, cf.~\cref{tab:methods:csdata}.
-Here, ChIP-seq data for the 13 features was downloaded in .bam format from the ENCODE project \xxx for both replicate one and two,
-and DNaseI-seq data was downloaded in .bam format from \xxx; the download links are also given in \cref{tab:methods:csdata}.
+For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used.
+Here, the data was downloaded in .bam format either via the ENCODE project \cite{Encode2012,Davis2017} 
+or directly from the file server of the University of California. 
+In all cases, bam-files for replicate 1 and 2 were downloaded in their most recent versions (if applicable);
+the UCSC- (wgEncode...) or GEO- (GSM...) identifiers are given in \cref{tab:methods:csdata}.
+For convenience, the pdf version of this document also provides download links for concrete files in \cref{sec:chromFeat_download_links}.
 \begin{table}[ht!]
 \centering
- \begin{tabular}{ll}
+ \begin{tabular}{lll}
  \hline
-  feature name & download link \\  \hline
-  CTCF & \\
-  DNaseI &\\
-  H3k27ac & \\
-  H3k27me3 &\\
-  H3k36me3 &\\
-  H3k4me1 &\\
-  H3k4me2 &\\
-  H3k4me3 &\\
-  H3k79me2 &\\
-  H3k9ac &\\
-  H3k9me3 &\\
-  H4k20me1 &\\
-  Rad21 &\\
-  Smc3 & \\ \hline
+  feature name & GM12878 & K562 \\  \hline
+  CTCF & GSM733752 & GSM733719\\
+  DNaseI & wgEncodeEH000534 & wgEncodeEH000530\\
+  H3k27ac & GSM733771 & GSM733656\\
+  H3k27me3 &GSM733758 & GSM733658\\
+  H3k36me3 &GSM733679 & GSM733714\\
+  H3k4me1  &GSM733772 & GSM733692\\
+  H3k4me2  &GSM733769 & GSM733651\\
+  H3k4me3 &GSM733708 & GSM733680\\
+  H3k79me2 &GSM733736	& GSM733653	\\
+  H3k9ac &GSM733677 & GSM733778\\
+  H3k9me3 &GSM733664 & GSM733776	\\
+  H4k20me1 &GSM733642 & GSM733675\\
+  Rad21 &	wgEncodeEH000749 & wgEncodeEH000649\\
+  Smc3 & 	wgEncodeEH001833 & wgEncodeEH001845\\ \hline
  \end{tabular}
  \caption{chromatin features used for the thesis} \label{tab:methods:csdata}
 \end{table}
 
-The data were then converted to bigwig format, which is more convenient to handle, and the replicates were merged into 
-one bigwig file. Pseudocode for the full conversion process is given in \xxx.
+After downloading, the bam files were converted to bigwig format, which was found more convenient to handle, and the replicates were merged into 
+one bigwig file by taking the mean, as in the study project \cite{Krauth2020}. Pseudocode for the full conversion process is given in \xxx.
+
+The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; it contains
+structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3 as well as active/passive markers.
 
 \subsubsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
 This thesis follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a}.
@@ -387,14 +393,14 @@ to allow processing smaller images of sizes $64\times64$ and $128\times128$, see
 Note that the generator (still) only supports square images with edge lengths that are powers of two and at least 64.
 Furthermore, symmetry of the output was enforced by adding its transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
 The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} are custom blocks 
-detailed in \xxx. 
+detailed in \cref{fig:methods:GAN_arch:downsampling} and \ref{fig:methods:GAN_arch:upsampling}. 
 All 2D-convolutions and 2D-deconvolutions had kernel size $(4,4)$ and were initialized with values drawn from a normal distribution with mean $\mu=0$ and
 standard deviation $\sigma=0.02$.
 Finally, the activation of the output layer was changed from tanh to sigmoid, because better results were observed
 in conjunction with the given Hi-C matrices, probably because these contain no negative values by definition.
 
-Within the discriminator, compared to the original pix2pix setup, 
-one downsampling layer was omitted for windowsize $w=\{256,128\}$ and another one for $w=64$.
+Compared to the original pix2pix setup, 
+one downsampling layer was omitted in the discriminator for windowsize $w=\{256,128\}$ and another one for $w=64$.
 This made the discriminator patches larger, especially for the smaller windowsizes,
 cf. \cref{fig:methods:GAN_arch:discriminator}.
 Symmetry was enforced after all convolutions in the same way as in the generator.
@@ -423,12 +429,52 @@ using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ fo
     \import{figures/GAN_arch/}{discriminatorModel.pdf_tex}
     \caption{Adapted discriminator model from pix2pix} \label{fig:methods:GAN_arch:discriminator}
 \end{figure}
+\begin{figure}[p]
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{downsampling_block.pdf_tex}
+    \caption{downsampling block} \label{fig:methods:GAN_arch:downsampling}
+\end{figure}
+\begin{figure}[p]
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{upsampling_block.pdf_tex}
+    \caption{upsampling block} \label{fig:methods:GAN_arch:upsampling}
+\end{figure}
+
 
 \begin{enumerate}
  \item the number of trainable parameters
 \end{enumerate}
 
 \subsubsection{Using a DNN for 1D-2D embedding} \label{sec:methods:dnn-embedding}
+In order to use the DNN described in \cref{sec:methods:basicSetup} as an embedding network
+for the cGAN, only small amendments were required to adjust the input shapes,
+i.\,e. to provide symmetric Hi-C matrices as grayscale images instead of the upper-triangular-vector representation
+native to the DNN, see \cref{fig:methods:dnn-embedding}.
+\begin{figure}[p]
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{dnn_embedding.pdf_tex}
+    \caption{embedding network, DNN} \label{fig:methods:dnn-embedding}
+\end{figure}
+The triu-reshape layer is a custom tensorflow network layer which simply generates an output tensor
+of appropriate shape $(w,w)$ and sets its upper triangular part to the values given by the input vector.
+Symmetrization was then performed by adding this tensor to its transpose and dividing the values on the diagonal by two.
+Finally the required third axis was added to get the shape of a grayscale image.
+The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_dnn_params}.
+Note that all trainable parameters stem from the DNN here; the reshaping layers do not have any trainable parameters.
+\begin{table}[hbp]
+\centering
+\begin{tabular}{cc}
+\hline
+\multicolumn{1}{l}{\textbf{windowsize}} & \multicolumn{1}{l}{\textbf{trainable weights}} \\ \hline
+64                                      & \xxx                                        \\
+128                                     & \xxx                                        \\
+256                                     & \xxx                                        \\ \hline
+\end{tabular}
+\caption{trainable weights for embedding DNN}\label{tab:methods:embedding_dnn_params}
+\end{table}
 \subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
 The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
 as shown in \cref{fig:methods:GAN_arch:embedding_network}.
@@ -438,13 +484,28 @@ with parameter $\alpha=0.2$.
 The last 1D convolution consists of $w$ filters with kernel size 4, strides 3 and padding ``same'',
 followed by sigmoid activation; this last convolution layer was not using kernel regularization.
 All kernel weights of the 1D convolutions in the embedding network were initialized by a Xavier initializer.
-
 \begin{figure}[p]
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{embedding_network.pdf_tex}
-    \caption{Embedding network} \label{fig:methods:GAN_arch:embedding_network}
+    \caption{embedding network, CNN} \label{fig:methods:GAN_arch:embedding_network}
 \end{figure}
+
+For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the embedding network shown in \cref{fig:methods:GAN_arch:embedding_network} 
+contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_cnn_params} for details.
+\begin{table}[hbp]
+\centering
+\begin{tabular}{cc}
+\hline
+\multicolumn{1}{l}{\textbf{windowsize}} & \multicolumn{1}{l}{\textbf{trainable weights}} \\ \hline
+64                                      & 4243968                                        \\
+128                                     & 4260416                                        \\
+256                                     & 4293312                                        \\ \hline
+\end{tabular}
+\caption{trainable weights for embedding CNN}\label{tab:methods:embedding_cnn_params}
+\end{table}
+
+
 
 \subsection{Hardware}
 \xxx Three machines, give number of cores, GPUs in a table \xxx
