@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'HiC-lab.pdf' (pdf, eps, ps)
 %%
@@ -35,6 +35,8 @@
     \renewcommand\transparent[1]{}%
   }%
   \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
     \setlength{\unitlength}{107.43970375bp}%
     \ifx\svgscale\undefined%
@@ -49,15 +51,31 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,3.4166756)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{HiC-lab.pdf}}%
-    \put(0.17804938,3.30171601){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Crosslinked DNA}}}%
-    \put(0.02591213,2.81279244){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1. Digest DNA}}}%
-    \put(0.02591213,2.2310733){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2. Fill \& Mark ends }}}%
-    \put(0.02168261,1.12924833){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{4. Purify \& Shear}}}%
-    \put(0.02591213,1.63122365){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{3. Ligate}}}%
-    \put(0.02591213,0.65631364){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{5. Pull down biotin}}}%
-    \put(0.02591213,0.24624056){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\resizebox{35mm}{!}{6. Paired-end sequencing}}}}%
-    \put(0.65762558,0.01952092){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scriptsize ...ACGA}}}%
-    \put(0.30308454,0.13140508){\color[rgb]{0,0,0}\makebox(0,0)[rb]{\smash{\scriptsize CGTA...}}}%
+    \put(0.09428147,3.301716){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}In: Crosslinked DNA\end{tabular}}}}%
+    \put(0.02591213,2.81279242){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}1. Digest DNA\end{tabular}}}}%
+    \put(0.02591213,2.23107327){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}2. Fill \& Mark ends \end{tabular}}}}%
+    \put(0.02168261,1.12924828){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}4. Purify \& Shear\end{tabular}}}}%
+    \put(0.02591213,1.63122361){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}3. Ligate\end{tabular}}}}%
+    \put(0.02591213,0.65631358){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}5. Pull down biotin\end{tabular}}}}%
+    \put(0.02591213,0.24624049){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\resizebox{35mm}{!}{6. Paired-end sequencing}\end{tabular}}}}%
+    \put(0.68554829,0.1312114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\scriptsize ...ACGA\end{tabular}}}}%
+    \put(0.33100718,0.02494994){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}\scriptsize CGTA...\end{tabular}}}}%
+    \put(0.22885013,3.1514506){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.4033666,3.1514506){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.07368284,2.49468544){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.25850842,2.49557722){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.19728222,1.90708602){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.01660356,1.90831013){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.43748809,1.42740153){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.57754014,1.29981861){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.33975886,0.99460062){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.58093395,0.91792653){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.34579206,0.55481906){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.49716603,0.41619161){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
+    \put(0.32572266,0.13696522){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{a}\end{tabular}}}}%
+    \put(0.64171523,0.01131357){\color[rgb]{0.4,0.4,0.4}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{b}\end{tabular}}}}%
   \end{picture}%
 \endgroup%
