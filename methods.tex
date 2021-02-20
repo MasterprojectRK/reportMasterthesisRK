@@ -417,6 +417,7 @@ The loss function was implemented as shown in \ref{eq:improve:cGAN_loss}
 with parameters $\lambda_\mathit{cGAN}=10^{-5}, \lambda_\mathit{MAE}=1.0, \lambda_\mathit{TV}=10^{-12}$.
 Optimization was performed on minibatches of size 32,4 and 2 for windowsizes 64, 128 and 256, respectively, 
 using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
+The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:methods:hardware}.
 
 \begin{figure}[p]
     \tiny
@@ -462,19 +463,21 @@ The triu-reshape layer is a custom tensorflow network layer which simply generat
 of appropriate shape $(w,w)$ and sets its upper triangular part to the values given by the input vector.
 Symmetrization was then performed by adding this tensor to its transpose and dividing the values on the diagonal by two.
 Finally the required third axis was added to get the shape of a grayscale image.
-The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_dnn_params}.
+The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_network_params}.
 Note that all trainable parameters stem from the DNN here; the reshaping layers do not have any trainable parameters.
-\begin{table}[hbp]
+\begin{table}[htbp]
 \centering
-\begin{tabular}{cc}
+\begin{tabular}{lrr}
 \hline
-\multicolumn{1}{l}{\textbf{windowsize}} & \multicolumn{1}{l}{\textbf{trainable weights}} \\ \hline
-64                                      & \xxx                                        \\
-128                                     & \xxx                                        \\
-256                                     & \xxx                                        \\ \hline
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{windowsize}}} & \multicolumn{2}{c}{\textbf{trainable weights}}    \\
+\multicolumn{1}{c}{}                                     & \multicolumn{1}{c}{CNN} & \multicolumn{1}{c}{DNN} \\ \hline
+64                                                       & 4243968                 & 5502796                 \\
+128                                                      & 4260416                 & 16034732                \\
+256                                                      & 4293312                 & 57877612                \\ \hline
 \end{tabular}
-\caption{trainable weights for embedding DNN}\label{tab:methods:embedding_dnn_params}
+\caption{trainable weights for embedding networks}\label{tab:methods:embedding_network_params}
 \end{table}
+
 \subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
 The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
 as shown in \cref{fig:methods:GAN_arch:embedding_network}.
@@ -492,19 +495,7 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
 \end{figure}
 
 For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the embedding network shown in \cref{fig:methods:GAN_arch:embedding_network} 
-contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_cnn_params} for details.
-\begin{table}[hbp]
-\centering
-\begin{tabular}{cc}
-\hline
-\multicolumn{1}{l}{\textbf{windowsize}} & \multicolumn{1}{l}{\textbf{trainable weights}} \\ \hline
-64                                      & 4243968                                        \\
-128                                     & 4260416                                        \\
-256                                     & 4293312                                        \\ \hline
-\end{tabular}
-\caption{trainable weights for embedding CNN}\label{tab:methods:embedding_cnn_params}
-\end{table}
-
+contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
 
 \subsection{Hardware} \label{sec:methods:hardware}
 For the thesis, three virtual machines were used to train the neural networks, see \cref{tab:appendix:hardware}.
