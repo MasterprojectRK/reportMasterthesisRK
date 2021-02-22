@@ -11,7 +11,8 @@ Here, the quality-filtered ``combined\_30'' matrices were taken, which contain o
 both replicates.
 
 Next, matrices at \SI{5}{\kilo\bp} binsize were extracted and converted to cooler format using \texttt{hic2cool}
-and subsequently coarsened to resolutions of 10, 25, 50 and \SI{100}{\kilo\bp} using \texttt{cooler coarsen}.
+and subsequently coarsened to resolutions of 10, 25, 50 and \SI{100}{\kilo\bp} using \texttt{cooler coarsen},
+see \cref{list:methods:hic2cool}.
 
 Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using a distance-based normalization,
 and many others in the field which are using ICE- or KR-normalization, 
@@ -19,11 +20,11 @@ these matrices have not been normalized for the thesis at hand
 because no benefit of doing so was found during the study project \cite{Krauth2020}.
 
 \subsubsection{ChIP-seq data} \label{sec:methods:chipseq}
-For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used.
+For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used, cf. \cref{tab:methods:csdata}.
 Here, the data was downloaded in .bam format either via the ENCODE project \cite{Encode2012,Davis2017} 
-or directly from the file server of the University of California. 
+or directly from the file server of the University of California (UCSC). 
 In all cases, bam-files for replicate 1 and 2 were downloaded in their most recent versions (if applicable);
-the UCSC- (wgEncode...) or GEO- (GSM...) identifiers are given in \cref{tab:methods:csdata}.
+the UCSC- (wgEncode...) or GEO- (GSM...) identifiers are also given in \cref{tab:methods:csdata}.
 For convenience, the pdf version of this document also provides download links for concrete files in \cref{sec:chromFeat_download_links}.
 \begin{table}[ht!]
 \centering
@@ -49,7 +50,8 @@ For convenience, the pdf version of this document also provides download links f
 \end{table}
 
 After downloading, the bam files were converted to bigwig format, which was found more convenient to handle, and the replicates were merged into 
-one bigwig file by taking the mean, as in the study project \cite{Krauth2020}. Pseudocode for the full conversion process is given in \xxx.
+one bigwig file by taking the mean, as in the study project \cite{Krauth2020}. 
+Pseudocode for the full conversion process is given in \cref{list:methods:bamtobigwig}.
 
 The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; it contains
 structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3 as well as active/passive markers.
@@ -272,7 +274,7 @@ However, all of these operate on images, and no useful images seem available for
 Images of complete Hi-C matrices, i.\,e. for full chromosomes,
 can be generated from cooler matrices, but contain only zeros outside the first $w$ diagonals.
 This would lead to false results when compared to the true matrices, whether they are truncated at $w$ or not.
-Images of $(w\times w)$ sub-matrices, on the other hand, are generated natively, but are overlapping and thus highly correlated among each other due to the sliding window approach for sample generation, 
+Images of $(w\times w)$ sub-matrices, on the other hand, are generated natively within this thesis, but are overlapping and thus highly correlated among each other due to the sliding window approach for sample generation, 
 cf. \cref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}. 
 Again, the result would be not very meaningful, or at least difficult to interpret.
 
@@ -314,7 +316,7 @@ see repository \xxx.
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
 where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and feature binsize.
-Mirror-type padding was used to maintain the output dimensions of the basic network, which now had \SI{7486478} trainable weights
+Mirror-type padding was used to maintain the output dimensions of the basic network, which now had \SI{7486478}{} trainable weights
 for $k=1$.
 
 For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
@@ -322,15 +324,15 @@ were used in place of the basic network's single convolutional layer.
 This replacement was also made for the ``wider-longer''-variant, 
 additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4.
 In both cases, the dropout rate was increased to 20\%.
-The ``longer'' variant had \SI{9142665} trainable weights and the ``wider-longer''
-had \SI{9143313} for $k=1$.
+The ``longer'' variant had \SI{9142665}{} trainable weights and the ``wider-longer''
+had \SI{9143313}{} for $k=1$.
 
 For the variant with generalized feature binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
 so the factor for the relation between the two binsizes was $k=25/5=5$.
 This yields input feature arrays of size $3w\cdot k \times n = 3\cdot80\cdot5 \times 14 = 1200\times 14$.
 Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$,
 this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
-The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}.
+The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
 
 \subsubsection{Combination of mean squared error, perception loss and TV loss} \label{sec:methods:combined_loss}
 For computing the combined MSE, perception- and TV-loss,
@@ -383,8 +385,8 @@ a user-selected loss weight $\lambda_\mathit{score}$, see \cref{eq:methods:score
 While it would also have been possible, and probably faster, to slice the outputs of the networks directly in vector form, 
 this is rather unintuitive and was therefore not implemented for the thesis. 
 
-\subsection{HiC-GAN approach}
-\subsubsection{Modified Pix2Pix network}\label{sec:methods:cGAN_initial}
+\subsection{Hi-cGAN approach}
+\subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
 Several implementations of the original pix2pix network are publicly available, usually for the original image size of $256\times256$.
 For the thesis at hand, implementation concepts from two tutorials \xxx were combined and the code was adapted to the given requirements.
 
@@ -413,7 +415,7 @@ into grayscale images of shape $(w,w,1)$.
 These networks will be discussed below in \cref{sec:methods:dnn-embedding}
 and \cref{sec:methods:cnn-embedding}.
 
-The loss function was implemented as shown in \ref{eq:improve:cGAN_loss}
+The loss function was implemented as shown in \cref{eq:improve:cGAN_loss}
 with parameters $\lambda_\mathit{cGAN}=10^{-5}, \lambda_\mathit{MAE}=1.0, \lambda_\mathit{TV}=10^{-12}$.
 Optimization was performed on minibatches of size 32,4 and 2 for windowsizes 64, 128 and 256, respectively, 
 using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
@@ -503,17 +505,12 @@ All training for \cref{sec:results:cgan} was done on machine 2,
 computations for sections \ref{sec:initialDNNresults}, \ref{sec:results:wider-longer-etc} and \ref{sec:results:binsize_winsize}
 were done on machine 3 without GPU and computations for sections \ref{sec:results:loss_functions} and \ref{sec:results:scorebased} were done on machine 2.
 
-Training the DNN with perception- or score-based losses as well as the GAN was not reasonably possible without GPU.
-For the GAN, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
+Training the DNN with perception- or score-based losses as well as the cGAN was not reasonably possible without GPU.
+For the cGAN, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
 to avoid undue limitations on batchsizes and/or windowsizes.
-\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the GAN at windowsize 64 for more than 80 epochs.
+\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the cGAN at windowsize 64 for more than 80 epochs.
 It could not be clarified throughout the thesis whether this was due to a memory leak in tensorflow or due to the chosen implementation.
 
 Training samples were stored as tensorflow tfrecords (on the fly at runtime) and a custom pipeline including a shuffle buffer and prefetching 
 was employed to balance workload between CPUs and GPU.
 This approach was found to be faster than generator-based approaches by a large margin.
-
-
-
-
-
