@@ -1,8 +1,15 @@
 \section{Methods}
+In the following sections, the methodical details for the tasks within the thesis will be discussed in more detail.
+First, input data and data preprocessing will be discussed, followed by an explanation of the quality metrics used to assess the predictions
+of Hi-C matrices made throughout the thesis.
+Next, sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan} will give details with regard to the two 
+different approaches made in this thesis to advance the state of the art in predicting Hi-C matrices.
+Finally, the hardware used for the computations within this thesis will be outlined in \cref{sec:methods:hardware}.
 
 \subsection{Input data}
 For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
-The exact data sources and data preprocessing will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
+The exact data sources and data preprocessing for the Hi-C matrices and ChIP-seq data 
+will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
 
 \subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
 Hi-C data due to Rao et al. \cite{Rao2014} was downloaded 
@@ -30,7 +37,8 @@ For convenience, the pdf version of this document also provides download links f
 \centering
  \begin{tabular}{lll}
  \hline
-  feature name & GM12878 & K562 \\  \hline
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{feature name}}} & \multicolumn{2}{l}{\hspace*{18mm}\textbf{cell line}} \\
+\multicolumn{1}{c}{}                                       & GM12878             & K562             \\ \hline
   CTCF & GSM733752 & GSM733719\\
   DNaseI & wgEncodeEH000534 & wgEncodeEH000530\\
   H3k27ac & GSM733771 & GSM733656\\
@@ -278,7 +286,9 @@ Images of $(w\times w)$ sub-matrices, on the other hand, are generated natively 
 cf. \cref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}. 
 Again, the result would be not very meaningful, or at least difficult to interpret.
 
-\subsection{Dense neural network approach}
+\subsection{Dense neural network approach} \label{sec:methods:dnn}
+In the following sections, the setup for the Dense Neural network inspired by Farr\'e et al. \cite{Farre2018a}
+and its variations will be discussed in detail.
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
 The basic setup for the dense neural network approach closely follows the proposal by Farr\'e et al. \cite{Farre2018a},
@@ -385,10 +395,10 @@ a user-selected loss weight $\lambda_\mathit{score}$, see \cref{eq:methods:score
 While it would also have been possible, and probably faster, to slice the outputs of the networks directly in vector form, 
 this is rather unintuitive and was therefore not implemented for the thesis. 
 
-\subsection{Hi-cGAN approach}
+\subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
 \subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
 Several implementations of the original pix2pix network are publicly available, usually for the original image size of $256\times256$.
-For the thesis at hand, implementation concepts from two tutorials \xxx were combined and the code was adapted to the given requirements.
+For the thesis at hand, implementation concepts from two tutorials \cite{tfpix2pix2020, brownlee2019} were combined and the code was adapted to the given requirements.
 
 Within the generator, two of the down- and upsampling layers inside the U-Net portion were made optional 
 to allow processing smaller images of sizes $64\times64$ and $128\times128$, see \cref{fig:methods:GAN_arch:generator}.
