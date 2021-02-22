@@ -81,47 +81,51 @@ to the corresponding reference genome.
 Here, only reads are kept where the ``left'' sequence (6)(a)
 uniquely maps to a different region of the reference genome than the ``right'' sequence (6)(b).
 These so-called chimeric reads are subjected to quality control, and those passing are counted as an interaction
-between the two genomic positions (1)(a) and (1)(b) to which the two ends belong.
+between the two genomic positions (a) and (b) to which the two ends belong.
 However, at reasonable read coverages, interactions cannot be counted per base pair. 
 Instead, the reference genome is split into equally sized bins (or regions), 
-and the reads are counted for those regions where they belong. 
-The final outcome of a Hi-C experiment is then a sparse matrix, henceforth referred to as ``Hi-C matrix'', 
+and the reads are counted for those bins where they belong. 
+Common bin size values $b$ include $b \in \{1, 5, 10, 25, 50, 100, 1000\}$\,kbp.
+
+The final outcome of a Hi-C experiment is then a (sparse) square matrix $M$, henceforth referred to as ``Hi-C matrix'', 
 which records the interaction count for all possible pairs of regions in the reference genome.
-
-For the thesis at hand, Hi-C matrices can abstractly be considered as sets of sparse, square matrices; one matrix for each chromosome.
-The individual elements $m_{i,j}$ of the matrices are counts of interactions between the bins with indices $i,j \in \{0,1,...,l\}$,
-where the last index $l$ is given by the chromosome size $cs$ and the binsize $b$ in basepairs as $l=   \left \lceil{\frac{cs}{b}}\right \rceil -1$.
-Because interaction counts do not have a ``direction'', it holds that $m_{i,j} = m_{j,i}$, so Hi-C matrices are always symmetric.
-
-A bin with index $n$ then corresponds to the genomic region $p_n = [\,n\cdot b, \; (n+1)\cdot b\,)$, 
-except the last bin $l$, where $p_{l} = [\,l \cdot b, \; cs \,]$, with $l,b,cs$ as above.
-As an example, if $m_{0,10}=22$ for a matrix with binsize $b=\SI{25}{\kilo\bp}$, this means that in the underlying experiment, 
-22 interactions have been counted between region $p_0$, ranging from 0 to \SI{24999}{\bp} and region $p_{10}$, 
-ranging from 250000 to \SI{274999}{\bp}. 
-Due to insufficient read coverage, $b=\SI{1}{\bp}$ is impossible in practice. 
-Instead, common values include $b \in \{1, 5, 10, 25, 50, 100, 1000\}$\,kbp.
+The individual elements $m_{i,j}$ of the matrices are counts of interactions between the bins with indices $i,j \in \{0,1,...\}$,
+where each bin index $i$ and $j$ uniquely maps to a genomic region with defined start- and end position.
+For example, if region index $i$ corresponded to ``chr1, 25000...49999'' and index $j$ corresponded to ``chr1, 250000...274999'',
+then a matrix entry $m_{i,j}=22$ would mean that 22 interactions have experimentally been measured between the two mentioned genomic positions.
+Because interactions do not have a ``direction'', Hi-C matrices are always symmetric and it thus holds that $m_{i,j} = m_{j,i}$.
 
 In the bioinformatics part of the Hi-C protocol, often just a small fraction of all reads 
 fulfill the selection criteria outlined above, for example due to reads not being chimeric or uniquely mappable.
 This makes Hi-C a comparatively inefficient, slow and thus expensive process.
 For example, the well-known dataset by Rao et al. \cite{Rao2014} with matrix bin sizes down to \SI{1}{\kilo\bp}, required several \emph{billions} of reads being made. 
 
+\begin{wrapfigure}[28]{r}{0.3\textwidth}
+ \vspace{-4mm}
+ \resizebox{0.3\textwidth}{!}{
+ \small
+ \import{figures/}{chipseq_wetlab.pdf_tex}}
+ \caption[ChIP-seq lab process]{ChIP-seq\\lab process}
+ \label{fig:intro:chipseq1}
+\end{wrapfigure}
 Parts of \cref{fig:intro:HiC} and the process description above 
 have been adapted from the preceding study project \cite{Krauth2020}.
 
-\subsection{The ChIP-seq process for determining protein binding sites} \label{sec:intro:chipseq}
-The ChIP-seq process is a combination of Chromatin-Immunoprecipitation (ChIP) and DNA-sequencing, 
+
+\subsection[The ChIP-seq process for determining protein binding sites]{The ChIP-seq process for determining\\protein binding sites} \label{sec:intro:chipseq}
+The ChIP-seq process is a combination of Chromatin-Immu\-no\-pre\-ci\-pi\-ta\-tion (ChIP) and DNA-sequencing, 
 designed for investigating DNA-protein interactions \cite{Johnson2007,Robertson2007}.
-As with Hi-C, the input consists of a sufficient number of cells, which are first fixed with formaldehyde.
-The cells are then lysed, the DNA-protein structure is extracted and cut into fragments, 
-usually by sonication (2).
-Next, specific antibodies are added, designed to bind only to a certain protein of interest (3).
+As with Hi-C, the input consists of a sufficient number of cells, which are first treated with formaldehyde
+to fix present proteins to DNA, \cref{fig:intro:chipseq1}~(In).
+The cells are then lysed and the DNA-protein structure is extracted and cut into fragments, 
+usually by sonication (1).
+Next, specific antibodies are added, designed to bind only to a certain protein of interest (2).
 These antibodies are additionally equipped with a tag, for example a magnetic one, so that 
-the DNA-protein-antibody structures can be precipitated, while fragments without antibodies are discarded (4).
-The proteins and antibodies are then removed (5), 
-the DNA is purified and finally sequenced (6).
+the DNA-protein-antibody structures can be precipitated, while fragments without antibodies are discarded (3).
+The proteins and antibodies are then removed (4), 
+the DNA is purified and finally sequenced (5).
 Typically, a control experiment is performed together with the ChIP-seq process, 
-which comprises all steps described above, except the immunoprecipitation (3),(4).
+which comprises all steps described above, except the immunoprecipitation (2),(3).
 
 The outcome of the ChIP-seq lab process is again a bunch of short genomic sequences, 
 which are then fed into the bioinformatics part of the pipeline.
@@ -136,6 +140,9 @@ is statistically significant compared to the read count from the control group.
 For the thesis at hand, the aligned reads from the ChIP-seq experiment have been used directly,
 because peak data was found to be too sparse for the machine learning approach used 
 in the study project \cite{Krauth2020}.
+
+Parts of \cref{fig:intro:chipseq1} and the process description above have been
+adapted from the study project \cite{Krauth2020}.
 
 \subsection{Motivation and goal of the thesis}
 \begin{wraptable}{r}{5.5cm}
@@ -179,14 +186,15 @@ and Hi-C interaction counts on the other hand.
 Because this is a wide field and lead time for a master thesis is limited, 
 the present work will focus on machine learning techniques,
 which have proven a good choice for exploiting complex patterns
-and relationships in various kinds of data. \xxx citations needed
+and relationships, especially when it comes to the synthesis of 
+2D data from various kinds of input data \cite{Tsirikoglou2020}.
 More specifically, the goal of this thesis is to develop an easy-to-use machine learning
 approach for predicting Hi-C interaction matrices from ChIP-seq data, 
 using standard in- and output formats with minimal pre- and postprocessing.
 
 To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
 sorted by total number of selected assays available.
-It is obvious that even otherwise well-investigated cell lines like HEK293, MCF-7 and H1 lack Hi-C data, while ChIP-seq data is mostly available.
-\xxx data for H1 is available in 
+Although not necessarily all available experiments to date are included in ENCODE -- for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 cells are not listed -- 
+it is obvious that the public availability of ChIP-seq data is commonly much better than the one of Hi-C data, even for otherwise well investigated cell lines like HEK293 and MCF-7.
 
 

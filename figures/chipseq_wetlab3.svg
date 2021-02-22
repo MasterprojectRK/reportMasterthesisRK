@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -14,7 +12,7 @@
    viewBox="0 0 134.64564 146.39592"
    id="svg5026"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
    sodipodi:docname="chipseq_wetlab3.svg">
   <defs
      id="defs5028">
@@ -65,10 +63,11 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1031"
+     inkscape:window-height="1020"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0" />
   <metadata
      id="metadata5031">
     <rdf:RDF>
@@ -77,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -586,86 +585,86 @@
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="90.54583"
        y="63.419472"
-       id="text8726"
-       sodipodi:linespacing="125%"><tspan
+       id="text8726"><tspan
          sodipodi:role="line"
          id="tspan8728"
          x="90.54583"
-         y="63.419472">4. Immunoprecipitation</tspan></text>
+         y="63.419472"
+         style="font-size:10px;line-height:1.25">4. Immunoprecipitation</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="91.113823"
        y="118.49253"
-       id="text8734"
-       sodipodi:linespacing="125%"><tspan
+       id="text8734"><tspan
          sodipodi:role="line"
          id="tspan8736"
          x="91.113823"
-         y="118.49253">5. Purification</tspan></text>
+         y="118.49253"
+         style="font-size:10px;line-height:1.25">5. Purification</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="91.113823"
        y="164.00708"
-       id="text8738"
-       sodipodi:linespacing="125%"><tspan
+       id="text8738"><tspan
          sodipodi:role="line"
          id="tspan8740"
          x="91.113823"
-         y="164.00708">6. Sequencing</tspan></text>
+         y="164.00708"
+         style="font-size:10px;line-height:1.25">6. Sequencing</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="125.52154"
        y="181.61377"
-       id="text12602"
-       sodipodi:linespacing="125%"><tspan
+       id="text12602"><tspan
          sodipodi:role="line"
          id="tspan12604"
          x="125.52154"
-         y="181.61377">\scriptsize ACGA...</tspan></text>
+         y="181.61377"
+         style="font-size:10px;line-height:1.25">\scriptsize ACGA...</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="170.77153"
        y="181.61377"
-       id="text12606"
-       sodipodi:linespacing="125%"><tspan
+       id="text12606"><tspan
          sodipodi:role="line"
          id="tspan12608"
          x="170.77153"
-         y="181.61377">\scriptsize TGGT...</tspan></text>
+         y="181.61377"
+         style="font-size:10px;line-height:1.25">\scriptsize TGGT...</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="125.52154"
        y="192.86377"
-       id="text12610"
-       sodipodi:linespacing="125%"><tspan
+       id="text12610"><tspan
          sodipodi:role="line"
          id="tspan12612"
          x="125.52154"
-         y="192.86377">\scriptsize CGTA...</tspan></text>
+         y="192.86377"
+         style="font-size:10px;line-height:1.25">\scriptsize CGTA...</tspan></text>
     <text
        transform="translate(-87.633786,-50.592819)"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="170.77153"
        y="192.86377"
-       id="text12614"
-       sodipodi:linespacing="125%"><tspan
+       id="text12614"><tspan
          sodipodi:role="line"
          id="tspan12616"
          x="170.77153"
-         y="192.86377">\scriptsize CCTG...</tspan></text>
+         y="192.86377"
+         style="font-size:10px;line-height:1.25">\scriptsize CCTG...</tspan></text>
   </g>
 </svg>

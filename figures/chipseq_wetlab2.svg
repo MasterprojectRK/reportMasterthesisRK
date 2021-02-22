@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -14,7 +12,7 @@
    viewBox="0 0 134.64567 288.7795"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
    sodipodi:docname="chipseq_wetlab2.svg">
   <defs
      id="defs4">
@@ -119,22 +117,23 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.0000002"
-     inkscape:cx="5.4105475"
-     inkscape:cy="285.26292"
+     inkscape:zoom="2.8284272"
+     inkscape:cx="35.79524"
+     inkscape:cy="133.03521"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer4"
      showgrid="false"
      showguides="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1031"
+     inkscape:window-height="1020"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:document-rotation="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -143,7 +142,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1949,47 +1948,47 @@
      style="display:inline">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="37.25"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="18.5"
        y="245.36221"
-       id="text8692"
-       sodipodi:linespacing="125%"><tspan
+       id="text8692"><tspan
          sodipodi:role="line"
          id="tspan8694"
-         x="37.25"
-         y="245.36221">DNA + proteins</tspan></text>
+         x="18.5"
+         y="245.36221"
+         style="font-size:10px;line-height:1.25">Input: DNA + proteins</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="14.318024"
        y="323.27441"
-       id="text8718"
-       sodipodi:linespacing="125%"><tspan
+       id="text8718"><tspan
          sodipodi:role="line"
          id="tspan8720"
          x="14.318024"
-         y="323.27441">1. Fixation</tspan></text>
+         y="323.27441"
+         style="font-size:10px;line-height:1.25">1. Fixation</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="14.318024"
        y="401.14908"
-       id="text8722"
-       sodipodi:linespacing="125%"><tspan
+       id="text8722"><tspan
          sodipodi:role="line"
          id="tspan8724"
          x="14.318024"
-         y="401.14908">2. Shearing</tspan></text>
+         y="401.14908"
+         style="font-size:10px;line-height:1.25">2. Shearing</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="15.568024"
        y="464.41577"
-       id="text8730"
-       sodipodi:linespacing="125%"><tspan
+       id="text8730"><tspan
          sodipodi:role="line"
          id="tspan8732"
          x="15.568024"
-         y="464.41577">3. Adding Antibodies</tspan></text>
+         y="464.41577"
+         style="font-size:10px;line-height:1.25">3. Adding Antibodies</tspan></text>
   </g>
 </svg>
