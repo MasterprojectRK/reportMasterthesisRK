@@ -266,7 +266,7 @@ Many different layouts and training processes for the Generator and Discriminato
 For the thesis at hand, the well-known ``pix2pix'' proposal by Isola et al. from 2017 was followed \cite{Isola2017}, 
 amended by a convolutional embedding network for the chromatin features, which serve as the conditional input $x$ here.
 The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be explained in more detail below.
-\begin{figure}[hbp]
+\begin{figure}[htbp]
  \import{figures/}{Hi-cGAN.pdf_tex}
  \caption{cGAN approach} \label{fig:improve:cGAN-approach}
 \end{figure}
@@ -314,22 +314,36 @@ choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
 Another advantage towards pix2pix, and U-Net architectures in general, 
 is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
-%State of the art approaches have 80 mio parameters \cite{Brock2019}.
-%But these are used for synthesizing images from many different classes, like in imageNet.
-%our approach is much more simple
-
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
-First, the deep neural network developed above was employed to turn chromatin features into Hi-C submatrices, which can be seen as grayscale images.
-The rationale here was to use the DNN for converting the conditional input into a coarse Hi-C matrix first and then
-use the GAN to refine the predictions.
-Additionally, the network could be pre-trained as shown above, saving time compared to an embedding that has to be trained alongside the GAN.
-Potentially pre-training might also improve stability or enable convergence of the network in general.
+The embedding network required for processing the conditional inputs
+has on obvious mandatory property: it must be capable of embedding the input of shape $(3w,n)$ 
+into a 2D grayscale image of shape $(w,w,1)$.
+Naturally, this can be achieved by using the dense neural network explored above
+and reshaping its ``upper triangular'' output vector back into a symmetric ``image'' tensor with the required shape.
+
+The rationale here was to first use the DNN to get a coarse estimate of the predicted matrix,
+and then the cGAN to refine the results, somewhat similar to the two-stage approach by Zhang et al. \cite{Zhang2019c},
+albeit much less sophisticated. 
+Naturally, this approach also allows to pre-train the dense network as shown above and then use transfer learning
+to provide better starting values for the embedding network, potentially improving both stability and convergence speed
+of the cGAN network.
+
+A disadvantage of the dense network approach is that the number of neurons in its output layer quadratically depends on the windowsize $w$.
+Taken together with the three fully connected layers underneath, this leads to a superlinear increase in the number of parameters along $w$,
+further aggravated by the fact that the cGAN requires $w$ to be powers of two, cf. \cref{sec:methods:cGAN_initial} and  
+\ref{sec:methods:dnn-embedding} (\cref{tab:methods:embedding_network_params}, p.~\pageref{tab:methods:embedding_network_params}).
+The DNN embedding has thus only been explored for $w=64$, both with and without pretraining. 
+The results are to be found in \cref{sec:results:cgan_dnn}.
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
-Second, a short convolutional network was used to embed the one-dimensional chromatin feature vectors in a 2D image.
-Here, the idea was to use a fast trainable embedding that keeps the localization information in the chromatin feature data,
+Since the results from the DNN embedding were not convincing, another approach based on convolutional layers was created.
+Here, the idea was to have a trainable embedding that keeps the localization information in the chromatin feature data,
 has less parameters than a dense embedding and can efficiently be trained along with the rest of the network, allowing for a standalone solution.
 
+Since no example for such an embedding was found in literature, a first try was made with a simple 8-layer convolutional network.
+The complete setup is shown in \cref{sec:methods:cnn-embedding} (\cref{fig:methods:GAN_arch:embedding_network}, p.~\pageref{fig:methods:GAN_arch:embedding_network}).
+Compared to the dense approach, the number of parameters in the CNN embedding is widely independent of the windowsize and 
+stays between 4.24 million and 4.29 million for the tested windowsizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
 
 
 
