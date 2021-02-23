@@ -10,7 +10,7 @@ propose a combination of a 1D convolutional filter with a three-layer dense neur
 which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing.
 This thesis tries to build on the success of their method by extending the comparatively simple neural network
 in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
-As a start, the basic network has been rebuilt and used on well-known data from human cell lines GM12878 and K562.
+As a start, the basic network has been rebuilt and used on well-known data from human cell lines GM12878 and K562, cf. \cref{sec:methods:input_data}.
 
 \subsubsection{Basic network setup} \label{sec:improve:basicNetwork}
 The basic network setup taken over from Farr\'e et al. \cite{Farre2018a} is shown in simplied form in \cref{fig:improve:priciple_basic_dnn},
@@ -29,11 +29,10 @@ it requires two kinds of inputs for training -- ChIP-seq data of the chosen chro
 target Hi-C matrices for each training chromosome.
 However, it is generally infeasible to learn Hi-C matrices for complete chromosomes at once with machine learning approaches, 
 because the latter heavily depend on availability of training data.
-
 The target matrices are thus taken as submatrices of size $w \times w$ 
 with fixed windowsize $w$, centered at the diagonal of the 
 original Hi-C matrices, \cref{fig:improve:priciple_basic_dnn} top.
-The ChIP-seq data is taken as $3w \times n$ subarray of the original array,
+The ChIP-seq data of $n$ chromatin features is taken as $3w \times n$ subarray of the original array,
 whereby the middle $w$ bins are aligned with the position of the submatrix,
 the first $w$ bins correspond to the left flanking region and the last $w$ bins correspond to 
 the right flanking region of the current submatrix region, \cref{fig:improve:priciple_basic_dnn} bottom. 
@@ -44,22 +43,21 @@ For the technical details of the sample generation process, see \cref{sec:method
 Within the network, a 1D convolutional filter compresses the $3w \times n$ input arrays to 1D vectors
 of size $3w \times 1$, and four dense layers further process the compressed input, \cref{fig:improve:priciple_basic_dnn} middle.
 The number of neurons in the last dense layer corresponds to the number of bins
-in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons,
+in the upper triangular part of the target submatrix, i.\,e. it consists of $(w \cdot (w+1))/2$ neurons, \cref{fig:improve:priciple_basic_dnn} top, 
 exploiting the symmetry of Hi-C matrices. 
 For implementation details, please refer to \cref{sec:methods:basicSetup}.
 
 Training of the network is performed by minimizing the mean squared error of the predicted matrix
-versus the target Hi-C matrix using stochastic gradient descent.
-The technical details are also given in \cref{sec:methods:basicSetup}
+versus the target Hi-C matrix using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
 
 Farr\'e et al. propose a windowsize of $w=80$ at $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$.
 However, larger binsizes of $b_{feat} = b_{mat} = \SI{25}{\kilo\bp}$ were found beneficial for 
 most of the data used throughout this master thesis.
 Additionally, larger binsizes allow for a higher coverage of the target matrix at the same windowsize,
-because obviously $10\, w < 25\, w$.
+because the windowsize is specified in bins, and obviously $10\, w < 25\, w$.
 Results for both binsize 10 and \SI{25}{\kilo\bp} are shown in \cref{sec:initialDNNresults}.
 
-The network shown above is quite simple, and immediately offers some opportunities
+The network layout shown above is quite simple, and immediately offers some opportunities
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.
 These will be explored below.
 
@@ -69,7 +67,8 @@ One starting point for modifying the neural network is its convolutional part.
 With only a single 1D convolutional filter in one layer, the network might have difficulties capturing complex relationships 
 between Hi-C interaction counts and more than one of the chromatin features.
 For this reason, an extended ``longer'' network was created, 
-comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respectively.
+comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respectively, replacing the single
+1D-convolution in \cref{fig:improve:priciple_basic_dnn}, lower left, cf. \cref{sec:methods:variants}.
 This is still a comparatively low number of layers and filters,
 but the choice seemed justified in order to avoid overfitting to the low-dimensional input.
 
