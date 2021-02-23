@@ -6,7 +6,7 @@ Next, sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan} will give deta
 different approaches made in this thesis to advance the state of the art in predicting Hi-C matrices.
 Finally, the hardware used for the computations within this thesis will be outlined in \cref{sec:methods:hardware}.
 
-\subsection{Input data}
+\subsection{Input data} \label{sec:methods:input_data}
 For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
 The exact data sources and data preprocessing for the Hi-C matrices and ChIP-seq data 
 will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
@@ -301,7 +301,7 @@ The dense layers all use a ``L2'' kernel regularizer and the dropout layers foll
     \small
     \centering
     \import{figures/}{DNN_basic_model.pdf_tex}
-    \caption{Basic dense neural network}
+    \caption{Basic dense neural network with generalized feature binning}
     \label{fig:methods:basic_dnn}
 \end{figure}
 
@@ -330,19 +330,26 @@ Mirror-type padding was used to maintain the output dimensions of the basic netw
 for $k=1$.
 
 For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
-were used in place of the basic network's single convolutional layer.
+were used in place of the basic network's single convolutional layer, cf. \cref{fig:methods:longer_dnn}.
 This replacement was also made for the ``wider-longer''-variant, 
-additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4.
+additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4, cf. \cref{fig:methods:longer_dnn} (right).
 In both cases, the dropout rate was increased to 20\%.
 The ``longer'' variant had \SI{9142665}{} trainable weights and the ``wider-longer''
 had \SI{9143313}{} for $k=1$.
 
-For the variant with generalized feature binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
+For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
 so the factor for the relation between the two binsizes was $k=25/5=5$.
 This yields input feature arrays of size $3w\cdot k \times n = 3\cdot80\cdot5 \times 14 = 1200\times 14$.
 Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$,
 this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
+\begin{figure}[p]
+    \small
+    \centering
+    \import{figures/}{DNN_longer.pdf_tex}
+    \caption{``longer'' and ``wider-longer'' variants for DNN}
+    \label{fig:methods:longer_dnn}
+\end{figure}
 
 \subsubsection{Combination of mean squared error, perception loss and TV loss} \label{sec:methods:combined_loss}
 For computing the combined MSE, perception- and TV-loss,
