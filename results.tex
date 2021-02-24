@@ -60,7 +60,7 @@ or between \xxx and \xxx in chromosome 21 were not predicted at all.
     \label{fig:results:basicDNN_pearson}
 \end{figure}
 
-%10k
+%10k Pearson and progress
 \begin{figure}[p]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -102,21 +102,43 @@ or between \xxx and \xxx in chromosome 21 were not predicted at all.
     \caption{results\,/\,metrics, basic DNN, \SI{10}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_10k_pearson}
 \end{figure}
-
+%25k matrices
 \begin{figure}[p]
-    \scriptsize
-    \import{figures/basic_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
-    \caption{example prediction, 500 epochs} \label{fig:results:00500_21_030-040}
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
+        \caption{example  region 1, 500 epochs} \label{fig:results:00500_21_030-040}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
+        \caption{example region 2, 500 epochs} \label{fig:results:00500_19_030-040}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2, 1000 epochs} \label{fig:results:01000_19_030-040}
+    \end{subfigure}
+    \caption{example predictions, basic DNN \SI{25}{\kilo\bp}, 500 and 1000 epochs}
 \end{figure}
+%10k matrices
 \begin{figure}[p]
-    \scriptsize
-    \import{figures/basic_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
-    \caption{example prediction, 500 epochs} \label{fig:results:00500_19_030-040}
-\end{figure}
-\begin{figure}[p]
-    \scriptsize
-    \import{figures/basic_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
-    \caption{example prediction, 1000 epochs} \label{fig:results:01000_19_030-040}
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic10k_dnn_results/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:basic10k_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic10k_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:basic10k_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/basic10k_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:basic10k_r3}
+    \end{subfigure}
+    \caption{example predictions, basic DNN \SI{10}{\kilo\bp}, 1000 epochs}
 \end{figure}
 
 \subsubsection{Results for variations of the convolutional part} \label{sec:results:wider-longer-etc}
@@ -126,7 +148,7 @@ Given the small increase in the number of trainable parameters at overall simila
 However, it is interesting that hardly any improvement was found.
 Overfitting was less obvious than with the initial setup and the training process looked more smooth overall, 
 but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
-\begin{figure}[p]
+\begin{figure}[p] %wider variant Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -167,6 +189,25 @@ but the remaining validation error was slightly higher than for the initial appr
     \caption{Pearson correlations, ``wider'' variant of DNN,  test chromosomes}
     \label{fig:results:widerDNN_pearson}
 \end{figure}
+%wider variant matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider_dnn_results/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:wider_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:wider_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:wider_r3}
+    \end{subfigure}
+    \caption{example predictions, ``wider'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs}
+\end{figure}
 
 The predictions from the ``longer'' variant were partially better for the test set than the initial ones in terms of
 Pearson correlations, \cref{fig:results:longerDNN_pearson}.
@@ -177,7 +218,7 @@ comparatively few neurons are responsible for certain distances.
 Since the longer network setup has considerably more trainable parameters,
 500 epochs might not be enough to fully adjust the weights of these (outer) neuros.
 The learning process in itself looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs}.
-\begin{figure}[p]
+\begin{figure}[p] %longer variant pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -218,12 +259,30 @@ The learning process in itself looked more smooth and reached a lower validation
     \caption{results\,/\,metrics, ``longer'' variant of DNN,  test chromosomes}
     \label{fig:results:longerDNN_pearson}
 \end{figure}
-
+%longer variant matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/longer_dnn_results/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:longer_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/longer_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:longer_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/longer_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:longer_r3}
+    \end{subfigure}
+    \caption{example predictions, ``longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs}
+\end{figure}
 The Pearson correlations for predictions from the ``wider-longer'' variant are shown in \cref{fig:results:wider-longerDNN_pearson}.
 While improvements can be seen for 3 of 5 test chromosomes compared to the initial network, 
 the results were worse than the ones from the highly similar ``longer''-variant alone,
 and the remaining validation error was also higher.
-\begin{figure}[p]
+\begin{figure}[p]%wider-longer Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -264,13 +323,31 @@ and the remaining validation error was also higher.
     \caption{results\,/\,metrics, ``wider-longer'' variant of DNN,  test chromosomes}
     \label{fig:results:wider-longerDNN_pearson}
 \end{figure}
-
+%wider-longer variant matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider-longer_dnn_results/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:wider-longer_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider-longer_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:wider-longer_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/wider-longer_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:wider-longer_r3}
+    \end{subfigure}
+    \caption{example predictions, ``wider-longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs}
+\end{figure}
 The Pearson correlations for the variant with feature binsize \SI{5}{\kilo\bp} and matrix binsize \SI{25}{\kilo\bp}
 are shown in \cref{fig:results:25k5DNN_pearson}.
 Much like the ``wider'' variant, the results did not improve compared to the initial predictions.
 The learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs}.
 
-\begin{figure}[p]
+\begin{figure}[p]%25k5 Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -311,11 +388,29 @@ The learning curve was smooth and showed signs of slight overfitting beyond 300 
     \caption{results\,/\,metrics, ``5k -- 25k'' variant of DNN with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$,  test chromosomes}
     \label{fig:results:25k5DNN_pearson}
 \end{figure}
-
+%25k5 matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25k5_dnn_results/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:25k5_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25k5_dnn_results/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:25k5_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25k5_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:25k5_r3}
+    \end{subfigure}
+    \caption{example predictions, ``5k -- 25k'' variant of DNN, 1000 epochs}
+\end{figure}
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
 The Pearson correlations for a combined loss function according to \cref{eq:methods:combined_loss} with weighting parameters $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$ are shown in \cref{fig:results:combilossDNN_pearson}.
 For all test chromosomes, the results were highly similar to the inital network's results.
-\begin{figure}[p]
+\begin{figure}[p] %combiloss pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -356,7 +451,25 @@ For all test chromosomes, the results were highly similar to the inital network'
     \caption{results\,/\,metrics, DNN with combined loss function (MSE, TV, VGG-16),  test chromosomes}
     \label{fig:results:combilossDNN_pearson}
 \end{figure}
-
+%combiloss matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/combiloss_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:combiloss_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/combiloss_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:combiloss_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/combiloss_dnn_results/}{pred00500_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:combiloss_r3}
+    \end{subfigure}
+    \caption{example predictions, DNN with combined loss function (MSE, TV, VGG-16), 500 epochs}
+\end{figure}
 While manually finding parameters $\lambda$ for MSE- and VGG-loss that made the results better was not successful,
 it was found that the TV loss weight needed to be much smaller than the two other weights.
 Otherwise, many true interactions outside the first few matrix diagonals were considered as noise and optimized away early in the training process.
@@ -369,7 +482,7 @@ While a slight improvement was achieved for test chromosome 21, the Pearson corr
 but at about \SI{7}{min} per epoch, the training time was much longer than for the initial network.
 It is well possible that a stronger improvement \emph{can} be achieved by targeted parameter tuning. 
 However, the results achieved by manual parameter tuning were also not encouraging towards a tedious grid- or tree-search.
-\begin{figure}[p]
+\begin{figure}[p]%score loss pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -408,6 +521,24 @@ However, the results achieved by manual parameter tuning were also not encouragi
     \end{subfigure}
     \caption{results\,/\,metrics, DNN with score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_pearson}
 \end{figure}
+\begin{figure}[p] %score loss matrices
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/scoreLoss_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:scoreloss_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/scoreLoss_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:scoreloss_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/scoreLoss_dnn_results/}{pred00500_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:scoreloss_r3}
+    \end{subfigure}
+    \caption{example predictions,  DNN with score-based loss function, 500 epochs}
+\end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
 Training the network with matrix- and feature binsizes of \SI{50}{\kilo\bp} (``50k direct'') did not improve the results in the desired way, \cref{fig:results:DNN50k_pearson}.
@@ -417,7 +548,7 @@ The same held for re-using the initial network trained at \SI{25}{\kilo\bp} to p
 Additionally, the training process for 50k collapsed after about 420 epochs for unknown reasons -- 
 which was not considered too problematic here, because the optimum validation error had already been reached between 150 and 250 epochs, \cref{fig:results:50k_lossEpochs}. 
 Faster convergence in itself would not be surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, cf. \cref{tab:methods:samples}.
-\begin{figure}[p]
+\begin{figure}[p]%50k direct AND from 25k, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -456,12 +587,60 @@ Faster convergence in itself would not be surprising, since there are only about
     \end{subfigure}
     \caption{results\,/\,metrics, various DNNs at \SI{50}{\kilo\bp}} \label{fig:results:DNN50k_pearson}
 \end{figure}
+\begin{figure}[p] %50k direct, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00250_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:50k_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00250_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:50k_r2}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00250_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:50k_r3}
+    \end{subfigure}
+    \caption{example predictions,  DNN at \SI{50}{\kilo\bp} direct, 250 epochs}
+\end{figure}
+\begin{figure}[p] %50k from 25k, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00500_50k_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:50k_from25k_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00500_50k_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:50k_from25k_r2}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.77\textwidth}{!}{
+        \scriptsize
+        \import{figures/50k_dnn_results/}{pred00500_50k_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:50k_from25k_r3}
+    \end{subfigure}
+    \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500 epochs}
+\end{figure}
 
 Simultaneously training a network with matrix- and feature binsizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp}
 turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
 but the predictions at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
 than the initial predictions at that binsize, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
-\begin{figure}[p]
+\begin{figure}[p]%trained at 25k and 50k simultaneously, pearson and progress for 25k
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -500,11 +679,24 @@ than the initial predictions at that binsize, \cref{fig:results:DNN50k_pearson} 
     \end{subfigure}
     \caption{results\,/\,metrics, DNN trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously} \label{fig:results:DNN25plus50_pearson}
 \end{figure}
-
-
-
-
-
+\begin{figure}[p] %25plus50, matrices at 25k
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25plus50_dnn_results/}{pred00500_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:25plus50_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25plus50_dnn_results/}{pred00500_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:25plus50_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/25plus50_dnn_results/}{pred00500_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:25plus50_r3}
+    \end{subfigure}
+    \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously, \SI{25}{\kilo\bp}, 500 epochs}
+\end{figure}
 
 
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
@@ -521,8 +713,7 @@ while for windowsize 256, a number greater 100 epochs might have been favorable.
 However, this would have come at a large computation time, 
 since average training time was around \SI{108}{\min} per epoch on the given hardware.
 
-
-\begin{figure}[p]
+\begin{figure}[p] %cGAN with CNN, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -560,6 +751,24 @@ since average training time was around \SI{108}{\min} per epoch on the given har
         \caption{learning progress} \label{fig:results:GAN64_lossEpochs}
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 64, test chromosomes}   \label{fig:results:GAN64_pearson}
+\end{figure}
+\begin{figure}[p] %cgan CNN, 64k
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_64/}{pred00100_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:cGAN64_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_64/}{pred00100_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:cGAN64_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_64/}{pred00100_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:cGAN64_r3}
+    \end{subfigure}
+    \caption{example predictions, cGAN with CNN embedding, $w=64$, 100 epochs}
 \end{figure}
 
 \begin{figure}[p]
@@ -602,6 +811,24 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 128, test chromosomes}   \label{fig:results:GAN128_pearson}
 \end{figure}
+\begin{figure}[p] %cgan CNN, 128k, matrices
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_128/}{pred00100_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:cGAN128_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_128/}{pred00100_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:cGAN128_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_128/}{pred00100_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:cGAN128_r3}
+    \end{subfigure}
+    \caption{example predictions, cGAN with CNN embedding, $w=128$, 100 epochs}
+\end{figure}
 
 \begin{figure}[p]
     \begin{subfigure}{0.45\textwidth}
@@ -643,4 +870,24 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 256, test chromosomes}   \label{fig:results:GAN256_pearson}
 \end{figure}
-
+\begin{figure}[p] %cgan CNN, 256k, matrices
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_256/}{pred00100_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:cGAN256_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_256/}{pred00100_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:cGAN256_r2}
+    \end{subfigure}
+    \caption{example predictions, cGAN with CNN embedding, $w=256$, 100 epochs}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \scriptsize
+        \import{figures/GAN_256/}{pred00100_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:cGAN256_r3}
+    \end{subfigure}
+    \caption{example predictions, cGAN with CNN embedding, $w=256$, 100 epochs}
+\end{figure}
