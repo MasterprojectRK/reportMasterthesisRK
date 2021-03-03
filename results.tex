@@ -820,7 +820,7 @@ Fast convergence is well known from pix2pix \cite{Isola2017}, but it is still su
 this property was maintained despite the changes made to the original network.
 
 For windowsizes 64 and 128 bins, the optimal number of epochs seemed to be around 80,
-while for windowsize 256, a number greater 100 epochs might have been favorable.
+while for windowsize 256, a number greater 100 epochs might have further improved the results.
 However, this would have come at a large computation time, 
 since average training time was around \SI{108}{\min} per epoch on the given hardware.
 
@@ -863,7 +863,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 64, test chromosomes}   \label{fig:results:GAN64_pearson}
 \end{figure}
-\begin{figure}[p] %cgan CNN, 64k
+\begin{figure}[p] %cgan CNN, 64
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
@@ -885,7 +885,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \caption{example predictions, cGAN with CNN embedding, $w=64$, 100 epochs}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[p] %cGAN cnn 128, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -925,7 +925,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 128, test chromosomes}   \label{fig:results:GAN128_pearson}
 \end{figure}
-\begin{figure}[p] %cgan CNN, 128k, matrices
+\begin{figure}[p] %cgan CNN, 128, matrices
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
@@ -947,10 +947,10 @@ since average training time was around \SI{108}{\min} per epoch on the given har
         \import{figures/GAN_128/}{pred00100_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:cGAN128_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN with CNN embedding, $w=128$, 100 epochs}
+    \caption{example predictions, cGAN with CNN embedding, $w=128$, 100 epochs} \label{fig:results:cGAN128_matrices}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[p] %cGAN CNN 256, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -1012,12 +1012,105 @@ since average training time was around \SI{108}{\min} per epoch on the given har
         \import{figures/GAN_256/}{pred00100_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN256_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN with CNN embedding, $w=256$, 100 epochs}
+    \caption{example predictions, cGAN with CNN embedding, $w=256$, 100 epochs} \label{fig:results:cGAN256_matrices}
+\end{figure}
+
+\subsubsection{cGAN with mixed DNN / CNN embedding}
+The results from the cGAN with mixed embedding, i.\,e. DNN-embedding for the generator
+and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pretrained_mixed_pearson} and \ref{fig:results:GAN64_pretrained_mixed_matrices} 
+(with pre-trained DNN-embedding network) and \xxx, \xxx (with standard weight initialization)
+
+\begin{figure}[p] %cGAN mixed 64, pretrained, pearson and progress
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-mixed/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN64_pretrained_mixed_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics cGAN, windowsize 64, mixed embedding, DNN pre-trained, test chromosomes}   \label{fig:results:GAN64_pretrained_mixed_pearson}
+\end{figure}
+\begin{figure}[p] %cgan mixed 64, pretrained, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_pretrain-mixed/}{pred00100_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:cGAN64_pretrained_mixed_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_pretrain-mixed/}{pred00100_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:cGAN64_pretrained_mixed_r2}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_pretrain-mixed/}{pred00100_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:cGAN64_pretrained_mixed_r3}
+    \end{subfigure}
+    \caption{example predictions cGAN, mixed embedding, DNN pre-trained, $w=128$, 100 epochs} 
+     \label{fig:results:GAN64_pretrained_mixed_matrices}
 \end{figure}
 
 \clearpage
 \subsection{Comparison with other approaches}\label{sec:results:comparison}
-See \ref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-vs-ours}
+A comparasion between the DNN- and cGAN approaches discussed in this paper and the
+random-forest-based method by Zhang et al., HiC-Reg \cite{Zhang2019}, is shown in  \cref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-vs-ours}.
+Here, the Pearson correlation plots suggest that the cGAN approach is superior to the other approaches
+for distances up to about \SI{200}{\kilo\bp}, while both the multicell- and window- approach by Zhang et al. outperform DNN and Hi-cGAN for distances between 
+\SI{200}{\kilo\bp} and \SI{1}{\mega\bp}.
+This is also reflected in the matrix plots, \cref{fig:results:matrices_zhang-vs-ours}. 
+While the cGAN often predicts smaller structures up to about \SI{400}{\kilo\bp} very well and offers distinct boundaries
+even among nested structures, the approach by Zhang et al. shows better performance for interactions in the upper half of the windowsize,
+see e.\,g. chromosome 17, 30...\SI{34.5}{\mega\bp}.
+
+It should be noted that the results from HiC-Reg were obtained by training \emph{only} on chromosome 14 and 17 at binsize \SI{5}{\kilo\bp}, respectively,
+while cGAN and DNN were trained as described in sections \ref{sec:methods:sample_gen}, \ref{sec:methods:sample_gen_cgan},
+using training chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20, and 22 at binsizes of \SI{25}{\kilo\bp}. 
+
+While training the cGAN just on chromosome 14 and 17 is futile due to the small number of training samples, 
+we tried training our own implementation of HiC-Reg from a previous study project \cite{Krauth2020} on the same training data, binsizes and windowsizes as the cGAN and DNN,
+to allow for a direct comparison. 
+Unfortunately, we could not confirm the good results of HiC-reg, \cref{fig:results:randomforest_masterproject_pearson} and \ref{fig:results:randomforest_masterproject_matrices}, 
+and it is currently unknown whether this was just due to our implementation or due to a general problem with the HiC-Reg approach in this setting.
+However, we have generally not been able to reproduce the results of HiC-Reg with our implementation so far.
+
+\xxx Training the cGAN just on chromosomes 14 and 17. At least try it, but do not expect much of it \xxx
+
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
   \resizebox{\textwidth}{!}{
@@ -1074,3 +1167,62 @@ See \ref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-
 \caption{Comparison HicReg (random forest by Zhang et al. \cite{Zhang2019} and Hi-cGAN 256} \label{fig:results:matrices_zhang-vs-ours}
 \end{figure}
 
+\begin{figure}[p] %our random forest, w=80, same train chroms as everywhere
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/randomforest_masterproject/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/randomforest_masterproject/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/randomforest_masterproject/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/randomforest_masterproject/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/randomforest_masterproject/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \caption{results\,/\,metrics, random forest from study project \cite{Krauth2020}, windowsize 80, \SI{25}{\kilo\bp}, test chromosomes}  \label{fig:results:randomforest_masterproject_pearson}
+\end{figure}
+\begin{figure}[p] %our random forest, windowsize 80, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/randomforest_masterproject/}{pred00021_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:randomforest_masterproject_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/randomforest_masterproject/}{pred00019_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:randomforest_masterproject_r2}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/randomforest_masterproject/}{pred00003_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:randomforest_masterproject_r3}
+    \end{subfigure}
+    \caption{example predictions random forest \cite{Krauth2020}, \SI{25}{\kilo\bp}, $w=80$} 
+     \label{fig:results:randomforest_masterproject_matrices}
+\end{figure}
