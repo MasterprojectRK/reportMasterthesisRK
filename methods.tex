@@ -495,10 +495,11 @@ native to the DNN, see \cref{fig:methods:dnn-embedding}.
     \import{figures/GAN_arch/}{dnn_embedding.pdf_tex}
     \caption{embedding network, DNN} \label{fig:methods:dnn-embedding}
 \end{figure}
-The triu-reshape layer is a custom tensorflow network layer which simply generates an output tensor
+The triu-reshape layer is a custom tensorflow network layer which generates an output tensor
 of appropriate shape $(w,w)$ and sets its upper triangular part to the values given by the input vector.
-Symmetrization was then performed by adding this tensor to its transpose and dividing the values on the diagonal by two.
-Finally the required third axis was added to get the shape of a grayscale image.
+Symmetrization was then performed by adding this tensor to its transpose and dividing the values on the diagonal by two,
+because the diagonal is contained both in the upper triangular part of the matrix and its transpose.
+Finally, the required third axis was added to get the shape of a grayscale image.
 The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_network_params}.
 Note that all trainable parameters stem from the DNN here; the reshaping layers do not have any trainable parameters.
 \begin{table}[htbp]
