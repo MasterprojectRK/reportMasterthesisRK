@@ -61,7 +61,7 @@ The network layout shown above is quite simple, and immediately offers some oppo
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.
 These will be explored below.
 
-\subsubsection{Modifying the convolutional part of the network}
+\subsubsection{Modifying the convolutional part of the network} \label{sec:improve:convolution_extensions}
 One starting point for modifying the neural network is its convolutional part.
 
 With only a single 1D convolutional filter in one layer, the network might have difficulties capturing complex relationships 
@@ -71,15 +71,18 @@ comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respec
 1D-convolution in \cref{fig:improve:priciple_basic_dnn}, lower left, cf. \cref{sec:methods:variants}.
 This is still a comparatively low number of layers and filters,
 but the choice seemed justified in order to avoid overfitting to the low-dimensional input.
+The results are shown in \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:longerDNN_pearson} and \ref{fig:results:longer_matrices}.
 
 Next, a ``wider'' network was created, featuring the same setup as the basic network
 except the width of the filter kernel, which was set to 4 instead of 1.
-The idea here is to allow the network to capture correlations between Hi-C interaction counts
+The idea here was to allow the network to capture correlations between Hi-C interaction counts
 and chromatin features which span more than one bin. 
 The actual number has been kept low, since at binsize $b=\SI{25}{\kilo\bp}$, 4 bins already correspond to \SI{100}{\kilo\bp}.
+However, the results were not as expected, cf. \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
 Of course, increasing filter width and using more filters can also be combined,
 hopefully allowing the  ``wider-longer'' network to capture both correlations
 spanning more than one bin and more than one chromatin feature.
+The results for this combined approach are shown in \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:wider-longerDNN_pearson} and \ref{fig:results:wider_matrices}.
 
 Another approach to potentially improve the predictions that goes somewhat into
 the direction of the ``wider'' network has been proposed, but not implemented by Farr\'e et al. 
@@ -92,13 +95,16 @@ whereby $k \in \mathbb{N}^{\geq1}$, cf.~\cref{sec:methods:inputBinning} for the 
 This yields an input data size of $k \cdot 3w \times n$, which is then again compressed to a $3w \times 1$ vector 
 by a 1D convolutional filter with kernel size $n$ and strides $k$. 
 For practical reasons, $k=5$ was chosen for the thesis at hand, 
-and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \xxx.
+and the results for binsizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \cref{sec:results:wider-longer-etc},
+especially figures \ref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
 
 
 \subsubsection{Using a combination of MSE-, TV- and perceptual loss} \label{sec:improve:combined_loss}
 In image regression tasks, optimizing for mean squared error is known to produce blurry images,
 because it is computed independently for each image pixel, ignoring spatial proximity \cite{Isola2017,Lu2019}.
-Thus, another approach for improving the predictions of the basic neural network is to use a different loss function.
+And indeed, both the predictions from the initial and the extended network according to sections \ref{sec:improve:basicNetwork} and \ref{sec:improve:convolution_extensions} 
+suffered from blurriness. 
+To improve on this, investigations with modified loss functions were made. 
 
 It has been shown that loss functions based on the (multiscale-)structural similarity index (SSIM) \cite{Wang2003}. 
 can outperform mean squared error (L2) and mean absolute error (L1) in image regression tasks.
@@ -106,11 +112,11 @@ While Zhao et al. used a combination of L1- and multiscale SSIM loss \cite{Zhao2
 Lu proposed a custom level-weighted SSIM loss \cite{Lu2019}.
 The results were better than with L1- or L2 loss alone, but sometimes not much -- depending on the machine learning model in use.
 
-Another type of loss function used in image processing is the so-called perceptual- or perception loss.
-The idea here is not to compute L1 or L2 loss directly from the output of the network to be trained,
+Another type of loss function used to produce sharp images is the so-called perceptual- or perception loss.
+The idea here is not to compute L1- or L2 loss directly from the output of the network to be trained,
 but instead use a pre-trained loss network to determine structures in ``predicted'' and ``real'' images
-and then compute e.\,g. L1 or L2 loss on these structures, \cref{fig:improve:perceptual_loss}.
-\begin{figure}[htb]
+and then compute e.\,g. L1- or L2 loss on these structures, \cref{fig:improve:perceptual_loss}.
+\begin{figure}[hbt]
     \small
     \centering
     %\resizebox{\textwidth}{!}{
@@ -118,7 +124,8 @@ and then compute e.\,g. L1 or L2 loss on these structures, \cref{fig:improve:per
     \caption{perceptual loss}
     \label{fig:improve:perceptual_loss}
 \end{figure}
-The optimization of the trainable weights can be performed as usual, for example with gradient descent and backpropagation, 
+
+The optimization of the target network's trainable weights can be performed as usual, for example with gradient descent and backpropagation, 
 simply keeping the weights of the loss networks constant.
 Often, complex image classification networks like VGG-16 \cite{Simonyan2015} are taken as loss network, e.\,g. in the well-known style-transfer network by Johnson et al. \cite{Johnson2016},
 because these are known to be good at detecting relevant structures in images.
