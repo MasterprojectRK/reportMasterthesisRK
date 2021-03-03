@@ -356,7 +356,7 @@ had \SI{9143313}{} for $k=1$.
 For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
 so the factor for the relation between the two binsizes was $k=25/5=5$.
 This yields input feature arrays of size $3w\cdot k \times n = 3\cdot80\cdot5 \times 14 = 1200\times 14$.
-Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$,
+Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$ without padding,
 this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
 \begin{figure}[p]
@@ -532,6 +532,47 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
 
 For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the embedding network shown in \cref{fig:methods:GAN_arch:embedding_network} 
 contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
+
+\subsection{Comparsion with other approaches} \label{sec:methods:comparison}
+To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
+predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
+Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, the random forest being trained on GM12878, chromosome 14 and 17, respectively,
+because these results were deemed to offer the best comparability to the cGAN and DNN approaches of this thesis.
+The downloaded data is in text format and was first converted into cooler format, whereby we noticed that the data offered is surprisingly sparse.
+For chromosome 14, only \SI{42.4}{\percent} and for chromosome 17, only \SI{59.9}{\percent} of all possible interacting pairs 
+for the chosen windowsize $w=200$ at binsize $b=5000$ were contained in the datasets, 
+and no interacting pairs with predicted interaction counts below 0.01 were found in the data. 
+Instead, the value range was between 0.36 and 5.10 across all four datasets, with similar values for each dataset alone.
+The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, which was not contained in the datasets at all.
+For the conversion to cooler format, the missing values were assumed to be zero.
+Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the cGAN and DNN data.
+
+When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values,
+the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
+allowing the conclusion that the correlation computations should be comparable between this thesis and the paper.
+For the comparsion with the DNN and cGAN approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
+yielding comparatively high correlation values and visually pleasing matrix predictions, cf. \ref{sec:results:comparison}.
+\begin{figure}[htbp]
+ \begin{subfigure}{0.45\textwidth}
+   \resizebox{\textwidth}{!}{
+   \scriptsize
+   \import{figures/randomforest/}{pearson_chr14_originalData_ZhangEtAl.pdf_tex}}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+   \scriptsize
+   \import{figures/randomforest/}{pearson_chr17_originalData_ZhangEtAl.pdf_tex}}
+ \end{subfigure}
+\caption{Pearson correlations reconstructed from \cite{Zhang2019}} \label{fig:methods:zhang_correlations_reconstructed}
+\end{figure}
+
+
+It seems strange that zero values have not been considered when computing the correlations for the publication.
+First, the paper gives no reason why the predicted data could be sparse, and second, 
+correctly predicted zero-values strongly increase the quality of the predicted matrices and should thus be considered when computing correlations.
+It is also unknown how TADs could be computed on the data without assuming the missing values as zeros,
+and, among others, TAD detection was used as a measure of prediction quality in the paper.
+
 
 \subsection{Hardware} \label{sec:methods:hardware}
 For the thesis, three virtual machines were used to train the neural networks, see \cref{tab:appendix:hardware}.

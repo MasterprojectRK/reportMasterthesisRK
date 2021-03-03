@@ -465,7 +465,7 @@ Here, the matrix plots seemed worse than the initial ones, the large structure a
         \import{figures/25k5_dnn_results/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:25k5_r3}
     \end{subfigure}
-    \caption{example predictions, ``5k -- 25k'' variant of DNN, 1000 epochs}
+    \caption{example predictions, ``5k -- 25k'' variant of DNN, 1000 epochs} \label{fig:results:25k5_matrices}
 \end{figure}
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
@@ -476,7 +476,8 @@ The matrix plots also looked similar, chromosome 21 probably being the most diff
 
 The results plotted are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$. 
 Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for computing the perceptual loss.
-Other options which where not explored for the same reason include truncating the VGG-16 network at a different layer or using another loss network.
+Other options which where not explored for the same reason include truncating the VGG-16 network at a different layer, using a loss function based on
+more than just one of the intermediate VGG-16 layers \cite{Johnson2016} or taking another loss network.
 However, the results obtained thus far were also not encouraging towards such investigations.
 \begin{figure}[p] %combiloss pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -749,7 +750,7 @@ parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutou
 
 \begin{figure}[p]%trained at 25k and 50k simultaneously, pearson and progress for 25k
     \begin{subfigure}{0.45\textwidth}
-        \scriptsize, 
+        \scriptsize 
         \resizebox{\textwidth}{!}{
         \import{figures/25plus50_dnn_results/}{pearson_chr03.pdf_tex}}
         \caption{chr3}
@@ -1013,3 +1014,63 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{example predictions, cGAN with CNN embedding, $w=256$, 100 epochs}
 \end{figure}
+
+\clearpage
+\subsection{Comparison with other approaches}\label{sec:results:comparison}
+See \ref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-vs-ours}
+\begin{figure}[htbp]
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+  \scriptsize
+  \import{figures/randomforest/}{pearson_chr14_overview_25k.pdf_tex}}
+  \caption{Overview chromosome 14}
+ \end{subfigure}\hfill
+\begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+  \scriptsize
+  \import{figures/randomforest/}{pearson_chr17_overview_25k.pdf_tex}}
+  \caption{Overview chromosome 17}
+ \end{subfigure}\\[4mm]
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+  \scriptsize
+  \import{figures/randomforest/}{pearson_chr14_detail_25k.pdf_tex} }
+  \caption{chr14, detail 0...\SI{1}{\mega\bp}}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+  \scriptsize
+  \import{figures/randomforest/}{pearson_chr17_detail_25k.pdf_tex}}
+  \caption{chr17, detail 0...\SI{1}{\mega\bp}}
+ \end{subfigure}
+ \caption{Pearson correlation comparison Hi-cGAN / DNN and Hic-Reg \cite{Zhang2019}} \label{fig:results:pearson_zhang-vs-ours}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/randomforest/}{pred0014_multicell_chr14_030-040.pdf_tex}
+ \caption{Hic-Reg (random forest), MULTICELL, reconstructed from \cite{Zhang2019}}
+\end{subfigure}\\[5mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/randomforest/}{pred00100_restriced_chr14_030-040.pdf_tex}
+ \caption{Hi-cGAN with windowsize $w=256$, chr14, plot restricted to first \SI{1}{\mega\bp}}
+\end{subfigure}\\[10mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/randomforest/}{pred0017_multicell_chr17_030-040.pdf_tex}
+ \caption{Hic-Reg (random forest), MULTICELL, chr17, reconstructed from \cite{Zhang2019}}
+\end{subfigure}\\[5mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/randomforest/}{pred00100_restriced_chr17_030-040.pdf_tex}
+ \caption{Hi-cGAN with windowsize $w=256$, chr17, plot restricted to first \SI{1}{\mega\bp}}
+\end{subfigure}
+\caption{Comparison HicReg (random forest by Zhang et al. \cite{Zhang2019} and Hi-cGAN 256} \label{fig:results:matrices_zhang-vs-ours}
+\end{figure}
+
