@@ -426,7 +426,7 @@ For the thesis at hand, implementation concepts from two tutorials \cite{tfpix2p
 
 Within the generator, two of the down- and upsampling layers inside the U-Net portion were made optional 
 to allow processing smaller images of sizes $64\times64$ and $128\times128$, see \cref{fig:methods:GAN_arch:generator}.
-Note that the generator (still) only supports square images with edge lengths that are powers of two and at least 64.
+Note that the generator (still) only supports square images with edge lengths that are powers of two and at least $2^6=64$.
 Furthermore, symmetry of the output was enforced by adding its transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
 The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} are custom blocks 
 detailed in \cref{fig:methods:GAN_arch:downsampling} and \ref{fig:methods:GAN_arch:upsampling}. 
@@ -452,7 +452,7 @@ and \cref{sec:methods:cnn-embedding}.
 The loss function was implemented as shown in \cref{eq:improve:cGAN_loss}
 with parameters $\lambda_\mathit{cGAN}=10^{-5}, \lambda_\mathit{MAE}=1.0, \lambda_\mathit{TV}=10^{-12}$.
 Optimization was performed on minibatches of size 32,4 and 2 for windowsizes 64, 128 and 256, respectively, 
-using the Adam optimizer with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
+using Adam optimizers with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
 The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:methods:hardware}.
 
 \begin{figure}[p]
