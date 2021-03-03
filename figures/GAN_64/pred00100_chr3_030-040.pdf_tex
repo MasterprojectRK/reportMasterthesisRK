@@ -76,7 +76,6 @@
     \put(0.3423811,0.13345514){\color[rgb]{1,0.8,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Rao et al. \cite{Rao2014}\end{tabular}}}}%
     \put(0.07992592,0.08328757){\color[rgb]{0.8,0.4,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}binarized PCA\end{tabular}}}}%
     \put(0.49406093,0.04674015){\color[rgb]{0,0.6,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature sum\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00100_chr3_030-040.pdf}}%
     \put(0.04640391,-0.00212304){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.23434648,-0.00212304){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
   \end{picture}%

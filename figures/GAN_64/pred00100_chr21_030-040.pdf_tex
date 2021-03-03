@@ -72,7 +72,6 @@
     \put(0.80181775,0.0051062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}38.0 Mbp\end{tabular}}}}%
     \put(0.98621418,0.0051062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40.0\end{tabular}}}}%
     \put(0.51102421,0.00485029){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chr21\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00100_chr21_030-040.pdf}}%
     \put(0.04649791,0.0051062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.29694264,0.27626887){\color[rgb]{1,0.8,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}prediction, 100ep\end{tabular}}}}%
     \put(0.28283153,0.13984209){\color[rgb]{1,0.8,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Rao et al. \cite{Rao2014}\end{tabular}}}}%

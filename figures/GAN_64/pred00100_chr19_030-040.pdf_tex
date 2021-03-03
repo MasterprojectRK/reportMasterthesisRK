@@ -77,6 +77,5 @@
     \put(0.27969269,0.11146779){\color[rgb]{0.8,0.4,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}binarized PCA\end{tabular}}}}%
     \put(0.72205024,0.06185637){\color[rgb]{0,0.6,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature sum\end{tabular}}}}%
     \put(0.51116088,0.00289593){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chr19\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00100_chr19_030-040.pdf}}%
   \end{picture}%
 \endgroup%

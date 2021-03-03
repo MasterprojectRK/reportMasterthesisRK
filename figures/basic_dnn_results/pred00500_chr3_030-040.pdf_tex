@@ -70,7 +70,6 @@
     \put(0.03162352,0.11372935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
     \put(0.03611379,0.0412777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
     \put(-0.01259282,0.06802865){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2947.2\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00500_chr3_030-040.pdf}}%
     \put(0.04681839,0.00084391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.23476115,0.00084391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
     \put(0.42270373,0.00084391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%
