@@ -515,6 +515,18 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 \caption{trainable weights for embedding networks}\label{tab:methods:embedding_network_params}
 \end{table}
 
+For the thesis, the DNN-embedding was used in two ways.
+First, it was trained together with the rest of the cGAN with weight initialization as described in 
+\cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
+Second, the DNN was pre-trained as described in \cref{sec:methods:basicSetup}
+and the learned weights were transferred to the cGAN once before the start of the training process,
+which was then continued as described in \cref{sec:methods:cGAN_initial}.
+The results of the pre-training are visualized in \cref{sec:appendix:pretraining_results} (\cref{fig:results:DNN64_pearson});
+the state after 250 epochs was the one transferred to the cGAN.
+
+DNN embeddings were only used with windowsize $w=64$ due to the large number of parameters
+to be trained at windowsizes 128, 256 and higher.
+
 \subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
 The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
 as shown in \cref{fig:methods:GAN_arch:embedding_network}.
