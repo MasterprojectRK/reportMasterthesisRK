@@ -560,7 +560,13 @@ The missing pairs were found to be distributed all across the chromosome and all
 For the conversion to cooler format, the missing values were assumed to be zero.
 Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the cGAN and DNN data.
 
-When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values,
+For the comparison between HiC-Reg and Hi-cGAN, two additional cGAN models with CNN embedding were trained on chromosome 14 and 17, respectively,
+using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to 64 and batch size to 2.
+The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
+Additionally, HiC-Reg was compared to a cGAN-CNN model with windowsize 256 and CNN embedding, trained on the typical training data set, 
+which includes chromosomes 14 and 17, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
+
+When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
 allowing the conclusion that the correlation computations should be comparable between this thesis and the paper.
 For the comparsion with the DNN and cGAN approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
