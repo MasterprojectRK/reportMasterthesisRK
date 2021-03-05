@@ -812,6 +812,68 @@ parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutou
 \clearpage
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
 \subsubsection{cGAN with DNN embedding} \label{sec:results:cgan_dnn}
+Results after pretraining see figures \ref{fig:results:GAN64_pretrain-dnn_pearson} and \ref{fig:results:cGAN64_pretrain-dnn_matrices}.
+\begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN64__pretrain-dnn_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics cGAN, DNN embedding, pretrained, windowsize 64, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
+\end{figure}
+\begin{figure}[p] %cgan with DNN, pretrained, winsize 64, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:cGAN64_pretrain-dnn_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:cGAN64_pretrain-dnn_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:cGAN64_pretrain-dnn_r3}
+    \end{subfigure}
+    \caption{example predictions, cGAN with CNN embedding, $w=64$, 100 epochs} \label{fig:results:cGAN64_pretrain-dnn_matrices}
+\end{figure}
+
 \subsubsection{cGAN with CNN embedding} \label{sec:results:cgan_cnn}
 The results from the cGAN were generally better than the best results from the DNN,
 and from windowsize 128, they were also close to the baseline or better.
@@ -863,7 +925,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, windowsize 64, test chromosomes}   \label{fig:results:GAN64_pearson}
 \end{figure}
-\begin{figure}[p] %cgan CNN, 64
+\begin{figure}[p] %cgan CNN, 64, matrices
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
@@ -1088,8 +1150,8 @@ and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pre
 
 \clearpage
 \subsection{Comparison with other approaches}\label{sec:results:comparison}
-A comparasion between the DNN- and cGAN approaches discussed in this paper and the
-random-forest-based method by Zhang et al., HiC-Reg \cite{Zhang2019}, is shown in  \cref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-vs-ours}.
+Comparative plots between the DNN- and cGAN approaches discussed in this paper and the
+random-forest-based method by Zhang et al., HiC-Reg \cite{Zhang2019}, are shown in  \cref{fig:results:pearson_zhang-vs-ours} and \ref{fig:results:matrices_zhang-vs-ours}.
 Here, the Pearson correlation plots suggest that the cGAN approach is superior to the other approaches
 for distances up to about \SI{200}{\kilo\bp}, while both the multicell- and window- approach by Zhang et al. outperform DNN and Hi-cGAN for distances between 
 \SI{200}{\kilo\bp} and \SI{1}{\mega\bp}.
