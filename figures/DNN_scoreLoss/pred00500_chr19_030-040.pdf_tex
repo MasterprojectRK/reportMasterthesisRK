@@ -69,11 +69,9 @@
     \put(-0.00137677,0.11342439){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}140.6\end{tabular}}}}%
     \put(0.03613282,0.04093518){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
     \put(-0.01259176,0.06770002){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2472.8\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00500_chr19_030-040.pdf}}%
     \put(0.6373664,0.13534784){\color[rgb]{1,0.8,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Rao et al. \cite{Rao2014}\end{tabular}}}}%
     \put(0.72201929,0.05748093){\color[rgb]{0,0.6,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature sum\end{tabular}}}}%
     \put(0.51112992,-0.00147951){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chr19\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{pred00500_chr19_030-040.pdf}}%
     \put(0.04660306,-0.0012235){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.23454595,-0.0012235){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
     \put(0.42248872,-0.0012235){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%

@@ -60,7 +60,6 @@
     \put(-0.00140716,0.130209){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{100.0}\end{tabular}}}}%
     \put(0.00779209,0.05220743){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{10.0}\end{tabular}}}}%
     \put(-0.00122935,0.07049148){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{100.0}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred00100_restriced_chr14_030-040.pdf}}%
     \put(0.05039622,-0.00023341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.23830436,-0.00023341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
     \put(0.42621252,-0.00023341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%

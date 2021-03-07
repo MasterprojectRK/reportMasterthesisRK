@@ -76,7 +76,6 @@
     \put(-0.01259159,0.06805277){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4430.4\end{tabular}}}}%
     \put(0.1753585,0.08596334){\color[rgb]{0.8,0.4,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}binarized PCA\end{tabular}}}}%
     \put(0.18723515,0.05046596){\color[rgb]{0,0.6,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature sum\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{pred01000_chr21_030-040.pdf}}%
     \put(0.04668831,0.00104905){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
     \put(0.23463095,0.00104905){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
     \put(0.42257372,0.00104905){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%

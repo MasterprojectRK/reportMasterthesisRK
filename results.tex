@@ -814,66 +814,6 @@ parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutou
 \subsubsection{cGAN with DNN embedding} \label{sec:results:cgan_dnn}
 Results after pretraining see figures \ref{fig:results:GAN64_pretrain-dnn_pearson} and \ref{fig:results:cGAN64_pretrain-dnn_matrices}.
 Results without pretraining see figures \ref{fig:results:GAN64-dnn_pearson} and \ref{fig:results:cGAN64-dnn_matrices}.
-\begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr03.pdf_tex}}
-        \caption{chr3}
-    \end{subfigure} \hfill
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr05.pdf_tex}}
-        \caption{chr5}
-    \end{subfigure}\\[5mm]
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr10.pdf_tex}}
-        \caption{chr10}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr19.pdf_tex}}
-        \caption{chr19}
-    \end{subfigure}\\[3mm]
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr21.pdf_tex}}
-        \caption{chr21}
-    \end{subfigure} \hfill
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64_pretrain-dnn/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress} \label{fig:results:GAN64__pretrain-dnn_lossEpochs}
-    \end{subfigure}
-    \caption{results\,/\,metrics, cGAN, DNN embedding, pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
-\end{figure}
-\begin{figure}[p] %cgan with DNN, pretrained, winsize 64, matrices
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr21_030-040.pdf_tex}
-        \caption{example  region 1} \label{fig:results:cGAN64_pretrain-dnn_r1}
-    \end{subfigure}\\[6mm]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr19_030-040.pdf_tex}
-        \caption{example region 2} \label{fig:results:cGAN64_pretrain-dnn_r2}
-    \end{subfigure}\\[6mm]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr3_030-040.pdf_tex}
-        \caption{example region 3} \label{fig:results:cGAN64_pretrain-dnn_r3}
-    \end{subfigure}
-    \caption{example predictions, cGAN, DNN embedding, pre-trained, $w=64$, 100 epochs} \label{fig:results:cGAN64_pretrain-dnn_matrices}
-\end{figure}
 \begin{figure}[p] %cGAN with DNN, no pretraining, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -934,6 +874,66 @@ Results without pretraining see figures \ref{fig:results:GAN64-dnn_pearson} and 
     \end{subfigure}
     \caption{example predictions, cGAN, DNN embedding, no pre-training, $w=64$, 80 epochs} \label{fig:results:cGAN64-dnn_matrices}
 \end{figure}
+\begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_pretrain-dnn/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN64__pretrain-dnn_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics, cGAN, DNN embedding, pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
+\end{figure}
+\begin{figure}[p] %cgan with DNN, pretrained, winsize 64, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr21_030-040.pdf_tex}
+        \caption{example  region 1} \label{fig:results:cGAN64_pretrain-dnn_r1}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr19_030-040.pdf_tex}
+        \caption{example region 2} \label{fig:results:cGAN64_pretrain-dnn_r2}
+    \end{subfigure}\\[6mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr3_030-040.pdf_tex}
+        \caption{example region 3} \label{fig:results:cGAN64_pretrain-dnn_r3}
+    \end{subfigure}
+    \caption{example predictions, cGAN, DNN embedding, pre-trained, $w=64$, 100 epochs} \label{fig:results:cGAN64_pretrain-dnn_matrices}
+\end{figure}
 
 
 \subsubsection{cGAN with CNN embedding} \label{sec:results:cgan_cnn}
@@ -985,7 +985,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
         \import{figures/GAN_64/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics cGAN, CNN embedding $w=64$, test chromosomes}   \label{fig:results:GAN64_pearson}
+    \caption{results\,/\,metrics cGAN, CNN embedding, $w=64$, test chromosomes}   \label{fig:results:GAN64_pearson}
 \end{figure}
 \begin{figure}[p] %cgan CNN, 64, matrices
     \begin{subfigure}{\textwidth}
@@ -1006,7 +1006,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
         \import{figures/GAN_64/}{pred00100_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN with CNN embedding, $w=64$, 100 epochs}
+    \caption{example predictions, cGAN, CNN embedding, $w=64$, 100 epochs}
 \end{figure}
 
 \begin{figure}[p] %cGAN cnn 128, pearson and progress
@@ -1144,7 +1144,73 @@ The results from the cGAN with mixed embedding, i.\,e. DNN-embedding for the gen
 and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pretrained_mixed_pearson} and \ref{fig:results:GAN64_pretrained_mixed_matrices} 
 (with pre-trained DNN-embedding network) and \xxx, \xxx (with standard weight initialization)
 
-\begin{figure}[p] %cGAN mixed 64, pretrained, pearson and progress
+\begin{figure}[p] %cGAN mixed 64, not pretrained, pearson and progress
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_mixed/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN64_mixed_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics cGAN, mixed embedding, no pre-training, $w=64$, test chromosomes}   \label{fig:results:GAN64_mixed_pearson}
+\end{figure}
+\begin{figure}[p] %cgan mixed 64, pretrained, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_mixed/}{pred00080_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:cGAN64_mixed_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_mixed/}{pred00080_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:cGAN64_mixed_r2}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_64_mixed/}{pred00080_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:cGAN64_mixed_r3}
+    \end{subfigure}
+    \caption{example predictions cGAN, mixed embedding, no pre-training, $w=64$, 80 epochs} 
+     \label{fig:results:GAN64_mixed_matrices}
+\end{figure}
+
+\begin{figure}[p] %cGAN mixed 64, PRE-TRAINED, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -1182,7 +1248,7 @@ and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pre
         \import{figures/GAN_64_pretrain-mixed/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64_pretrained_mixed_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics cGAN, windowsize 64, mixed embedding, DNN pre-trained, test chromosomes}   \label{fig:results:GAN64_pretrained_mixed_pearson}
+    \caption{results\,/\,metrics cGAN, mixed embedding, DNN pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrained_mixed_pearson}
 \end{figure}
 \begin{figure}[p] %cgan mixed 64, pretrained, matrices
     \begin{subfigure}{\textwidth}
@@ -1206,7 +1272,7 @@ and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pre
         \import{figures/GAN_64_pretrain-mixed/}{pred00100_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:cGAN64_pretrained_mixed_r3}
     \end{subfigure}
-    \caption{example predictions cGAN, mixed embedding, DNN pre-trained, $w=128$, 100 epochs} 
+    \caption{example predictions cGAN, mixed embedding, DNN pre-trained, $w=64$, 100 epochs} 
      \label{fig:results:GAN64_pretrained_mixed_matrices}
 \end{figure}
 

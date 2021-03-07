@@ -64,7 +64,6 @@
     \put(0.66073486,0.12221131){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\scriptsize TGGT...\end{tabular}}}}%
     \put(0.30105664,0.03278855){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\scriptsize CGTA...\end{tabular}}}}%
     \put(0.66073486,0.03278855){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\scriptsize CCTG...\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{chipseq_wetlab.pdf}}%
     \put(0.11499956,2.56125634){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{proteins}\end{tabular}}}}%
   \end{picture}%
 \endgroup%

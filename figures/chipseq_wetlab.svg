@@ -134,10 +134,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="31.081073"
-     inkscape:cy="134.29202"
+     inkscape:cx="24.129667"
+     inkscape:cy="356.11001"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer8"
      showgrid="false"
      showguides="false"
      inkscape:window-width="1920"
@@ -158,7 +158,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2138,6 +2138,20 @@
        style="fill:none;stroke:#000000;stroke-width:0.28125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 50.498741,144.61156 h -2.489199 m 6.337883,4.59468 -3.848684,-4.59468 26.654585,-3.65431"
        sodipodi:nodetypes="ccccc" />
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.5, 1.50000000000000000;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 37.003027,474.67733 11.147655,-7.4764"
+       id="path12620"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       transform="translate(-10.850799,-16.428764)" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path12622"
+       d="M 48.275682,479.77108 36.565527,474.51343"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.5, 1.50000000000000000;stroke-dashoffset:0;stroke-opacity:1"
+       sodipodi:nodetypes="cc"
+       transform="translate(-10.850799,-16.428764)" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -2255,18 +2269,6 @@
          x="93.9758"
          y="481.54907"
          style="font-size:10px;line-height:1.25">\scriptsize CCTG...</tspan></text>
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.5, 1.5;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 37.003027,474.67733 11.147655,-7.4764"
-       id="path12620"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path12622"
-       d="M 48.275682,479.77108 36.565527,474.51343"
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.5, 1.5;stroke-dashoffset:0;stroke-opacity:1"
-       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:13.75px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
