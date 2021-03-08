@@ -1,5 +1,15 @@
 \section{Results}
+In the following two sections, 
+the results of the DNN- and cGAN-based approaches for predicting Hi-C contact matrices will be presented.
+While the various modifications of the dense neural network described in \cref{sec:improve:DNNapproach} 
+did  not really help improve the status quo, the novel conditional generative adversarial network laid out in \cref{sec:improve:Hi-cGAN}
+showed interesting properties.
+
 \subsection{Dense Neural Network approaches} \label{sec:results:DNN}
+Modifications to the dense neural network originally conceived by Farr\'e, Heurteau, Cuvier and Emberly \cite{Farre2018a}
+include variations of the convolutional layer(s), custom loss functions with the intent of reducing blurriness in the predictions
+and tuning window- and binsize, cf. \cref{sec:improve:DNNapproach}.
+As a start, however, the results of the initial network without any modifications are shown for comparison.
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
 The basic network was trained as explained in \cref{sec:methods:basicSetup}.
