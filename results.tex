@@ -12,37 +12,41 @@ and tuning window- and binsize, cf. \cref{sec:improve:DNNapproach}.
 As a start, however, the results of the initial network without any modifications are shown for comparison.
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
-The basic network was trained as explained in \cref{sec:methods:basicSetup}.
-The validation error (MSE) for the basic neural network reached its minimum of about \SI{150000}{} 
+The basic network was setup and trained as explained in \cref{sec:methods:basicSetup}.
+Here, the validation error (MSE) reached its minimum of about \SI{150000}{} 
 after about 500 epochs for \SI{25}{\kilo\bp} binsize and about 400 epochs for \SI{10}{\kilo\bp} binsize, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
 Beyond that, the learning curve indicated overfitting, but the resulting test matrices often still looked fairly similar, 
 compare e.\,g. the matrix plots after 500 and 1000 epochs in figures \ref{fig:results:basic500} and \ref{fig:results:basic1000}.
 
-\Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} show the Pearson correlations alongside area under the correlation curve (AUC) for the five test chromosomes
-at 25 and \SI{10}{\kilo\bp} binsizes, respectively.
+\Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} 
+show the distance stratified Pearson correlations (cf. \ref{sec:methods:metrics}) 
+alongside area under the correlation curve (AUC) for the five test chromosomes at binsizes 25 and \SI{10}{\kilo\bp}, respectively.
 The red lines in each correlation plot show the correlation between the corresponding training matrix from GM12878 and the target matrix from K562.
-It is obvious that all predicted test matrices have a strictly positive Pearson correlation, but are not better than simply taking data from the training cell line as prediction for the target cell line.
+It is obvious that all predicted test matrices have a strictly positive Pearson correlation with respect to the experimentally derived matrices by Rao et al. \cite{Rao2014},
+but are not better than simply taking data from the training cell line as prediction for the target cell line.
 
 The predicted matrices themselves looked modest when plotted with pygenometracks. 
-While the program generally produced high interaction counts in regions with many true interactions
+While the DNN generally produced high interaction counts in regions with many true interactions
 and low interaction counts in regions with few true interactions, the (TAD-)boundaries between different interacting domains 
 were mostly not discernible, \cref{fig:results:basic500} and \ref{fig:results:basic1000}.
 This finding is in line with the clearly positive, but medium-valued Pearson correlations.
-Exceptions with more disctinct boundaries could be found in any of the five test chromosomes,
+Exceptions with more disctinct boundaries existed in all of the five test chromosomes,
 for example chr19, 34 to \SI{35}{\kilo\bp} (\cref{fig:results:basic_r2}), but were rare. 
 Interestingly, medium-sized interacting structures, for example chr21, 31 to \SI{32.5}{\kilo\bp} 
 or between chr19, 31.2 to \SI{32.7}{\kilo\bp} often seemed to be missing altogether -- 
 while structures larger than the windowsize, for example chr3, 34 and \SI{36.7}{\kilo\bp} and 36.7 and \SI{39.5}{\kilo\bp}
 sometimes were at least indicated.
 
-Reducing the binsize to $b_\mathit{feat}=b_\mathit{mat}=\SI{10}{\kilo\bp}$ as in the paper by Farr\'e et al. \cite{Farre2018a} did alter the previous findings much.
+Reducing the binsize to $b_\mathit{feat}=b_\mathit{mat}=\SI{10}{\kilo\bp}$ as in the paper by Farr\'e et al. \cite{Farre2018a} 
+led to somewhat different results.
 The area under the correlation curves was approximately the same for test chromosomes 3 and 5, slightly better for chromosome 10, but worse for chromosome 19 and 21,
 cf.~\cref{fig:results:basicDNN_pearson} and \ref{fig:results:basicDNN_10k_pearson}.
 However, the ability to predict larger structures was lost by design, and the matrix plots thus did not look better than the ones for binsize \SI{25}{\kilo\bp}.
 The comparatively bad result for test chromosome 21 might result from the low chromatin feature coverage of this particular chromosome.
 
 No obvious correlation between comparatively ``good'' and ``bad'' predictions with open and closed states of the chromatin was observed.
-However, formally computing such a correlation is challenging, because no adequate objective measure for ``good'' and ``bad'' is known, especially for such blurry results.
+However, formally computing such a correlation is challenging, because no adequate objective measure for ``good'' and ``bad'' is known, 
+especially for such blurry results.
 Furthermore, even if suchlike correlations existed, exploiting them for improving predictions would still be, at best, not straightforward.
 
 \begin{figure}[p]
@@ -197,8 +201,10 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
 \end{figure}
 
 \subsubsection{Results for variations of the convolutional part} \label{sec:results:wider-longer-etc}
-The predictions from the ``wider'' variant were generally similar to the initial results,
-both in terms of Pearson correlations and in terms of matrix plots, \cref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
+The results for the ``wider'' network, which featured a wider convolutional filter in the first network layer, 
+cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, 
+were generally similar to the initial results, both in terms of Pearson correlations and in terms of matrix plots, 
+\cref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
 Given the small increase in the number of trainable parameters and overall similar network topology, this is not surprising.
 Overfitting was less obvious than with the initial setup and the training process looked more smooth overall, 
 but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
@@ -266,15 +272,15 @@ but the remaining validation error was slightly higher than for the initial appr
     \caption{example predictions, ``wider'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs}\label{fig:results:wider_matrices}
 \end{figure}
 
-The predictions from the ``longer'' variant were better than the initial ones in terms of
-Pearson correlations for test chromosomes 10, 19 and 21, but worse for chromosomes 3 and 5, \cref{fig:results:longerDNN_pearson}.
-Interestingly, no predictions were available for certain distances after 250 and 500 epochs, 
-while predictions for all distances were available after 1000 epochs.
+The predictions from the ``longer'' variant with three convolutinal filter layers instead of just one were better than the initial ones in terms of
+Pearson correlations for test chromosomes 10, 19 and 21, but worse for test chromosomes 3 and 5, \cref{fig:results:longerDNN_pearson}.
+Interestingly, correlations for some of the larger distances could not be computed after 250 and 500 epochs, 
+which generally means that the same values were predicted for these distances, cf. \cref{sec:methods:metrics}.
 The reason for this behavior is unknown, but due to the network setup, 
 comparatively few neurons are responsible for predictions certain distances, cf. \cref{sec:methods:sample_gen}, \cref{fig:methods:prediction}.
-Since the longer network setup has considerably more trainable parameters,
-500 epochs might not be enough to fully adjust the weights of these (outer) neuros.
-The learning process looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
+Since the longer network variant has a considerably larger number of trainable parameters,
+500 epochs might not have been enough to activate these (outer) neurons.
+The learning process in general looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
 but the matrix plots did not show any obvious improvement over the initial ones, \cref{fig:results:longer_matrices}.
 \begin{figure}[p] %longer variant pearson
     \begin{subfigure}{0.45\textwidth}
