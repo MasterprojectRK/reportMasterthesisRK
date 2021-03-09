@@ -146,8 +146,18 @@ For convenience, the pdf version of this document contains clickable links below
 Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main memory) in GB
 \end{landscape}
 
+\subsection{Further figures}
+\subsubsection{Combined loss function}
+\begin{figure}[htbp]
+    \centering
+    \scriptsize
+    \import{figures/DNN_combiloss/}{pred01000_chr19_030-040_failedTvLoss.pdf_tex}
+    \caption{Combined loss with parametrization $\lambda_\mathit{MSE}=10^{-5}$, $\lambda_\mathit{VGG}=0.0$, $\lambda_\mathit{TV}=1.0$}
+    \label{fig:appendix:failed_tv_loss}
+\end{figure}
+\clearpage
 
-\subsection{Results of pre-training the DNN-embedding} \label{sec:appendix:pretraining_results}
+\subsubsection{Results of pre-training the DNN-embedding} \label{sec:appendix:pretraining_results}
 \begin{figure}[h!] %DNN64 for weight transfer, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -209,8 +219,8 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \end{subfigure}
     \caption{example predictions, DNN, $w=64$, 250 epochs} \label{fig:results:DNN_matrices}
 \end{figure}
-
-\subsection{cGAN trained on single chromosomes predicting usual test chromosomes}
+\clearpage
+\subsubsection{cGAN trained on single chromosomes predicting usual test chromosomes}
 \begin{figure}[h!] %cGAN single chrom 14, pearson and progress, predicting usual test chroms 3,5,10,19,21
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -341,3 +351,4 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \caption{example predictions cGAN, trained on chr17 only, $w=64$, 100 epochs} 
      \label{fig:results:GAN64-17single_matrices}
 \end{figure}
+\clearpage
