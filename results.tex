@@ -6,22 +6,23 @@ did  not really help improve the status quo, the novel conditional generative ad
 showed interesting properties.
 
 \subsection{Dense Neural Network approaches} \label{sec:results:DNN}
-Modifications to the dense neural network originally conceived by Farr\'e, Heurteau, Cuvier and Emberly \cite{Farre2018a}
-include variations of the convolutional layer(s), custom loss functions with the intent of reducing blurriness in the predictions
+In the following subsections, the resulting predictions for modifications of the dense neural network originally conceived 
+by Farr\'e, Heurteau, Cuvier and Emberly \cite{Farre2018a} will be shown. 
+This includes variations of the convolutional layer(s), custom loss functions with the intent of reducing blurriness in the predictions
 and tuning window- and binsize, cf. \cref{sec:improve:DNNapproach}.
-As a start, however, the results of the initial network without any modifications are shown for comparison.
+As a start, however, the results of the initial network without any modifications will be shown for comparison.
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
 The basic network was setup and trained as explained in \cref{sec:methods:basicSetup}.
 Here, the validation error (MSE) reached its minimum of about \SI{150000}{} 
-after about 500 epochs for \SI{25}{\kilo\bp} binsize and about 400 epochs for \SI{10}{\kilo\bp} binsize, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
+after approximately 500 epochs for \SI{25}{\kilo\bp} binsize and around 400 epochs for \SI{10}{\kilo\bp} binsize, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
 Beyond that, the learning curve indicated overfitting, but the resulting test matrices often still looked fairly similar, 
 compare e.\,g. the matrix plots after 500 and 1000 epochs in figures \ref{fig:results:basic500} and \ref{fig:results:basic1000}.
 
 \Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} 
-show the distance stratified Pearson correlations (cf. \ref{sec:methods:metrics}) 
+show the distance stratified Pearson correlations (cf. \cref{sec:methods:metrics}) 
 alongside area under the correlation curve (AUC) for the five test chromosomes at binsizes 25 and \SI{10}{\kilo\bp}, respectively.
-The red lines in each correlation plot show the correlation between the corresponding training matrix from GM12878 and the target matrix from K562.
+The red curves in each correlation plot show the correlation between the corresponding training chromosome from GM12878 and the target chromosome from K562.
 It is obvious that all predicted test matrices have a strictly positive Pearson correlation with respect to the experimentally derived matrices by Rao et al. \cite{Rao2014},
 but are not better than simply taking data from the training cell line as prediction for the target cell line.
 
@@ -41,12 +42,12 @@ Reducing the binsize to $b_\mathit{feat}=b_\mathit{mat}=\SI{10}{\kilo\bp}$ as in
 led to somewhat different results.
 The area under the correlation curves was approximately the same for test chromosomes 3 and 5, slightly better for chromosome 10, but worse for chromosome 19 and 21,
 cf.~\cref{fig:results:basicDNN_pearson} and \ref{fig:results:basicDNN_10k_pearson}.
-However, the ability to predict larger structures was lost by design, and the matrix plots thus did not look better than the ones for binsize \SI{25}{\kilo\bp}.
+However, the ability to predict larger structures was lost, and the matrix plots thus did not look better than the ones for binsize \SI{25}{\kilo\bp}.
 The comparatively bad result for test chromosome 21 might result from the low chromatin feature coverage of this particular chromosome.
 
 No obvious correlation between comparatively ``good'' and ``bad'' predictions with open and closed states of the chromatin was observed.
 However, formally computing such a correlation is challenging, because no adequate objective measure for ``good'' and ``bad'' is known, 
-especially for such blurry results.
+especially considering the rather blurry results obtained so far.
 Furthermore, even if suchlike correlations existed, exploiting them for improving predictions would still be, at best, not straightforward.
 
 \begin{figure}[p]
@@ -206,7 +207,7 @@ cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants},
 were generally similar to the initial results, both in terms of Pearson correlations and in terms of matrix plots, 
 \cref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
 Given the small increase in the number of trainable parameters and overall similar network topology, this is not surprising.
-Overfitting was less obvious than with the initial setup and the training process looked more smooth overall, 
+Overfitting was less obvious than with the initial setup and the training process looked more smooth, 
 but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
 \begin{figure}[p] %wider variant Pearson
     \begin{subfigure}{0.45\textwidth}
@@ -276,11 +277,11 @@ The predictions from the ``longer'' variant with three convolutinal filter layer
 Pearson correlations for test chromosomes 10, 19 and 21, but worse for test chromosomes 3 and 5, \cref{fig:results:longerDNN_pearson}.
 Interestingly, correlations for some of the larger distances could not be computed after 250 and 500 epochs, 
 which generally means that the same values were predicted for these distances, cf. \cref{sec:methods:metrics}.
-The reason for this behavior is unknown, but due to the network setup, 
-comparatively few neurons are responsible for predictions certain distances, cf. \cref{sec:methods:sample_gen}, \cref{fig:methods:prediction}.
+The reason for this behavior is not fully understood yet, but comparatively few neurons in the outermost layer are responsible for predictions at 
+longer distances due to the chosen network setup, cf. \cref{sec:methods:sample_gen}, \cref{fig:methods:prediction}.
 Since the longer network variant has a considerably larger number of trainable parameters,
-500 epochs might not have been enough to activate these (outer) neurons.
-The learning process in general looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
+it is assumed that 500 epochs might not have been enough to activate some of the outer neurons.
+Apart from that, the learning process for the ``longer'' variant in general looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
 but the matrix plots did not show any obvious improvement over the initial ones, \cref{fig:results:longer_matrices}.
 \begin{figure}[p] %longer variant pearson
     \begin{subfigure}{0.45\textwidth}
@@ -346,11 +347,13 @@ but the matrix plots did not show any obvious improvement over the initial ones,
     \caption{example predictions, ``longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:longer_matrices}
 \end{figure}
 
-The Pearson correlations for predictions from the ``wider-longer'' variant are shown in \cref{fig:results:wider-longerDNN_pearson}.
-While again improvements could be seen for 3 of 5 test chromosomes compared to the initial network, 
-the correlations were worse than the ones from the highly similar ``longer''-variant alone, predictions at longer distances were partially missing
-and the remaining validation error was also higher.
-In terms of matrix plots, the predictions were still quite similar to the initial ones, but seemed a bit more blurry, \ref{fig:results:wider-longer_matrices}.
+Combining the ``longer'' and ``wider'' variants in the ``wider-longer'' setup with more convolutional layers and wider 
+filter kernels also did not perform as expected.
+While improvements in the Pearson correlations could again be seen for 3 of 5 test chromosomes compared to the initial network, \cref{fig:results:wider-longerDNN_pearson},
+the observed correlations were worse than the ones from the highly similar ``longer''-variant alone. 
+Like with the similar ``longer''-approach predictions at longer distances were partially missing. 
+Compared to the other variants, the validation error was generally higher and stopped decreasing after very few epochs, \cref{fig:results:wider-longerDNN_lossEpochs}.
+In terms of matrix plots, the predictions surprisingly were still quite similar to the initial ones, but seemed a bit more blurry, \ref{fig:results:wider-longer_matrices}.
 \begin{figure}[p]%wider-longer Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -415,11 +418,12 @@ In terms of matrix plots, the predictions were still quite similar to the initia
     \caption{example predictions, ``wider-longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:wider-longer_matrices}
 \end{figure}
 
-The Pearson correlations for the variant with feature binsize \SI{5}{\kilo\bp} and matrix binsize \SI{25}{\kilo\bp}
-are shown in \cref{fig:results:25k5DNN_pearson}.
-Much like the ``wider'' variant, the results did not improve compared to the initial predictions.
-The learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs}.
-Here, the matrix plots seemed worse than the initial ones, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp} being completely missing, for example.
+Predictions and metrics from the generalized DNN approach with feature binsize \SI{5}{\kilo\bp} and matrix binsize \SI{25}{\kilo\bp}
+are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
+Unfortunately, the results did again not improve compared to the initial predictions.
+While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
+the matrix plots seemed worse than the initial ones. 
+For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, which had been detected by the previous approaches, was now completely missing.
 \begin{figure}[p]%25k5 Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -485,13 +489,14 @@ Here, the matrix plots seemed worse than the initial ones, the large structure a
 \end{figure}
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
-The Pearson correlations for predictions from a network with combined loss function according to \cref{eq:methods:combined_loss} 
-with weighting parameters $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$ are shown in \cref{fig:results:combilossDNN_pearson}.
-For all test chromosomes, the correlations were highly similar to the inital network's.
-The matrix plots also looked similar, chromosome 21 probably being the most different, \cref{fig:results:combiloss_matrices}.
+Exchanging the mean squared error for a combined loss function consinsting of MSE, TV loss and perceptual loss did not improve the results in the given setting.
+The results for optimizing a loss function according to \cref{eq:methods:combined_loss} with weighting parameters 
+are shown in \cref{fig:results:combilossDNN_pearson} and \ref{fig:results:combiloss_matrices}.
 
+For all test chromosomes, the correlations were highly similar to the inital network's, \cref{fig:results:combilossDNN_pearson},
+and the matrix plots also looked similar, chromosome 21 probably being the most different, \cref{fig:results:combiloss_matrices}.
 The results plotted are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$. 
-Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for computing the perceptual loss.
+Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for optimizing the combined loss function.
 Other options which where not explored for the same reason include truncating the VGG-16 network at a different layer, using a loss function based on
 more than just one of the intermediate VGG-16 layers \cite{Johnson2016} or taking another loss network.
 However, the results obtained thus far were also not encouraging towards such investigations.
@@ -558,13 +563,18 @@ However, the results obtained thus far were also not encouraging towards such in
     \end{subfigure}
     \caption{example predictions, DNN with combined loss function (MSE, TV, VGG-16), 500 epochs} \label{fig:results:combiloss_matrices}
 \end{figure}
-While manually finding parameters $\lambda$ for MSE- and VGG-loss that made the results better was not successful,
-it was found that the TV loss weight needed to be much smaller than the two other weights.
-Otherwise, many true interactions outside the first few matrix diagonals were considered as noise and optimized away early in the training process.
-\xxx maybe put one figure here from \texttt{2020-12-05\_tvLoss}
+While manually searching better parameters $\lambda$ was not successful,
+it was found that the TV loss weight $\lambda_\mathit{TV}$ needed to be much smaller than the two other weights.
+Otherwise, many true interactions off the matrix diagonals were considered as noise and optimized away early in the training process, cf.
+\cref{fig:appendix:failed_tv_loss} (p. \pageref{fig:appendix:failed_tv_loss}).
 
 \subsubsection{Results for score-based loss function} \label{sec:results:scorebased}
-The Pearson correlations for the DNN with score-based loss function with parameters $\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$ 
+Exchanging the MSE- loss function by a combination between score-based and MSE loss
+allowed for a smooth learning process and a slightly lower validation error compared to the initial approach.
+However, at around \SI{7}{\min} per epoch on a GPU, the training process also was about seven times slower than the initial approach on CPU.
+Unfortunately, the higher effort did not lead to obvious improvements.
+
+The Pearson correlations for a score-based loss function with parameters $\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$ 
 are shown in figure \ref{fig:results:scoreLossDNN_pearson}.
 While a slight improvement was achieved for test chromosome 21, the correlations of the others remained widely unchanged.
 The matrix plots also looked fairly similar to the initial ones, \cref{fig:results:scoreloss_matrices}, chromosome 21 again being the 
@@ -573,14 +583,13 @@ most different compared to the intial predictions.
 In the matrix plots, the true- and predicted scores have been added as a second track, replacing the PCA track. 
 Indeed, the score curve computed from the true matrices showed local minima at putative TAD boundaries, as set forth in \ref{sec:improve:TAD_loss},
 so score computation with the chosen diamondsize seemed sound.
-However, despite the optimization term in the loss function, the score curve of the predicted matrices compared to the true curve somewhat like the predicted matrices compared to the true ones:
+However, despite the optimization term in the loss function, the score curve of the predicted matrices compared to the true curve 
+somewhat like the predicted matrices compared to the true ones:
 The predicted score was generally high, when the true score was high, and low when the true score was also low,
 but high peaks (local maxima) and steep valleys (local minima) in the plots were usually averaged out.
 
-The training process was smooth and the validation error slightly lower than with the initial approach,
-but at around \SI{7}{\min} per epoch on a GPU, it was about seven times slower than the initial approach on CPU.
-The long training time also forbade a targeted parameter tuning by grid- or tree-search,
-so the results presented below should not be interpreted as the optimal ones achievable by a score-based loss function.
+Long training times forbade a targeted parameter tuning by grid- or tree-search,
+so the results presented in this section should not be interpreted as the optimal ones achievable by a score-based loss function.
 \begin{figure}[p]%score loss pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -643,24 +652,32 @@ so the results presented below should not be interpreted as the optimal ones ach
 \end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
-To assess predictions at larger binsizes, four different approaches were compared:
-First, directly training a network at binsize \SI{50}{\kilo\bp} and predicting at that same binsize (``50k direct''),
-second, coarsening the results of the initial network (``initial 25k coarsened'') by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:hicMatrices},
-third, using the initial network trained at \SI{25}{\kilo\bp} to predict at \SI{50}{\kilo\bp} (``initial 25k$\rightarrow$50k''),
-and fourth, predicting at 50k from a network simultaneously trained with binsizes 25k and 50k (``25k+50k$\rightarrow$50k'').
+To assess predictions at larger binsizes, five different approaches were compared, cf. \cref{sec:improve:binsize_winsize}:
+\begin{enumerate}
+ \item ``50k direct'': \\directly training a network at binsize \SI{50}{\kilo\bp} and predicting at that same binsize
+ \item ``initial 25k coarsened'': \\coarsening the results of the initial network discussed above in \cref{sec:initialDNNresults}
+                    by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:hicMatrices}
+ \item ``initial 25k$\rightarrow$50k'': \\using the initial network trained at \SI{25}{\kilo\bp} (cf. \cref{sec:initialDNNresults}) to predict at \SI{50}{\kilo\bp}
+ \item ``25k+50k$\rightarrow$50k'': \\predicting at \SI{50}{\kilo\bp} from a network \emph{simultaneously} trained with binsizes 25k and 50k
+ \item ``25k+50k$\rightarrow$25k'': \\predicting at \SI{25}{\kilo\bp} from a network \emph{simultaneously} trained with binsizes 25k and 50k
+\end{enumerate}
 
-For all test chromosomes except 21, the best Pearson correlations were obtained either by coarsening the initial results to 50k 
-or by training the network at 25k and predicting at 50k (``initial 25k$\rightarrow$50k''), \cref{fig:results:DNN50k_pearson}.
-The latter approach has the advantage of doubling the windowsize (in basepairs) compared to coarsening, and it also worked well for test chromosome 21.
+For all test chromosomes except 21, the best Pearson correlations were obtained either by coarsening the initial results to \SI{50}{\kilo\bp} 
+(method b) or by taking the network trained at \SI{25}{\kilo\bp} for predicting at \SI{50}{\kilo\bp} (method c), \cref{fig:results:DNN50k_pearson}.
+Compared to coarsening, the latter approach had the advantage of doubling the windowsize (in basepairs) and it worked better for test chromosome 21.
 
 Looking at the matrix plots, the desired effect of making larger structures more prominent by increasing the binsize was only partially achieved, \cref{fig:results:50k_from25k_matrices}.
 While all larger structures in the example cutout of test chromosome 3 indeed looked more prominent,
 no obvious improvement was observed for the medium-sized structures in the example regions of chromosome 19 and 21.
-Here, too, the predicted matrices from the network trained at 25k seemed better than the direct predictions at 50k, \cref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}.
+Here, too, the predicted matrices from the network trained at binsize \SI{25}{\kilo\bp} seemed better than the direct predictions 
+at \SI{50}{\kilo\bp} (method a), \cref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}.
 
-Notably, the training process for 50k collapsed after about 420 epochs for unknown reasons -- 
-this was not considered too problematic here, because the optimum validation error had already been reached between 150 and 250 epochs, \cref{fig:results:50k_lossEpochs}.
-Faster convergence in itself would not be surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, cf. \cref{tab:methods:samples}.
+Notably, the training process for the direct prediction at binsize \SI{50}{\kilo\bp} (method a) collapsed after about 420 epochs.
+One possible reason for this could be too high a learning rate, which could have been avoided by decreasing the learning rate over time.
+However, no further investigations were made into the case, because the divergence occurred after the optimum validation error 
+had been reached between 150 and 250 epochs, \cref{fig:results:50k_lossEpochs}, and was thus not seen as too problematic here.
+Faster convergence in itself would not be surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, 
+cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
 
 \begin{figure}[p]%50k direct AND from 25k, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -750,19 +767,20 @@ Faster convergence in itself would not be surprising, since there are only about
     \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500 epochs} \label{fig:results:50k_from25k_matrices}
 \end{figure}
 
-Simultaneously training a network with matrix- and feature binsizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp}
+Simultaneously training a network with matrix- and feature binsizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
 turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
 but the Pearson correlations when predicting at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
 than the initial predictions at that binsize, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
 Looking into the matrix plots, it could not be clarified what caused the improvement in the Pearson correlations for test chromosome 21, \cref{fig:results:25plus50_matrices}.
 Here, all predictions seemed equally useless and definitely worse than the results obtained by the other approaches investigated thus far.
 
+\xxx get this section in shape
 Another finding relates to the training progress curve -- such smooth courses of the training loss usually occur together with gradient-style predictions
 as observed in test chromosome 19. 
 These gradients seem to be a local minimum with regard to mean squared error in which the optimizer may end up under certain circumstances.
 However, these types of predictions generally cause Pearson correlations close to zero, and it remained unclear why this did not happen here -- the other
 parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutout shown in \cref{fig:results:25plus50_r2}.
-\xxx maybe plot the matrices for 25k+50k--50k, too.
+\xxx
 
 \begin{figure}[p]%trained at 25k and 50k simultaneously, pearson and progress for 25k
     \begin{subfigure}{0.45\textwidth}
