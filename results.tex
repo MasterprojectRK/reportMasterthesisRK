@@ -9,19 +9,19 @@ showed interesting properties.
 In the following subsections, the resulting predictions for modifications of the dense neural network originally conceived 
 by Farr\'e, Heurteau, Cuvier and Emberly \cite{Farre2018a} will be shown. 
 This includes variations of the convolutional layer(s), custom loss functions with the intent of reducing blurriness in the predictions
-and tuning window- and binsize, cf. \cref{sec:improve:DNNapproach}.
+and tuning window- and bin size, cf. \cref{sec:improve:DNNapproach}.
 As a start, however, the results of the initial network without any modifications will be shown for comparison.
 
 \subsubsection{Initial results for comparison} \label{sec:initialDNNresults}
 The basic network was setup and trained as explained in \cref{sec:methods:basicSetup}.
 Here, the validation error (MSE) reached its minimum of about \SI{150000}{} 
-after approximately 500 epochs for \SI{25}{\kilo\bp} binsize and around 400 epochs for \SI{10}{\kilo\bp} binsize, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
+after approximately 500 epochs for \SI{25}{\kilo\bp} bin size and around 400 epochs for \SI{10}{\kilo\bp} bin size, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
 Beyond that, the learning curve indicated overfitting, but the resulting test matrices often still looked fairly similar, 
 compare e.\,g. the matrix plots after 500 and 1000 epochs in figures \ref{fig:results:basic500} and \ref{fig:results:basic1000}.
 
 \Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} 
 show the distance stratified Pearson correlations (cf. \cref{sec:methods:metrics}) 
-alongside area under the correlation curve (AUC) for the five test chromosomes at binsizes 25 and \SI{10}{\kilo\bp}, respectively.
+alongside area under the correlation curve (AUC) for the five test chromosomes at bin sizes 25 and \SI{10}{\kilo\bp}, respectively.
 The red curves in each correlation plot show the correlation between the corresponding training chromosome from GM12878 and the target chromosome from K562.
 It is obvious that all predicted test matrices have a strictly positive Pearson correlation with respect to the experimentally derived matrices by Rao et al. \cite{Rao2014},
 but are not better than simply taking data from the training cell line as prediction for the target cell line.
@@ -31,18 +31,18 @@ While the DNN generally produced high interaction counts in regions with many tr
 and low interaction counts in regions with few true interactions, the (TAD-)boundaries between different interacting domains 
 were mostly not discernible, \cref{fig:results:basic500} and \ref{fig:results:basic1000}.
 This finding is in line with the clearly positive, but medium-valued Pearson correlations.
-Exceptions with more disctinct boundaries existed in all of the five test chromosomes,
+Exceptions with more distinct boundaries existed in all of the five test chromosomes,
 for example chr19, 34 to \SI{35}{\kilo\bp} (\cref{fig:results:basic_r2}), but were rare. 
 Interestingly, medium-sized interacting structures, for example chr21, 31 to \SI{32.5}{\kilo\bp} 
 or between chr19, 31.2 to \SI{32.7}{\kilo\bp} often seemed to be missing altogether -- 
-while structures larger than the windowsize, for example chr3, 34 and \SI{36.7}{\kilo\bp} and 36.7 and \SI{39.5}{\kilo\bp}
+while structures larger than the window size, for example chr3, 34 and \SI{36.7}{\kilo\bp} and 36.7 and \SI{39.5}{\kilo\bp}
 sometimes were at least indicated.
 
-Reducing the binsize to $b_\mathit{feat}=b_\mathit{mat}=\SI{10}{\kilo\bp}$ as in the paper by Farr\'e et al. \cite{Farre2018a} 
+Reducing the bin size to $b_\mathit{feat}=b_\mathit{mat}=\SI{10}{\kilo\bp}$ as in the paper by Farr\'e et al. \cite{Farre2018a} 
 led to somewhat different results.
 The area under the correlation curves was approximately the same for test chromosomes 3 and 5, slightly better for chromosome 10, but worse for chromosome 19 and 21,
 cf.~\cref{fig:results:basicDNN_pearson} and \ref{fig:results:basicDNN_10k_pearson}.
-However, the ability to predict larger structures was lost, and the matrix plots thus did not look better than the ones for binsize \SI{25}{\kilo\bp}.
+However, the ability to predict larger structures was lost, and the matrix plots thus did not look better than the ones for bin size \SI{25}{\kilo\bp}.
 The comparatively bad result for test chromosome 21 might result from the low chromatin feature coverage of this particular chromosome.
 
 No obvious correlation between comparatively ``good'' and ``bad'' predictions with open and closed states of the chromatin was observed.
@@ -418,7 +418,7 @@ In terms of matrix plots, the predictions surprisingly were still quite similar 
     \caption{example predictions, ``wider-longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:wider-longer_matrices}
 \end{figure}
 
-Predictions and metrics from the generalized DNN approach with feature binsize \SI{5}{\kilo\bp} and matrix binsize \SI{25}{\kilo\bp}
+Predictions and metrics from the generalized DNN approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
 are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
 Unfortunately, the results did again not improve compared to the initial predictions.
 While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
@@ -489,11 +489,11 @@ For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, whi
 \end{figure}
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
-Exchanging the mean squared error for a combined loss function consinsting of MSE, TV loss and perceptual loss did not improve the results in the given setting.
+Exchanging the mean squared error for a combined loss function consisting of MSE, TV loss and perceptual loss did not improve the results in the given setting.
 The results for optimizing a loss function according to \cref{eq:methods:combined_loss} with weighting parameters 
 are shown in \cref{fig:results:combilossDNN_pearson} and \ref{fig:results:combiloss_matrices}.
 
-For all test chromosomes, the correlations were highly similar to the inital network's, \cref{fig:results:combilossDNN_pearson},
+For all test chromosomes, the correlations were highly similar to the initial network's, \cref{fig:results:combilossDNN_pearson},
 and the matrix plots also looked similar, chromosome 21 probably being the most different, \cref{fig:results:combiloss_matrices}.
 The results plotted are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$. 
 Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for optimizing the combined loss function.
@@ -578,11 +578,11 @@ The Pearson correlations for a score-based loss function with parameters $\lambd
 are shown in figure \ref{fig:results:scoreLossDNN_pearson}.
 While a slight improvement was achieved for test chromosome 21, the correlations of the others remained widely unchanged.
 The matrix plots also looked fairly similar to the initial ones, \cref{fig:results:scoreloss_matrices}, chromosome 21 again being the 
-most different compared to the intial predictions.
+most different compared to the initial predictions.
 
 In the matrix plots, the true- and predicted scores have been added as a second track, replacing the PCA track. 
 Indeed, the score curve computed from the true matrices showed local minima at putative TAD boundaries, as set forth in \ref{sec:improve:TAD_loss},
-so score computation with the chosen diamondsize seemed sound.
+so score computation with the chosen diamond size seemed sound.
 However, despite the optimization term in the loss function, the score curve of the predicted matrices compared to the true curve 
 somewhat like the predicted matrices compared to the true ones:
 The predicted score was generally high, when the true score was high, and low when the true score was also low,
@@ -652,31 +652,40 @@ so the results presented in this section should not be interpreted as the optima
 \end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
-To assess predictions at larger binsizes, five different approaches were compared, cf. \cref{sec:improve:binsize_winsize}:
+To assess predictions at larger bin sizes, five different approaches were compared, cf. \cref{sec:improve:binsize_winsize}:
 \begin{enumerate}
- \item ``50k direct'': \\directly training a network at binsize \SI{50}{\kilo\bp} and predicting at that same binsize
- \item ``initial 25k coarsened'': \\coarsening the results of the initial network discussed above in \cref{sec:initialDNNresults}
+ \item ``50k direct'': \\directly training a network at bin size \SI{50}{\kilo\bp} and predicting at that same bin size
+ \item ``initial 25k coarsened'': \\coarsening the results of the initial network discussed above (\cref{sec:initialDNNresults})
                     by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:hicMatrices}
  \item ``initial 25k$\rightarrow$50k'': \\using the initial network trained at \SI{25}{\kilo\bp} (cf. \cref{sec:initialDNNresults}) to predict at \SI{50}{\kilo\bp}
- \item ``25k+50k$\rightarrow$50k'': \\predicting at \SI{50}{\kilo\bp} from a network \emph{simultaneously} trained with binsizes 25k and 50k
- \item ``25k+50k$\rightarrow$25k'': \\predicting at \SI{25}{\kilo\bp} from a network \emph{simultaneously} trained with binsizes 25k and 50k
+ \item ``25k+50k$\rightarrow$50k'': \\predicting at \SI{50}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
+ \item ``25k+50k$\rightarrow$25k'': \\predicting at \SI{25}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
 \end{enumerate}
 
-For all test chromosomes except 21, the best Pearson correlations were obtained either by coarsening the initial results to \SI{50}{\kilo\bp} 
+The best Pearson correlations at bin size \SI{50}{\kilo\bp} were generally obtained either by coarsening the initial results to \SI{50}{\kilo\bp} 
 (method b) or by taking the network trained at \SI{25}{\kilo\bp} for predicting at \SI{50}{\kilo\bp} (method c), \cref{fig:results:DNN50k_pearson}.
-Compared to coarsening, the latter approach had the advantage of doubling the windowsize (in basepairs) and it worked better for test chromosome 21.
+Compared to coarsening, the latter approach had the advantage of doubling the window size (in base pairs) and it worked better for test chromosome 21.
 
-Looking at the matrix plots, the desired effect of making larger structures more prominent by increasing the binsize was only partially achieved, \cref{fig:results:50k_from25k_matrices}.
-While all larger structures in the example cutout of test chromosome 3 indeed looked more prominent,
-no obvious improvement was observed for the medium-sized structures in the example regions of chromosome 19 and 21.
-Here, too, the predicted matrices from the network trained at binsize \SI{25}{\kilo\bp} seemed better than the direct predictions 
-at \SI{50}{\kilo\bp} (method a), \cref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}.
+Looking at the corresponding matrix plots, the desired effect of making larger structures more prominent by increasing the bin size was only partially achieved, \cref{fig:results:50k_from25k_matrices}.
+While all larger structures in the example cutout of test chromosome 3 indeed looked more prominent, \cref{fig:results:50k_from25k_r3},
+no obvious improvement was observed for the medium-sized structures in the example regions of chromosome 19 and 21, 
+figures \ref{fig:results:50k_from25k_r1} and \ref{fig:results:50k_from25k_r2}.
 
-Notably, the training process for the direct prediction at binsize \SI{50}{\kilo\bp} (method a) collapsed after about 420 epochs.
+Direct predictions at bin size \SI{50}{\kilo\bp} (method a) were definitely not better than indirect methods derived from networks
+trained at \SI{25}{\kilo\bp}. 
+Both the Pearson correlations and the matrix plots were clearly better for method b) and c),
+figures \ref{fig:results:DNN50k_pearson}, \ref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}.
+It is not known why the direct predictions turned out worse. 
+Potential reasons include the reduced number of samples (cf. \cref{tab:methods:samples}, p. \pageref{tab:methods:samples})
+and the binning process, or a combination of both.
+However, first investigations showed that binning the proteins using the maximum instead of the mean across the \SI{50}{\kilo\bp}-bins, cf. \cref{sec:methods:sample_gen},
+did not improve the results.
+
+Notably, the training process for the direct prediction at bin size \SI{50}{\kilo\bp} (method a) diverged after about 420 epochs.
 One possible reason for this could be too high a learning rate, which could have been avoided by decreasing the learning rate over time.
-However, no further investigations were made into the case, because the divergence occurred after the optimum validation error 
-had been reached between 150 and 250 epochs, \cref{fig:results:50k_lossEpochs}, and was thus not seen as too problematic here.
-Faster convergence in itself would not be surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, 
+However, no further investigations were made into the case, because the divergence occurred only after overfitting, \cref{fig:results:50k_lossEpochs}, and was thus not seen as too problematic here.
+The minimum validation error was reached after about 150 epochs and thus about 100 epochs earlier than in the initial setup at \SI{25}{\kilo\bp}. 
+This is not surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, 
 cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
 
 \begin{figure}[p]%50k direct AND from 25k, pearson and progress
@@ -767,12 +776,15 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500 epochs} \label{fig:results:50k_from25k_matrices}
 \end{figure}
 
-Simultaneously training a network with matrix- and feature binsizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
+Simultaneously training a network with matrix- and feature bin sizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
 turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
 but the Pearson correlations when predicting at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
-than the initial predictions at that binsize, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
-Looking into the matrix plots, it could not be clarified what caused the improvement in the Pearson correlations for test chromosome 21, \cref{fig:results:25plus50_matrices}.
-Here, all predictions seemed equally useless and definitely worse than the results obtained by the other approaches investigated thus far.
+than the initial predictions at the respective bin size, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
+Looking into the matrix plots shown in \cref{fig:results:25plus50_matrices}, 
+all predictions seemed equally useless and definitely worse than the results obtained by the other approaches investigated thus far.
+It could not be clarified what caused the improvement in Pearson correlations for chromosome 21 compared to the initial predictions at \SI{25}{\kilo\bp}, 
+\cref{fig:results:DNN_25_pearson_21}, but it is interesting that even predictions with such a high degree of blurriness as in \cref{fig:results:25plus50_r1}
+can reach an AUC of around 0.65.
 
 \xxx get this section in shape
 Another finding relates to the training progress curve -- such smooth courses of the training loss usually occur together with gradient-style predictions
@@ -811,7 +823,7 @@ parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutou
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/DNN_25plus50/}{pearson_chr21.pdf_tex}}
-        \caption{chr21}
+        \caption{chr21} \label{fig:results:DNN_25_pearson_21}
     \end{subfigure}\hfill
     \begin{subfigure}{0.45\textwidth}
         \resizebox{\textwidth}{!}{
