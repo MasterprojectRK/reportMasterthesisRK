@@ -152,7 +152,7 @@ Conveniently, cooler also supports storing only the upper triangular part of sym
 Training samples were drawn from GM12878, chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of GM12878, 
 validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21.
 This approximately implements a 60:20:20 train:validation:test split, see \cref{tab:methods:samples} for details.
-Note that windowsize $w=80$ is not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
+Note that windowsize $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
 to train a network with more than seven million parameters, cf.~\cref{sec:methods:basicSetup}.
 \begin{table}[hbp]
 \centering
@@ -277,12 +277,12 @@ $\sigma(\mathit{true}|_d)$ and $\sigma(\mathit{pred}|_d)$ are the respective sta
 Since a numerically stable and efficient implementation of the Pearson correlation is non-trivial, the corresponding function from the pandas library \xxx was used
 for actual calculations.
 An obvious disadvantage of distance-stratified Pearson correlations is that they are undefined if either the predicted matrices or -- not observed in practice -- 
-the true matrices have the same value, and thus zero standard deviation for a certain distance.
+the true matrices have the same value, and thus zero standard deviation, for a certain distance.
 
 In addition to the correlations themselves, the area under the correlation curve (AUC) was computed for all curves in each plot 
 to obtain a single-valued, albeit very abstract quality metric.
 In line with Zhang et al. \cite{Zhang2019}, trapez integration method was used for numerical area computations
-and the values were normalized to the interval [-1, 1] by dividing through the maximum bin distance in each dataset to allow for comparisons across distances.
+and the values were normalized to the interval [-1, 1] by dividing through the maximum distance to allow for comparisons across experiments.
 Furthermore, all Pearson correlation plots show the correlation between the ``true'' GM12878 matrix and the corresponding target matrix as a baseline,
 i.\,e. the Pearson correlation that is obtained when simply using the corresponding GM12878 matrix and chromosome 
 as a ``prediction'' for a given target matrix and chromosome.
@@ -302,7 +302,8 @@ generalizing such results to the whole matrix seems without example in literatur
 
 Since relying on one metric alone seemed problematic, selected areas of the test set were plotted against the true 
 Hi-C matrices in these areas, see \cref{sec:methods:matrix_plots} below.
-
+Note that visual comparison of predicted Hi-C matrices and true Hi-C matrices in this setting is strongly influenced by
+the value range of the matrices, while the Pearson correlation is generally not.
 
 \subsection{Matrix plots} \label{sec:methods:matrix_plots}
 To allow for a visual comparison, selected areas of the predicted matrices were plotted against their true counterparts using pygenometracks \cite{LopezDelisle2020}.
@@ -320,6 +321,8 @@ a simple python script. Finally, eigenvectors and feature sum were written out i
 All tracks were plotted with an original resolution of 200\,dpi and a diagram width of \SI{150}{\mm}.
 For the interaction counts in the Hi-C matrix plots, ``log1p'' transformation was applied and the true matrices were inverted,
 i.\,e. reflected at the diagonal. 
+No minimum or maximum values were set for plotting, but note that predicted matrices were scaled to value range 0...1000 
+before they were stored, cf. \cref{sec:methods:sample_gen}.
 
 \subsection{Dense neural network approach} \label{sec:methods:dnn}
 In the following sections, the setup for the Dense Neural network inspired by Farr\'e et al. \cite{Farre2018a}
@@ -328,10 +331,10 @@ and its variations will be discussed in detail.
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
 The basic setup for the dense neural network approach closely follows the proposal by Farr\'e et al. \cite{Farre2018a},
 so a windowsize of $w=80$ and $b_\mathit{feat}=b_\mathit{mat} = \SI{10}{\kilo\bp}$ was initially used.
-With these parameters, the network has a total of 7,486,436 trainable weights in five trainable layers; 
+With these parameters, the network has a total of \SI{7486436}{} trainable weights in five trainable layers; 
 one convolutional layer and four densely connected layers, \cref{fig:methods:basic_dnn}.
 For brevity, the sigmoid activation after the 1D convolution and the ReLU activations after the Dense layers are not shown.
-The dense layers all use a ``L2'' kernel regularizer and the dropout layers following all but the last dense layer have a dropout probability of $10\%$.
+The dense layers all use a ``L2'' kernel regularizer and all dropout layers have a dropout probability of $10\%$.
 \begin{figure}[htb]
     \small
     \centering
@@ -439,14 +442,20 @@ While it would also have been possible, and probably faster, to slice the output
 this is rather unintuitive and was therefore not implemented for the thesis. 
 
 \subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
+In the following subsection, the setup and training process of the cGAN network developed for this thesis and the respective
+embeddings for the conditional input -- the chromatin features -- will be described in more detail.
+First, the basic network setup based on the well-known pix2pix cGAN architecture \cite{Isola2017} and the training process
+are explained in \cref{sec:methods:cGAN_initial}, then the respective embedding networks are discussed in subsections \ref{sec:methods:dnn-embedding},
+\ref{sec:methods:cnn-embedding} and \ref{sec:methods:mixed-embedding}.
+
 \subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
-Several implementations of the original pix2pix network are publicly available, usually for the original image size of $256\times256$.
+Several implementations of the original pix2pix network \cite{Isola2017} are publicly available, usually for the original image size of $256\times256$.
 For the thesis at hand, implementation concepts from two tutorials \cite{tfpix2pix2020, brownlee2019} were combined and the code was adapted to the given requirements.
 
 Within the generator, two of the down- and upsampling layers inside the U-Net portion were made optional 
 to allow processing smaller images of sizes $64\times64$ and $128\times128$, see \cref{fig:methods:GAN_arch:generator}.
 Note that the generator (still) only supports square images with edge lengths that are powers of two and at least $2^6=64$.
-Furthermore, symmetry of the output was enforced by adding its transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
+Furthermore, symmetry of the output images was enforced by adding their transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
 The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} are custom blocks 
 detailed in \cref{fig:methods:GAN_arch:downsampling} and \ref{fig:methods:GAN_arch:upsampling}. 
 All 2D-convolutions and 2D-deconvolutions had kernel size $(4,4)$ and were initialized with values drawn from a normal distribution with mean $\mu=0$ and
@@ -457,7 +466,8 @@ in conjunction with the given Hi-C matrices, probably because these contain no n
 Compared to the original pix2pix setup, 
 one downsampling layer was omitted in the discriminator for windowsize $w=\{256,128\}$ and another one for $w=64$.
 This made the discriminator patches larger, especially for the smaller windowsizes,
-cf. \cref{fig:methods:GAN_arch:discriminator}.
+cf. \cref{fig:methods:GAN_arch:discriminator} and was empirically found to improve the results
+slightly in the given application.
 Symmetry was enforced after all convolutions in the same way as in the generator.
 Kernel sizes and initializations for all 2D convolutions also were the same as for the generator,
 and leaky ReLU-activations were used with parameter $\alpha=0.2$, as in all up- and downsampling layers.
@@ -537,7 +547,7 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 For the thesis, the DNN-embedding was used in two ways.
 First, it was trained together with the rest of the cGAN with weight initialization as described in 
 \cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
-Second, the DNN was pre-trained as described in \cref{sec:methods:basicSetup}
+Second, a DNN was pre-trained as described in \cref{sec:methods:basicSetup} with windowsize $w=64$
 and the learned weights were transferred to the cGAN once before the start of the training process,
 which was then continued as described in \cref{sec:methods:cGAN_initial}.
 The results of the pre-training are visualized in \cref{sec:appendix:pretraining_results} (\cref{fig:results:DNN64_pearson});
@@ -562,7 +572,9 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
     \caption{embedding network, CNN} \label{fig:methods:GAN_arch:embedding_network}
 \end{figure}
 
-For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the embedding network shown in \cref{fig:methods:GAN_arch:embedding_network} 
+In the CNN-embedding, the number of trainable parameters is constant for all layers, except for the last convolutional layer, where the number
+of convolutional filters is equal to the windowsize, cf. \cref{fig:methods:GAN_arch:embedding_network}. 
+For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the CNN-embedding network 
 contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
 
 \subsubsection{Mixed embedding for generator and discriminator} \label{sec:methods:mixed-embedding}
