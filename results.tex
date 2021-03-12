@@ -281,6 +281,7 @@ The reason for this behavior is not fully understood yet, but comparatively few 
 longer distances due to the chosen network setup, cf. \cref{sec:methods:sample_gen}, \cref{fig:methods:prediction}.
 Since the longer network variant has a considerably larger number of trainable parameters,
 it is assumed that 500 epochs might not have been enough to activate some of the outer neurons.
+Slow training can occur when ReLU activations are used (as in the given case) and the gradients are close to zero \cite{Maas2013}.
 Apart from that, the learning process for the ``longer'' variant in general looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
 but the matrix plots did not show any obvious improvement over the initial ones, \cref{fig:results:longer_matrices}.
 \begin{figure}[p] %longer variant pearson
@@ -857,7 +858,15 @@ parts of chromosome 19 did not look much better than the \SI{10}{\mega\bp}-cutou
 
 \clearpage
 \subsection{Hi-cGAN approaches} \label{sec:results:cgan}
+In the following three subsections, the results from the conditional generative adversarial networks will be presented.
+Although there is still room for improvements, at least one of the three cGAN-variants under investigation showed good performance. 
+
 \subsubsection{cGAN with DNN embedding} \label{sec:results:cgan_dnn}
+The cGAN with DNN-embedding generally did not meet the expectations.
+Without pre-training, the learning process reached reasonable values after only about 30 epochs, cf. \cref{fig:results:GAN64-dnn_lossEpochs},
+and the best Pearson correlations for the test chromosomes were recorded between 60 and 80 epochs, see \cref{fig:results:GAN64-dnn_pearson}.
+
+
 Results after pretraining see figures \ref{fig:results:GAN64_pretrain-dnn_pearson} and \ref{fig:results:cGAN64_pretrain-dnn_matrices}.
 Results without pretraining see figures \ref{fig:results:GAN64-dnn_pearson} and \ref{fig:results:cGAN64-dnn_matrices}.
 \begin{figure}[p] %cGAN with DNN, no pretraining, windowsize 64, pearson and progress
@@ -1185,7 +1194,7 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \caption{example predictions, cGAN, CNN embedding, $w=256$, 100 epochs} \label{fig:results:cGAN256_matrices}
 \end{figure}
 
-\subsubsection{cGAN with mixed DNN / CNN embedding}
+\subsubsection{cGAN with mixed DNN / CNN embedding} \label{sec:results:cgan-mixed}
 The results from the cGAN with mixed embedding, i.\,e. DNN-embedding for the generator
 and CNN-embedding for the discriminator are shown in \cref{fig:results:GAN64_pretrained_mixed_pearson} and \ref{fig:results:GAN64_pretrained_mixed_matrices} 
 (with pre-trained DNN-embedding network) and \xxx, \xxx (with standard weight initialization)
