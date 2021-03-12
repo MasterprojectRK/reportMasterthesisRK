@@ -5,10 +5,10 @@ While the first approach is a dense neural network based on work by Farr\'e et a
 the second is a novel method based on conditional generative adversarial networks.
 
 \subsection{Dense Neural Network approach}\label{sec:improve:DNNapproach}
-In their 2008 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
+In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
 propose a combination of a 1D convolutional filter with a three-layer dense neural network 
 which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing.
-This thesis tries to build on the success of their method by extending the comparatively simple neural network
+This thesis attempts to build on the success of their method by extending the comparatively simple neural network
 in various ways, modifying the binsizes of the Hi-C matrices and changing the learning process.
 As a start, the basic network has been rebuilt and used on well-known data from human cell lines GM12878 and K562, cf. \cref{sec:methods:input_data}.
 
@@ -317,41 +317,53 @@ Compared to other cGAN architectures, pix2pix is rather simple, but well studied
 sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
 Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
 choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
-Another advantage towards pix2pix, and U-Net architectures in general, 
+Another advantage of pix2pix, and U-Net architectures in general, 
 is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
 The embedding network required for processing the conditional inputs
 has on obvious mandatory property: it must be capable of embedding the input of shape $(3w,n)$ 
-into a 2D grayscale image of shape $(w,w,1)$.
+into a 2D grayscale image of shape $(w,w,1)$ which can then be processed by a pix2pix-like network.
 Naturally, this can be achieved by using the dense neural network explored above
-and reshaping its ``upper triangular'' output vector back into a symmetric ``image'' tensor with the required shape.
+and reshaping its ``upper triangular'' output vector back into a symmetric ``image''-tensor with the required shape.
 
 The rationale here was to first use the DNN to get a coarse estimate of the predicted matrix,
 and then the cGAN to refine the results, somewhat similar to the two-stage approach by Zhang et al. \cite{Zhang2019c},
 albeit much less sophisticated. 
-Naturally, this approach also allows to pre-train the dense network as shown above and then use transfer learning
-to provide better starting values for the embedding network, potentially improving both stability and convergence speed
-of the cGAN network.
+Naturally, this approach also allows to pre-train the dense network as discussed above in \cref{sec:improve:DNNapproach}, 
+this time for windowsize $w=64$ and then use transfer learning to provide better starting values for the weights of the embedding network, 
+potentially improving both stability and convergence speed of the cGAN network.
 
-A disadvantage of the dense network approach is that the number of neurons in its output layer quadratically depends on the windowsize $w$.
-Taken together with the three fully connected layers underneath, this leads to a superlinear increase in the number of parameters along $w$,
+A disadvantage of the dense network approach is that the number of neurons in its output layer quadratically depends on the windowsize $w$,
+cf. \cref{sec:improve:basicNetwork} and \ref{sec:methods:basicSetup}.
+Taken together with the three fully connected layers underneath, this leads to a superlinear increase in the number of parameters along with $w$,
 further aggravated by the fact that the cGAN requires $w$ to be powers of two, cf. \cref{sec:methods:cGAN_initial} and  
 \ref{sec:methods:dnn-embedding} (\cref{tab:methods:embedding_network_params}, p.~\pageref{tab:methods:embedding_network_params}).
-The DNN embedding has thus only been explored for $w=64$, both with and without pretraining. 
-The results are to be found in \cref{sec:results:cgan_dnn}.
+The DNN embedding has thus only been explored for $w=64$, both with and without pre-training the DNN. 
+The results are to be found in \cref{sec:results:cgan_dnn} and some more technical details are given in \cref{sec:methods:dnn-embedding}.
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
-Since the results from the DNN embedding were not convincing, another approach based on convolutional layers was created.
-Here, the idea was to have a trainable embedding that keeps the localization information in the chromatin feature data,
-has less parameters than a dense embedding and can efficiently be trained along with the rest of the network, allowing for a standalone solution.
+Since the results from the cGAN with DNN embedding were not convincing, another embedding network was designed, based on convolutional layers.
+Here, the idea was to have a trainable embedding that keeps the localization information contained in the chromatin feature data,
+has less parameters than a dense embedding and can efficiently be trained along with the rest of the network even at windowsizes up to 256 bins.
 
-Since no example for such an embedding was found in literature, a first try was made with a simple 8-layer convolutional network.
+Since no example for such an embedding was found in literature, a first attempt was made with a simple convolutional neural network (CNN).
+This network essentially featured 8 building blocks, each consisting of 1D convolution, batch normalization layer to avoid overfitting and leaky ReLU activation \cite{Maas2013}
+to avoid the so-called ``dying ReLU'' problem. 
+A final 9th convolution layer was added to ensure the required output shape. 
 The complete setup is shown in \cref{sec:methods:cnn-embedding} (\cref{fig:methods:GAN_arch:embedding_network}, p.~\pageref{fig:methods:GAN_arch:embedding_network}).
-Compared to the dense approach, the number of parameters in the CNN embedding is widely independent of the windowsize and 
-stays between 4.24 million and 4.29 million for the tested windowsizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
+Compared to the dense approach, the number of trainable parameters in the CNN embedding is widely independent of the windowsize and 
+stays within 4.24...4.29 million parameters for the tested windowsizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
 
-\subsubsection{Using DNN and CNN embedding for generator and discriminator}
+The results of the cGAN with CNN embedding are shown in \cref{sec:results:cgan_cnn} and were indeed better than the ones obtained with DNN embeddings.
+
+\subsubsection{Using a mixed DNN- and CNN-embedding for generator and discriminator}
+Besides using a DNN- or CNN-embedding for \emph{both} generator and discriminator, it is obviously also possible
+to use different embedding network types.
+To investigate the influences of the embedding network on the general performance,
+a ``mixed'' embedding, i.\,e. a DNN-embedding for the generator and a CNN-embedding for the discriminator was tested,
+using the same DNN and CNN as above.
+The results are shown in \ref{sec:results:cgan-mixed}.
 
 
 
