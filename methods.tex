@@ -565,6 +565,14 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
 For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the embedding network shown in \cref{fig:methods:GAN_arch:embedding_network} 
 contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
 
+\subsubsection{Mixed embedding for generator and discriminator} \label{sec:methods:mixed-embedding}
+In the mixed setting, the dense neural network described above in \cref{sec:methods:dnn-embedding} was used as  
+embedding network for the generator and the CNN described in \cref{sec:methods:cnn-embedding} was used as embedding
+network for the discriminator.
+As with the DNN alone, the mixed setting was used both with and without weight transfer.
+In the latter case, again the weights of the DNN were replaced by the ones of the same pre-trained DNN as in \cref{sec:methods:dnn-embedding}
+ before the training process started.
+
 \subsection{Comparsion with other approaches} \label{sec:methods:comparison}
 To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
 predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
