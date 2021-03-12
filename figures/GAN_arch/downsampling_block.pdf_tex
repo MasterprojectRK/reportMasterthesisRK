@@ -69,7 +69,7 @@
     \put(0.56657207,0.21475935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
     \put(0.72934714,0.21475935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
     \put(0.72934714,0.28021502){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
-    \put(0.158529,0.08457326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}leaky ReLu\end{tabular}}}}%
+    \put(0.158529,0.08457326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}leaky ReLU\end{tabular}}}}%
     \put(0.56657207,0.0890256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
     \put(0.56657207,0.02356987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
     \put(0.72934714,0.0890256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%

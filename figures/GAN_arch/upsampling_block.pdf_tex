@@ -81,7 +81,7 @@
     \put(0.34264364,0.58796224){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}strides (2,2)\end{tabular}}}}%
     \put(0.15405937,0.58870617){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}transpose\end{tabular}}}}%
     \put(0.15405937,0.20955998){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}optional; rate = 0.5\end{tabular}}}}%
-    \put(0.15405937,0.05795973){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reLU\end{tabular}}}}%
+    \put(0.15405937,0.05795973){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ReLU\end{tabular}}}}%
     \put(0.57878069,0.08981393){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
     \put(0.57878069,0.02609734){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
     \put(0.73723075,0.08981393){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $2x,2x,y$)\end{tabular}}}}%

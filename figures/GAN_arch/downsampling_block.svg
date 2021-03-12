@@ -17,7 +17,7 @@
    inkscape:version="1.0.2 (1.0.2+r75+1)"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6"><marker
        style="overflow:visible"
        id="Arrow2Mend"
@@ -45,11 +45,11 @@
      units="mm"
      inkscape:zoom="3.0435039"
      inkscape:cx="162.42273"
-     inkscape:cy="121.21052"
+     inkscape:cy="94.925027"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g10"
+     inkscape:current-layer="layer1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -352,7 +352,7 @@
          id="tspan3130"
          x="56.926521"
          y="197.40485"
-         style="stroke-width:0.603955">leaky ReLu</tspan></text><text
+         style="stroke-width:0.603955">leaky ReLU</tspan></text><text
        style="font-variant:normal;font-size:11.274px;font-family:'Nimbus Roman';-inkscape-font-specification:NimbusRomNo9L-Regu;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.603955"
        id="text3136"
        x="172.3913"
