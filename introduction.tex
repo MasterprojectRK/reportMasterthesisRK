@@ -6,13 +6,13 @@ it remains comparatively expensive to determine the spatial folding of DNA direc
 so that current knowledge of three-dimensional DNA organization is still sketchy.
 In the last five years, several methods have thus been proposed to improve on this situation
 by determining DNA-DNA interactions \emph{in-silico}.
-All of these are using existing experimental data which is easier to obtain than spatial data, but correlates with 3D chromatin structure in certain ways.
+All of these are using certain types of experimental data which is easier to obtain than spatial data, but correlates with 3D chromatin structure in certain ways.
 However, most current in-silico approaches have disadvantages and shortcomings,
 and the current thesis attempts to improve on these.
 
 \subsection{Spatial structure of DNA}
 In the late 1970s, Watson and Crick discovered the now well-known double helix structure of DNA molecules \cite{Watson1953}.
-However, this is not the only relevant spatial structure of genomes. 
+However, this is not the only relevant spatial structure of chromatin. 
 At larger scales, DNA molecules can be wound around certain proteins, so-called histones, forming DNA-protein complexes named nucleosomes.
 Several of these can further be compacted into fibers, which in turn can be ``supercoiled'' into the also well-known chromosomes, \cref{fig:intro:spatial_chrom_structures}.
 \begin{figure}[h!]
@@ -22,21 +22,21 @@ Several of these can further be compacted into fibers, which in turn can be ``su
  \caption{spatial chromatin structures (simplified, cf.\,\cite{Lee2001})} \label{fig:intro:spatial_chrom_structures}
 \end{figure}
 
-
-While the spatial structure of chromatin outlined above brings along compaction (\cref{fig:intro:spatial_chrom_structures} from left to right), 
-e.\,g. to make chromosomes fit into eucaryotic cell nuclei,
+While the spatial structure of chromatin outlined above brings along compaction, 
+e.\,g. to make chromosomes fit into eukaryotic cell nuclei (\cref{fig:intro:spatial_chrom_structures} from left to right), 
 it also has other functional implications.
 One well known effect of spatial structure is the regulation of gene transcription by establishing or releasing contacts
-between gene enhancers and the relevant promoters \cite{Smallwood2013,Gorkin2014}.
-Since enhancers can be up to a million basepairs away from the promoters, 
-the two can only interact by means of spatial DNA structure.
-Many effects of spatial structure are still under investigation, 
+between certain DNA-regions, the so-called gene enhancers and promoters \cite{Smallwood2013,Gorkin2014}.
+Since enhancers can be up to a million basepairs away from the corresponding promoters, 
+the two can usually only interact by means of spatial DNA structure.
+Further effects of spatial structure are still under investigation;
 two recent studies have for example found dependencies between chromatin conformation 
 and cell differentiation in Drosophila Melanogaster \cite{Chathoth2019}
 and investigated spatial structure dynamics during phase transitions in murine cells \cite{Zhang2019b}.
 
-While the driving mechanisms behind the formation of spatial chromatin structures are partially still under research,
+While the driving mechanisms behind the formation of spatial chromatin structures are partially still under research, too,
 certain proteins like CTCF or modified histones are already well known to mediate or prevent DNA-DNA contacts \cite{Phillips2009,PhillipsCremins2013,Dixon2015}.
+This relationship can partially be exploited to predict 3D DNA conformation from the 1D binding sites of such proteins, as will be shown below.
 
 In the last two decades, DNA-sequencing-based techniques have increasingly been utilized to capture the spatial structure of DNA experimentally.
 The method of choice within this thesis is called Hi-C and shall be explained in the following section.
@@ -58,7 +58,7 @@ and is depicted in simplified form in \cref{fig:intro:HiC}.
 
 The typical input (In) to Hi-C consists of several millions of cells,
 which are treated chemically to fix existing DNA-DNA contacts, 
-commoly using formaldehyde, before they are lysed.
+commonly using formaldehyde, before they are lysed.
 Next, the DNA is extracted and cut into fragments by certain restriction enzymes (1),
 usually HindIII or DpnII, 
 and the cut ends are repaired with nucleotides, some of which are marked by biotin (2).
@@ -131,13 +131,13 @@ The outcome of the ChIP-seq lab process is again a bunch of short genomic sequen
 which are then fed into the bioinformatics part of the pipeline.
 
 On the software side of the process, the reads are filtered for quality and mapped to an appropriate reference genome.
-The number of mapped reads per genomic position can then be simply be counted.
+The number of mapped reads per genomic position can then simply be counted.
 It is common to process reads from the control experiment in the same way as reads from the ChIP-seq experiment
 and then use special software to call ``peaks'', i.\,e. protein binding sites,
 at those genomic positions where the read count from ChIP-seq
 is statistically significant compared to the read count from the control group.
 
-For the thesis at hand, the aligned reads from the ChIP-seq experiment have been used directly,
+For the thesis at hand, the read counts from the ChIP-seq experiment have been used directly without calling peaks,
 because peak data was found to be too sparse for the machine learning approach used 
 in the study project \cite{Krauth2020}.
 
@@ -171,17 +171,18 @@ GM23248  & 2   & 13 & 1  & 1 \\ \hline
 \caption{availability of selected assays in ENCODE (extract)} \label{tab:intro:assaysInEncode}
 \vspace{-10mm}
 \end{wraptable}
-Due to the high effort, Hi-C experiments have been conducted only by few labs and for comparatively few organisms and cell lines so far.
-For example, as of January 2021, Hi-C assays are available for just 26 of more than 150 human cell lines listed in the Encyclopedia of DNA elements \cite{Encode2012,Davis2017},
+Due to the high effort, Hi-C experiments have been published for comparatively few organisms and cell lines so far.
+For example, as of January 2021, Hi-C assays were available for just 26 of more than 150 human cell lines listed 
+in the Encyclopedia of DNA elements \cite{Encode2012,Davis2017}, \cref{tab:intro:assaysInEncode},
 and these have been produced by only five university labs.
 
 However, investigations and experiments with the available Hi-C data have shown correlations
 between the spatial DNA structure and the binding sites of certain transcription factors and histone modifications \cite{Rao2014, Bonev2016}.
 Since these binding sites can be detected with the less costly ChIP-seq method, 
-a computational method able to predict contact matrices from DNA-protein bindings would be very helpful.
+a computational method able to predict contact matrices from DNA-protein bindings \emph{in silico} would be very helpful.
 
 The goal of this master thesis is thus to predict missing Hi-C data from existing ChIP-seq data,
-making use of the known correlations between the binding sites of transcription factors and histone modifications of the one hand 
+making use of the known correlations between the binding sites of transcription factors and histone modifications on the one hand 
 and Hi-C interaction counts on the other hand. 
 Because this is a wide field and lead time for a master thesis is limited, 
 the present work will focus on machine learning techniques,
@@ -190,11 +191,13 @@ and relationships, especially when it comes to the synthesis of
 2D data from various kinds of input data \cite{Tsirikoglou2020}.
 More specifically, the goal of this thesis is to develop an easy-to-use machine learning
 approach for predicting Hi-C interaction matrices from ChIP-seq data, 
-using standard in- and output formats with minimal pre- and postprocessing.
+using standard in- and output formats with minimal pre- and post-processing.
 
 To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
 sorted by total number of selected assays available.
-Although not necessarily all available experiments to date are included in ENCODE -- for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 cells are not listed -- 
-it is obvious that the public availability of ChIP-seq data is commonly much better than the one of Hi-C data, even for otherwise well investigated cell lines like HEK293 and MCF-7.
+Although not necessarily all available experiments to date are included in ENCODE -- 
+for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 stem cells are not listed -- 
+it is obvious that the public availability of ChIP-seq data is commonly much better than the one of Hi-C data, 
+even for otherwise well investigated cell lines like HEK293 and MCF-7.
 
 
