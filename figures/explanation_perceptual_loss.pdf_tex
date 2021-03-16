@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{411.02362205bp}%
+    \setlength{\unitlength}{396.8503937bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,19 +50,24 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.28275862)%
+  \begin{picture}(1,0.29285714)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{explanation_perceptual_loss.pdf}}%
-    \put(0.12806739,0.26242541){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}network to be trained\end{tabular}}}}%
-    \put(0.40943809,0.26242541){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pre-trained loss network\end{tabular}}}}%
-    \put(0.00417494,0.24932838){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input\end{tabular}}}}%
-    \put(0.00417494,0.22084776){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}image\end{tabular}}}}%
-    \put(0.07401796,0.04508247){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}true/target image\end{tabular}}}}%
-    \put(0.7449283,0.18874935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}L1 / L2 / ...\end{tabular}}}}%
-    \put(0.7450329,0.14993942){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}loss function\end{tabular}}}}%
-    \put(0.90962188,0.1905229){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}perceptual\end{tabular}}}}%
-    \put(0.90953043,0.14478529){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}loss\end{tabular}}}}%
-    \put(0.50490502,0.11585511){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}fixed weights\end{tabular}}}}%
+    \put(0.13264122,0.27179774){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}network to be trained\end{tabular}}}}%
+    \put(0.42406088,0.27179774){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pre-trained loss network\end{tabular}}}}%
+    \put(0.00432405,0.25823297){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}training\end{tabular}}}}%
+    \put(0.00432405,0.22873518){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}sample\end{tabular}}}}%
+    \put(0.07666145,0.04669256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}true/target matrix\end{tabular}}}}%
+    \put(0.80555072,0.19549039){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}L1 / L2 / ...\end{tabular}}}}%
+    \put(0.80565905,0.1552944){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}loss function\end{tabular}}}}%
+    \put(0.64585637,0.0520788){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}perceptual loss\end{tabular}}}}%
+    \put(0.53427664,0.11999279){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}fixed weights\end{tabular}}}}%
+    \put(0.69671931,0.2261991){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{generated}\end{tabular}}}}%
+    \put(0.69671931,0.2039942){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{perception}\end{tabular}}}}%
+    \put(0.69671931,0.14551087){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{true}\end{tabular}}}}%
+    \put(0.69671931,0.12366462){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{perception}\end{tabular}}}}%
+    \put(0.35654093,0.2261991){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{generated}\end{tabular}}}}%
+    \put(0.3565409,0.2039942){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{matrix}\end{tabular}}}}%
   \end{picture}%
 \endgroup%
