@@ -29,32 +29,36 @@ Here, the conditional probability of two genomic regions being in contact, given
 is estimated using Bayes' rule. 
 In this case, the chromatin state -- reduced to active or inactive -- is derived from \acrfull{damid} signals of 53 chromatin factors using probabilistic methods \cite{Zhou2016}.
 The conditional probabilities on the right side of Bayes' rule are either computed from training data or estimated with different probabilistic approaches, too.
-While the predicted contact matrices do not look like real Hi-C matrices with this approach, highly interacting regions are still often well identifiable.
+While the predicted contact matrices do not look like real Hi-C matrices, highly interacting regions are still often well identifiable with this approach.
 
-Three further approaches in the field make use of random forests. 
-3DEpiLoop by Bkhetan and Plewczynski and Lollipop by Kai et al., 
+Three further approaches in the field make use of machine learning in form of random forests. 
+\emph{3DEpiLoop} by Bkhetan and Plewczynski and \emph{Lollipop} by Kai et al., 
 both from 2018, use a random forest classifier to predict DNA loops, but differ in input data and preprocessing  \cite{Bkhetan2018, Kai2018}.
 While 3DEpiLoop is using only \acrshort{cs} data of histone modifications and transcription factors \cite{Bkhetan2018},
 Lollipop additionally takes \acrshort{chia}-, RNA-seq- and DNase-seq-data, CTCF motif orientation and loop length as inputs \cite{Kai2018}.
 Both approaches show good coincidence of predicted loops with experimental data, but their output is binary and rather sparse.
-Contrary to these two, the third random-forest-based approach, HiC-Reg by Zhang et al. from 2019, allows predicting real-valued
-Hi-C interaction matrices directly~\cite{Zhang2019}. To this end, it employs random forest regression to predict interactions
-between two genomic ``windows'', using \acrshort{cs} data of 13 chromatin factors and the genomic distance of the two windows.
-The published results for five human cell lines look interesting.
+Contrary to these two, the third random-forest-based approach, \emph{HiC-Reg} by Zhang et al. from 2019, allows predicting real-valued
+Hi-C interaction matrices directly~\cite{Zhang2019}. 
+To this end, it employs random forest regression to predict interactions
+between all pairs of genomic regions within a certain distance. 
+For each pair of regions and the genomic window enclosing them, \acrshort{cs}- and DNase-seq data of 14 chromatin features 
+are taken as decision criteria for the random forest, along with genomic distance of the pair.
+The published results for five human cell lines look visually good in terms of Hi-C matrix plots, while the reported correlations between predicted and true matrices are modest.
 
 Another recent method which investigated decision-tree-based algorithms is due to Martens et al. (2020) \cite{Martens2020}.
 Here, gradient boosted decision trees, logistic regression and neural networks were used to predict highly interacting chromatin regions
 and \acrshort{tad} domain boundaries from histone modifications and CTCF \acrshort{cs} data. 
-However, in this setup, the neural network approach yielded the best, overall acceptable results of the three approaches,
+In this setup, the neural network approach yielded the best, overall acceptable results of the three approaches,
 but again in form of a binary classifications.
 A neural-network approach with comparable input data, but without the restriction to binary classifications has been presented by Farr\`e et al. in 2018 \cite{Farre2018a}. 
-Here, a one-dimensional convolutional filter is used to convert \acrshort{cs} data from 50 chromatin factors into a 
-one-dimensional chromatin vector, which is then processed by a \acrfull{dnn}.
-This allows predicting real-valued Hi-C interaction matrices, which resemble the general structure of experimentally derived matrices quite well.
+Here, a one-dimensional convolutional filter is used to convert \acrshort{cs} data of 50 chromatin factors from a certain region of the genome into a 
+one-dimensional chromatin vector, which is then processed by a \acrfull{dnn} to predict Hi-C submatrices.
+Using a sliding window approach, the method by Farr\'e et al. allows predicting complete, real-valued Hi-C interaction matrices, 
+which resemble the general structure of experimentally derived matrices quite well.
 
-While the approaches discussed so far have either modeled DNA as a ``beads-on-a-string'' polymer or not used it explicitly at all,
+While the approaches discussed so far have either modeled DNA as a ``beads-on-a-string'' polymer or not used the actual DNA sequence explicitly at all,
 there are also several machine-learning approaches which directly consider DNA sequence without a need for polymer modeling.
-In 2019, Singh et al. presented SPEID \cite{Singh2019}, an approach to predict promoter-enhancer interactions from DNA sequence,
+In 2019, Singh et al. presented \emph{SPEID} \cite{Singh2019}, an approach to predict promoter-enhancer interactions from DNA sequence,
 using a combination of \acrshort{cnn}s, a recurrent network (\acrshort{lstm}) and a \acrshort{dnn}.
 The results match well with experimental data, but are limited to promoter and enhancer loci by design, disallowing predictions of complete Hi-C contact matrices.
 Other researchers have tried to design similar methods without such limitations.
@@ -63,18 +67,18 @@ additionally taking into account a ``middle sequence'' between enhancer- and pro
 CTCF motif counts within the sequences and genomic distance between two sequence snippets. 
 However, the network lacks generalization, i.\,e. the results are only good in training regions \cite[figs. 4, 5]{peng2017}.
 A conceptually similar method to the one by Peng \cite{peng2017}, but with a different neural network design has been presented by Schreiber et al., also in 2017, 
-named Rambutan \cite{Schreiber2017}.
-It accepts DNA-sequence, DNase-seq data and distance between two genomic loci as inputs 
+named \emph{Rambutan} \cite{Schreiber2017}.
+It accepts DNA sequence, DNase-seq data and distance between two genomic loci as inputs 
 and then uses a combination of \acrshort{cnn}s and a \acrshort{dnn} to predict whether the given two loci interact or not. 
 Unfortunately, it is difficult to decide whether the results of Schreiber et al. are useful for the task at hand, since the evaluation is done only by statistical means 
 and no actual Hi-C matrices have been published.
 The original paper \cite{Schreiber2017} also contains a known error and seems not to have appeared in a peer-reviewed journal in improved form 
 yet. 
-A probably more promising method working on DNA sequence, Akita, has been published by Fudenberg et al. in 2020 \cite{Fudenberg2020}.
+A probably more promising method working on DNA sequence, \emph{Akita}, has been published by Fudenberg et al. in 2020 \cite{Fudenberg2020}.
 It is based on two rather involved \acrlong{cnn}s. 
 While the first one, ``trunk'', processes one-dimensional, one-hot encoded DNA sequence input through convolutional filters, the second one, ``head'', 
 converts one-dimensional representations to 2D, further processes the data with convolutional filters and enforces symmetry.
-Although Fudenberg et al. initally seemed to focus on determining the influence of DNA modifications on spatial structure \cite{Fudenberg2019},
+Although Fudenberg et al. initially seemed to focus on determining the influence of DNA modifications on spatial structure \cite{Fudenberg2019},
 predicting complete Hi-C matrices is an integral part of their work, 
 and a large number of images of Hi-C matrices from the test set has been published alongside the article. 
 The predicted matrices often hardly look like experimental Hi-C matrices, but mostly still indicate highly interacting regions quite well.
@@ -86,7 +90,7 @@ the corresponding chromatin factors. The weights of this first network are then 
 which is responsible for predicting DNA-DNA interactions from DNA sequence.
 In this case, the results were blurry, but generally in good accordance with experimental Hi-C data.
 
-Yet another machine-learning concept based on sequence data, Samarth, has been proposed by Nikumbh and Pfeifer in 2017 \cite{Nikumbh2017}.
+Yet another machine-learning concept based on sequence data, \emph{Samarth}, has been proposed by Nikumbh and Pfeifer in 2017 \cite{Nikumbh2017}.
 Here, a support vector machine is trained on 5C data, using a specific representation for DNA sequence called oligomer distance histograms.
 The results showed acceptable consensus with experimental Hi-C data and allowed some interesting conclusions
 about the importance of certain k-mers for DNA folding. However, the applicability for the task at hand is hard to assess, 
@@ -96,42 +100,41 @@ because none of the predicted matrices used for statistical evaluation has been 
 \subsection{Image synthesis techniques from computer vision} \label{sec:prior:generativeCV}
 With the advent of deep learning, both the number of opportunities and the demand for using machine learning techniques 
 in image synthesis tasks have risen, as recently summarized by Tsirikoglou et al. \cite{Tsirikoglou2020}.
-Since Hi-C contact matrices can be seen as are square grayscale images, such techniques can also be relevant for this thesis.
+Since Hi-C contact matrices can be seen as square grayscale images, such techniques can also be relevant for this thesis.
 
 Probably one of the first applications of computer vision methods for Hi-C matrices was presented by Liu and Wang in 2019 \cite{Liu2019b}.
 Here, established image super-resolution networks -- mostly deep \acrlong{cnn}s -- have been modified to enhance low-resolution Hi-C matrices.
 
-Another technique from computer vision that has been transferred to Hi-C matrices are conditional \acrlong{gan}s (\acrshort{gan}s), 
+Another technique from computer vision that has been transferred to Hi-C matrices are conditional \acrlong{gan}s (c\acrshort{gan}s), 
 invented by Goodfellow, Mirza and colleagues in 2014 \cite{Goodfellow2014, mirza2014}. 
 Again, several works have employed this comparatively new and involved method to increase the resolution of given Hi-C matrices, 
 including the ones by Liu and colleagues \cite{Liu2019}, Hong et al. \cite{Hong2020} and Dimmick et al. \cite{Dimmick2020}.
-In general, all three works feature the typical GAN setup with two competitive networks -- a generator, 
-which is trained to produce realistic high-resolution Hi-C matrices from its low-resolution inputs, 
-and a discriminator, which tries to distinguish real Hi-C matrices from generated ones and thus serves as a ``critique'', an additional loss function, for the generator.
+In general, all three works feature the typical cGAN setup with two competitive networks -- a \emph{generator}, 
+which is trained to produce realistic high-resolution Hi-C matrices from random noise and the low-resolution matrices (as conditional input), 
+and a \emph{discriminator}, which tries to distinguish real Hi-C matrices from generated ones.
+In this setting, the discriminator serves as a ``critique'', an additional loss function, for the generator,
+which has been shown empirically to be beneficial in many applications.
 While the convolutional building blocks for the discriminators and the residual building blocks for the generators are conceptually similar
-in all cases, the three works differ in the number of building blocks used and the activation functions applied within the blocks.
-Furthermore, Dimmick et al. and Hong et al. include additional loss functions beyond standard generator- and adversarial losses. 
-This includes perceptual losses derived from other (pre-trained) neural networks to obtain ``visually good'' Hi-C matrices and total variation loss to suppress noise
-while maintaining edges. 
+in all cases, the three works differ in the number of building blocks and the activation functions applied within the blocks.
+Furthermore, Dimmick et al. and Hong et al. include additional loss functions beyond standard generator- and discriminator losses. 
 The method by Dimmick et al. outperformed the others for most test cases, but it is also the most elaborated.
 
-\subsection{Discussion of existing work}
+\subsection{Discussion of existing work} \label{sec:prior:discussion}
 Independent of chosen techniques, several of the methods shown above only allow predictions restricted to certain loci (e.\,g. promoters and enhancers)
 or yield binary predictions in the sense of ``interaction'' or ``no interaction'' between certain loci \cite{Bkhetan2018, Kai2018,Martens2020,Singh2019}.
-These methods are thus not directly suitable for the task at hand, but would require further develoment.
+These methods are thus not directly suitable for the task at hand, but would require further development.
 
 The chromatin-modeling based approaches \cite{Brackley2016, MacPherson2018, Pierro2017, Qi2019} allow indirect derivation of Hi-C matrices
-by performing sufficient simulation passes and estimating contacts from the resulting model ensembles.
+by performing sufficient simulation passes and estimating contact counts from the resulting model ensembles.
 Depending on the chromatin model choice -- which seems not straightforward \cite{Huang2018, Bendandi2020} -- and the number of constraints involved,
 the required computations can be expensive.
-However, the results still seem slightly inferior compared to other methods mentioned in \cref{sec:prior:predictingInteractions}, 
-maybe because not all constraints for chromatin modeling are known or cannot be considered in the models yet.
+However, the results still seem slightly inferior compared to other methods mentioned in \cref{sec:prior:predictingInteractions} --
+maybe because only modeled constraints can be considered, but not all constraints for chromatin conformation are known or can be modeled yet.
 
 Three of the DNA-sequence based methods mentioned above also allow direct prediction of Hi-C matrices 
 \cite{Schreiber2017, Fudenberg2020, Schwessinger2019}.
 At first look, it is surprising that learning spatial structure from DNA-sequence actually works, 
-because there seems no obvious correlation between sequence and structure -- 
-instead, 3D conformation can vary considerably for different cell lines of the same organism, which all share the same DNA.
+because 3D conformation can vary considerably for different cell lines of the same organism, which all share the same DNA sequence.
 On the other hand, the chosen artificial networks might be able to figure out binding sites of relevant proteins from DNA sequence,
 which \emph{do} have a correlation with spatial structure. 
 This is especially true for the method by Schwessinger \cite{Schwessinger2019},
@@ -140,14 +143,15 @@ While the methods by Schreiber and Schwessinger use secondary inputs and therefo
 adapt to cell lines sharing the same DNA, the method by Fudenberg focuses on DNA and is thus 
 expected to produce the same outputs for all cell lines of a given organism.
 All three methods require comparatively deep networks which are expensive to train.
-The sequence-based method by Nikumbh et al. \cite{Nikumbh2017} is using a support vector machine, which is generally easier to train,
+The fourth sequence-based method by Nikumbh et al. \cite{Nikumbh2017} is using a support vector machine, which is generally easier to train,
 but the adaptability to different cell lines is expected to remain problematic due to the chosen concept.
 
 The random-forest-based method by Zhang et al. \cite{Zhang2019} is directly targeted at the goal of this thesis,
 since it directly predicts Hi-C matrices, is not limited to certain loci and can adapt to different cell lines using 
 corresponding ChIP-seq data.
 However, this approach has extensively been investigated in two previous study projects at the university of Freiburg,
-and the results could not be reproduced for unknown reasons~\cite{Krauth2020,Bajorat2019}.
+and the results could not be reproduced for unknown reasons -- neither using
+the provided source code nor own implementations from the two study projects \cite{Krauth2020,Bajorat2019} .
 
 The dense neural network approach by Farr\`e et al. \cite{Farre2018a} is also compatible with the goals of this thesis.
 The published results are visually and statistically convincing, and both the presented network and the training process offer
