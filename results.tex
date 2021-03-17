@@ -912,22 +912,22 @@ Results without pretraining see figures \ref{fig:results:GAN64-dnn_pearson} and 
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64_dnn/}{pred00080_chr21_030-040.pdf_tex}
+        \import{figures/GAN_64_dnn/}{pred00060_chr21_030-040.pdf_tex}
         \caption{example  region 1} \label{fig:results:cGAN64-dnn_r1}
     \end{subfigure}\\[6mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64_dnn/}{pred00080_chr19_030-040.pdf_tex}
+        \import{figures/GAN_64_dnn/}{pred00060_chr19_030-040.pdf_tex}
         \caption{example region 2} \label{fig:results:cGAN64-dnn_r2}
     \end{subfigure}\\[6mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64_dnn/}{pred00080_chr3_030-040.pdf_tex}
+        \import{figures/GAN_64_dnn/}{pred00060_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64-dnn_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN, DNN embedding, no pre-training, $w=64$, 80 epochs} \label{fig:results:cGAN64-dnn_matrices}
+    \caption{example predictions, cGAN, DNN embedding, no pre-training, $w=64$, 60 epochs} \label{fig:results:cGAN64-dnn_matrices}
 \end{figure}
 \begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -1007,37 +1007,37 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{pearson_chr03.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{pearson_chr03.pdf_tex}}
         \caption{chr3}
     \end{subfigure} \hfill
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{pearson_chr05.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{pearson_chr05.pdf_tex}}
         \caption{chr5}
     \end{subfigure}\\[5mm]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{pearson_chr10.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{pearson_chr10.pdf_tex}}
         \caption{chr10}
     \end{subfigure}\hfill
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{pearson_chr19.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{pearson_chr19.pdf_tex}}
         \caption{chr19}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{pearson_chr21.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{pearson_chr21.pdf_tex}}
         \caption{chr21}
     \end{subfigure} \hfill
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/GAN_64/}{lossOverEpochs.pdf_tex}}
+        \import{figures/GAN_64_cnn/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64_lossEpochs}
     \end{subfigure}
     \caption{results\,/\,metrics cGAN, CNN embedding, $w=64$, test chromosomes}   \label{fig:results:GAN64_pearson}
@@ -1046,22 +1046,22 @@ since average training time was around \SI{108}{\min} per epoch on the given har
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64/}{pred00100_chr21_030-040.pdf_tex}
+        \import{figures/GAN_64_cnn/}{pred00080_chr21_030-040.pdf_tex}
         \caption{example  region 1} \label{fig:results:cGAN64_r1}
     \end{subfigure}\\[6mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64/}{pred00100_chr19_030-040.pdf_tex}
+        \import{figures/GAN_64_cnn/}{pred00080_chr19_030-040.pdf_tex}
         \caption{example region 2} \label{fig:results:cGAN64_r2}
     \end{subfigure}\\[6mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
-        \import{figures/GAN_64/}{pred00100_chr3_030-040.pdf_tex}
+        \import{figures/GAN_64_cnn/}{pred00080_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN, CNN embedding, $w=64$, 100 epochs}
+    \caption{example predictions, cGAN, CNN embedding, $w=64$, 80 epochs}
 \end{figure}
 
 \begin{figure}[p] %cGAN cnn 128, pearson and progress
