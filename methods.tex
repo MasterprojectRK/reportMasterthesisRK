@@ -460,8 +460,10 @@ The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} 
 detailed in \cref{fig:methods:GAN_arch:downsampling} and \ref{fig:methods:GAN_arch:upsampling}. 
 All 2D-convolutions and 2D-deconvolutions had kernel size $(4,4)$ and were initialized with values drawn from a normal distribution with mean $\mu=0$ and
 standard deviation $\sigma=0.02$.
-Finally, the activation of the output layer was changed from tanh to sigmoid, because better results were observed
-in conjunction with the given Hi-C matrices, probably because these contain no negative values by definition.
+Finally, the output layer of the generator was changed from tanh- to sigmoid activation.
+This empirically showed better results, probably because the training- and test matrices were scaled to 0...1, which 
+is also the value range of the sigmoid function.
+
 
 Compared to the original pix2pix setup, 
 one downsampling layer was omitted in the discriminator for windowsize $w=\{256,128\}$ and another one for $w=64$.
