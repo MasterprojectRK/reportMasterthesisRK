@@ -164,10 +164,10 @@ which should not be considered optimal, are shown in \cref{sec:results:loss_func
 Looking at the results obtained from the networks so far, see \xxx, it seemed that highly interacting regions,
 especially topologically interacting domains (TADs), were not well predicted and either absent
 in the matrix plots or blurred.
-Assuming availability of a TAD scoring function $\mathit{tad}(z_\mathit{pred})$, where $z_\mathit{pred}$ is a predicted submatrix,
+Assuming availability of a TAD scoring function $\mathit{tad}(\mathbf{z}_\mathit{pred})$, where $\mathbf{z}_\mathit{pred}$ is a predicted submatrix,
 this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
 \begin{equation}
- L_\mathit{combined} = \lambda_\mathit{MSE}\;L_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(z_\mathit{true}) - \mathit{tad}(z_\mathit{pred}))^2 \label{eq:combined_loss_tad}
+ L_\mathit{combined} = \lambda_\mathit{MSE}\;L_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(\mathbf{z}_\mathit{true}) - \mathit{tad}(\mathbf{z}_\mathit{pred}))^2 \label{eq:combined_loss_tad}
 \end{equation}
 However, this approach suffers from several restrictions.
 First and foremost, there seems no consensus on the exact definition of TADs, 
@@ -316,27 +316,27 @@ Many ways for training a cGAN exist, and achieving a stable, converging training
 For the thesis at hand, the generator loss function proposed by Isola et al. \cite{Isola2017} was used, 
 amended by a TV loss function for noise reduction, \cref{eq:improve:cGAN_loss}.
 \begin{align}
- L_G(x, y, z) &=\lambda_\mathit{MAE}L_\mathit{MAE}(G(x,z), y) + \lambda_\mathit{adv} \; L_d(\mathbf{1}, D(x, G(x,z)) +  \lambda_\mathit{TV}L_\mathit{TV}(G(x,z)) \label{eq:improve:cGAN_loss}\\
- L_d(l, k) &= \frac{1}{bs}\sum^{bs} \frac{1}{n^2}\sum^{n^2}\left( -\log(\mathrm{sigmoid}(k)) \cdot l - \log(\mathbf{1} - \mathrm{sigmoid}(k)) \cdot (\mathbf{1} - l) \right) \label{eq:improve:disc_loss1}\\
- \mathrm{sigmoid(m)} &= \frac{e^m}{1+e^m} \label{eq:sigmoid}
+ L_G(\mathbf{x}, \mathbf{y}, \mathbf{z}) &=\lambda_\mathit{MAE}L_\mathit{MAE}(G(\mathbf{x},\mathbf{z}), \mathbf{y}) + \lambda_\mathit{adv} \; L_d(\mathbf{1}, D(\mathbf{x}, G(\mathbf{x},\mathbf{z})) +  \lambda_\mathit{TV}L_\mathit{TV}(G(\mathbf{x},\mathbf{z})) \label{eq:improve:cGAN_loss}\\
+ L_d(\mathbf{l, k}) &= \frac{1}{bs}\sum^{bs} \frac{1}{n^2}\sum^{n^2}\left( -\log(\mathrm{sigmoid}(\mathbf{k})) \cdot \mathbf{l} - \log(\mathbf{1} - \mathrm{sigmoid}(\mathbf{k})) \cdot (\mathbf{1} - \mathbf{l}) \right) \label{eq:improve:disc_loss1}\\
+ \mathrm{sigmoid(m_{i,j,k})} &= \frac{e^{m_{i,j,k}}}{1+e^{m_{i,j,k}}} \quad \mathrm{for}\; i \in (0, 1, \dots, bs)\; \textrm{and}\; j,k \in (0, 1, \dots, n) \label{eq:sigmoid}
 \end{align}
 Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between artificially generated output $G(x,z)$ and true Hi-C submatrices $y$ (as grayscale images), 
-$L_d$ is the discriminator loss according to \cref{eq:improve:disc_loss1}, in this case with respect to artificially generated matrices and 
+$L_d$ is the discriminator loss according to \cref{eq:improve:disc_loss1}, in this case with respect to artificially generated matrices, and 
 $l_\mathit{TV}$ is a total variation loss as in \cref{eq:combined_loss_short} and \cref{eq:methods:tv}.
 Since the discriminator is a patchGAN discriminator, it is working on batches which contain $bs$ image patches of shape $(n,n)$, and $\mathbf{1}$ is also a tensor of shape $(n,n)$, populated with ones.
-To obtain a scalar loss value, the mean is taken across both batches and patches. 
-The sigmoid function is computed individually for all elements in the $(bs,n,n)$-shaped tensors as shown in \cref{eq:sigmoid}, transforming them into value range [0...1].
-Finally, individual factors $\lambda$ can be used to balance the influence of the individual loss portions on the joint loss function.
+To obtain a scalar loss value, the mean was taken across both batches and patches. 
+The sigmoid function was computed individually for all elements $m_{i,j,k}$ in the $(bs,n,n)$-shaped tensors as shown in \cref{eq:sigmoid}, transforming them into value range [0...1].
+Finally, individual scalar factors $\lambda$ were used to balance the influence of the individual loss portions on the joint loss function, cf. \cref{sec:methods:cGAN_initial}.
 
-The discriminator was trained as proposed by Isola et al., as already indicated in \cref{fig:improve:cGAN-approach}.
-Here, the binary cross entropy loss was optimized with respect to true and fake samples, \cref{eq:improve:disc_loss_total} .
+As already indicated in \cref{fig:improve:cGAN-approach}, the discriminator was trained as proposed by Isola et al.,
+meaning that the binary cross entropy loss was optimized with respect to true- and fake samples, \cref{eq:improve:disc_loss_total} .
 \begin{align}
- L_D = \lambda_D * ( L_d(\mathbf{1}, D(x,y)) + L_d(\mathbf{0}, D(x,G(x, z)) ) \label{eq:improve:disc_loss_total}
+ L_D(\mathbf{x,y,z}) = \lambda_D * \left[ L_d(\mathbf{1}, D(\mathbf{x,y})) + L_d(\mathbf{0}, D(\mathbf{x},G(\mathbf{x, z})) \right] \label{eq:improve:disc_loss_total}
 \end{align}
 In \cref{eq:improve:disc_loss_total}, $L_d$ is again the PatchGAN loss defined above in \cref{eq:improve:disc_loss1}, $y$ are true Hi-C submatrices, 
 $G(x,z)$ are Hi-C submatrices artificially generated by the generator $G$
 from chromatin feature data $x$ and random noise $z$, and $\mathbf{1}, \mathbf{0}$ are tensors of the appropriate shape with all ones and all zeros, respectively.
-$\lambda_D$ is a factor proposed by Isola et al. to slow down the learning process of the discriminator compared to the generator.
+$\lambda_D$ is a scalar factor proposed by Isola et al. to slow down the learning process of the discriminator compared to the generator.
 
 The original idea behind combining mean absolute error $L_\mathit{MAE}$ and PatchGAN adversarial loss $L_d$ is that optimizing MAE 
 mainly minimizes low-frequency errors, while optimizing the PatchGAN-loss with its small patches helps reducing high-frequency errors \cite{Isola2017}.
