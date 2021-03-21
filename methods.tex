@@ -589,28 +589,29 @@ In the latter case, again the weights of the DNN were replaced by the ones of th
 
 \subsection{Comparsion with other approaches} \label{sec:methods:comparison}
 To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
-predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
-Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, the random forest being trained on GM12878, chromosome 14 and 17, respectively,
-because these results were deemed to offer the best comparability to the cGAN and DNN approaches of this thesis.
-The downloaded data is in text format and was first converted into cooler format, whereby we noticed that the data offered is surprisingly sparse.
+the available predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
+Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
+while the MULTICELL approach was using chromatin feature data from cell lines GM12878, HMEC, HUVEC, K562(!) and NHEK with training matrices from GM12878, chromosome 14 or 17.
+These results were deemed to offer the best comparability to the cGAN- and DNN approaches of this thesis.
+The downloaded data is in text format and was first converted into cooler format, whereby a surprising sparsity of the data was noted.
 For chromosome 14, only \SI{42.4}{\percent} and for chromosome 17, only \SI{59.9}{\percent} of all possible interacting pairs 
 for the chosen windowsize $w=200$ at binsize $b=5000$ were contained in the datasets, 
 and no interacting pairs with predicted interaction counts below 0.01 were found in the data. 
 Instead, the value range was between 0.36 and 5.10 across all four datasets, with similar values for each dataset alone.
-The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, which was not contained in the datasets at all.
+The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, i.\,e. the Hi-C matrix diagonal, which was not contained in the datasets at all.
 For the conversion to cooler format, the missing values were assumed to be zero.
-Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the cGAN and DNN data.
+Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the cGAN- and DNN results using cooler coarsen.
 
 For the comparison between HiC-Reg and Hi-cGAN, two additional cGAN models with CNN embedding were trained on chromosome 14 and 17, respectively,
-using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to 64 and batch size to 2.
+using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
 Additionally, HiC-Reg was compared to a cGAN-CNN model with windowsize 256 and CNN embedding, trained on the typical training data set, 
-which includes chromosomes 14 and 17, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
+which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
 allowing the conclusion that the correlation computations should be comparable between this thesis and the paper.
-For the comparsion with the DNN and cGAN approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
+For the comparsion with the DNN- and cGAN approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
 yielding comparatively high correlation values and visually pleasing matrix predictions, cf. \ref{sec:results:comparison}.
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
@@ -626,12 +627,11 @@ yielding comparatively high correlation values and visually pleasing matrix pred
 \caption{Pearson correlations reconstructed from \cite{Zhang2019}} \label{fig:methods:zhang_correlations_reconstructed}
 \end{figure}
 
-
-It seems strange that zero values have not been considered when computing the correlations for the publication.
+It seems strange that zero values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
 First, the paper gives no reason why the predicted data could be sparse, and second, 
 correctly predicted zero-values strongly increase the quality of the predicted matrices and should thus be considered when computing correlations.
-It is also unknown how TADs could be computed on the data without assuming the missing values as zeros,
-and, among others, TAD detection was used as a measure of prediction quality in the paper.
+It is also unknown how TADs could be computed on the data without assuming the missing values as zeros
+-- and TAD detection was used as a measure of prediction quality in the paper, among others.
 
 
 \subsection{Hardware} \label{sec:methods:hardware}
