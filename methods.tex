@@ -291,9 +291,9 @@ In computer graphics, other similarity metrics like the structural similarity in
 Fréchet inception distance (FID) seem more common than Pearson correlation.
 However, their suitability for plots of Hi-C matrices seems not to have been investigated so far. 
 Unlike Pearson correlation, SSIM and PSNR both depend on absolute values in the matrices to be compared, 
-so that for example $\mathit{PSNR}(\mathbf{X}) \not=\mathit{PSNR}(k\cdot \mathbf{X})$ for $k\in\mathbb{R}^{>1}$, which seems not optimal for a use case
-where structures are more interesting than actual values.
-Computing FID would require reshaping our outputs into images of shape (299, 299, 3) to meet Inception v3 specifications \cite{Szegedy2016}.
+so that for example $\mathit{PSNR}(\mathbf{X}) \not=\mathit{PSNR}(k\cdot \mathbf{X})$ for $k\in\mathbb{R}^{>1}$ and $X$ a matrix of appropriate shape, 
+which seems not optimal for a use case where structures are more interesting than actual values.
+Computing FID would require reshaping outputs into images of shape (299, 299, 3) to meet Inception v3 specifications \cite{Szegedy2016}.
 This is a non-trivial task for the given matrix plots,
 where the longer edge -- defined by $\mathit{chromsize}/\mathit{binsize}$ -- is usually much longer 
 and the shorter edge -- defined by the windowsize $w$ -- is usually shorter than 299 bins, or pixels, respectively.
@@ -344,13 +344,13 @@ The dense layers all use a ``L2'' kernel regularizer and all dropout layers have
 \end{figure}
 
 The training goal for the neural network $G$ is to find weights $\omega^*$ for its five trainable layers 
-such that the mean squared error $L_2$ between the predicted submatrices $M_s = G_s(\omega)$ 
-and the training submatrices $T_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
-Here, $M_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
+such that the mean squared error $L_2$ between the predicted submatrices $\mathbf{M}_s = G_s(\omega)$ 
+and the training submatrices $\mathbf{T}_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
+Here, $\mathbf{M}_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
 part of a symmetric $(w\times w)$ Hi-C matrix.
 Formally, one needs to optimize
 \begin{equation}
- \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 \label{eq:methods:nn-mse}
+ \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
 For the thesis at hand, stochastic gradient descent (SGD) with learning rate $10^{-5}$  was used to find $\omega^*$.
 Initial values $\omega_\mathit{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
@@ -396,9 +396,9 @@ and mean squared error was computed on the predicted ``upper triangular vectors'
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
 $w \times w \times 1$ tensors, where $w$ is again the windowsize.
 
-For a pixel-image $y$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992}
+For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992}
 \begin{equation}
- \sum_{i,j}\sqrt{|y_{i+1,j} - y_{i,j}|^2 + |y_{i,j+1} - y_{i,j} |^2 } \label{eq:methods:tv}
+ tv(\mathbf{y}) = \sum_{i,j}\sqrt{|y_{i+1,j} - y_{i,j}|^2 + |y_{i,j+1} - y_{i,j} |^2 } \label{eq:methods:tv}
 \end{equation}
 For efficiency, the tensorflow implementation from tf.image.total\_variation was used,
 taking the sum across batches as loss value, as recommended in the tensorflow documentation \cite{TensorflowTV2020}.
@@ -407,14 +407,14 @@ For perception loss, the predicted images and the true images were first fed thr
 in the fourth block (``block4\_conv3''), the last layer used by the influential work of Johnson et al. \cite{Johnson2016}.
 The loss was then computed as mean squared error between the ``predicted'' and ``true'' output activations of the truncated VGG-16 network.
 
-Let $M_s=G_s(\omega)$ again be the output of the neural network $G$ described above, and $T_s$ the true matrices for training samples $s$ in vector form,
-and let $M^\prime_s$ and $T^\prime_s$ be their grayscale image counterparts as described above.
-Furthermore, let $\mathit{tv}(x)$ be the total variation of image $x$ and $\mathit{vgg}(x)$ the output of the perception loss network for image $x$.
-The goal of the modified network was now to find weights $w^*$ such that
+Let $\mathbf{M}_s=G_s(\mathbf{\omega})$ again be the output of the neural network $G$ described above, and $\mathbf{T}_s$ the true matrices for training samples $s$ in vector form,
+and let $\mathbf{M}^\prime_s$ and $\mathbf{T}^\prime_s$ be their grayscale image counterparts as described above.
+Furthermore, let $\mathit{tv}(\mathbf{x})$ be the total variation of image $\mathbf{x}$ and $\mathit{vgg}(\mathbf{x})$ the output of the perception loss network for image $\mathbf{x}$.
+The goal of the modified network was now to find weights $\mathbf{\omega}^*$ such that
 \begin{equation}
- \omega^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2 
-                                                     + \lambda_\mathit{TV} \sum_{s=0}^N \mathit{tv}( M^\prime_s) 
-                                                     + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(M^\prime_s) - \mathit{vgg}(T^\prime_s))^2 ) \label{eq:methods:combined_loss}
+ \mathbf{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
+                                                     + \lambda_\mathit{TV} \sum_{s=0}^N \mathit{tv}( \mathbf{M}^\prime_s) 
+                                                     + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
 \end{equation}
 Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
 The weights for the VGG16 network were taken from the pre-trained keras implementation and can here be considered as constants.
@@ -426,13 +426,13 @@ but for the thesis at hand, only the initial network from \cref{sec:methods:basi
 \subsubsection{Combination of mean squared error and TAD-score-based loss} \label{sec:methods:score_loss}
 Formally, the the following optimization task can be defined by means of a combination between MSE and TAD-score based loss:
 \begin{equation}
- \omega^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (M_s - T_s)^2
-                                                    + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(M^\prime_s,ds) - \mathit{score}(T^\prime_s,ds))^2 \label{eq:methods:score_loss}
+ \omega^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2
+                                                    + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(\mathbf{M}^\prime_s,ds) - \mathit{score}(\mathbf{T}^\prime_s,ds))^2 \label{eq:methods:score_loss}
 \end{equation}
-where $M_s$ is again the Hi-C submatrix predicted by the network $G(\omega)$ for sample $s$ and $T_s$ is the corresponding true Hi-C submatrix.
+where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\omega)$ for sample $s$ and $\mathbf{T}_s$ is the corresponding true Hi-C submatrix.
 
-To compute the TAD-score-based loss $\mathit{score}(\cdot,\cdot)$, the predictions and true Hi-C matrices $M$ and $T$ in vector form (upper triangular part)
-were first converted back to complete, symmetric Hi-C matrices $M^\prime,\; T^\prime$. 
+To compute the TAD-score-based loss $\mathit{score}(\cdot,\cdot)$, the predictions and true Hi-C matrices $\mathbf{M}$ and $\mathbf{T}$ in vector form (upper triangular part)
+were first converted back to complete, symmetric Hi-C matrices $\mathbf{M}^\prime,\; \mathbf{T}^\prime$. 
 Next, in a custom network layer, all diamonds with size $ds$ inside the submatrices of size $w$ were cut out using tensor slicing and the values inside the diamonds were reduced to their respective mean.
 This yields score vectors -- more exactly, tensors with shape $(w - 2\,ds, 1)$.
 After computing the latter for both predicted- and real Hi-C submatrices, the mean squared error between them was computed as usual and weighted with 
@@ -444,12 +444,12 @@ this is rather unintuitive and was therefore not implemented for the thesis.
 \subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
 In the following subsection, the setup and training process of the cGAN network developed for this thesis and the respective
 embeddings for the conditional input -- the chromatin features -- will be described in more detail.
-First, the basic network setup based on the well-known pix2pix cGAN architecture \cite{Isola2017} and the training process
+First, the basic network setup based on the well-known \emph{pix2pix} cGAN architecture \cite{Isola2017} and the training process
 are explained in \cref{sec:methods:cGAN_initial}, then the respective embedding networks are discussed in subsections \ref{sec:methods:dnn-embedding},
 \ref{sec:methods:cnn-embedding} and \ref{sec:methods:mixed-embedding}.
 
 \subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
-Several implementations of the original pix2pix network \cite{Isola2017} are publicly available, usually for the original image size of $256\times256$.
+Several implementations of the original \emph{pix2pix} network \cite{Isola2017} are publicly available, usually for the original image size of $256\times256$.
 For the thesis at hand, implementation concepts from two tutorials \cite{tfpix2pix2020, brownlee2019} were combined and the code was adapted to the given requirements.
 
 Within the generator, two of the down- and upsampling layers inside the U-Net portion were made optional 
@@ -464,38 +464,37 @@ Finally, the output layer of the generator was changed from tanh- to sigmoid act
 This empirically showed better results, probably because the training- and test matrices were scaled to 0...1, which 
 is also the value range of the sigmoid function.
 
-
-Compared to the original pix2pix setup, 
-one downsampling layer was omitted in the discriminator for windowsize $w=\{256,128\}$ and another one for $w=64$.
+Compared to the original \emph{pix2pix} setup, 
+one downsampling layer was omitted in the discriminator for windowsize $w\in\{128,256,\dots\}$ and another one for $w=64$.
 This made the discriminator patches larger, especially for the smaller windowsizes,
-cf. \cref{fig:methods:GAN_arch:discriminator} and was empirically found to improve the results
+cf. \cref{fig:methods:GAN_arch:discriminator}, and was empirically found to improve the results
 slightly in the given application.
 Symmetry was enforced after all convolutions in the same way as in the generator.
 Kernel sizes and initializations for all 2D convolutions also were the same as for the generator,
-and leaky ReLU-activations were used with parameter $\alpha=0.2$, as in all up- and downsampling layers.
+and leaky ReLU-activations were used with parameter $\alpha=0.2$, as in all downsampling layers.
 
-Both the discriminator and the generator feature their own, trainable embedding network
+Both the discriminator and the generator featured their own, trainable embedding network
 to convert the conditional input, i.\,e. the chromatin feature data of shape $(3w, n)$,
 into grayscale images of shape $(w,w,1)$. 
 These networks will be discussed below in \cref{sec:methods:dnn-embedding}
 and \cref{sec:methods:cnn-embedding}.
 
-The loss function was implemented as shown in \cref{eq:improve:cGAN_loss}
-with parameters $\lambda_\mathit{cGAN}=10^{-5}, \lambda_\mathit{MAE}=1.0, \lambda_\mathit{TV}=10^{-12}$.
-Optimization was performed on minibatches of size 32,4 and 2 for windowsizes 64, 128 and 256, respectively, 
-using Adam optimizers with learning rate $2\cdot10^{-5}$ and $\beta_1=0.5$ for both generator and discriminator.
+The loss functions for the generator and discriminator were implemented as shown in equations (\ref{eq:improve:cGAN_loss}) to (\ref{eq:improve:disc_loss_total})
+with parameters $\lambda_\mathit{adv}=1.0, \lambda_\mathit{MAE}=100.0, \lambda_\mathit{TV}=10^{-12}$ and $\lambda_D=0.5$.
+Optimization was performed on minibatches of size 32, 8 and 2 for windowsizes 64, 128 and 256, respectively, 
+using Adam optimizers with learning rate $2\cdot10^{-5}$ for the generator, $10^{-6}$ for the discriminator and $\beta_1=0.5$ for both generator and discriminator.
 The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:methods:hardware}.
 
 \begin{figure}[p]
     \tiny
     \import{figures/GAN_arch/}{generatorModel.pdf_tex}
-    \caption{Adapted generator model from pix2pix} \label{fig:methods:GAN_arch:generator}
+    \caption{Adapted generator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:generator}
 \end{figure}
 \begin{figure}[p]
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{discriminatorModel.pdf_tex}
-    \caption{Adapted discriminator model from pix2pix} \label{fig:methods:GAN_arch:discriminator}
+    \caption{Adapted discriminator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:discriminator}
 \end{figure}
 \begin{figure}[p]
     \scriptsize
@@ -512,7 +511,7 @@ The choice of batchsizes was partially dictated by memory limitations of the ava
 
 
 \begin{enumerate}
- \item the number of trainable parameters
+ \item the number of trainable parameters \xxx
 \end{enumerate}
 
 \subsubsection{Using a DNN for 1D-2D embedding} \label{sec:methods:dnn-embedding}

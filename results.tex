@@ -864,16 +864,17 @@ Although there is still room for improvements, at least one of the three cGAN-va
 \subsubsection{cGAN with DNN embedding} \label{sec:results:cgan_dnn}
 The cGAN with DNN-embedding showed interesting results.
 All in all, the training process was unexpectedly smooth and converged after around 60 epochs, mostly using the parameters suggested
-by Isola et al \cite{Isola2017} which is rather unusual for cGANs -- and also somewhat unexpected after the changes made to the original
-\emph{pix2pix} network. 
+by Isola et al \cite{Isola2017} (cf. \ref{sec:methods:cGAN_initial}), which is rather unusual for cGANs -- especially after the changes made to the original
+\emph{pix2pix} network, including the embedding portion. 
 Although the Pearson correlations were mostly worse than the ones of the DNN presented above, compare figures \ref{fig:results:DNN64_pearson} and \ref{fig:results:GAN64-dnn_pearson},
 the matrices mostly looked visually better, showing more distinct boundaries between interacting and non-interacting regions, compare figures \ref{fig:results:DNN_matrices} and \ref{fig:results:GAN64-dnn_matrices}.
 
 Using weight transfer from a pre-trained DNN for the embedding networks further stabilized the training process 
-and made the discriminator reach a stable value of around 0.693 ($\approx -ln(0.5)$)
-after only 2 epochs, while the generator validation loss reached a stable minimum value after about 15 epochs, \cref{fig:results:GAN64_pretrain-dnn_lossEpochs}
-The Pearson correlations showed showed slight improvements of the pre-trained variant against the non-pre-trained, \cref{fig:results:GAN64_pretrain-dnn_pearson},
-but surprisingly, the matrices were visually clearly worse than without pre-training, and also worse than the results from the DNN alone, \cref{fig:results:cGAN64_pretrain-dnn_matrices}.
+and made the discriminator reach a stable value of around 0.693 ($\approx -ln(0.5)$, cf. \cref{eq:improve:cGAN_loss})
+after only 2 epochs, while the generator validation loss reached a stable minimum value after about 15 epochs, \cref{fig:results:GAN64_pretrain-dnn_lossEpochs}.
+However, the resulting predictions did not really improve.
+While the Pearson correlations showed showed slightly better values for the pre-trained compared to the non-pre-trained, \cref{fig:results:GAN64_pretrain-dnn_pearson},
+the matrices were visually clearly worse than without pre-training, and also worse than the results from the DNN alone, \cref{fig:results:cGAN64_pretrain-dnn_matrices}.
 
 \begin{figure}[p] %cGAN with DNN, no pretraining, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -933,7 +934,7 @@ but surprisingly, the matrices were visually clearly worse than without pre-trai
         \import{figures/GAN_64_dnn/}{pred00060_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64-dnn_r3}
     \end{subfigure}
-    \caption{example predictions, cGAN, DNN embedding, no pre-training, $w=64$, 60 epochs} \label{fig:results:cGAN64-dnn_matrices}
+    \caption{example predictions, cGAN, DNN embedding, no pre-training, $w=64$, 60 epochs} \label{fig:results:GAN64-dnn_matrices}
 \end{figure}
 \begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -970,7 +971,7 @@ but surprisingly, the matrices were visually clearly worse than without pre-trai
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_64_pretrain-dnn/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress} \label{fig:results:GAN64__pretrain-dnn_lossEpochs}
+        \caption{learning progress} \label{fig:results:GAN64_pretrain-dnn_lossEpochs}
     \end{subfigure}
     \caption{results\,/\,metrics, cGAN, DNN embedding, pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
 \end{figure}
