@@ -604,7 +604,7 @@ Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow c
 For the comparison between HiC-Reg and Hi-cGAN, two additional cGAN models with CNN embedding were trained on chromosome 14 and 17, respectively,
 using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
-Additionally, HiC-Reg was compared to a cGAN-CNN model with windowsize 256 and CNN embedding, trained on the typical training data set, 
+Additionally, HiC-Reg was compared to a cGAN-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
 which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,

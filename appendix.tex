@@ -220,6 +220,75 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \caption{example predictions, DNN, $w=64$, 250 epochs} \label{fig:results:DNN_matrices}
 \end{figure}
 \clearpage
+\subsubsection{cGAN trained on K562, predicting GM12878}
+\begin{figure}[h!] %cGAN 256 K-on-G, pearson and progress
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_256_K-on-G/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:results:GAN256_K-on-G_lossEpochs}
+    \end{subfigure}
+    \caption{results\,/\,metrics cGAN, CNN embedding, $w=256$, test chromosomes}   \label{fig:results:GAN256_K-on-G_pearson}
+\end{figure}
+\begin{figure}[p] %cgan mixed 64, pretrained, matrices
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_256_K-on-G/}{pred00060_chr21_030-040.pdf_tex}}
+        \caption{example  region 1} \label{fig:results:GAN256_K-on-G_r1}
+    \end{subfigure}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_256_K-on-G/}{pred00060_chr19_030-040.pdf_tex}}
+        \caption{example region 2} \label{fig:results:GAN256_K-on-Gr2}
+    \end{subfigure}\\[3mm]
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \centering
+        \resizebox{0.9\textwidth}{!}{
+        \scriptsize
+        \import{figures/GAN_256_K-on-G/}{pred00060_chr3_030-040.pdf_tex}}
+        \caption{example region 3} \label{fig:results:GAN256_K-on-G_r3}
+    \end{subfigure}
+    \caption{example predictions cGAN, CNN embedding, $w=256$, 60 epochs} 
+     \label{fig:results:GAN256_K-on-G_matrices}
+\end{figure}
+\clearpage
 \subsubsection{cGAN trained on single chromosomes predicting usual test chromosomes}
 \begin{figure}[h!] %cGAN single chrom 14, pearson and progress, predicting usual test chroms 3,5,10,19,21
     \begin{subfigure}{0.45\textwidth}
