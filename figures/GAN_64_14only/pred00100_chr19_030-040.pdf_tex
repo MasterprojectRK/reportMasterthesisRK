@@ -54,20 +54,20 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pred00100_chr19_030-040.pdf}}%
-    \put(0.01298975,0.12907603){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2.0\end{tabular}}}}%
-    \put(0.00307836,0.15151244){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10.0\end{tabular}}}}%
-    \put(0.00307836,0.17394892){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50.0\end{tabular}}}}%
-    \put(-0.00683304,0.19327457){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}200.0\end{tabular}}}}%
-    \put(0.01298975,0.04428537){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2.0\end{tabular}}}}%
-    \put(0.00307836,0.0697574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20.0\end{tabular}}}}%
-    \put(-0.00683304,0.08756162){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100.0\end{tabular}}}}%
-    \put(-0.00683304,0.10536576){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}500.0\end{tabular}}}}%
-    \put(0.04671837,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
-    \put(0.23466123,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
-    \put(0.42260405,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%
-    \put(0.61054666,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36.0\end{tabular}}}}%
-    \put(0.80203782,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}38.0 Mbp\end{tabular}}}}%
-    \put(0.98643333,0.00025754){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40.0\end{tabular}}}}%
-    \put(0.51124501,0.00000154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chr19\end{tabular}}}}%
+    \put(0.01224779,0.12908114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2.0\end{tabular}}}}%
+    \put(0.00233733,0.15123797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10.0\end{tabular}}}}%
+    \put(0.00233733,0.1733947){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50.0\end{tabular}}}}%
+    \put(-0.00757312,0.19247949){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}200.0\end{tabular}}}}%
+    \put(0.01224779,0.04442203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2.0\end{tabular}}}}%
+    \put(0.00233733,0.06989035){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20.0\end{tabular}}}}%
+    \put(-0.00757312,0.08769193){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100.0\end{tabular}}}}%
+    \put(-0.00757312,0.1054934){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}500.0\end{tabular}}}}%
+    \put(0.04661412,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30.0\end{tabular}}}}%
+    \put(0.2345569,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}32.0\end{tabular}}}}%
+    \put(0.42249973,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34.0\end{tabular}}}}%
+    \put(0.61044266,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36.0\end{tabular}}}}%
+    \put(0.80193382,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}38.0 Mbp\end{tabular}}}}%
+    \put(0.98632868,0.00265597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40.0\end{tabular}}}}%
+    \put(0.51114101,0.00239995){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chr19\end{tabular}}}}%
   \end{picture}%
 \endgroup%
