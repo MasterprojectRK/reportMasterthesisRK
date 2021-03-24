@@ -54,29 +54,49 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pearson_chr10.pdf}}%
-    \put(0.08586562,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
-    \put(0.18769359,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
-    \put(0.30275074,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
-    \put(0.41780784,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
-    \put(0.53286496,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
-    \put(0.64792213,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
-    \put(0.7629792,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.2\end{tabular}}}}%
-    \put(0.87803637,0.03468357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.4\end{tabular}}}}%
-    \put(0.39229401,-0.00000504){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Genomic distance / Mbp\end{tabular}}}}%
-    \put(0.0346978,0.06207713){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
-    \put(0.0346978,0.19711148){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
-    \put(0.0346978,0.33214589){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
-    \put(0.0346978,0.46718034){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
-    \put(0.0346978,0.60221464){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
-    \put(0.0346978,0.73724883){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
-    \put(0.01927657,0.28671927){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
-    \put(0.2325314,0.79623018){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
-    \put(0.35147023,0.76210518){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GM12878, 17 on K562, 10\end{tabular}}}}%
-    \put(0.21559238,0.28872895){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20 ep / AUC: 0.394\end{tabular}}}}%
-    \put(0.21559238,0.25150391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40 ep / AUC: 0.435\end{tabular}}}}%
-    \put(0.21559238,0.21427896){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60 ep / AUC: 0.444\end{tabular}}}}%
-    \put(0.21559238,0.17705391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}80 ep / AUC: 0.443\end{tabular}}}}%
-    \put(0.21559238,0.13982886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100 ep / AUC: 0.452\end{tabular}}}}%
-    \put(0.21559238,0.10260377){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}transfer GM12878 / AUC: 0.738\end{tabular}}}}%
+    \put(0.08585695,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{pearson_chr10.pdf}}%
+    \put(0.18767119,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{pearson_chr10.pdf}}%
+    \put(0.3027146,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{pearson_chr10.pdf}}%
+    \put(0.41775801,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{pearson_chr10.pdf}}%
+    \put(0.53280139,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{pearson_chr10.pdf}}%
+    \put(0.64784483,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{pearson_chr10.pdf}}%
+    \put(0.76288821,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{pearson_chr10.pdf}}%
+    \put(0.87793158,0.03455512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.4\end{tabular}}}}%
+    \put(0.39224718,-0.00012871){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Genomic distance / Mbp\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.06194531){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.19696365){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.33198191){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.46700018){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.60201852){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{pearson_chr10.pdf}}%
+    \put(0.03469367,0.73703665){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
+    \put(0.01927427,0.28656075){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{pearson_chr10.pdf}}%
+    \put(0.23250366,0.79601103){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
+    \put(0.10925638,0.76189005){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GM12878, 1,2,4,7,9,11,13,14,16,17,18,20,22 on K562, 10\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.29012125){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}80 ep / AUC: 0.432\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.25290062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100 ep / AUC: 0.449\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.21568014){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}120 ep / AUC: 0.453\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.17845938){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}140 ep / AUC: 0.464\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.14123876){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}160 ep / AUC: 0.463\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{pearson_chr10.pdf}}%
+    \put(0.2152082,0.10401813){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}transfer GM12878 / AUC: 0.738\end{tabular}}}}%
   \end{picture}%
 \endgroup%
