@@ -194,11 +194,11 @@ to train a network with more than seven million parameters, cf.~\cref{sec:method
 \end{table}
 
 \subsubsection{Sample generation for the cGAN} \label{sec:methods:sample_gen_cgan}
-The samples for the cGAN were generated the same way as the samples for the dense neural network described 
+The samples for the \acrshort{cgan} were generated the same way as the samples for the dense neural network described 
 in \cref{sec:methods:sample_gen}, with two exceptions.
 First, Hi-C (sub-)matrices were not entered as vectors corresponding to their upper triangular part, 
 but were instead taken as $w\times w \times 1$ grayscale images with value range [0...1] in 32-bit floating point format.
-Second, for the cGAN approach the input matrices need not only be square,
+Second, for the \acrshort{cgan} approach the input matrices need not only be square,
 but their sizes also needed to be powers of two. 
 This ensured the required shapes for the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
@@ -442,9 +442,9 @@ While it would also have been possible, and probably faster, to slice the output
 this is rather unintuitive and was therefore not implemented for the thesis. 
 
 \subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
-In the following subsection, the setup and training process of the cGAN network developed for this thesis and the respective
+In the following subsection, the setup and training process of the \acrshort{cgan} network developed for this thesis and the respective
 embeddings for the conditional input -- the chromatin features -- will be described in more detail.
-First, the basic network setup based on the well-known \emph{pix2pix} cGAN architecture \cite{Isola2017} and the training process
+First, the basic network setup based on the well-known \emph{pix2pix} \acrshort{cgan} architecture \cite{Isola2017} and the training process
 are explained in \cref{sec:methods:cGAN_initial}, then the respective embedding networks are discussed in subsections \ref{sec:methods:dnn-embedding},
 \ref{sec:methods:cnn-embedding} and \ref{sec:methods:mixed-embedding}.
 
@@ -514,9 +514,9 @@ The choice of batchsizes was partially dictated by memory limitations of the ava
  \item the number of trainable parameters \xxx
 \end{enumerate}
 
-\subsubsection{Using a DNN for 1D-2D embedding} \label{sec:methods:dnn-embedding}
+\subsubsection{Using a DNN for feature embedding} \label{sec:methods:dnn-embedding}
 In order to use the DNN described in \cref{sec:methods:basicSetup} as an embedding network
-for the cGAN, only small amendments were required to adjust the input shapes,
+for the \acrshort{cgan}, only small amendments were required to adjust the input shapes,
 i.\,e. to provide symmetric Hi-C matrices as grayscale images instead of the upper-triangular-vector representation
 native to the DNN, see \cref{fig:methods:dnn-embedding}.
 \begin{figure}[p]
@@ -546,18 +546,18 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 \end{table}
 
 For the thesis, the DNN-embedding was used in two ways.
-First, it was trained together with the rest of the cGAN with weight initialization as described in 
+First, it was trained together with the rest of the \acrshort{cgan} with weight initialization as described in 
 \cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
 Second, a DNN was pre-trained as described in \cref{sec:methods:basicSetup} with windowsize $w=64$
-and the learned weights were transferred to the cGAN once before the start of the training process,
+and the learned weights were transferred to the \acrshort{cgan} once before the start of the training process,
 which was then continued as described in \cref{sec:methods:cGAN_initial}.
 The results of the pre-training are visualized in \cref{sec:appendix:pretraining_results} (\cref{fig:results:DNN64_pearson});
-the state after 250 epochs was the one transferred to the cGAN.
+the state after 250 epochs was the one transferred to the \acrshort{cgan}.
 
 DNN embeddings were only used with windowsize $w=64$ due to the large number of parameters
 to be trained at windowsizes 128, 256 and higher.
 
-\subsubsection{Using a CNN for 1D-2D embedding} \label{sec:methods:cnn-embedding}
+\subsubsection{Using a CNN for feature embedding} \label{sec:methods:cnn-embedding}
 The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
 as shown in \cref{fig:methods:GAN_arch:embedding_network}.
 Each of the convolution blocks start with a 1D convolution with kernel size 4, strides 1, padding ``same'' 
@@ -591,7 +591,7 @@ To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
 the available predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
 Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
 while the MULTICELL approach was using chromatin feature data from cell lines GM12878, HMEC, HUVEC, K562(!) and NHEK with training matrices from GM12878, chromosome 14 or 17.
-These results were deemed to offer the best comparability to the cGAN- and DNN approaches of this thesis.
+These results were deemed to offer the best comparability to the \acrshort{cgan}- and DNN approaches of this thesis.
 The downloaded data is in text format and was first converted into cooler format, whereby a surprising sparsity of the data was noted.
 For chromosome 14, only \SI{42.4}{\percent} and for chromosome 17, only \SI{59.9}{\percent} of all possible interacting pairs 
 for the chosen windowsize $w=200$ at binsize $b=5000$ were contained in the datasets, 
@@ -599,18 +599,18 @@ and no interacting pairs with predicted interaction counts below 0.01 were found
 Instead, the value range was between 0.36 and 5.10 across all four datasets, with similar values for each dataset alone.
 The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, i.\,e. the Hi-C matrix diagonal, which was not contained in the datasets at all.
 For the conversion to cooler format, the missing values were assumed to be zero.
-Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the cGAN- and DNN results using cooler coarsen.
+Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and DNN results using cooler coarsen.
 
-For the comparison between HiC-Reg and Hi-cGAN, two additional cGAN models with CNN embedding were trained on chromosome 14 and 17, respectively,
+For the comparison between \emph{HiC-Reg} and Hi-\acrshort{cgan}, two additional \acrshort{cgan} models with CNN embedding were trained on chromosome 14 and 17, respectively,
 using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
-Additionally, HiC-Reg was compared to a cGAN-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
+Additionally, HiC-Reg was compared to a \acrshort{cgan}-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
 which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
 allowing the conclusion that the correlation computations should be comparable between this thesis and the paper.
-For the comparsion with the DNN- and cGAN approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
+For the comparsion with the DNN- and \acrshort{cgan} approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
 yielding comparatively high correlation values and visually pleasing matrix predictions, cf. \ref{sec:results:comparison}.
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
@@ -639,10 +639,10 @@ All training for \cref{sec:results:cgan} was done on machine 2,
 computations for sections \ref{sec:initialDNNresults}, \ref{sec:results:wider-longer-etc} and \ref{sec:results:binsize_winsize}
 were done on machine 3 without GPU and computations for sections \ref{sec:results:loss_functions} and \ref{sec:results:scorebased} were done on machine 2.
 
-Training the DNN with perception- or score-based losses as well as the cGAN was not reasonably possible without GPU.
-For the cGAN, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
+Training the DNN with perception- or score-based losses as well as the \acrshort{cgan} was not reasonably possible without GPU.
+For the \acrshort{cgan}, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
 to avoid undue limitations on batchsizes and/or windowsizes.
-\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the cGAN at windowsize 64 for more than 80 epochs.
+\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the \acrshort{cgan} at windowsize 64 for more than 80 epochs.
 It could not be clarified throughout the thesis whether this was due to a memory leak in tensorflow or due to the chosen implementation.
 
 Training samples were stored as tensorflow tfrecords (on the fly at runtime) and a custom pipeline including a shuffle buffer and prefetching 
