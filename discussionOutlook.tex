@@ -13,25 +13,33 @@ and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019}
 However, there is still room for improvement -- even the best predictions of this thesis were not or not much better 
 than simply taking data from the training cell line as a ``prediction'' for the target cell line.
 
-Throughout the thesis, at least two starting points for further improving the predictions were identified.
+Throughout the thesis, a few starting points for further improving the predictions were identified.
 As of now, the discriminator is trained on two kinds of inputs:
 it is supposed to classify pairs of true chromatin feature arrays and true Hi-C submatrices as real, 
 and pairs of true chromatin feature arrays and artificial Hi-C submatrices produced by the generator as fake, cf. \cref{eq:improve:disc_loss_total}.
 For text-to-image synthesis tasks, a third kind of input has been introduced; here the discriminator is additionally trained 
 to classify pairs of true output and mismatching \emph{input data} as fake \cite{Reed2016}.
 Training the discriminator on such samples might help the \acrshort{cgan} to avoid situations 
-where the generator produces matrices which ``look good'', 
+where the generator produces matrices which ``look real'', 
 but have insufficient correlations with the chromatin feature input data.
 It is unclear how strong the effect of this change would be in the given application, 
 where the adversarial loss is only one part of the combined generator loss, but certainly worth a try.
 
-As noted in \cref{sec:methods:cGAN_initial}, better results were obtained when using sigmoid activation for the generator,
-replacing the tanh activation of the original \emph{pix2pix} network.
+As noted in \cref{sec:methods:cGAN_initial}, better results were obtained by replacing the tanh activation in the generator 
+of the original \emph{pix2pix} network by sigmoid activation.
 Retrospectively, however, it might have been better to leave the tanh activation in the generator untouched
 and instead scale the training matrices -- and maybe the chromatin features, too -- to value range -1...1.
 This would allow for a broader input value range to the sigmoid function contained in the discriminator loss,
 potentially improving numerical gradient computations.
 
-\xxx \xxx \xxx
-Better embedding network, choice was ad-hoc
-\xxx \xxx \xxx
+Another starting point is for sure the network architecture in itself.
+While good reasons backed the decision for choosing \emph{pix2pix} for the general network setup,
+namely its wide range of applications and demonstrated convergence even when only few training samples are at hand \cite{Isola2017},
+it remains a network designed for converting \emph{input images} to output images.
+However, the task at hand essentially requires transforming \emph{one-dimensional input} data into very special symmetric output images.
+Although surprisingly good results were obtained, it is difficult to imagine that \emph{pix2pix} -- amended by the simplistic and rather ad-hoc CNN embedding network 
+described in \cref{sec:improve:CNN_embedding} and \ref{sec:methods:cnn-embedding} -- is the optimal solution for suchlike 1D\,$\rightarrow$\,2D conversions.
+
+Nevertheless, the cGAN approach developed within this thesis can hopefully serve as a helpful starting point and baseline
+for further development of improved Hi-C contact matrix prediction methods.
+To this end, all source code is provided on github under an open source license \cite{Krauth2021a, Krauth2021b} .
