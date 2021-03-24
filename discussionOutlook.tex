@@ -1,13 +1,37 @@
 \section{Discussion and Outlook}
-Approach by Farre et al also working for human data.
-Changes might bring benefits in certain cituations, but are not a big improvement.
+In this thesis, two methods have been considered for predicting Hi-C interaction matrices,
+one based on a dense neural network proposed by Farr\'e et al. \cite{Farre2018a} and the other one based on a novel conditional generative adversarial network
+inspired by \emph{pix2pix} \cite{Isola2017}.
 
-cGAN seems promising, but the discriminator remains to improve.
-Improvements still not good enough to beat transfer GM12878-K562 in many cases.
+Despite all amendments to the original network setup,
+the results of the dense neural network approach remained modest.
+Improvements, if at all visible, could only be achieved for a small part of the test set.
 
-Conclusion w.r.t. comparison to other approaches
+On the other hand, the novel conditional generative adversarial network method seems promising.
+Especially the variant with CNN embedding showed widely satisfying results for genomic distances up to about \SI{5}{\mega\bp}
+and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019} with regard to predicting nested structures.
+However, there is still room for improvement -- even the best predictions of this thesis were not or not much better 
+than simply taking data from the training cell line as a ``prediction'' for the target cell line.
 
-Learning from mixed up samples, true matrix but non-matching conditional input could improve things,
-commonly done in text-to-image synthesis networks.
+Throughout the thesis, at least two starting points for further improving the predictions were identified.
+As of now, the discriminator is trained on two kinds of inputs:
+it is supposed to classify pairs of true chromatin feature arrays and true Hi-C submatrices as real, 
+and pairs of true chromatin feature arrays and artificial Hi-C submatrices produced by the generator as fake, cf. \cref{eq:improve:disc_loss_total}.
+For text-to-image synthesis tasks, a third kind of input has been introduced; here the discriminator is additionally trained 
+to classify pairs of true output and mismatching \emph{input data} as fake \cite{Reed2016}.
+Training the discriminator on such samples might help the \acrshort{cgan} to avoid situations 
+where the generator produces matrices which ``look good'', 
+but have insufficient correlations with the chromatin feature input data.
+It is unclear how strong the effect of this change would be in the given application, 
+where the adversarial loss is only one part of the combined generator loss, but certainly worth a try.
 
-Should have scaled the matrices to -1...1 instead of 0...1 and used tanh activation in the generator!
+As noted in \cref{sec:methods:cGAN_initial}, better results were obtained when using sigmoid activation for the generator,
+replacing the tanh activation of the original \emph{pix2pix} network.
+Retrospectively, however, it might have been better to leave the tanh activation in the generator untouched
+and instead scale the training matrices -- and maybe the chromatin features, too -- to value range -1...1.
+This would allow for a broader input value range to the sigmoid function contained in the discriminator loss,
+potentially improving numerical gradient computations.
+
+\xxx \xxx \xxx
+Better embedding network, choice was ad-hoc
+\xxx \xxx \xxx
