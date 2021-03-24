@@ -2,7 +2,7 @@
 In the following subsections, two conceptually different approaches towards the goal of the thesis,
 predicting Hi-C matrices from ChIP-seq data, will be explored.
 While the first approach is a dense neural network based on work by Farr\'e et al. \cite{Farre2018a},
-the second is a novel method based on conditional generative adversarial networks (cGANs).
+the second is a novel method based on conditional generative adversarial networks (\acrshort{cgan}s).
 
 \subsection{Dense Neural Network approach}\label{sec:improve:DNNapproach}
 In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
@@ -267,7 +267,7 @@ and especially for image synthesis \cite{Wang2020}.
 Among their strengths is image synthesis from textual descriptions \cite{Reed2016,Zhang2019c,Zhu2019,Tao2020} --
 and from an abstract point of view, this task is not very different from the goal of the thesis at hand.
 Considering the chromatin features on the input side as a ``description'' of how the target Hi-C (sub-)matrices should look like,
-formulating the goal of the thesis as a cGAN-problem should be possible.
+formulating the goal of the thesis as a \acrshort{cgan}-problem should be possible.
 In the following sections, such an approach will be explored.
 
 \subsubsection{General setup of the cGAN approach}
@@ -288,7 +288,7 @@ amended by a convolutional embedding network for the chromatin features, which s
 The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be explained in more detail below.
 \begin{figure}[htbp]
  \import{figures/}{Hi-cGAN.pdf_tex}
- \caption{cGAN approach} \label{fig:improve:cGAN-approach}
+ \caption{\acrshort{cgan} approach} \label{fig:improve:cGAN-approach}
 \end{figure}
 
 The generator architecture is based the well known U-Net architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
@@ -312,12 +312,12 @@ Both approaches are distantly related to the text-encoders used by text-to-image
 \cite{Reed2016b,Xu2018}, but much less sophisticated. 
 However, a complex encoding is not needed here, since -- contrary to image captions -- the chromatin features are already in a format that can be processed directly by neural networks.
 
-Many ways for training a cGAN exist, and achieving a stable, converging training process can be tricky.
+Many ways for training a \acrshort{cgan} exist, and achieving a stable, converging training process can be tricky.
 For the thesis at hand, the generator loss function proposed by Isola et al. \cite{Isola2017} was used, 
 amended by a TV loss function for noise reduction, \cref{eq:improve:cGAN_loss}.
 \begin{align}
  L_G(\mathbf{x}, \mathbf{y}, \mathbf{z}) &=\lambda_\mathit{MAE}L_\mathit{MAE}(G(\mathbf{x},\mathbf{z}), \mathbf{y}) + \lambda_\mathit{adv} \; L_d(\mathbf{1}, D(\mathbf{x}, G(\mathbf{x},\mathbf{z})) +  \lambda_\mathit{TV}L_\mathit{TV}(G(\mathbf{x},\mathbf{z})) \label{eq:improve:cGAN_loss}\\
- L_d(\mathbf{l, k}) &= \frac{1}{bs}\sum^{bs} \frac{1}{n^2}\sum^{n^2}\left( -\log(\mathrm{sigmoid}(\mathbf{k})) \cdot \mathbf{l} - \log(\mathbf{1} - \mathrm{sigmoid}(\mathbf{k})) \cdot (\mathbf{1} - \mathbf{l}) \right) \label{eq:improve:disc_loss1}\\
+ L_d(\mathbf{r, s}) &= \frac{1}{bs}\sum^{bs} \frac{1}{n^2}\sum^{n^2}\left( -\log(\mathrm{sigmoid}(\mathbf{s})) \cdot \mathbf{r} - \log(\mathbf{1} - \mathrm{sigmoid}(\mathbf{s})) \cdot (\mathbf{1} - \mathbf{r}) \right) \label{eq:improve:disc_loss1}\\
  \mathrm{sigmoid(m_{i,j,k})} &= \frac{e^{m_{i,j,k}}}{1+e^{m_{i,j,k}}} \quad \mathrm{for}\; i \in (0, 1, \dots, bs)\; \textrm{and}\; j,k \in (0, 1, \dots, n) \label{eq:sigmoid}
 \end{align}
 Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between artificially generated output $G(x,z)$ and true Hi-C submatrices $y$ (as grayscale images), 
@@ -345,10 +345,10 @@ The TV loss has been added for edge-aware noise removal, in line with other work
 Both the generator- and discriminator loss functions were optimized with the Adam optimizer,
 alternately training discriminator and generator, see \cref{sec:methods:cGAN_initial} for details.
 
-Compared to other cGAN architectures, \emph{pix2pix} is rather simple, but well studied for different applications like label-to-image transfer,
+Compared to other \acrshort{cgan} architectures, \emph{pix2pix} is rather simple, but well studied for different applications like label-to-image transfer,
 sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
 Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
-choosing a ``general-purpose'' cGAN as a starting point seemed reasonable.
+choosing a ``general-purpose'' \acrshort{cgan} as a starting point seemed reasonable.
 Another advantage of \emph{pix2pix}, and U-Net architectures in general, 
 is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
@@ -360,22 +360,22 @@ Naturally, this can be achieved by using the dense neural network explored above
 and reshaping its ``upper triangular'' output vector back into a symmetric ``image''-tensor with the required shape.
 
 The rationale here was to first use the DNN to get a coarse estimate of the predicted matrix,
-and then the cGAN to refine the results, somewhat similar to the two-stage approach by Zhang et al. \cite{Zhang2019c},
+and then the \acrshort{cgan} to refine the results, somewhat similar to the two-stage approach by Zhang et al. \cite{Zhang2019c},
 albeit much less sophisticated. 
 Naturally, this approach also allows to pre-train the dense network as discussed above in \cref{sec:improve:DNNapproach}, 
 this time for window size $w=64$ and then use transfer learning to provide better starting values for the weights of the embedding network, 
-potentially improving both stability and convergence speed of the cGAN network.
+potentially improving both stability and convergence speed of the \acrshort{cgan} network.
 
 A disadvantage of the dense network approach is that the number of neurons in its output layer quadratically depends on the window size $w$,
 cf. \cref{sec:improve:basicNetwork} and \ref{sec:methods:basicSetup}.
 Taken together with the three fully connected layers underneath, this leads to a superlinear increase in the number of parameters along with $w$,
-further aggravated by the fact that the cGAN requires $w$ to be powers of two, cf. \cref{sec:methods:cGAN_initial} and  
+further aggravated by the fact that the \acrshort{cgan} requires $w$ to be powers of two, cf. \cref{sec:methods:cGAN_initial} and  
 \ref{sec:methods:dnn-embedding} (\cref{tab:methods:embedding_network_params}, p.~\pageref{tab:methods:embedding_network_params}).
 The DNN embedding has thus only been explored for $w=64$, both with and without pre-training the DNN. 
 The results are to be found in \cref{sec:results:cgan_dnn} and some more technical details are given in \cref{sec:methods:dnn-embedding}.
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
-Since the results from the cGAN with DNN embedding were not convincing, another embedding network was designed, based on convolutional layers.
+Since the results from the \acrshort{cgan} with DNN embedding were not convincing, another embedding network was designed, based on convolutional layers.
 Here, the idea was to have a trainable embedding that keeps the localization information contained in the chromatin feature data,
 has less parameters than a dense embedding and can efficiently be trained along with the rest of the network even at window sizes up to 256 bins.
 
@@ -385,17 +385,17 @@ to avoid the so-called ``dying ReLU'' problem.
 A final 9th convolution layer was added to ensure the required output shape. 
 The complete setup is shown in \cref{sec:methods:cnn-embedding} (\cref{fig:methods:GAN_arch:embedding_network}, p.~\pageref{fig:methods:GAN_arch:embedding_network}).
 Compared to the dense approach, the number of trainable parameters in the CNN embedding is widely independent of the window size and 
-stays within 4.24...4.29 million parameters for the tested window sizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
+stays within 4.24...4.29 million parameters for the investigated window sizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
 
-The results of the cGAN with CNN embedding are shown in \cref{sec:results:cgan_cnn} and were indeed better than the ones obtained with DNN embeddings.
+The results of the \acrshort{cgan} with CNN embedding are shown in \cref{sec:results:cgan_cnn} and were indeed better than the ones obtained with DNN embeddings.
 
-\subsubsection{Using a mixed DNN- and CNN-embedding for generator and discriminator}
+\subsubsection{Using mixed DNN- and CNN-embedding for feature embedding}
 Besides using a DNN- or CNN-embedding for \emph{both} generator and discriminator, it is obviously also possible
 to use different embedding network types.
 To investigate the influences of the embedding network on the general performance,
 a ``mixed'' embedding, i.\,e. a DNN-embedding for the generator and a CNN-embedding for the discriminator was tested,
 using the same DNN and CNN as above.
-The results are shown in \ref{sec:results:cgan-mixed}.
+The results are shown in \cref{sec:results:cgan-mixed}.
 
 
 
