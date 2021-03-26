@@ -1,14 +1,14 @@
 \section{Discussion and Outlook}
 In this thesis, two methods have been considered for predicting Hi-C interaction matrices,
-one based on a dense neural network proposed by Farr\'e et al. \cite{Farre2018a} and the other one based on a novel conditional generative adversarial network
+one based on a dense neural network proposed by Farr\'e et al. \cite{Farre2018a} and the other one based on a \acrlong{cgan}
 inspired by \emph{pix2pix} \cite{Isola2017}.
 
 Despite all amendments to the original network setup,
 the results of the dense neural network approach remained modest.
 Improvements, if at all visible, could only be achieved for a small part of the test set.
 
-On the other hand, the novel conditional generative adversarial network method seems promising.
-Especially the variant with CNN embedding showed widely satisfying results for genomic distances up to about \SI{5}{\mega\bp}
+On the other hand, the novel \acrfull{cgan} method seems promising.
+Especially the variant with \acrshort{cnn} embedding showed widely satisfying results for genomic distances up to about \SI{5}{\mega\bp}
 and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019} with regard to predicting nested structures.
 However, there is still room for improvement -- even the best predictions of this thesis were not or not much better 
 than simply taking data from the training cell line as a ``prediction'' for the target cell line.
@@ -37,7 +37,7 @@ While good reasons backed the decision for choosing \emph{pix2pix} for the gener
 namely its wide range of applications and demonstrated convergence even when only few training samples are at hand \cite{Isola2017},
 it remains a network designed for converting \emph{input images} to output images.
 However, the task at hand essentially requires transforming \emph{one-dimensional input} data into very special symmetric output images.
-Although surprisingly good results were obtained, it is difficult to imagine that \emph{pix2pix} -- amended by the simplistic and rather ad-hoc CNN embedding network 
+Although surprisingly good results were obtained, it is difficult to imagine that \emph{pix2pix} -- amended by the simplistic and rather ad-hoc \acrshort{cnn} embedding network 
 described in \cref{sec:improve:CNN_embedding} and \ref{sec:methods:cnn-embedding} -- is the optimal solution for suchlike 1D\,$\rightarrow$\,2D conversions.
 
 Nevertheless, the cGAN approach developed within this thesis can hopefully serve as a helpful starting point and baseline

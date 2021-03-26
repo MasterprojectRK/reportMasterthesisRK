@@ -1,6 +1,6 @@
 \section{Results}
 In the following two sections, 
-the results of the DNN- and \acrshort{cgan}-based approaches for predicting Hi-C contact matrices will be presented.
+the results of the \acrshort{dnn}- and \acrshort{cgan}-based approaches for predicting Hi-C contact matrices will be presented.
 While the various modifications of the dense neural network described in \cref{sec:improve:DNNapproach} 
 did  not really help improve the status quo, the novel conditional generative adversarial network laid out in \cref{sec:improve:Hi-cGAN}
 showed interesting properties.
@@ -21,13 +21,13 @@ compare e.\,g. the matrix plots after 500 and 1000 epochs in figures \ref{fig:re
 
 \Cref{fig:results:basicDNN_pearson} and \cref{fig:results:basicDNN_10k_pearson} 
 show the distance stratified Pearson correlations (cf. \cref{sec:methods:metrics}) 
-alongside area under the correlation curve (AUC) for the five test chromosomes at bin sizes 25 and \SI{10}{\kilo\bp}, respectively.
+alongside \acrfull{auc} for the five test chromosomes at bin sizes 25 and \SI{10}{\kilo\bp}, respectively.
 The red curves in each correlation plot show the correlation between the corresponding training chromosome from GM12878 and the target chromosome from K562.
 It is obvious that all predicted test matrices have a strictly positive Pearson correlation with respect to the experimentally derived matrices by Rao et al. \cite{Rao2014},
 but are not better than simply taking data from the training cell line as prediction for the target cell line.
 
 The predicted matrices themselves looked modest when plotted with pygenometracks. 
-While the DNN generally produced high interaction counts in regions with many true interactions
+While the \acrshort{dnn} generally produced high interaction counts in regions with many true interactions
 and low interaction counts in regions with few true interactions, the (TAD-)boundaries between different interacting domains 
 were mostly not discernible, \cref{fig:results:basic500} and \ref{fig:results:basic1000}.
 This finding is in line with the clearly positive, but medium-valued Pearson correlations.
@@ -88,7 +88,7 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
         \import{figures/DNN_basic/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress}\label{fig:results:basicDNN_lossEpochs_25}
     \end{subfigure}
-    \caption{results\,/\,metrics, basic DNN, \SI{25}{\kilo\bp}, test chromosomes}
+    \caption{results\,/\,metrics, basic \acrshort{dnn}, \SI{25}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_pearson}
 \end{figure}
 
@@ -131,7 +131,7 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
         \import{figures/DNN_basic10k/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress}\label{fig:results:basicDNN_lossEpochs_10}
     \end{subfigure}
-    \caption{results\,/\,metrics, basic DNN, \SI{10}{\kilo\bp}, test chromosomes}
+    \caption{results\,/\,metrics, basic \acrshort{dnn}, \SI{10}{\kilo\bp}, test chromosomes}
     \label{fig:results:basicDNN_10k_pearson}
 \end{figure}
 %25k matrices, after 500 epochs
@@ -154,7 +154,7 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
         \import{figures/DNN_basic/}{pred00500_chr3_030-040.pdf_tex}
         \caption{example region 2, 500 epochs} \label{fig:results:basic_r3}
     \end{subfigure}
-    \caption{example predictions, basic DNN, \SI{25}{\kilo\bp}, 500 epochs} \label{fig:results:basic500}
+    \caption{example predictions, basic \acrshort{dnn}, \SI{25}{\kilo\bp}, 500 epochs} \label{fig:results:basic500}
 \end{figure}
 %25k matrices, after 1000 epochs
 \begin{figure}[p]
@@ -176,7 +176,7 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
         \import{figures/DNN_basic/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 2, 1000 epochs} \label{fig:results:basic_r3_1000}
     \end{subfigure}
-    \caption{example predictions, basic DNN, \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:basic1000}
+    \caption{example predictions, basic \acrshort{dnn}, \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:basic1000}
 \end{figure}
 %10k matrices
 \begin{figure}[p]
@@ -198,7 +198,7 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
         \import{figures/DNN_basic10k/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:basic10k_r3}
     \end{subfigure}
-    \caption{example predictions, basic DNN \SI{10}{\kilo\bp}, 1000 epochs}
+    \caption{example predictions, basic \acrshort{dnn} \SI{10}{\kilo\bp}, 1000 epochs}
 \end{figure}
 
 \subsubsection{Results for variations of the convolutional part} \label{sec:results:wider-longer-etc}
@@ -245,9 +245,9 @@ but the remaining validation error was slightly higher than for the initial appr
         \resizebox{\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_wider/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress for wider DNN} \label{fig:results:widerDNN_lossEpochs}
+        \caption{learning progress for wider \acrshort{dnn}} \label{fig:results:widerDNN_lossEpochs}
     \end{subfigure}
-    \caption{Pearson correlations, ``wider'' variant of DNN,  test chromosomes}
+    \caption{Pearson correlations, ``wider'' variant of \acrshort{dnn},  test chromosomes}
     \label{fig:results:widerDNN_pearson}
 \end{figure}
 %wider variant matrices
@@ -270,7 +270,7 @@ but the remaining validation error was slightly higher than for the initial appr
         \import{figures/DNN_wider/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:wider_r3}
     \end{subfigure}
-    \caption{example predictions, ``wider'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs}\label{fig:results:wider_matrices}
+    \caption{example predictions, ``wider'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000 epochs}\label{fig:results:wider_matrices}
 \end{figure}
 
 The predictions from the ``longer'' variant with three convolutinal filter layers instead of just one were better than the initial ones in terms of
@@ -320,9 +320,9 @@ but the matrix plots did not show any obvious improvement over the initial ones,
         \resizebox{\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_longer/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress for longer DNN} \label{fig:results:longerDNN_lossEpochs}
+        \caption{learning progress for longer \acrshort{dnn}} \label{fig:results:longerDNN_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, ``longer'' variant of DNN,  test chromosomes}
+    \caption{results\,/\,metrics, ``longer'' variant of \acrshort{dnn},  test chromosomes}
     \label{fig:results:longerDNN_pearson}
 \end{figure}
 %longer variant matrices
@@ -345,7 +345,7 @@ but the matrix plots did not show any obvious improvement over the initial ones,
         \import{figures/DNN_longer/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:longer_r3}
     \end{subfigure}
-    \caption{example predictions, ``longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:longer_matrices}
+    \caption{example predictions, ``longer'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:longer_matrices}
 \end{figure}
 
 Combining the ``longer'' and ``wider'' variants in the ``wider-longer'' setup with more convolutional layers and wider 
@@ -393,7 +393,7 @@ In terms of matrix plots, the predictions surprisingly were still quite similar 
         \import{figures/DNN_wider-longer/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:wider-longerDNN_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, ``wider-longer'' variant of DNN,  test chromosomes}
+    \caption{results\,/\,metrics, ``wider-longer'' variant of \acrshort{dnn},  test chromosomes}
     \label{fig:results:wider-longerDNN_pearson}
 \end{figure}
 %wider-longer variant matrices
@@ -416,10 +416,10 @@ In terms of matrix plots, the predictions surprisingly were still quite similar 
         \import{figures/DNN_wider-longer/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:wider-longer_r3}
     \end{subfigure}
-    \caption{example predictions, ``wider-longer'' variant of DNN \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:wider-longer_matrices}
+    \caption{example predictions, ``wider-longer'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000 epochs} \label{fig:results:wider-longer_matrices}
 \end{figure}
 
-Predictions and metrics from the generalized DNN approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
+Predictions and metrics from the generalized \acrshort{dnn} approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
 are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
 Unfortunately, the results did again not improve compared to the initial predictions.
 While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
@@ -463,7 +463,7 @@ For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, whi
         \import{figures/DNN_25k5/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:25k5DNN_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, ``5k -- 25k'' variant of DNN with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$,  test chromosomes}
+    \caption{results\,/\,metrics, ``5k -- 25k'' variant of \acrshort{dnn} with $b_\mathit{feat}=\SI{5}{\kilo\bp}$ and $b_\mathit{mat}=\SI{25}{\kilo\bp}$,  test chromosomes}
     \label{fig:results:25k5DNN_pearson}
 \end{figure}
 %25k5 matrices
@@ -486,7 +486,7 @@ For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, whi
         \import{figures/DNN_25k5/}{pred01000_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:25k5_r3}
     \end{subfigure}
-    \caption{example predictions, ``5k -- 25k'' variant of DNN, 1000 epochs} \label{fig:results:25k5_matrices}
+    \caption{example predictions, ``5k -- 25k'' variant of \acrshort{dnn}, 1000 epochs} \label{fig:results:25k5_matrices}
 \end{figure}
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
@@ -539,7 +539,7 @@ However, the results obtained thus far were also not encouraging towards such in
         \import{figures/DNN_combiloss/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:combilossDNN_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, DNN with combined loss function (MSE, TV, VGG-16),  test chromosomes}
+    \caption{results\,/\,metrics, \acrshort{dnn} with combined loss function (MSE, TV, VGG-16),  test chromosomes}
     \label{fig:results:combilossDNN_pearson}
 \end{figure}
 %combiloss matrices
@@ -562,7 +562,7 @@ However, the results obtained thus far were also not encouraging towards such in
         \import{figures/DNN_combiloss/}{pred00500_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:combiloss_r3}
     \end{subfigure}
-    \caption{example predictions, DNN with combined loss function (MSE, TV, VGG-16), 500 epochs} \label{fig:results:combiloss_matrices}
+    \caption{example predictions, \acrshort{dnn} with combined loss function (MSE, TV, VGG-16), 500 epochs} \label{fig:results:combiloss_matrices}
 \end{figure}
 While manually searching better parameters $\lambda$ was not successful,
 it was found that the TV loss weight $\lambda_\mathit{TV}$ needed to be much smaller than the two other weights.
@@ -628,7 +628,7 @@ so the results presented in this section should not be interpreted as the optima
         \import{figures/DNN_scoreLoss/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:scoreLossDNN_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, DNN with score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_pearson}
+    \caption{results\,/\,metrics, \acrshort{dnn} with score-based loss function, test chromosomes\\ ($\lambda_\mathit{MSE}=1.0,\; \lambda_\mathit{score}=100,\; ds=12$)} \label{fig:results:scoreLossDNN_pearson}
 \end{figure}
 \begin{figure}[p] %score loss matrices
     \begin{subfigure}{\textwidth}
@@ -649,7 +649,7 @@ so the results presented in this section should not be interpreted as the optima
         \import{figures/DNN_scoreLoss/}{pred00500_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:scoreloss_r3}
     \end{subfigure}
-    \caption{example predictions,  DNN with score-based loss function, 500 epochs} \label{fig:results:scoreloss_matrices}
+    \caption{example predictions,  \acrshort{dnn} with score-based loss function, 500 epochs} \label{fig:results:scoreloss_matrices}
 \end{figure}
 
 \subsubsection{Results for different binsizes and windowsizes} \label{sec:results:binsize_winsize}
@@ -726,7 +726,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
         \import{figures/DNN_50k/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress 50k direct} \label{fig:results:50k_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, various DNNs at \SI{50}{\kilo\bp}} \label{fig:results:DNN50k_pearson}
+    \caption{results\,/\,metrics, various \acrshort{dnn}s at \SI{50}{\kilo\bp}} \label{fig:results:DNN50k_pearson}
 \end{figure}
 \begin{figure}[p] %50k direct, matrices
     \begin{subfigure}{\textwidth}
@@ -750,7 +750,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
         \import{figures/DNN_50k/}{pred00250_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:50k_r3}
     \end{subfigure}
-    \caption{example predictions,  DNN at \SI{50}{\kilo\bp} direct, 250 epochs} \label{fig:results:50k_matrices}
+    \caption{example predictions,  \acrshort{dnn} at \SI{50}{\kilo\bp} direct, 250 epochs} \label{fig:results:50k_matrices}
 \end{figure}
 \begin{figure}[p] %50k from 25k, matrices
     \begin{subfigure}{\textwidth}
@@ -774,7 +774,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
         \import{figures/DNN_50k/}{pred00500_50k_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:50k_from25k_r3}
     \end{subfigure}
-    \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500 epochs} \label{fig:results:50k_from25k_matrices}
+    \caption{example predictions,  \acrshort{dnn} trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500 epochs} \label{fig:results:50k_from25k_matrices}
 \end{figure}
 
 Simultaneously training a network with matrix- and feature bin sizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
@@ -785,7 +785,7 @@ Looking into the matrix plots shown in \cref{fig:results:25plus50_matrices},
 all predictions seemed equally useless and definitely worse than the results obtained by the other approaches investigated thus far.
 It could not be clarified what caused the improvement in Pearson correlations for chromosome 21 compared to the initial predictions at \SI{25}{\kilo\bp}, 
 \cref{fig:results:DNN_25_pearson_21}, but it is interesting that even predictions with such a high degree of blurriness as in \cref{fig:results:25plus50_r1}
-can reach an AUC of around 0.65.
+can reach an \acrshort{auc} of around 0.65.
 
 \begin{figure}[p]%trained at 25k and 50k simultaneously, pearson and progress for 25k
     \begin{subfigure}{0.45\textwidth}
@@ -824,7 +824,7 @@ can reach an AUC of around 0.65.
         \import{figures/DNN_25plus50/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:25plus50_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, DNN trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously} \label{fig:results:DNN25plus50_pearson}
+    \caption{results\,/\,metrics, \acrshort{dnn} trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously} \label{fig:results:DNN25plus50_pearson}
 \end{figure}
 \begin{figure}[p] %25plus50, matrices at 25k
     \begin{subfigure}{\textwidth}
@@ -845,7 +845,7 @@ can reach an AUC of around 0.65.
         \import{figures/DNN_25plus50/}{pred00500_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:25plus50_r3}
     \end{subfigure}
-    \caption{example predictions,  DNN trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously, \SI{25}{\kilo\bp}, 500 epochs}\label{fig:results:25plus50_matrices}
+    \caption{example predictions,  \acrshort{dnn} trained at \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} simultaneously, \SI{25}{\kilo\bp}, 500 epochs}\label{fig:results:25plus50_matrices}
 \end{figure}
 
 \clearpage
@@ -854,20 +854,20 @@ In the following three subsections, the results from the conditional generative 
 Although there is still room for improvements, at least one of the three \acrshort{cgan}-variants under investigation showed good performance. 
 
 \subsubsection{cGAN with DNN embedding} \label{sec:results:cgan_dnn}
-The \acrshort{cgan} with DNN-embedding showed interesting results.
+The \acrshort{cgan} with \acrshort{dnn}-embedding showed interesting results.
 All in all, the training process was smooth and converged after around 60 epochs, mostly using the parameters suggested
 by Isola et al. \cite{Isola2017} (cf. \ref{sec:methods:cGAN_initial}). 
 Although \emph{pix2pix} has shown fast convergence in other applications, 
 it was surprising that this still held after the changes made to the original network, especially adding the embedding network. 
-While the Pearson correlations were mostly worse than the ones of the DNN presented above, compare figures \ref{fig:results:DNN64_pearson} and \ref{fig:results:GAN64-dnn_pearson},
+While the Pearson correlations were mostly worse than the ones of the \acrshort{dnn} presented above, compare figures \ref{fig:results:DNN64_pearson} and \ref{fig:results:GAN64-dnn_pearson},
 the matrices mostly looked visually better, showing more distinct boundaries between interacting and non-interacting regions, compare figures \ref{fig:results:DNN_matrices} and \ref{fig:results:cGAN64-dnn_matrices}.
 
-Using weight transfer from a pre-trained DNN for the embedding networks further stabilized the training process 
+Using weight transfer from a pre-trained \acrshort{dnn} for the embedding networks further stabilized the training process 
 and made the discriminator reach a stable value of around 0.693 ($\approx -\log0.5$) on epoch average after only 2 epochs, 
 while the generator validation loss reached a stable minimum value after about 15 epochs, \cref{fig:results:GAN64_pretrain-dnn_lossEpochs}.
 However, the resulting predictions did not really improve.
-While the Pearson correlations showed showed slightly better values for the pre-trained DNN-embedding compared to the non-pre-trained, \cref{fig:results:GAN64_pretrain-dnn_pearson},
-the matrices were visually clearly worse than without pre-training, and also worse than the results from the DNN alone, \cref{fig:results:cGAN64_pretrain-dnn_matrices}.
+While the Pearson correlations showed showed slightly better values for the pre-trained \acrshort{dnn}-embedding compared to the non-pre-trained, \cref{fig:results:GAN64_pretrain-dnn_pearson},
+the matrices were visually clearly worse than without pre-training, and also worse than the results from the \acrshort{dnn} alone, \cref{fig:results:cGAN64_pretrain-dnn_matrices}.
 
 \begin{figure}[p] %cGAN with DNN, no pretraining, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -906,7 +906,7 @@ the matrices were visually clearly worse than without pre-training, and also wor
         \import{figures/GAN_64_dnn/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64-dnn_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics \acrshort{cgan}, DNN embedding, no pre-training, $w=64$, test chromosomes}   \label{fig:results:GAN64-dnn_pearson}
+    \caption{results\,/\,metrics \acrshort{cgan}, \acrshort{dnn} embedding, no pre-training, $w=64$, test chromosomes}   \label{fig:results:GAN64-dnn_pearson}
 \end{figure}
 \begin{figure}[p] %cgan with DNN, no pre-training, winsize 64, matrices
     \begin{subfigure}{\textwidth}
@@ -927,7 +927,7 @@ the matrices were visually clearly worse than without pre-training, and also wor
         \import{figures/GAN_64_dnn/}{pred00060_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64-dnn_r3}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, DNN embedding, no pre-training, $w=64$, 60 epochs} \label{fig:results:cGAN64-dnn_matrices}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{dnn} embedding, no pre-training, $w=64$, 60 epochs} \label{fig:results:cGAN64-dnn_matrices}
 \end{figure}
 \begin{figure}[p] %cGAN with DNN, pretrained, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -966,7 +966,7 @@ the matrices were visually clearly worse than without pre-training, and also wor
         \import{figures/GAN_64_pretrain-dnn/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64_pretrain-dnn_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics, \acrshort{cgan}, DNN embedding, pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
+    \caption{results\,/\,metrics, \acrshort{cgan}, \acrshort{dnn} embedding, pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrain-dnn_pearson}
 \end{figure}
 \begin{figure}[p] %cgan with DNN, pretrained, winsize 64, matrices
     \begin{subfigure}{\textwidth}
@@ -987,14 +987,14 @@ the matrices were visually clearly worse than without pre-training, and also wor
         \import{figures/GAN_64_pretrain-dnn/}{pred00100_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64_pretrain-dnn_r3}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, DNN embedding, pre-trained, $w=64$, 100 epochs} \label{fig:results:cGAN64_pretrain-dnn_matrices}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{dnn} embedding, pre-trained, $w=64$, 100 epochs} \label{fig:results:cGAN64_pretrain-dnn_matrices}
 \end{figure}
 
 
 \subsubsection{cGAN with CNN embedding} \label{sec:results:cgan_cnn}
-The DNN embedding also allowed for a stable training of the \acrshort{cgan},
+The \acrshort{dnn} embedding also allowed for a stable training of the \acrshort{cgan},
 whereby the discriminator loss reached stable epoch-average values after 20 to 30 epochs, depending on windowsize, \cref{fig:results:cGAN64_lossEpochs}.
-For windowsize $w=64$, the Pearson correlations showed worse values than the DNN-approach or the \acrshort{cgan} with DNN embedding, \cref{fig:results:cGAN64_pearson}.
+For windowsize $w=64$, the Pearson correlations showed worse values than the \acrshort{dnn}-approach or the \acrshort{cgan} with \acrshort{dnn} embedding, \cref{fig:results:cGAN64_pearson}.
 Nevertheless, the predicted matrices looked visually better, at least for the given test cutouts shown in \cref{fig:results:cGAN64_matrices}. 
 For windowsizes $w\in\{128,256\}$, the Pearson correlations often reached and partially exceeded the baseline (``transfer GM12878 to K562''),
 and the matrix plots were visually in good accordance with the targets, figures \ref{fig:results:cGAN128_pearson} to \ref{fig:results:cGAN256_matrices}.
@@ -1047,7 +1047,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_64_cnn/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:cGAN64_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics \acrshort{cgan}, CNN embedding, $w=64$, test chromosomes}   \label{fig:results:cGAN64_pearson}
+    \caption{results\,/\,metrics \acrshort{cgan}, \acrshort{cnn} embedding, $w=64$, test chromosomes}   \label{fig:results:cGAN64_pearson}
 \end{figure}
 \begin{figure}[p] %cgan CNN, 64, matrices
     \begin{subfigure}{\textwidth}
@@ -1068,7 +1068,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_64_cnn/}{pred00080_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN64_r3}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, CNN embedding, $w=64$, 80 epochs}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{cnn} embedding, $w=64$, 80 epochs}
 \end{figure} \label{fig:results:cGAN64_matrices}
 
 \begin{figure}[p] %cGAN cnn 128, pearson and progress
@@ -1109,7 +1109,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_128/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:cGAN128_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics \acrshort{cgan}, CNN embedding. $w=128$, test chromosomes}   \label{fig:results:cGAN128_pearson}
+    \caption{results\,/\,metrics \acrshort{cgan}, \acrshort{cnn} embedding. $w=128$, test chromosomes}   \label{fig:results:cGAN128_pearson}
 \end{figure}
 \begin{figure}[p] %cgan CNN, 128, matrices
     \begin{subfigure}{\textwidth}
@@ -1133,7 +1133,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_128/}{pred00090_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:cGAN128_r3}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, CNN embedding, $w=128$, 90 epochs} \label{fig:results:cGAN128_matrices}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{cnn} embedding, $w=128$, 90 epochs} \label{fig:results:cGAN128_matrices}
 \end{figure}
 
 \begin{figure}[p] %cGAN CNN 256, pearson and progress
@@ -1174,7 +1174,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_256/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:cGAN256_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics \acrshort{cgan}, CNN embedding, $w=256$, test chromosomes}   \label{fig:results:cGAN256_pearson}
+    \caption{results\,/\,metrics \acrshort{cgan}, \acrshort{cnn} embedding, $w=256$, test chromosomes}   \label{fig:results:cGAN256_pearson}
 \end{figure}
 \begin{figure}[p] %cgan CNN, 256k, matrices
     \begin{subfigure}{\textwidth}
@@ -1189,7 +1189,7 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_256/}{pred00100_chr19_030-040.pdf_tex}
         \caption{example region 2} \label{fig:results:cGAN256_r2}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, CNN embedding, $w=256$, 100 epochs}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{cnn} embedding, $w=256$, 100 epochs}
 \end{figure}
 \begin{figure}\ContinuedFloat
     \begin{subfigure}{\textwidth}
@@ -1198,22 +1198,22 @@ due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
         \import{figures/GAN_256/}{pred00100_chr3_030-040.pdf_tex}
         \caption{example region 3} \label{fig:results:cGAN256_r3}
     \end{subfigure}
-    \caption{example predictions, \acrshort{cgan}, CNN embedding, $w=256$, 100 epochs} \label{fig:results:cGAN256_matrices}
+    \caption{example predictions, \acrshort{cgan}, \acrshort{cnn} embedding, $w=256$, 100 epochs} \label{fig:results:cGAN256_matrices}
 \end{figure}
 
 \subsubsection{cGAN with mixed DNN / CNN embedding} \label{sec:results:cgan-mixed}
-Using a \acrshort{cgan} with mixed embedding, i.\,e. DNN-embedding for the generator
-and CNN-embedding for the discriminator, did not make for a stable training process, \ref{fig:results:GAN64_mixed_lossEpochs}.
+Using a \acrshort{cgan} with mixed embedding, i.\,e. \acrshort{dnn}-embedding for the generator
+and \acrshort{cnn}-embedding for the discriminator, did not make for a stable training process, \ref{fig:results:GAN64_mixed_lossEpochs}.
 Despite still acceptable Pearson correlations compared to the other approaches shown above,
 the predicted matrices were useless, \cref{fig:results:GAN64_mixed_pearson} and \ref{fig:results:GAN64_mixed_matrices}.
 First investigations indicated that the \acrshort{cgan} may have learned to partially ignore the feature input 
 and is thus predicting submatrices that look similar to real Hi-C submatrices, but do not have sufficient correlation with the feature data.
 
-Interestingly, pre-training the DNN improved the situation in this mixed DNN/CNN embedding setup. 
+Interestingly, pre-training the \acrshort{dnn} improved the situation in this mixed \acrshort{dnn}/\acrshort{cnn} embedding setup. 
 While the training process still seemed unstable, \cref{fig:results:GAN64_pretrained_mixed_lossEpochs},
-the predicted matrices looked much better, similar to the ones from the \acrshort{cgan} with DNN-embedding (non-pre-trained),
+the predicted matrices looked much better, similar to the ones from the \acrshort{cgan} with \acrshort{dnn}-embedding (non-pre-trained),
 compare figures \ref{fig:results:GAN64_pretrained_mixed_matrices} and \ref{fig:results:cGAN64-dnn_matrices}.
-However, the results were still not better than the ones from the CNN embedding alone, cf. \cref{sec:results:cgan_cnn}.
+However, the results were still not better than the ones from the \acrshort{cnn} embedding alone, cf. \cref{sec:results:cgan_cnn}.
 
 \begin{figure}[p] %cGAN mixed 64, not pretrained, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -1319,7 +1319,7 @@ However, the results were still not better than the ones from the CNN embedding 
         \import{figures/GAN_64_pretrain-mixed/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:results:GAN64_pretrained_mixed_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics \acrshort{cgan}, mixed embedding, DNN pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrained_mixed_pearson}
+    \caption{results\,/\,metrics \acrshort{cgan}, mixed embedding, \acrshort{dnn} pre-trained, $w=64$, test chromosomes}   \label{fig:results:GAN64_pretrained_mixed_pearson}
 \end{figure}
 \begin{figure}[p] %cgan mixed 64, pretrained, matrices
     \begin{subfigure}{\textwidth}
@@ -1343,7 +1343,7 @@ However, the results were still not better than the ones from the CNN embedding 
         \import{figures/GAN_64_pretrain-mixed/}{pred00040_chr3_030-040.pdf_tex}}
         \caption{example region 3} \label{fig:results:cGAN64_pretrained_mixed_r3}
     \end{subfigure}
-    \caption{example predictions \acrshort{cgan}, mixed embedding, DNN pre-trained, $w=64$, 40 epochs} 
+    \caption{example predictions \acrshort{cgan}, mixed embedding, \acrshort{dnn} pre-trained, $w=64$, 40 epochs} 
      \label{fig:results:GAN64_pretrained_mixed_matrices}
 \end{figure}
 
@@ -1351,7 +1351,7 @@ However, the results were still not better than the ones from the CNN embedding 
 \subsection{Comparison with other approaches}\label{sec:results:comparison}
 When comparing the random-forest-based method by Zhang et al., HiC-Reg \cite{Zhang2019}, to the \acrshort{cgan} model trained on the typical training chromosome set, cf. \ref{sec:methods:sample_gen},
 the \acrshort{cgan} approach seemed superior to all others for distances up to about \SI{200}{\kilo\bp}, 
-while both the multicell- and window- approach by Zhang et al. outperformed DNN and Hi-cGAN for distances between 
+while both the multicell- and window- approach by Zhang et al. outperformed \acrshort{dnn} and Hi-cGAN for distances between 
 \SI{200}{\kilo\bp} and \SI{1}{\mega\bp}, \cref{fig:results:zhang-vs-ours_pearson}.
 This was also reflected in the matrix plots, \cref{fig:results:zhang-vs-ours_matrices}. 
 While the \acrshort{cgan} often predicted smaller structures up to about \SI{400}{\kilo\bp} very well and offered distinct boundaries
@@ -1416,7 +1416,7 @@ However, we have generally not been able to reproduce the results of HiC-Reg wit
     \import{figures/randomforest/}{pearson_chr17_detail_25k_singleChrom.pdf_tex}}
     \caption{chr17 \acrshort{cgan} single chrom}\label{fig:results:zhang-vs-ours_pearson_17singlechrom}
  \end{subfigure}
-  \caption{Pearson correlation comparison Hi-cGAN / DNN and HiC-Reg \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_pearson}
+  \caption{Pearson correlation comparison Hi-cGAN / \acrshort{dnn} and HiC-Reg \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_pearson}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -1456,7 +1456,7 @@ However, we have generally not been able to reproduce the results of HiC-Reg wit
  \import{figures/randomforest/}{pred00160_chr17_030-040.pdf_tex}
  \caption{Hi-cGAN with windowsize $w=64$, trained on chr17 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-17}
 \end{subfigure}
-\caption{Comparison HiC-Reg \cite{Zhang2019} and Hi-cGAN (CNN embedding)} \label{fig:results:zhang-vs-ours_matrices}
+\caption{Comparison HiC-Reg \cite{Zhang2019} and Hi-cGAN (\acrshort{cnn} embedding)} \label{fig:results:zhang-vs-ours_matrices}
 \end{figure}
 
 \begin{figure}[p] %our random forest, w=80, same train chroms as everywhere
