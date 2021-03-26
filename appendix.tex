@@ -86,7 +86,7 @@ For convenience, the pdf version of this document contains clickable links below
 
 \clearpage
 \subsection{Listings}
-\begin{lstlisting}[language=bash, caption=hic to cooler, label=list:methods:hic2cool]
+\begin{lstlisting}[language=bash, caption=Hic to cooler, label=list:methods:hic2cool]
   #bash-style code
   #convert from hic to cooler, single resolution
   #MATRIXHIC is a matrix in .hic format
@@ -98,7 +98,7 @@ For convenience, the pdf version of this document contains clickable links below
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=bash, caption=bam to bigwig, label=list:methods:bamtobigwig]
+\begin{lstlisting}[language=bash, caption=Bam to bigwig, label=list:methods:bamtobigwig]
  #bash-style code
  #indexing a bam file
  samtools index ${BAMFILE} ${BAMFILE%bam}.bai
@@ -141,7 +141,7 @@ For convenience, the pdf version of this document contains clickable links below
 2                & 40 & Intel Xeon E5-2630 v4          & 2.20  & 32   & 4096  & 16384  &  & NVIDIA Tesla T4 TU104GL & 15109  &  & 116                              \\
 3                & 20 & AMD EPYC 7351P 16-Core         & 2.40  & 1300 & 10000 & 320000 &  & --                      & --     &  & 116                              \\ \hline
 \end{tabular}
-\caption{key figures of hardware used throughout the thesis}\label{tab:appendix:hardware}
+\caption{Key figures of hardware used throughout the thesis}\label{tab:appendix:hardware}
 \end{table}
 Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main memory) in GB
 \end{landscape}
@@ -194,30 +194,32 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/DNN_64/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress} \label{fig:results:DNN64_lossEpochs}
+        \caption{Learning progress} \label{fig:results:DNN64_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics DNN, windowsize 64, test chromosomes}   \label{fig:results:DNN64_pearson}
+    \caption{Results\,/\,metrics DNN, $w=64$, test chromosomes}   \label{fig:results:DNN64_pearson}
 \end{figure}
 \begin{figure}[p] %DNN64, for weight transfer, matrices
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
         \import{figures/DNN_64/}{pred00250_chr21_030-040.pdf_tex}
-        \caption{example  region 1} \label{fig:results:DNN64_r1}
-    \end{subfigure}\\[6mm]
+        \caption{Example  region 1} \label{fig:results:DNN64_r1}
+    \end{subfigure}\\[2mm]
+    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
         \import{figures/DNN_64/}{pred00250_chr19_030-040.pdf_tex}
-        \caption{example region 2} \label{fig:results:DNN64_r2}
-    \end{subfigure}\\[6mm]
+        \caption{Example region 2} \label{fig:results:DNN64_r2}
+    \end{subfigure}\\[2mm]
+    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \scriptsize
         \import{figures/DNN_64/}{pred00250_chr3_030-040.pdf_tex}
-        \caption{example region 3} \label{fig:results:DNN64_r3}
+        \caption{Example region 3} \label{fig:results:DNN64_r3}
     \end{subfigure}
-    \caption{example predictions, DNN, $w=64$, 250 epochs} \label{fig:results:DNN_matrices}
+    \caption{Example predictions GM12878 $\rightarrow$ K562, DNN, $w=64$, 250~epochs} \label{fig:results:DNN_matrices}
 \end{figure}
 \clearpage
 \subsubsection{cGAN trained on K562, predicting GM12878}
@@ -257,9 +259,9 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_256_K-on-G/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress} \label{fig:appendix:GAN256_K-on-G_lossEpochs}
+        \caption{Learning progress} \label{fig:appendix:GAN256_K-on-G_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics cGAN, CNN embedding, $w=256$, test chromosomes}   \label{fig:appendix:GAN256_K-on-G_pearson}
+    \caption{Results\,/\,metrics cGAN, CNN embedding, $w=256$, test chromosomes}   \label{fig:appendix:GAN256_K-on-G_pearson}
 \end{figure}
 \begin{figure}[p] %cgan mixed 64, pretrained, matrices
     \begin{subfigure}{\textwidth}
@@ -267,14 +269,14 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_256_K-on-G/}{pred00060_chr21_030-040.pdf_tex}}
-        \caption{example  region 1} \label{fig:appendix:GAN256_K-on-G_r1}
+        \caption{Example  region 1} \label{fig:appendix:GAN256_K-on-G_r1}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_256_K-on-G/}{pred00060_chr19_030-040.pdf_tex}}
-        \caption{example region 2} \label{fig:appendix:GAN256_K-on-Gr2}
+        \caption{Example region 2} \label{fig:appendix:GAN256_K-on-Gr2}
     \end{subfigure}\\[3mm]
 \end{figure}
 \begin{figure}\ContinuedFloat
@@ -283,9 +285,9 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_256_K-on-G/}{pred00060_chr3_030-040.pdf_tex}}
-        \caption{example region 3} \label{fig:appendix:GAN256_K-on-G_r3}
+        \caption{Example region 3} \label{fig:appendix:GAN256_K-on-G_r3}
     \end{subfigure}
-    \caption{example predictions cGAN, CNN embedding, $w=256$, 60 epochs} 
+    \caption{Example predictions K562 $\rightarrow$ GM12878, cGAN, CNN embedding, $w=256$, 60~epochs} 
      \label{fig:appendix:GAN256_K-on-G_matrices}
 \end{figure}
 \clearpage
@@ -326,9 +328,9 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \scriptsize
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_64_14only/}{lossOverEpochs.pdf_tex}}
-        \caption{learning progress} \label{fig:appendix:GAN64-14single_lossEpochs}
+        \caption{Learning progress} \label{fig:appendix:GAN64-14single_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics cGAN, $w=64$, trained on chr14 only, typical test chromosomes}   \label{fig:appendix:GAN64-14single_pearson}
+    \caption{Results\,/\,metrics, cGAN, $w=64$, trained on GM12878 chr14 only; prediction on K562, typical test chromosomes}   \label{fig:appendix:GAN64-14single_pearson}
 \end{figure}
 \begin{figure}[p] %cGAN single chrom 14, matrices
     \begin{subfigure}{\textwidth}
@@ -336,23 +338,23 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_14only/}{pred00100_chr21_030-040.pdf_tex}}
-        \caption{example  region 1} \label{fig:results:GAN64-14single_r1}
+        \caption{Example  region 1} \label{fig:results:GAN64-14single_r1}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_14only/}{pred00100_chr19_030-040.pdf_tex}}
-        \caption{example region 2} \label{fig:results:GAN64-14single_r2}
+        \caption{Example region 2} \label{fig:results:GAN64-14single_r2}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_14only/}{pred00100_chr3_030-040.pdf_tex}}
-        \caption{example region 3} \label{fig:results:GAN64-14single_r3}
+        \caption{Example region 3} \label{fig:results:GAN64-14single_r3}
     \end{subfigure}
-    \caption{example predictions cGAN, trained on chr14 only, $w=64$, 100 epochs} 
+    \caption{Example predictions, cGAN, $w=64$, trained on GM12878 chr14 only; prediction on K562, 100~epochs} 
      \label{fig:results:GAN64-14single_matrices}
 \end{figure}
 \begin{figure}[p] %cGAN single chrom 17, pearson and progress, predicting usual test chroms 3,5,10,19,21
@@ -393,7 +395,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \import{figures/GAN_64_17only/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:appendix:GAN64-17single_lossEpochs}
     \end{subfigure}
-    \caption{results\,/\,metrics cGAN, $w=64$, trained on chr17 only, typical test chromosomes}   \label{fig:appendix:GAN64-17single_pearson}
+    \caption{Results\,/\,metrics cGAN, $w=64$, trained on GM12878 chr17 only; prediction on K562, typical test chromosomes}   \label{fig:appendix:GAN64-17single_pearson}
 \end{figure}
 \begin{figure}[p] %cGAN single chrom 14, matrices
     \begin{subfigure}{\textwidth}
@@ -401,23 +403,23 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_17only/}{pred00160_chr21_030-040.pdf_tex}}
-        \caption{example  region 1} \label{fig:results:GAN64-17single_r1}
+        \caption{Example  region 1} \label{fig:results:GAN64-17single_r1}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_17only/}{pred00160_chr19_030-040.pdf_tex}}
-        \caption{example region 2} \label{fig:results:GAN64-17single_r2}
+        \caption{Example region 2} \label{fig:results:GAN64-17single_r2}
     \end{subfigure}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
         \resizebox{0.9\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_64_17only/}{pred00160_chr3_030-040.pdf_tex}}
-        \caption{example region 3} \label{fig:results:GAN64-17single_r3}
+        \caption{Example region 3} \label{fig:results:GAN64-17single_r3}
     \end{subfigure}
-    \caption{example predictions cGAN, trained on chr17 only, $w=64$, 160 epochs} 
+    \caption{Example predictions cGAN, , $w=64$, trained on GM12878 chr17 only; prediction on K562, 160~epochs} 
      \label{fig:results:GAN64-17single_matrices}
 \end{figure}
 \clearpage

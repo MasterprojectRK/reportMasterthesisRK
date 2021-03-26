@@ -54,7 +54,7 @@ For convenience, the pdf version of this document also provides download links f
   Rad21 &	wgEncodeEH000749 & wgEncodeEH000649\\
   Smc3 & 	wgEncodeEH001833 & wgEncodeEH001845\\ \hline
  \end{tabular}
- \caption{chromatin features used for the thesis} \label{tab:methods:csdata}
+ \caption{Chromatin features used for the thesis} \label{tab:methods:csdata}
 \end{table}
 
 After downloading, the bam files were converted to bigwig format, which was found more convenient to handle, and the replicates were merged into 
@@ -190,7 +190,7 @@ to train a network with more than seven million parameters, cf.~\cref{sec:method
                                                          &                                                         & \multicolumn{1}{l}{}   & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}    & \multicolumn{1}{l}{}     & \multicolumn{1}{l}{}     \\
 \multicolumn{2}{r}{$\mathbf{\sum}$ \textbf{total samples}}                                                                         & \textbf{570958}        & \textbf{282855}         & \textbf{109996}         & \textbf{52375}          & \textbf{6360}            & \textbf{1309}            \\ \hline
 \end{tabular}
-\caption{training, validation and test samples for sliding window approach} \label{tab:methods:samples}
+\caption{Training, validation and test samples for sliding window approach} \label{tab:methods:samples}
 \end{table}
 
 \subsubsection{Sample generation for the cGAN} \label{sec:methods:sample_gen_cgan}
@@ -385,7 +385,7 @@ The rest of the network remained the same so that the number of trainable parame
     \small
     \centering
     \import{figures/}{DNN_longer.pdf_tex}
-    \caption{``longer'' and ``wider-longer'' variants for DNN}
+    \caption{``Longer'' and ``wider-longer'' variants for DNN}
     \label{fig:methods:longer_dnn}
 \end{figure}
 
@@ -500,13 +500,13 @@ The choice of batchsizes was partially dictated by memory limitations of the ava
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{downsampling_block.pdf_tex}
-    \caption{downsampling block} \label{fig:methods:GAN_arch:downsampling}
+    \caption{Downsampling block} \label{fig:methods:GAN_arch:downsampling}
 \end{figure}
 \begin{figure}[p]
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{upsampling_block.pdf_tex}
-    \caption{upsampling block} \label{fig:methods:GAN_arch:upsampling}
+    \caption{Upsampling block} \label{fig:methods:GAN_arch:upsampling}
 \end{figure}
 
 
@@ -523,7 +523,7 @@ native to the DNN, see \cref{fig:methods:dnn-embedding}.
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{dnn_embedding.pdf_tex}
-    \caption{embedding network, DNN} \label{fig:methods:dnn-embedding}
+    \caption{Embedding network, DNN} \label{fig:methods:dnn-embedding}
 \end{figure}
 The triu-reshape layer is a custom tensorflow network layer which generates an output tensor
 of appropriate shape $(w,w)$ and sets its upper triangular part to the values given by the input vector.
@@ -542,7 +542,7 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 128                                                      & 4260416                 & 16034732                \\
 256                                                      & 4293312                 & 57877612                \\ \hline
 \end{tabular}
-\caption{trainable weights for embedding networks}\label{tab:methods:embedding_network_params}
+\caption{Trainable weights for embedding networks}\label{tab:methods:embedding_network_params}
 \end{table}
 
 For the thesis, the DNN-embedding was used in two ways.
@@ -570,7 +570,7 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
     \scriptsize
     \centering
     \import{figures/GAN_arch/}{embedding_network.pdf_tex}
-    \caption{embedding network, CNN} \label{fig:methods:GAN_arch:embedding_network}
+    \caption{Embedding network, CNN} \label{fig:methods:GAN_arch:embedding_network}
 \end{figure}
 
 In the CNN-embedding, the number of trainable parameters is constant for all layers, except for the last convolutional layer, where the number
