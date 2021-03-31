@@ -276,8 +276,8 @@ $\sigma(\mathit{true}|_d)$ and $\sigma(\mathit{pred}|_d)$ are the respective sta
 \begin{equation}
  \rho(\mathit{true}|_d, \; \mathit{pred}|_d) = \frac{cov(\mathit{true}|_d, \mathit{pred}|_d)}{\sigma(\mathit{true}|_d)\; \sigma(\mathit{pred}|_d)} \label{eq:pearson}
 \end{equation}
-Since a numerically stable and efficient implementation of the Pearson correlation is non-trivial, the corresponding function from the pandas library \xxx was used
-for actual calculations.
+Since a numerically stable and efficient implementation for computing Pearson correlation is non-trivial, the corresponding function from pandas was used
+for actual calculations \cite{pandasPearson}.
 An obvious disadvantage of distance-stratified Pearson correlations is that they are undefined if either the predicted matrices or -- not observed in practice -- 
 the true matrices have the same value, and thus zero standard deviation, for a certain distance.
 
@@ -360,8 +360,8 @@ Following \cite{Farre2018a}, optimization was performed on minibatches of 30 sam
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
 
-The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{Abadi2015,Chollet2015}, 
-see repository \xxx. 
+The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{Abadi2015,Chollet2015}.
+All code is available under an open source license, see github repository \cite{Krauth2021b}. 
 All computations were performed on virtual machines with different properties, partially with GPU assistance; see \ref{sec:appendix:hardware} for details.
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
@@ -420,7 +420,7 @@ The optimization problem for the modified network was then formulated by means o
                                                      + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
 \end{equation}
 Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
-The \emph{VGG16} network and the corresponding weights were taken from the keras implementation pre-trained on \emph{ImageNet} \xxx.
+The \emph{VGG16} network and the corresponding weights were taken from the keras implementation pre-trained on \emph{ImageNet} \cite{deng2009}.
 As a side effect, the usage of \emph{VGG16} imposes the restriction $w \geq 32$ on the windowsize $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
 
 The network $G(\bm{\omega})$ could in principle be any of the variants described above in \cref{sec:methods:variants},
@@ -591,7 +591,7 @@ In the latter case, again the weights of the DNN were replaced by the ones of th
 
 \subsection{Comparsion with other approaches} \label{sec:methods:comparison}
 To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
-the available predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \xxx.
+the available predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
 Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
 while the MULTICELL approach was using chromatin feature data from cell lines GM12878, HMEC, HUVEC, K562(!) and NHEK with training matrices from GM12878, chromosome 14 or 17.
 These results were deemed to offer the best comparability to the \acrshort{cgan}- and DNN approaches of this thesis.
@@ -611,7 +611,7 @@ The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_i
 Additionally, HiC-Reg was compared to a \acrshort{cgan}-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
 which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
-When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,
+When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the datasets \cite{ShiluZhang2019,ShiluZhang2019a},
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
 allowing the conclusion that the correlation computations should in principle be comparable between this thesis and the paper.
 \begin{figure}[htbp]
@@ -642,7 +642,7 @@ The resulting text files were converted back to cooler using another custom pyth
 The sparsity in the results was \SI{59.6}{\percent}, confirming that filtering occurs during the sample generation- or training process of HiC-Reg,
 although it is not explicitly mentioned in the paper.
 In terms of Pearson correlations -- here, including zero-values -- the recomputed results from replicate 1 were slightly better,
-but overall very similar to the ones restored from the published dataset \xxx. 
+but overall very similar to the ones restored from the published datasets \cite{ShiluZhang2019,ShiluZhang2019a}. 
 
 It seems strange that zero-values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
 Correctly predicted zero-values strongly increase the quality of the output matrices 
@@ -652,8 +652,8 @@ Pearson correlations for the predictions in \cref{sec:results:comparison} were t
 To compare our results with the ones from Farr\'e et al. \cite{Farre2018a},
 the corresponding Hi-C- and chromatin feature data for drosophila melanogaster were downloaded and pre-processed as described in the following paragraphs.
 
-\emph{Hi-C data} from 16-18 hours old embryos was downloaded in text format from Schuettengruber et al. \cite{Schuettengruber2014} from the gene expression omnibus, accession \xxx  for binsize \SI{10}{\kilo\bp}
-and subsequently converted to cooler format using a custom python script, \xxx.
+\emph{Hi-C data} from 16-18 hours old embryos was downloaded in text format from Schuettengruber et al. \cite{Schuettengruber2014} 
+from the gene expression omnibus, accession GSE61471, for binsize \SI{10}{\kilo\bp} and subsequently converted to cooler format using a custom python script \cite[scripts/schuettengruberToCooler.py]{Krauth2021b}.
 
 With respect to \emph{chromatin features}, raw reads from modEncode ChIP-seq experiments with 14-16 hour old embryos \cite{Roy2010} 
 were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:appendix:features_farre}.
