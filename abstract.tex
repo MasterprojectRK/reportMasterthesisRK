@@ -1,8 +1,34 @@
 \section*{Abstract}
 
-Harhar!
+In recent years, many studies have shown that the three-dimensional conformation of genomes is a key factor
+for understanding several important mechanisms on the molecular biological level.
+However, the typical experiments required to measure said 3D-structure are still costly,
+so that computational methods for predicting the spatial structure from existing data have recently gained some attention. 
+
+In this thesis, two machine learning approaches for predicting chromosome conformation are investigated with 
+regard to their usability for predicting Hi-C contact matrices for certain human- and fruit fly cell lines
+from ChIP-seq data.
+Here, the first method adapts and extends an existing dense neural network architecture for Hi-C matrix predictions, 
+while the novel second method, Hi-cGAN, leverages techniques from image synthesis, especially conditional generative adversarial networks (cGANs).
+
+While the dense neural network approach can neither produce satisfactory predictions for the Hi-C matrices of human cell lines GM12878 and K562,
+nor for Drosophila Melanogaster embryos in the chosen setting, Hi-cGAN yields encouraging outcomes in all three cases.
 
 
 \section*{Zusammenfassung}
 
-Hohoho!
+In den letzten Jahren wurde in mehreren Studien gezeigt, dass die dreidimensionale Struktur von Genomen ein
+wichtiger Schlüssel für das Verständnis zahlreicher wichtiger Vorgänge auf molekularbiologischer Ebene ist.
+Die Experimente, welche zum Erfassen dieser 3D-Struktur typischerweise durchgeführt werden,
+sind derzeit jedoch noch recht aufwendig, sodass computergestützte Verfahren zur Vorhersage 
+der räumlichen Struktur aus existierenden Daten an Bedeutung gewonnen haben.
+
+In dieser Masterarbeit werden zwei auf Techniken des maschinellen Lernens basierende Methoden untersucht
+im Hinblick auf ihre Eignung zur Vorhersage der Hi-C Kontaktmatrizen bestimmer Zell-Linien von Menschen und Fruchtfliegen aus sogenannten ChIP-seq Daten.
+Während die erste Methode auf einem existierenden, voll verbundenen neuronalen Netzwerk für die Vorhersage von Hi-C Matrizen aufbaut,
+handelt es sich bei der zweiten Methode, Hi-cGAN, um einen neuartigen Ansatz, der sich Techniken aus der maschinellen Bild-Synthese zu Nutzen macht,
+insbesondere sogenannte ``conditional generative adversarial'' Netzwerke (cGANs).
+
+Während das voll verbundene neuronale Netz im gewählten Aufbau weder für die menschlichen Zell-Linien GM12878 und K562, 
+noch für Embryonen der Fruchtfliege Drosophila Melanogaster zuriedenstellende Vorhersagen der jeweiligen Hi-C Kontaktmatrizen treffen kann, 
+führt Hi-cGAN in allen drei Fällen zu ermutigenden Resultaten.
