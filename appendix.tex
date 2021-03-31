@@ -719,4 +719,65 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \caption{Example predictions cGAN, , $w=64$, trained on GM12878 chr17 only; prediction on K562, 160~epochs} 
      \label{fig:results:GAN64-17single_matrices}
 \end{figure}
+
+\subsection{cGAN and DNN trained on D. melanogaster, chr2L and 3L} \label{sec:appendix:cgan_drosophila}
+\begin{figure}[p] %DNN trained on drosophila 2L, 2R 
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_drosophila/}{pearson_chr3L.pdf_tex}}
+        \caption{chr3L (validation)}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_drosophila/}{pearson_chr3R.pdf_tex}}
+        \caption{chr3R (test)}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_drosophila/}{pearson_chrX.pdf_tex}}
+        \caption{chrX (test)}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_drosophila/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:appendix:DNN_drosophila_progress}
+    \end{subfigure}
+    \caption{Results\,/\,metrics DNN, $w=80$, trained on D. melanogaster chr2L and 2R}   \label{fig:appendix:DNN_drosophila_pearson}
+\end{figure}
+
+\begin{figure}[p] %cGAN trained on drosophila 2L, 2R 
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_drosophila/}{pearson_chr3L.pdf_tex}}
+        \caption{chr3L (validation)}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_drosophila/}{pearson_chr3R.pdf_tex}}
+        \caption{chr3R (test)}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_drosophila/}{pearson_chrX.pdf_tex}}
+        \caption{chrX (test)}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/GAN_64_drosophila/}{lossOverEpochs.pdf_tex}}
+        \caption{learning progress} \label{fig:appendix:GAN64_drosophila_progress}
+    \end{subfigure}
+    \caption{Results\,/\,metrics cGAN, $w=64$, trained on D. melanogaster chr2L and 2R}   \label{fig:appendix:GAN64_drosophila_pearson}
+\end{figure}
+
+
+
 \clearpage
+

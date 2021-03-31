@@ -1,0 +1,112 @@
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'lossOverEpochs.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{226.77165354bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.7375)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lossOverEpochs.pdf}}%
+    \put(0.07245609,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{lossOverEpochs.pdf}}%
+    \put(0.14185702,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{lossOverEpochs.pdf}}%
+    \put(0.21945253,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{lossOverEpochs.pdf}}%
+    \put(0.29704799,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}30\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{lossOverEpochs.pdf}}%
+    \put(0.37464351,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{lossOverEpochs.pdf}}%
+    \put(0.45223894,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{lossOverEpochs.pdf}}%
+    \put(0.52983446,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{lossOverEpochs.pdf}}%
+    \put(0.60742999,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}70\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{lossOverEpochs.pdf}}%
+    \put(0.68502538,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}80\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{lossOverEpochs.pdf}}%
+    \put(0.76262084,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}90\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{lossOverEpochs.pdf}}%
+    \put(0.83202181,0.0375594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100\end{tabular}}}}%
+    \put(0.43324643,0.00232476){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}epoch\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{lossOverEpochs.pdf}}%
+    \put(-0.00283135,0.68034005){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{lossOverEpochs.pdf}}%
+    \put(0.02094581,0.18816087){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}generator loss\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{lossOverEpochs.pdf}}%
+    \put(0.14868902,0.42206542){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Generator\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{lossOverEpochs.pdf}}%
+    \put(0.21263228,0.38425362){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{training}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{lossOverEpochs.pdf}}%
+    \put(0.21263228,0.34644188){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{validation}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{lossOverEpochs.pdf}}%
+    \put(0.91305537,0.19237095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.62\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{lossOverEpochs.pdf}}%
+    \put(0.91305537,0.32188535){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.64\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{lossOverEpochs.pdf}}%
+    \put(0.91305537,0.45139981){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.66\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{lossOverEpochs.pdf}}%
+    \put(0.91305537,0.58091406){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.68\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{lossOverEpochs.pdf}}%
+    \put(0.91305537,0.71042852){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.70\end{tabular}}}}%
+    \put(1.01193223,0.29188085){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}discriminator loss\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{lossOverEpochs.pdf}}%
+    \put(0.63852177,0.57338666){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Discriminator\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{lossOverEpochs.pdf}}%
+    \put(0.70161439,0.53557486){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train total}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{lossOverEpochs.pdf}}%
+    \put(0.70161439,0.49776305){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train real}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{lossOverEpochs.pdf}}%
+    \put(0.70161439,0.45995131){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train fake}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{lossOverEpochs.pdf}}%
+    \put(0.70161439,0.42213951){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{valid. total}\end{tabular}}}}%
+    \put(0.01649737,0.49478459){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
