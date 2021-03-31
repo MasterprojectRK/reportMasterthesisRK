@@ -14,7 +14,7 @@ However, there is still room for improvement -- even the best predictions of thi
 than simply taking data from the training cell line as a ``prediction'' for the target cell line.
 
 Throughout the thesis, a few starting points for further improving the predictions were identified.
-As of now, the discriminator is trained on two kinds of inputs:
+In the current implementation, the discriminator is trained on two kinds of inputs:
 it is supposed to classify pairs of true chromatin feature arrays and true Hi-C submatrices as real, 
 and pairs of true chromatin feature arrays and artificial Hi-C submatrices produced by the generator as fake, cf. \cref{eq:improve:disc_loss_total}.
 For text-to-image synthesis tasks, a third kind of input has been introduced; here the discriminator is additionally trained 
@@ -42,4 +42,5 @@ described in \cref{sec:improve:CNN_embedding} and \ref{sec:methods:cnn-embedding
 
 Nevertheless, the cGAN approach developed within this thesis can hopefully serve as a helpful starting point and baseline
 for further development of improved Hi-C contact matrix prediction methods.
-To this end, all source code is provided on github under an open source license \cite{Krauth2021a, Krauth2021b} .
+To this end, all source code is provided on github under an open source license \cite{Krauth2021a, Krauth2021b}.
+\clearpage
