@@ -602,16 +602,15 @@ For the conversion to cooler format, the missing values were assumed to be zero.
 Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and DNN results using cooler coarsen.
 
 For the comparison between \emph{HiC-Reg} and Hi-\acrshort{cgan}, two additional \acrshort{cgan} models with CNN embedding were trained on chromosome 14 and 17, respectively,
-using (arbitariliy selected) chromosome 10 for validation. Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
+using (arbitariliy selected) chromosome 10 for validation. 
+Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
 Additionally, HiC-Reg was compared to a \acrshort{cgan}-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
 which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the dataset \xxx,
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
-allowing the conclusion that the correlation computations should be comparable between this thesis and the paper.
-For the comparsion with the DNN- and \acrshort{cgan} approach and for the transfer from GM12878, the full matrices (including zeros) where considered,
-yielding comparatively high correlation values and visually pleasing matrix predictions, cf. \ref{sec:results:comparison}.
+allowing the conclusion that the correlation computations should in principle be comparable between this thesis and the paper.
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
    \resizebox{\textwidth}{!}{
@@ -626,25 +625,58 @@ yielding comparatively high correlation values and visually pleasing matrix pred
 \caption{Pearson correlations reconstructed from \cite{Zhang2019}} \label{fig:methods:zhang_correlations_reconstructed}
 \end{figure}
 
-It seems strange that zero values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
-First, the paper gives no reason why the predicted data could be sparse, and second, 
-correctly predicted zero-values strongly increase the quality of the predicted matrices and should thus be considered when computing correlations.
-It is also unknown how TADs could be computed on the data without assuming the missing values as zeros
--- and TAD detection was used as a measure of prediction quality in the paper, among others.
+For reference, training and prediction were re-done for the WINDOW approach and cell lines GM12878 $\rightarrow$ K562, chromosome 17.
+With regard to chromatin features, the same bam files were taken as in \cref{sec:methods:input_data}, except for SMC3, which was replaced by TBP,
+in line with the paper by Zhang et al. \cite{Zhang2019}. 
+The bam files were then converted to text files using custom bash scripts and the \texttt{aggregateSignal} application provided by HiC-Reg, 
+cf. \cref{list:methods:bam2bedgraph} and \ref{list:methods:bedgraph2hicreg}. 
+For simplicity, only replicate 1 was used in all cases.
+With regard to matrix data, cooler files were first prepared as described in \cref{sec:methods:input_data}.
+Next, square root vanilla coverage correction was applied, the matrices were dumped into text files and a custom python script was used
+to convert the text inputs to meet HiC-Reg's requirements, cf. \cref{list:methods:convertForHicReg_bash} and \ref{list:methods:convertForHicReg_python}.
+For the rest of the training- and prediction process, the instructions in HiC-Reg's github repository were followed.
+The resulting text files were converted back to cooler using another custom python script, see \cref{list:methods:hicreg2cool}.
+The sparsity in the results was \SI{59.6}{\percent}, confirming that filtering occurs during the sample generation- or training process of HiC-Reg,
+although it is not explicitly mentioned in the paper.
+In terms of Pearson correlations -- here, including zero-values -- the recomputed results from replicate 1 were slightly better,
+but overall very similar to the ones restored from the published dataset \xxx. 
 
+It seems strange that zero-values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
+Correctly predicted zero-values strongly increase the quality of the output matrices 
+and should thus be included in the correlation computations.
+Pearson correlations for the predictions in \cref{sec:results:comparison} were thus computed for full chromosomes, including zero-values.
 
-\subsection{Hardware} \label{sec:methods:hardware}
-For the thesis, three virtual machines were used to train the neural networks, see \cref{tab:appendix:hardware}.
-All training for \cref{sec:results:cgan} was done on machine 2, 
-computations for sections \ref{sec:initialDNNresults}, \ref{sec:results:wider-longer-etc} and \ref{sec:results:binsize_winsize}
-were done on machine 3 without GPU and computations for sections \ref{sec:results:loss_functions} and \ref{sec:results:scorebased} were done on machine 2.
+To compare our results with the ones from Farr\'e et al. \cite{Farre2018a},
+the corresponding Hi-C- and chromatin feature data for drosophila melanogaster were downloaded and pre-processed as described in the following paragraphs.
 
-Training the DNN with perception- or score-based losses as well as the \acrshort{cgan} was not reasonably possible without GPU.
-For the \acrshort{cgan}, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
-to avoid undue limitations on batchsizes and/or windowsizes.
-\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the \acrshort{cgan} at windowsize 64 for more than 80 epochs.
-It could not be clarified throughout the thesis whether this was due to a memory leak in tensorflow or due to the chosen implementation.
+\emph{Hi-C data} from 16-18 hours old embryos was downloaded in text format from Schuettengruber et al. \cite{Schuettengruber2014} from the gene expression omnibus, accession \xxx  for binsize \SI{10}{\kilo\bp}
+and subsequently converted to cooler format using a custom python script, \xxx.
 
-Training samples were stored as tensorflow tfrecords (on the fly at runtime) and a custom pipeline including a shuffle buffer and prefetching 
-was employed to balance workload between CPUs and GPU.
-This approach was found to be faster than generator-based approaches by a large margin.
+With respect to \emph{chromatin features}, raw reads from modEncode ChIP-seq experiments with 14-16 hour old embryos \cite{Roy2010} 
+were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:appendix:features_farre}.
+Note that while Farr\'e et al. state they have used 50 features, in fact only 49 unique features are specified in their paper, H3k4me1 being listed twice \cite[p.~9]{Farre2018a},
+which explains why table \ref{tab:appendix:features_farre} has 49 instead of the expected 50 entries.
+After downloading, the reads were mapped to the drosophila melanogaster reference genome dm3 using bowtie2 mostly with default parameters, 
+see \cref{list:methods:map_drosophila} for details,
+and the resulting bam files were converted to bigwig format as described in \cref{sec:methods:input_data} and \cref{list:methods:bamtobigwig}.
+While most experiments feature 2 to 4 replicates, only replicate 2 was considered for each chromatin feature to limit disk space usage and processing time.
+
+The bigwig files were then used as inputs for the DNN and cGAN as described above in sections \ref{sec:methods:sample_gen}, \ref{sec:methods:sample_gen_cgan}, \ref{sec:methods:dnn}
+and \ref{sec:methods:hicgan}. 
+Here, the DNN was used in its initial configuration at windowsize $w=80$ and the cGAN was used with CNN embedding at windowsize $w=64$.
+Both the DNN and cGAN were trained on samples from chromosome 2L and 2R, samples from chromosome 3L were used for validation
+and predictions were made on chromosomes 3R and X using a batchsize of 2 for the cGAN and 30 for the DNN.
+All other parameters were set to the same values as in sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan}.
+Note that the windowsizes specified above are the maximum reasonable values, since the Hi-C data due to Schuettengruber et al. \cite{Schuettengruber2014} 
+is limited to distances below approximately 80 bins for unknown reasons, 
+and the cGAN approach is in turn restricted to power-of-two windowsizes.
+
+Unfortunately, Farr\'e et al have not published raw data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed.
+For this reason, the respective matrix plots and Pearson correlation graphs were extracted from the publication 
+and added to the figures generated by the DNN- and cGAN approaches by means of image processing.
+Note that the correlations are in this case given \emph{per position} and cannot be compared to the distance-stratified correlations
+used everywhere else in this thesis.
+However, the usual distance-stratified correlations for all test chromosomes are shown in the appendix, figures \xxx and \xxx.
+Like the distance-stratified-correlation plots, per-position-correlation figures were generated by a custom python script \xxx.
+
+\clearpage

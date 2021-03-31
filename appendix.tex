@@ -1,6 +1,6 @@
 \section{Appendix}
 
-\subsection{Chromatin feature download links} \label{sec:chromFeat_download_links}
+\subsection{Chromatin feature download details} \label{sec:chromFeat_download_links}
 The basic download paths for all chromatin feature files in .bam format are\\
 \small{\url{https://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeBroadHistone/}}\\
 \small{\url{https://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeOpenChromDnase/}}\\
@@ -83,7 +83,42 @@ For convenience, the pdf version of this document contains clickable links below
 \href{https://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeSydhTfbs/wgEncodeSydhTfbsK562Rad21StdAlnRep2.bam}{\nolinkurl{Rad21}}\\
 \href{https://www.encodeproject.org/files/ENCFF845WVY/@@download/ENCFF845WVY.bam}{\nolinkurl{SMC3}}\\
 \end{minipage}
+\clearpage
 
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lllll}
+\hline
+\textbf{feature} & \textbf{accession} &  & \textbf{feature} & \textbf{accession} \\ \hline
+BEAF             & SRR1164521         &  & H3K9me1          & SRR869989          \\
+Chro Chriz WR    & SRR869929          &  & H3K9me2          & SRR869708          \\
+CP190-HB         & SRR869732          &  & H3K9me2          & SRR869864          \\
+CTCF             & SRR869933          &  & H3K9me3          & SRR869860          \\
+dMi              & SRR869937          &  & H4               & SRR870049          \\
+dRING            & SRR869941          &  & H4K16acM         & SRR869856          \\
+GAF              & SRR869740          &  & H4K20me1         & SRR870057          \\
+H1               & SRR870123          &  & HP1              & SRR869718          \\
+H2AV             & SRR869950          &  & HP1b             & SRR870061          \\
+H2B-ubiq         & SRR869956          &  & HP1c             & SRR870183          \\
+H3               & SRR869965          &  & HP2              & SRR870138          \\
+H3K18Ac          & SRR869977          &  & HP4              & SRR869880          \\
+H3K23ac          & SRR869981          &  & JHDM1            & SRR870069          \\
+H3K27Ac          & SRR869744          &  & LSD1             & SRR870073          \\
+H3K27me2         & SRR869993          &  & MBD-R2           & SRR870077          \\
+H3K27me3         & SRR869712          &  & MOF              & SRR870081          \\
+H3K36me1         & SRR869839          &  & NURF301          & SRR870085          \\
+H3K36me2         & SRR870231          &  & Pc               & SRR869724          \\
+H3K36me3         & SRR869900          &  & POF              & SRR870089          \\
+H3K4me1          & SRR870009          &  & Psc              & SRR869736          \\
+H3K4me3          & SRR870025          &  & RNA Pol II       & SRR870093          \\
+H3K79Me1         & SRR869748          &  & RPD3             & SRR870105          \\
+H3K79me2         & SRR869884          &  & SU(HW)-HB        & SRR869728          \\
+H3K79me3         & SRR870191          &  & ZW5              & SRR870117          \\
+H3K9acS10P       & SRR870033          &  &                  &                    \\ \hline
+\end{tabular}
+\caption[Chromatin features from D. melanogaster used for the comparison DNN / cGAN / Farre et al. \cite{Farre2018a}]{Chromatin features from D. melanogaster used for the comparison\\DNN / cGAN / Farre et al. \cite{Farre2018a}}
+\label{tab:appendix:features_farre}
+\end{table}
 \clearpage
 \subsection{Listings}
 \begin{lstlisting}[language=bash, caption=Hic to cooler, label=list:methods:hic2cool]
@@ -125,6 +160,253 @@ For convenience, the pdf version of this document contains clickable links below
  #versions used for thesis
  #samtools 1.9, bamCoverage 3.5.0, bigwigCompare 3.5.0
 \end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption=Bam to bedgraph, label=list:methods:bam2bedgraph]
+chromosome="${2}"
+bamfolder="${1}"
+
+shopt -s nullglob
+for i in ${1}*.bam
+do
+ echo "converting: ${i} - chrom ${2}"
+ tmpfile="${i}.tmp"
+ countfile="${i%.bam}_${chromosome}.count"
+ samtools view -b ${i} ${chromosome} > ${tmpfile}
+ cmd="-ibam ${tmpfile} -bg"
+ bedtools genomecov ${cmd} > ${countfile}
+ rm ${tmpfile}
+done
+\end{lstlisting}
+\begin{lstlisting}[language=bash, caption=Bedgraph to HiC-Reg input format, label=list:methods:bedgraph2hicreg]
+inputfolder="${1}"
+#following example files are provided in HiC-Reg github
+region="HiC-Reg/Scripts/aggregateSignalInRegion/hg19_5kbp_chr17.txt"
+sizesfile="HiC-Reg/Scripts/aggregateSignalInRegion/hg19.fa.fai"
+
+shopt -s nullglob
+for i in ${1}*.count
+do
+ echo "converting: ${i}"
+ outfile="${i%.count}.txt"
+ cmd="${region} ${sizesfile} ${i} ${outfile}"
+ ./aggregateSignal_v1 ${cmd} #provided by HiC-Reg
+done
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption=Cooler matrices to HiC-Reg input format, label=list:methods:convertForHicReg_bash]
+#"combined_30" GM12878 or K562 matrix from Rao et al. at 5kb resolution
+inMatrix=${1} 
+#filename for cooler matrix (*.cool) with VC_SQRT correction
+outMatrix=${2} 
+chrom=${3}
+
+cmd="-m ${inMatrix}"
+cmd="${cmd} -o ${outMatrix}"
+cmd="${cmd} --inputFormat cool --outputFormat cool" 
+cmd="${cmd} --correction_name VC_SQRT --store_applied_correction"
+cmd="${cmd} --correction_division"
+cmd="${cmd} --chromosome ${chrom}" 
+hicConvertFormat ${cmd}
+
+cooler dump ${outMatrix} --join -o ${outMatrix%.cool}.txt
+params="--infile ${outMatrix%.cool}.txt"
+params="${params} --outfile ${outMatrix%.cool}_converted.txt"
+python matrix_conversion.py ${params} #see below for details
+\end{lstlisting}
+
+\begin{lstlisting}[language=python, caption=Custom text file conversion for HiC-Reg's matrix input, label=list:methods:convertForHicReg_python]
+import click
+import pandas as pd
+
+@click.option("--infile", required=True, type=click.Path(exists=True, readable=True, dir_okay=False), help="text file created by cooler dump with --join")
+@click.option("--outfile", required=False, type=click.Path(writable=True, dir_okay=False))
+@click.command()
+def convert(infile, outfile):
+	if outfile is None:
+		outfile = infile
+	try:
+		df = pd.read_csv(infile, header=None, sep="\t", index_col=False)
+	except Exception as e:
+		msg = str(e)
+		msg += "\ncould not read csv file, wrong format?"
+		raise SystemExit(msg)
+	if df.shape[1] != 7:
+		msg = "Read file with wrong format, number of columns should be 7 but is {:d}"
+		msg = msg.format(df.shape[1])
+		raise SystemExit(msg)
+	#check if the matrix contains nans
+	if df.isnull().values.any():
+		msg = "WARNING: there are nans in the dataframe"
+		print(msg)
+	#create the text-encoded matrix format for HiC-Reg
+	df["start"] = "chr" + df.loc[:,0].astype(str) + "_" + df.loc[:,1].astype(str) + "_" + df.loc[:,2].astype(str)
+	df["end"] = "chr" + df.loc[:,3].astype(str) + "_" + df.loc[:,4].astype(str) + "_" + df.loc[:,5].astype(str)
+	df["count"] = df.loc[:,6].astype("float32")
+	df.drop(columns=[0,1,2,3,4,5,6], inplace=True)
+	df["count"].fillna(value=0.0, inplace=True)
+	#remove matrix diagonal since it is missing in the HiC-Reg examples, too
+	diagFilter = df["start"] == df["end"]
+	df = df.loc[~diagFilter]
+	
+	df.to_csv(outfile, sep="\t", columns=["start","end","count"], header=False, index=False, float_format="%.4f")
+	print("first few lines of matrix txt file:\n", df.head())
+
+if __name__ == "__main__":
+	convert()
+\end{lstlisting}
+
+\begin{lstlisting}[language=python, caption=Custom script to convert HiC-Reg's text output to cooler format, label=list:methods:hicreg2cool]
+import click
+import pandas as pd
+import cooler
+import os
+import numpy as np
+
+@click.option("--filenames", "-f", required=True,
+				type=click.Path(exists=True, readable=True, dir_okay=False),
+				multiple=True,
+				help="testset_error file(s) from HiC-Reg") 
+@click.option("--chromsize", "-cs", required=False,
+				type=click.IntRange(min=1), 
+				help="Size of chromosome. Will be derived from data, if not specified")
+@click.option("--outfolder", "-o", required=True,
+				type=click.Path(writable=True, file_okay=False, exists=True),
+				help="Folder where the coolers will be placed")
+@click.option("--exponentiate", "-e", required=False, type=bool, default=False, show_default=True, help="exponentiate count values")
+@click.command()
+def reconstruct(filenames, chromsize, outfolder, exponentiate):
+	#read the the text files from HiC-Reg
+	#skip the first row, since it contains the incomplete header with missing "Distance"
+	try:
+		dataframes = [pd.read_csv(filename, names=["Pair", "TrueValue", "PredictedValue", "SquaredErr", "Distance"], 
+									sep="\t", 
+									dtype={"Pair": str, "TrueValue": float, "PredictedValue": float, "SquaredErr": float, "Distance": int}, 
+									skiprows=[0]) for filename in filenames]
+	except Exception as e:
+		msg = str(e) + "\nCould not read one of the files, wrong format?"
+		raise SystemExit(msg)
+		
+	#print number of pairs in each file
+	for i, df in enumerate(dataframes):
+		print("file {:d} - {:d} pairs ({:s})".format(i, df.shape[0], filenames[i]))
+	
+	for df in dataframes:
+		#extract the start- and end positions of all pairs and the chromosome
+		df["Pair"] = df["Pair"].str.replace(pat="-", repl="_")
+		splitDf = df["Pair"].str.split(pat="_", expand=True)
+		df["chrom"] = splitDf.iloc[:,0]
+		df["start_L"] = splitDf.iloc[:,1].astype("int32")
+		df["end_L"] = splitDf.iloc[:,2].astype("int32")
+		#df["chr_R"] = splitDf.iloc[:,3] #not needed here, always the same as chr_L
+		df["start_R"] = splitDf.iloc[:,4].astype("int32")
+		df["end_R"] = splitDf.iloc[:,5].astype("int32")
+		#compute binsizes
+		df["binsizes"] = df["end_L"] - df["start_L"]
+		#compute the bin ids
+		binsize = df["binsizes"].iloc[0]
+		df["bin1_id"] = df["start_L"] // binsize
+		df["bin2_id"] = df["start_R"] // binsize
+		#if desired, take the values to the power of e to get counts from log-scale values
+		if exponentiate == True:
+			df["TrueValue"] = np.exp(df["TrueValue"])
+			df["PredictedValue"] = np.exp(df["PredictedValue"])
+		#drop unnecessary columns
+		df.drop(columns=["Pair", "Distance", "SquaredErr", "end_L", "end_R", "start_L", "start_R"], inplace=True)	
+	
+	#check if the binsizes are equal in the single dataframes before merging the dataframes
+	binsizes = [df["binsizes"].iloc[0] for df in dataframes]
+	binsizes = list(set(binsizes))
+	if len(binsizes) != 1:
+		msg = "Binsizes not equal: {:s}".format(", ".join([str(b) for b in binsizes]))
+		raise SystemExit(msg)
+	else:
+		print("detected binsize: {:d}".format(binsizes[0])) 
+	
+	#concat the dataframes from the files
+	joinDf = pd.concat(dataframes, ignore_index=True)
+	joinDf.drop(columns=["binsizes"], inplace=True)
+	
+	#When using train_i and test_i, there should be no duplicate pairs. 
+	#Otherwise, e.g. in x-validation settings, take the mean
+	chrom = joinDf["chrom"].iloc[0]
+	elem_number_before = joinDf.shape[0]
+	joinDf = joinDf.groupby(["bin1_id", "bin2_id"])[["TrueValue", "PredictedValue"]].mean().reset_index()
+	elem_number_after = joinDf.shape[0]
+	if elem_number_after != elem_number_before:
+		msg = "Aggregated {:d} duplicates by taking the mean".format(elem_number_before - elem_number_after)
+		print(msg)
+	
+	print("first few elems of joint dataset:\n", joinDf.head())
+	print("dataset contains {:d} pairs".format(joinDf.shape[0]))
+	
+	#if no data given, set chromsize to max(bin id) * bin size + bin size
+	maxbin = joinDf[["bin1_id","bin2_id"]].max().max()
+	if chromsize is None:
+		chromsize = maxbin * binsizes[0] + binsizes[0]
+	
+	#prepare the bins for cooler
+	bins = pd.DataFrame(columns=['chrom','start','end'])
+	binStartList = list(range(0, chromsize, binsizes[0]))
+	binEndList = list(range(binsizes[0], chromsize, binsizes[0])) + [chromsize]
+	bins['start'] = np.uint32(binStartList)
+	bins['end'] = np.uint32(binEndList)
+	bins["chrom"] = str(chrom)
+
+	#prepare the pixels for cooler
+	joinDf.sort_values(by=["bin1_id", "bin2_id"], inplace=True)
+	pixels = joinDf[["bin1_id","bin2_id"]].copy()
+	pixels["count"] = joinDf["PredictedValue"]
+	outfilename = os.path.join(outfolder, "predValues_{:s}.cool".format(str(chrom)))
+	#build the coolers
+	cooler.create_cooler(outfilename, 
+						bins=bins, 
+						pixels=pixels, 
+						dtypes={'count': np.float64}, 
+						ordered=True, 
+						metadata={"fromFilenames": filenames})
+	pixels["count"] = joinDf["TrueValue"]
+	outfilename = os.path.join(outfolder, "trueValues_{:s}.cool".format(str(chrom)))
+	cooler.create_cooler(outfilename, 
+						bins=bins, 
+						pixels=pixels, 
+						dtypes={'count': np.float64}, 
+						ordered=True, 
+						metadata={"fromFilenames": filenames})
+	#check and report sparsity
+	max_bin_dist = (pixels["bin2_id"] - pixels["bin1_id"]).max()
+	full_nr_elements = ((bins.shape[0])**2 + bins.shape[0])//2
+	cut_nr = bins.shape[0] - max_bin_dist
+	cut_nr_elements = (cut_nr**2 + cut_nr)//2
+	exp_nr_elements = full_nr_elements - cut_nr_elements
+	sparsity_percent = (pixels.shape[0] / exp_nr_elements)*100
+	print("number of bins: {:d}".format(bins.shape[0]))
+	print("maxdist: {:d}".format(max_bin_dist * binsizes[0]))
+	print("expected interacting pairs: {:d}, available interacting pairs: {:d}".format(exp_nr_elements, pixels.shape[0]))
+	print("sparsity: {:.2f}%".format(sparsity_percent))
+
+if __name__ == "__main__":
+	reconstruct()
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption=Mapping ChIP-seq reads to D. melanogaster ref. genome, label=list:methods:map_drosophila]
+fqdir=${1}                  #directory with fastq files
+procs="8"                   #number of threads
+indexdir="./BDGP5/BDGP5"    #bowtie2 index for BDGP5/dm3
+
+shopt -s nullglob
+for fqfile in ${fqdir}*.fastq; do
+	samfile="${fqfile%fastq}sam"
+	bamfile="${fqfile%fastq}bam"
+	echo "processing ${fqfile} => ${samfile} => ${bamfile}"
+	bowtie2 -x ${indexdir} -U ${fqfile} -S ${samfile} --no-unal -p ${procs}
+	samtools view -S -b ${samfile} > ${bamfile}
+	rm ${samfile}
+	gzip ${fqfile}
+	samtools sort ${bamfile} -o ${bamfile}
+	samtools index ${bamfile}
+done
+\end{lstlisting}
+
 
 
 \clearpage
