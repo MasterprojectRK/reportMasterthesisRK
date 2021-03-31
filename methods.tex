@@ -4,15 +4,13 @@ First, input data and data preprocessing will be discussed, followed by an expla
 of Hi-C matrices made throughout the thesis.
 Next, sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan} will give details with regard to the two 
 different approaches made in this thesis to advance the state of the art in predicting Hi-C matrices.
-Finally, the hardware used for the computations within this thesis will be outlined in \cref{sec:methods:hardware}.
 
 \subsection{Input data} \label{sec:methods:input_data}
-For the thesis at hand, data from human cell lines GM12878, K562, HMEC, HUVEC and NHEK was used.
+For the thesis at hand, data from human cell lines GM12878 and K562 was used.
 The exact data sources and data preprocessing for the Hi-C matrices and ChIP-seq data 
-will be outlined in the following subsections \ref{sec:methods:hicMatrices} and \ref{sec:methods:chipseq}.
+will be outlined below.
 
-\subsubsection{Hi-C matrices} \label{sec:methods:hicMatrices}
-Hi-C data due to Rao et al. \cite{Rao2014} was downloaded 
+\emph{Hi-C data} due to Rao et al. \cite{Rao2014} was downloaded 
 in .hic format from Gene Expression Omnibus under accession key GSE63525.
 Here, the quality-filtered ``combined\_30'' matrices were taken, which contain only high-quality reads from 
 both replicates.
@@ -20,14 +18,12 @@ both replicates.
 Next, matrices at \SI{5}{\kilo\bp} binsize were extracted and converted to cooler format using \texttt{hic2cool}
 and subsequently coarsened to resolutions of 10, 25, 50 and \SI{100}{\kilo\bp} using \texttt{cooler coarsen},
 see \cref{list:methods:hic2cool}.
-
-Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using a distance-based normalization,
+Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using ICE plus distance-based normalization,
 and many others in the field which are using ICE- or KR-normalization, 
 these matrices have not been normalized for the thesis at hand
 because no benefit of doing so was found during the study project \cite{Krauth2020}.
 
-\subsubsection{ChIP-seq data} \label{sec:methods:chipseq}
-For this thesis, ChIP-seq data for 13 chromatin features and DNaseI-seq data was used, cf. \cref{tab:methods:csdata}.
+\emph{ChIP-seq} data for 13 chromatin features and DNaseI-seq data was used, cf. \cref{tab:methods:csdata}.
 Here, the data was downloaded in .bam format either via the ENCODE project \cite{Encode2012,Davis2017} 
 or directly from the file server of the University of California (UCSC). 
 In all cases, bam-files for replicate 1 and 2 were downloaded in their most recent versions (if applicable);
@@ -61,8 +57,8 @@ After downloading, the bam files were converted to bigwig format, which was foun
 one bigwig file by taking the mean, as in the study project \cite{Krauth2020}. 
 Pseudocode for the full conversion process is given in \cref{list:methods:bamtobigwig}.
 
-The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; it contains
-structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3 as well as active/passive markers.
+The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; 
+aside structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3, active/passive markers are used as well.
 
 \subsubsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
 This thesis follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a}.
@@ -149,9 +145,15 @@ Conveniently, cooler also supports storing only the upper triangular part of sym
  \end{minipage}
 \end{figure}
 
-Training samples were drawn from GM12878, chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of GM12878, 
-validation samples from GM12878, chromosomes 6, 8, 12 and 15 and test samples from K562, chromosomes 3, 5, 10, 19 and 21.
+Generally, training samples were drawn from chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of cell line GM12878, 
+validation samples from chromosomes 6, 8, 12 and 15 of cell line GM12878 and test samples from chromosomes 3, 5, 10, 19 and 21 of cell line K562.
 This approximately implements a 60:20:20 train:validation:test split, see \cref{tab:methods:samples} for details.
+Reversing training/validation and test cell line, which differ strongly in sequencing depth within the Hi-C experiments, 
+was tested briefly for the cGAN approach and seemed to work, see \cref{sec:appendix:reverseTrainTest}.
+For comparability reasons, two cGANs were additionally trained on single chromosomes 14 and 17 of cell line GM12878,  cf. \cref{sec:methods:comparison}.
+Also for comparability reasons, another cGAN was trained and tested on data from \emph{drosophila melanogaster} embryos, again refer to \cref{sec:methods:comparison}
+for details.
+
 Note that windowsize $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
 to train a network with more than seven million parameters, cf.~\cref{sec:methods:basicSetup}.
 \begin{table}[hbp]

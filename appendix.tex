@@ -411,7 +411,22 @@ done
 
 \clearpage
 \begin{landscape}
-\subsection{Hardware}
+\subsection{Hardware}\label{sec:appendix:hardware}
+For the thesis, three virtual machines were used to train the neural networks, see \cref{tab:appendix:hardware}.
+All training for \cref{sec:results:cgan} with windowsize $w=256$ was done on machine 2, 
+while computations for  \cref{sec:results:cgan} with windowsizes $w \in \{64,128\}$ were done on machine 1.
+Computations for sections \ref{sec:initialDNNresults}, \ref{sec:results:wider-longer-etc} and \ref{sec:results:binsize_winsize}
+were done on machine 3 without GPU and computations for sections \ref{sec:results:loss_functions} and \ref{sec:results:scorebased} were done on machine 2.
+
+Training the DNN with perception- or score-based losses as well as the \acrshort{cgan} was not reasonably possible without GPU.
+For the \acrshort{cgan}, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
+to avoid undue limitations on batchsizes and/or windowsizes.
+\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the \acrshort{cgan} at windowsize 64 for more than 100 epochs.
+It could not be clarified throughout the thesis whether this was due to a memory leak in tensorflow or due to the chosen implementation.
+
+Training samples were stored as tensorflow tfrecords (on the fly at runtime) and a custom pipeline including a shuffle buffer and prefetching 
+was employed to balance workload between CPUs and GPU.
+This approach was found to be faster than generator-based approaches by a large margin.
  \begin{table}[hbp]
 \small
 \centering
@@ -504,7 +519,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \caption{Example predictions GM12878 $\rightarrow$ K562, DNN, $w=64$, 250~epochs} \label{fig:results:DNN_matrices}
 \end{figure}
 \clearpage
-\subsubsection{cGAN trained on K562, predicting GM12878}
+\subsubsection{cGAN trained on K562, predicting GM12878}\label{sec:appendix:reverseTrainTest}
 \begin{figure}[h!] %cGAN 256 K-on-G, pearson and progress
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
