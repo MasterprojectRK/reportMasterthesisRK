@@ -162,8 +162,8 @@ and the results for $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \l
 which should not be considered optimal, are shown in \cref{sec:results:loss_functions}.
 
 \subsubsection{Using a TAD-based loss function} \label{sec:improve:TAD_loss}
-Looking at the results obtained from the networks so far, see \xxx, it seemed that highly interacting regions,
-especially topologically interacting domains (TADs), were not well predicted and either absent
+Looking at the results obtained from the networks discussed in the previous sections, see e.\,g. \cref{fig:results:basic500}, 
+it seemed that highly interacting regions, especially topologically interacting domains (TADs), were not well predicted and either absent
 in the matrix plots or blurred.
 Assuming availability of a TAD scoring function $\mathit{tad}(\mathbf{z}_\mathit{pred})$, where $\mathbf{z}_\mathit{pred}$ is a predicted submatrix,
 this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
