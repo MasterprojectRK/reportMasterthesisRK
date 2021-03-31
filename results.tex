@@ -281,7 +281,7 @@ but the remaining validation error was slightly higher than for the initial appr
     \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000~epochs}\label{fig:results:wider_matrices}
 \end{figure}
 
-The predictions from the ``longer'' variant with three convolutinal filter layers instead of just one were better than the initial ones in terms of
+The predictions from the ``longer'' variant with three convolutional filter layers instead of a single one were better than the initial predictions in terms of
 Pearson correlations for test chromosomes 10, 19 and 21, but worse for test chromosomes 3 and 5, \cref{fig:results:longerDNN_pearson}.
 Interestingly, correlations for some of the larger distances could not be computed after 250 and 500 epochs, 
 which generally means that the same values were predicted for these distances, cf. \cref{sec:methods:metrics}.
@@ -436,7 +436,7 @@ are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matric
 Unfortunately, the results did again not improve compared to the initial predictions.
 While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
 the matrix plots seemed worse than the initial ones. 
-For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, which had been detected by the previous approaches, was now completely missing.
+For example, the large structure at chromosome 3, 34 to \SI{36.7}{\kilo\bp}, which had been detected by the previous approaches, was completely missing.
 \begin{figure}[p]%25k5 Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -512,8 +512,8 @@ For all test chromosomes, the correlations were highly similar to the initial ne
 and the matrix plots also looked similar, chromosome 21 probably being the most different, \cref{fig:results:combiloss_matrices}.
 The results plotted are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$. 
 Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for optimizing the combined loss function.
-Other options which where not explored for the same reason include truncating the VGG-16 network at a different layer, using a loss function based on
-more than just one of the intermediate VGG-16 layers \cite{Johnson2016} or taking another loss network.
+Other options which where not explored for the same reason include truncating the \emph{VGG-16} network at a different layer, using a loss function based on
+more than one of the intermediate \emph{VGG-16} layers \cite{Johnson2016} or taking another loss network.
 However, the results obtained thus far were also not encouraging towards such investigations.
 \begin{figure}[p] %combiloss pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -675,7 +675,7 @@ To assess predictions at larger bin sizes, five different approaches were compar
 \begin{enumerate}
  \item ``50k direct'': \\directly training a network at bin size \SI{50}{\kilo\bp} and predicting at that same bin size
  \item ``initial 25k coarsened'': \\coarsening the results of the initial network discussed above (\cref{sec:initialDNNresults})
-                    by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:hicMatrices}
+                    by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:input_data}
  \item ``initial 25k$\rightarrow$50k'': \\using the initial network trained at \SI{25}{\kilo\bp} (cf. \cref{sec:initialDNNresults}) to predict at \SI{50}{\kilo\bp}
  \item ``25k+50k$\rightarrow$50k'': \\predicting at \SI{50}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
  \item ``25k+50k$\rightarrow$25k'': \\predicting at \SI{25}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
@@ -1036,7 +1036,7 @@ and matrix plots were in good accordance with their respective targets, cf. \cre
 Average training times per epoch were around \SI{110}{\min} for windowsize $w=256$
 and \SI{28}{\min} and \SI{14}{\min} for windowsizes $w=128$ and $w=64$, respectively.
 Here, training was performed on machine 1 for windowsizes $w=\{64,128\}$ and on machine 2 for windowsize $w=256$,
-due to memory limitations on machine 1, cf. \cref{sec:methods:hardware}.
+due to memory limitations on machine 1, cf. \cref{sec:appendix:hardware}.
 
 \begin{figure}[p] %cGAN with CNN, windowsize 64, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -1404,11 +1404,11 @@ Surprisingly, despite the low amount of training samples, the training process c
 visually good matrices, \cref{fig:results:zhang-vs-ours_pearson_14singlechrom}/\ref{fig:results:zhang-vs-ours_pearson_17singlechrom} 
 and \ref{fig:results:zhang-vs-ours_matrices_ours-only-14}/\ref{fig:results:zhang-vs-ours_matrices_ours-only-17}.
 In general, Hi-cGAN was still better than HiC-Reg MULTICELL and WINDOW at smaller distances and worse at larger ones, 
-but structures sized approximately 500 to \SI{1000}{\kilo\bp} now appeared more clearly and the ``intersecting point'' on the Pearson correlation graphs 
+but structures sized approximately 500 to \SI{1000}{\kilo\bp} appeared more clearly and the ``intersecting point'' on the Pearson correlation graphs 
 moved further to the right.
 Interestingly, interacting pairs at distances beyond approximately \SI{1.3}{\kilo\bp} were all predicted zero, likely due to the small number of samples in this setting,
 maybe in combination with insufficient training. 
-The effect was more pronounced for chromosome 17, which indeed has less training samples.
+The effect was more pronounced for chromosome 17, which indeed yields less training samples.
 
 Additionally, we tried training our own implementation of HiC-Reg from a previous study project \cite{Krauth2020} on the same training data, binsizes and windowsizes as the \acrshort{cgan} model above
 to allow for a direct comparison. 
@@ -1556,3 +1556,4 @@ However, we have generally not been able to reproduce the results of HiC-Reg wit
     \caption{Example predictions GM12878 $\rightarrow$ K562, random forest \cite{Krauth2020}, \SI{25}{\kilo\bp}, $w=80$} 
      \label{fig:results:randomforest_masterproject_matrices}
 \end{figure}
+\clearpage
