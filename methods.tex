@@ -60,21 +60,21 @@ Pseudocode for the full conversion process is given in \cref{list:methods:bamtob
 The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; 
 aside structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3, active/passive markers are used as well.
 
-\subsubsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
+\subsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
 This thesis follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a}.
 
 First, all chromatin features were binned to binsize $b_\mathit{feat}$ by splitting each chromosome of size $cs$ into 
 $l_\mathit{feat}=\left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil$ non-overlapping bins of size $b_\mathit{feat}$
 and taking the mean feature value within the genomic region belonging to each bin.
-All $n$ chromatin factors were processed in this way and then stacked into a $l_\mathit{feat} \times n$ array.
-Here, the number of chromatin features was constant for all investigations within this thesis, $n=14$ (cf.~\cref{sec:methods:chipseq}). 
+All $n$ chromatin factors were processed in this way and then stacked into a $(l_\mathit{feat},n)$-shaped array.
+Here, the number of chromatin features was constant for all investigations within this thesis, $n=14$ (cf.~\cref{sec:methods:input_data}). 
 
-Separate Hi-C matrices for each chromosome were derived from the cooler format as $(l_\mathit{mat} \times l_\mathit{mat})$-matrices, 
+Separate Hi-C matrices for each chromosome were derived from the cooler format as $(l_\mathit{mat}, l_\mathit{mat})$-shaped matrices, 
 $l_\mathit{mat}=\left \lceil{\frac{cs}{b_\mathit{mat}}}\right \rceil$ being the number of bins in the given chromosome. 
 Initially, $b_\mathit{feat} = b_\mathit{mat}$ was used, which leads to $l_\mathit{feat} = l_\mathit{mat}$, because $cs$ is a constant for a given chromosome.
 
-A sliding window approach was now applied to generate training samples for the neural networks $G$ described below.
-Here, subarrays of size $(3w_\mathit{mat} \times n)$ were cut out from the feature array 
+A sliding window approach was then applied to generate training samples for the neural networks $G$ described below.
+Here, subarrays of size $(3w_\mathit{mat}, n)$ were cut out from the feature array 
 such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_\mathit{mat}$ of the full array. 
 Sliding the window along the array with stepsize one obviously yields $N=l-3w_\mathit{mat}+1$ training samples.
 The corresponding Hi-C matrices were then cut out along the diagonal of the original matrix 
@@ -84,7 +84,7 @@ the next $w_\mathit{mat}+1,\,w_\mathit{mat}+2,\,\dots \,2w_\mathit{mat}$ corresp
 Since Hi-C matrices are symmetric by definition, only the upper triangular part of the submatrices was used, 
 flattened into a $w\cdot (w+1)/2$ vector.
 
-\Cref{fig:methods:sample_gen} exemplarily shows the sample generation process for a $(16\times16)$-matrix with $w_\mathit{mat}=4$ and $n=3$ chromatin features.
+\Cref{fig:methods:sample_gen} exemplarily shows the sample generation process for a matrix of shape (16,16) with $w_\mathit{mat}=4$ and $n=3$ chromatin features.
 In this case, five training samples would be generated -- the one encircled in green and four more to the right, as the window is sliding from left to right until the
 right flanking region hits the feature array boundary.
 \begin{figure}[hbp]
@@ -104,8 +104,8 @@ right flanking region hits the feature array boundary.
     \item right flanking region
     \item chromatin feature array
     \item sliding direction for sample generation windows
-    \item first 4 diagonals of a $16\times16$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
-    \item first $4\times4$training matrix, corrsponding to feature window A-B-C
+    \item first 4 diagonals of a $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item first $(4, 4)$ training matrix, corrsponding to feature window A-B-C
 \end{enumerate}
  \end{minipage}
 \end{figure}
@@ -115,7 +115,7 @@ except that no matrix window was generated.
 Due to the sliding window approach, the output of the network is a set of overlapping submatrices along the main diagonal of the actual target Hi-C matrix.
 To generate the final submatrix, all submatrices were added up in a position-aware fashion 
 and finally all values were divided by the number of overlaps for their respective position.
-\Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with windowsize $w=4$ for a $16\times16$ matrix.
+\Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with windowsize $w=4$ for a matrix of shape (16,16).
 Note that the first and last $w$ bins in each row (matrix diagonal) always remain empty due to the flanking regions,
 as do all bins outside the main diagonal and the first $w-1$ side diagonals.
 To improve visualisation, all predicted matrices were scaled to value range 0...1000 after re-assembly and stored in cooler format for further processing.
@@ -138,8 +138,8 @@ Conveniently, cooler also supports storing only the upper triangular part of sym
     \item right flanking region
     \item chromatin feature array
     \item sliding direction for predicted submatrices
-    \item first 4 diagonals of a predicted $16\times16$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
-    \item first predicted $4\times4$ matrix
+    \item first 4 diagonals of a predicted $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item first predicted $(4, 4)$ matrix
 \end{enumerate}
 \raggedright{gray backround colors symbolize number of overlapping predictions at that position (bright = 1, dark = 4)}
  \end{minipage}
@@ -195,22 +195,22 @@ to train a network with more than seven million parameters, cf.~\cref{sec:method
 \caption{Training, validation and test samples for sliding window approach} \label{tab:methods:samples}
 \end{table}
 
-\subsubsection{Sample generation for the cGAN} \label{sec:methods:sample_gen_cgan}
+\subsection{Sample generation for the cGAN} \label{sec:methods:sample_gen_cgan}
 The samples for the \acrshort{cgan} were generated the same way as the samples for the dense neural network described 
 in \cref{sec:methods:sample_gen}, with two exceptions.
 First, Hi-C (sub-)matrices were not entered as vectors corresponding to their upper triangular part, 
-but were instead taken as $w\times w \times 1$ grayscale images with value range [0...1] in 32-bit floating point format.
+but were instead taken as $(w, w, 1)$-shaped grayscale images with value range [0...1] in 32-bit floating point format.
 Second, for the \acrshort{cgan} approach the input matrices need not only be square,
 but their sizes also needed to be powers of two. 
 This ensured the required shapes for the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
 Within the thesis, windowsizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
 
-\subsubsection{Generalization of feature binning} \label{sec:methods:inputBinning}
+\subsection{Generalization of feature binning} \label{sec:methods:inputBinning}
 Most of the binning- and sample generation procedures described above 
 also work for binsize relations $k=\frac{b_\mathit{mat}}{b_\mathit{feat}} \in \mathbb{N}^{>1}$.
 
-The training matrices remain unchanged, i.\,e. $(l \times l)$-arrays, from which training submatrices of size  $w_\mathit{mat} \times w_\mathit{mat} $
+The training matrices remain unchanged, i.\,e. $(l, l)$-shaped arrays, from which training submatrices of size  $(w_\mathit{mat}, w_\mathit{mat})$
 can be extracted. 
 With $k \in \mathbb{N}^{>1}$, one bin on the matrix diagonal corresponds to $k$ bins of the feature array,
 so the feature windowsize needs to be $k$ times the submatrix windowsize, $w_\mathit{feat} = k \cdot w_\mathit{mat}$.
@@ -231,7 +231,7 @@ For the prediction process, the feature array was padded with zeros on its end.
 This procedure ensures that no errors are introduced into the \emph{training} process by imputing values,
 but keeps the size of the \emph{predicted} matrix consistent with the training matrix binsizes.
 
-\Cref{fig:methods:sample_gen_generalized} shows the generalized training process with a $(16\times16)$-training matrix and $k=2$. 
+\Cref{fig:methods:sample_gen_generalized} shows the generalized training process with a $(16, 16)$-training matrix and $k=2$. 
 If  $15\cdot b_\mathit{mat} + 1 \leq cs < 15\cdot b_\mathit{mat} + b_\mathit{feat}$ held for the chromosome size $cs$ in the example,
 then the number of bins on the matrix diagonal would be $l_\mathit{mat}=16$, while the number of chromatin feature bins would be $l_\mathit{feat}=31 \not = 2 \cdot l_\mathit{mat}$.
 \begin{figure}
@@ -251,14 +251,14 @@ then the number of bins on the matrix diagonal would be $l_\mathit{mat}=16$, whi
     \item right flanking region
     \item chromatin features array ($k=2$)
     \item sliding direction for sample generation windows
-    \item first 4 diagonals of a $16\times16$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
-    \item last $4\times4$ training matrix, corrsponding to feature window A-B-C; to be dropped/padded
+    \item first 4 diagonals of a $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
+    \item last $(4, 4)$ training matrix, corrsponding to feature window A-B-C; to be dropped/padded
 \end{enumerate}
  \end{minipage}
 \end{figure}
 In this case, the 5th sample would be dropped for training,
 while a column with zero bins -- symbolized by pink crosses in \cref{fig:methods:sample_gen_generalized} -- would be added to the feature array for prediction
-so that the resulting matrix would still have the desired size of $16 \times 16$.
+so that the resulting matrix would still have the desired size of $(16, 16)$.
 
 \subsection{Quality metrics for predicted Hi-C matrices} \label{sec:methods:metrics}
 Assessing the quality of synthetically generated images is a long-standing problem, which has not yet been solved, see e\,g. \cite[p.\,19]{Wang2020}.
@@ -349,7 +349,7 @@ The training goal for the neural network $G$ is to find weights $\omega^*$ for i
 such that the mean squared error $L_2$ between the predicted submatrices $\mathbf{M}_s = G_s(\omega)$ 
 and the training submatrices $\mathbf{T}_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
 Here, $\mathbf{M}_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
-part of a symmetric $(w\times w)$ Hi-C matrix.
+part of a symmetric $(w, w)$ Hi-C matrix.
 Formally, one needs to optimize
 \begin{equation}
  \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
@@ -361,12 +361,13 @@ to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
 
 The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{Abadi2015,Chollet2015}, 
-see repository \xxx.
+see repository \xxx. 
+All computations were performed on virtual machines with different properties, partially with GPU assistance; see \ref{sec:appendix:hardware} for details.
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
 where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and feature binsize.
-Mirror-type padding was used to maintain the output dimensions of the basic network, which now had \SI{7486478}{} trainable weights
+Mirror-type padding was used to maintain the output dimensions of the basic network, which had \SI{7486478}{} trainable weights
 for $k=1$.
 
 For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
@@ -379,9 +380,9 @@ had \SI{9143313}{} for $k=1$.
 
 For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
 so the factor for the relation between the two binsizes was $k=25/5=5$.
-This yields input feature arrays of size $3w\cdot k \times n = 3\cdot80\cdot5 \times 14 = 1200\times 14$.
+This yields input feature arrays of size $(3w\cdot k, n = (3\cdot80\cdot5 , 14) = (1200, 14)$.
 Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$ without padding,
-this input was again compressed to a $3w\times 1 = 240\times 1$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
+this input was again compressed to a $(3w, 1) = (240, 1)$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
 \begin{figure}[p]
     \small
@@ -396,7 +397,7 @@ For computing the combined MSE, perception- and TV-loss,
 input features were first passed through the network as normal,
 and mean squared error was computed on the predicted ``upper triangular vectors'' vs. the real vectors.
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
-$w \times w \times 1$ tensors, where $w$ is again the windowsize.
+$(w, w, 1)$-shaped tensors, where $w$ is again the windowsize.
 
 For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992}
 \begin{equation}
@@ -405,30 +406,30 @@ For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the
 For efficiency, the tensorflow implementation from tf.image.total\_variation was used,
 taking the sum across batches as loss value, as recommended in the tensorflow documentation \cite{TensorflowTV2020}.
 
-For perception loss, the predicted images and the true images were first fed through a pre-trained VGG-16 network with fixed weights, truncated after the third convolution layer
+For perception loss, the predicted images and the true images were first fed through a pre-trained \emph{VGG-16} network with fixed weights, truncated after the third convolution layer
 in the fourth block (``block4\_conv3''), the last layer used by the influential work of Johnson et al. \cite{Johnson2016}.
 The loss was then computed as mean squared error between the ``predicted'' and ``true'' output activations of the truncated VGG-16 network.
 
-Let $\mathbf{M}_s=G_s(\mathbf{\omega})$ again be the output of the neural network $G$ described above, and $\mathbf{T}_s$ the true matrices for training samples $s$ in vector form,
+Let $\mathbf{M}_s=G_s(\bm{\omega})$ again be the output of the neural network $G$ described above, and $\mathbf{T}_s$ the true matrices for training samples $s$ in vector form,
 and let $\mathbf{M}^\prime_s$ and $\mathbf{T}^\prime_s$ be their grayscale image counterparts as described above.
 Furthermore, let $\mathit{tv}(\mathbf{x})$ be the total variation of image $\mathbf{x}$ and $\mathit{vgg}(\mathbf{x})$ the output of the perception loss network for image $\mathbf{x}$.
-The goal of the modified network was now to find weights $\mathbf{\omega}^*$ such that
+The optimization problem for the modified network was then formulated by means of \cref{eq:methods:combined_loss} to find weights $\bm{\omega}^*$ such that
 \begin{equation}
- \mathbf{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
+ \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
                                                      + \lambda_\mathit{TV} \sum_{s=0}^N \mathit{tv}( \mathbf{M}^\prime_s) 
                                                      + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
 \end{equation}
 Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
-The weights for the VGG16 network were taken from the pre-trained keras implementation and can here be considered as constants.
-In addition, the usage of VGG16 imposes the restriction $w \geq 32$ on the windowsize $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
+The \emph{VGG16} network and the corresponding weights were taken from the keras implementation pre-trained on \emph{ImageNet} \xxx.
+As a side effect, the usage of \emph{VGG16} imposes the restriction $w \geq 32$ on the windowsize $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
 
-The network $G(\omega)$ could in principle be any of the variants described above in \cref{sec:methods:variants},
+The network $G(\bm{\omega})$ could in principle be any of the variants described above in \cref{sec:methods:variants},
 but for the thesis at hand, only the initial network from \cref{sec:methods:basicSetup} was used.
 
 \subsubsection{Combination of mean squared error and TAD-score-based loss} \label{sec:methods:score_loss}
-Formally, the the following optimization task can be defined by means of a combination between MSE and TAD-score based loss:
+To optimize both for mean-squared error and a TAD-score-derived loss, the following optimization task was defined to find weights $\bm{\omega}^*$ such that
 \begin{equation}
- \omega^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2
+ \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2
                                                     + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(\mathbf{M}^\prime_s,ds) - \mathit{score}(\mathbf{T}^\prime_s,ds))^2 \label{eq:methods:score_loss}
 \end{equation}
 where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\omega)$ for sample $s$ and $\mathbf{T}_s$ is the corresponding true Hi-C submatrix.
@@ -485,7 +486,7 @@ The loss functions for the generator and discriminator were implemented as shown
 with parameters $\lambda_\mathit{adv}=1.0, \lambda_\mathit{MAE}=100.0, \lambda_\mathit{TV}=10^{-12}$ and $\lambda_D=0.5$.
 Optimization was performed on minibatches of size 32, 8 and 2 for windowsizes 64, 128 and 256, respectively, 
 using Adam optimizers with learning rate $2\cdot10^{-5}$ for the generator, $10^{-6}$ for the discriminator and $\beta_1=0.5$ for both generator and discriminator.
-The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:methods:hardware}.
+The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:appendix:hardware}.
 
 \begin{figure}[p]
     \tiny
