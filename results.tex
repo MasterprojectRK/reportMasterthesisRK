@@ -1020,7 +1020,7 @@ the matrices were visually clearly worse than without pre-training, and also wor
 
 
 \subsubsection{cGAN with CNN embedding} \label{sec:results:cgan_cnn}
-The \acrshort{dnn} embedding also allowed for a stable training of the \acrshort{cgan},
+The \acrshort{cnn} embedding also allowed for a stable training of the \acrshort{cgan},
 whereby the discriminator loss reached stable epoch-average values after 20 to 30 epochs, depending on windowsize, \cref{fig:results:cGAN64_lossEpochs}.
 For windowsize $w=64$, the Pearson correlations showed worse values than the \acrshort{dnn}-approach or the \acrshort{cgan} with \acrshort{dnn} embedding, \cref{fig:results:cGAN64_pearson}.
 Nevertheless, the predicted matrices looked visually better, at least for the given test cutouts shown in \cref{fig:results:cGAN64_matrices}. 
