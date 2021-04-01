@@ -54,25 +54,25 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pearson_chr14_detail_25k_singleChrom.pdf}}%
-    \put(0.07262622,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
-    \put(0.25381563,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
-    \put(0.43500509,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
-    \put(0.61619457,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
-    \put(0.7973839,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
-    \put(0.97857348,0.03471557){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
-    \put(0.3922387,0.00003251){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Genomic distance / Mbp\end{tabular}}}}%
-    \put(0.18666395,0.21149984){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GAN64 single chr., 25k / AUC: 0.798\end{tabular}}}}%
-    \put(0.18666395,0.17428004){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MULTICELL, 0-padded, 25k / AUC: 0.876\end{tabular}}}}%
-    \put(0.18666395,0.13706019){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}WINDOW, 0-padded, 25k / AUC: 0.752\end{tabular}}}}%
-    \put(0.18666395,0.09984034){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Transfer GM12878, 25k / AUC: 0.821\end{tabular}}}}%
-    \put(0.03469291,0.12347585){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.5\end{tabular}}}}%
-    \put(0.03469291,0.24621711){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
-    \put(0.03469291,0.36895828){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.7\end{tabular}}}}%
-    \put(0.03469291,0.49169939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
-    \put(0.03469291,0.61444056){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.9\end{tabular}}}}%
-    \put(0.03469291,0.73718181){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
-    \put(0.01927384,0.28671574){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
-    \put(0.23249865,0.79615484){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
-    \put(0.42044096,0.76203467){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chromosome 14\end{tabular}}}}%
+    \put(0.19580666,0.1056717){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Transfer GM12878, 25k / AUC: 0.821\end{tabular}}}}%
+    \put(0.07265162,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
+    \put(0.2539044,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
+    \put(0.43515724,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
+    \put(0.61641005,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    \put(0.79766287,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
+    \put(0.97891553,0.03486545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
+    \put(0.39237581,0.00017088){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Genomic distance / Mbp\end{tabular}}}}%
+    \put(0.03470505,0.12365677){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.5\end{tabular}}}}%
+    \put(0.03470505,0.24644093){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    \put(0.03470505,0.36922504){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.7\end{tabular}}}}%
+    \put(0.03470505,0.4920095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
+    \put(0.03470505,0.61479364){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.9\end{tabular}}}}%
+    \put(0.03470505,0.73757765){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1.0\end{tabular}}}}%
+    \put(0.01928059,0.28695374){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
+    \put(0.23257995,0.7965713){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
+    \put(0.42058797,0.76243919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chromosome 14\end{tabular}}}}%
+    \put(0.19580666,0.21737026){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GAN64 single chr., 25k / AUC: 0.792\end{tabular}}}}%
+    \put(0.19580666,0.18013734){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MULTICELL, 0-padded, 25k / AUC: 0.876\end{tabular}}}}%
+    \put(0.19580666,0.14290452){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}WINDOW, 0-padded, 25k / AUC: 0.752\end{tabular}}}}%
   \end{picture}%
 \endgroup%
