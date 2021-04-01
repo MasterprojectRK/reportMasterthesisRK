@@ -575,6 +575,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \import{figures/GAN_256_K-on-G/}{pred00060_chr19_030-040.pdf_tex}}
         \caption{Example region 2} \label{fig:appendix:GAN256_K-on-Gr2}
     \end{subfigure}\\[3mm]
+    \caption{Example predictions K562 $\rightarrow$ GM12878, cGAN, CNN embedding, $w=256$, 60~epochs} 
 \end{figure}
 \begin{figure}\ContinuedFloat
     \begin{subfigure}{\textwidth}
@@ -613,8 +614,11 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \resizebox{\textwidth}{!}{
         \import{figures/GAN_64_14only/}{pearson_chr19.pdf_tex}}
         \caption{chr19}
-    \end{subfigure}\\[3mm]
-    \centering
+    \end{subfigure}
+    \caption{Results\,/\,metrics, cGAN, $w=64$, trained on GM12878 chr14 only; prediction on K562, typical test chromosomes}
+    \end{figure}
+    \begin{figure}\ContinuedFloat
+     \centering
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -719,9 +723,10 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \caption{Example predictions cGAN, , $w=64$, trained on GM12878 chr17 only; prediction on K562, 160~epochs} 
      \label{fig:results:GAN64-17single_matrices}
 \end{figure}
+\clearpage
 
-\subsection{cGAN and DNN trained on D. melanogaster, chr2L and 3L} \label{sec:appendix:cgan_drosophila}
-\begin{figure}[p] %DNN trained on drosophila 2L, 2R 
+\subsubsection{cGAN and DNN trained on D. melanogaster, chr2L and 3L} \label{sec:appendix:cgan_drosophila}
+\begin{figure}[h!] %DNN trained on drosophila 2L, 2R 
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
@@ -775,6 +780,21 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \caption{learning progress} \label{fig:appendix:GAN64_drosophila_progress}
     \end{subfigure}
     \caption{Results\,/\,metrics cGAN, $w=64$, trained on D. melanogaster chr2L and 2R}   \label{fig:appendix:GAN64_drosophila_pearson}
+\end{figure}
+\begin{figure}[htbp]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/GAN_64_drosophila/}{pred00100_chr3L_015-020.pdf_tex}
+ \caption{chr3L (validation), 100 epochs}
+\end{subfigure}\\[5mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/GAN_64_drosophila/}{pred00100_chrX_015-020.pdf_tex}
+ \caption{chrX (test), 100 epochs}
+\end{subfigure}
+\caption{Further matrix plots, cGAN with DNN embedding, Drosophila Melanogaster} \label{fig:appendix:GAN64_drosophila_matrices}
 \end{figure}
 
 
