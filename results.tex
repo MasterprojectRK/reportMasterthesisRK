@@ -278,7 +278,7 @@ but the remaining validation error was slightly higher than for the initial appr
         \import{figures/DNN_wider/}{pred01000_chr3_030-040.pdf_tex}
         \caption{Example region 3} \label{fig:results:wider_r3}
     \end{subfigure}
-    \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000~epochs}\label{fig:results:wider_matrices}
+    \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider'' variant of \acrshort{dnn},\\binsize \SI{25}{\kilo\bp}, 1000~epochs}\label{fig:results:wider_matrices}
 \end{figure}
 
 The predictions from the ``longer'' variant with three convolutional filter layers instead of a single one were better than the initial predictions in terms of
@@ -355,7 +355,7 @@ but the matrix plots did not show any obvious improvement over the initial ones,
         \import{figures/DNN_longer/}{pred01000_chr3_030-040.pdf_tex}
         \caption{Example region 3} \label{fig:results:longer_r3}
     \end{subfigure}
-    \caption{Example predictions GM12878 $\rightarrow$ K562, ``longer'' variant of \acrshort{dnn} \SI{25}{\kilo\bp}, 1000~epochs} \label{fig:results:longer_matrices}
+    \caption{Example predictions GM12878 $\rightarrow$ K562, ``longer'' variant of \acrshort{dnn},\\binsize \SI{25}{\kilo\bp}, 1000~epochs} \label{fig:results:longer_matrices}
 \end{figure}
 
 Combining the ``longer'' and ``wider'' variants in the ``wider-longer'' setup with more convolutional layers and wider 
@@ -749,7 +749,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
 \begin{figure}[p] %50k direct, matrices
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00250_chr21_030-040.pdf_tex}}
         \caption{Example  region 1} \label{fig:results:50k_r1}
@@ -757,7 +757,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00250_chr19_030-040.pdf_tex}}
         \caption{Example region 2} \label{fig:results:50k_r2}
@@ -765,7 +765,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00250_chr3_030-040.pdf_tex}}
         \caption{Example region 3} \label{fig:results:50k_r3}
@@ -775,7 +775,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
 \begin{figure}[p] %50k from 25k, matrices
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00500_50k_chr21_030-040.pdf_tex}}
         \caption{Example  region 1} \label{fig:results:50k_from25k_r1}
@@ -783,7 +783,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00500_50k_chr19_030-040.pdf_tex}}
         \caption{Example region 2} \label{fig:results:50k_from25k_r2}
@@ -791,7 +791,7 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.77\textwidth}{!}{
+        \resizebox{0.71\textwidth}{!}{
         \scriptsize
         \import{figures/DNN_50k/}{pred00500_50k_chr3_030-040.pdf_tex}}
         \caption{Example region 3} \label{fig:results:50k_from25k_r3}
@@ -1144,7 +1144,7 @@ due to memory limitations on machine 1, cf. \cref{sec:appendix:hardware}.
 \begin{figure}[p] %cgan CNN, 128, matrices
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.9\textwidth}{!}{
+        \resizebox{0.8\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_128/}{pred00090_chr21_030-040.pdf_tex}}
         \caption{Example  region 1} \label{fig:results:cGAN128_r1}
@@ -1152,7 +1152,7 @@ due to memory limitations on machine 1, cf. \cref{sec:appendix:hardware}.
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.9\textwidth}{!}{
+        \resizebox{0.8\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_128/}{pred00090_chr19_030-040.pdf_tex}}
         \caption{Example region 2} \label{fig:results:cGAN128_r2}
@@ -1160,7 +1160,7 @@ due to memory limitations on machine 1, cf. \cref{sec:appendix:hardware}.
     \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
     \begin{subfigure}{\textwidth}
         \centering
-        \resizebox{0.9\textwidth}{!}{
+        \resizebox{0.8\textwidth}{!}{
         \scriptsize
         \import{figures/GAN_128/}{pred00090_chr3_030-040.pdf_tex}}
         \caption{Example region 3} \label{fig:results:cGAN128_r3}
@@ -1457,39 +1457,45 @@ The effect was more pronounced for chromosome 17, which indeed is shorter than c
 \begin{figure}[htbp]
 \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred0014_multicell_chr14_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred0014_multicell_chr14_030-040.pdf_tex}}
  \caption{Hic-Reg (random forest), MULTICELL, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-14}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred00100_restriced_chr14_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred00100_restriced_chr14_030-040.pdf_tex}}
  \caption{Hi-cGAN with windowsize $w=256$; plot restricted to first \SI{1}{\mega\bp}} \label{fig:results:zhang-vs-ours_matrices_ours-full-14}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred00100_chr14_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred00100_chr14_030-040.pdf_tex}}
  \caption{Hi-cGAN with windowsize $w=64$, trained on chr14 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-14}
 \end{subfigure}\\[4mm]
     \centering{\scriptsize{\Cref{fig:results:zhang-vs-ours_matrices} a-f: Predicted matrices on top, true matrices from Rao et al. \cite{Rao2014} on bottom}}\\[5mm]
     \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred0017_multicell_chr17_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred0017_multicell_chr17_030-040.pdf_tex}}
  \caption{Hic-Reg (random forest), MULTICELL, chr17, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-17}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred00100_restriced_chr17_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred00100_restriced_chr17_030-040.pdf_tex}}
  \caption{Hi-cGAN with windowsize $w=256$, chr17, plot restricted to first \SI{1}{\mega\bp}}\label{fig:results:zhang-vs-ours_matrices_ours-full-17}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.92\textwidth}{!}{
  \scriptsize
- \import{figures/randomforest/}{pred00160_chr17_030-040.pdf_tex}
+ \import{figures/randomforest/}{pred00160_chr17_030-040.pdf_tex}}
  \caption{Hi-cGAN with windowsize $w=64$, trained on chr17 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-17}
 \end{subfigure}
 \caption{Comparison HiC-Reg \cite{Zhang2019} and Hi-cGAN (\acrshort{cnn} embedding)} \label{fig:results:zhang-vs-ours_matrices}
@@ -1514,7 +1520,8 @@ cutout from chr3R, 15-\SI{20}{\mega\bp} at hand, which additionally is obviously
 and not with its original values.
 
 \begin{figure}[htbp]
-  \resizebox{\textwidth}{!}{
+ \centering
+  \resizebox{0.65\textwidth}{!}{
   \scriptsize
   \import{figures/GAN_64_drosophila/}{ppp_chr3L_comparison.pdf_tex}}
   \caption{Comparison Pearson correlations DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}}\label{fig:results:farre-vs-ours_pearson_3R}
@@ -1524,15 +1531,16 @@ and not with its original values.
  \centering
  \scriptsize
  \import{figures/DNN_drosophila/}{pred01000_chr3R_015-020.pdf_tex}
- \caption{Matrix from DNN} \label{fig:results:farre-vs-ours_dnn-matrix}
+ \caption{Matrix from DNN, 1000 epochs} \label{fig:results:farre-vs-ours_dnn-matrix}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
  \import{figures/GAN_64_drosophila/}{pred00100_chr3R_015-020.pdf_tex}
- \caption{Matrix from Hi-cGAN} \label{fig:results:farre-vs-ours_cgan-matrix}
+ \caption{Matrix from Hi-cGAN, 100 epochs} \label{fig:results:farre-vs-ours_cgan-matrix}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
+ \centering{\tiny{Image courtesy Farr\'e, Heurteau, Cuvier, Emberly \cite{Farre2018a}, licensed under Creative Commons Attribution 4.0 License \cite{ccby4}\\X-axis not part of original image}}
  \centering
  \scriptsize
  \import{figures/GAN_64_drosophila/}{predFarre_chr3R_015-020.pdf_tex}
