@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{212.22902073bp}%
+    \setlength{\unitlength}{218.26771654bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,36 +50,36 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.70710679)%
+  \begin{picture}(1,0.68754365)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{downsampling_block.pdf}}%
-    \put(0.158529,0.62975859){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input layer\end{tabular}}}}%
-    \put(0.56657207,0.66249061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.56657207,0.59703492){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.72878149,0.66249061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $x, x, \cdot$)]\end{tabular}}}}%
-    \put(0.72878149,0.59703492){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $x, x, \cdot$)]\end{tabular}}}}%
-    \put(0.158529,0.43868089){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}conv2D\end{tabular}}}}%
-    \put(0.56657207,0.47140458){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.56657207,0.40594887){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.72934714,0.47140458){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x, x, \cdot$)\end{tabular}}}}%
-    \put(0.72934714,0.4059489){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2, x/2,y$)\end{tabular}}}}%
-    \put(0.158529,0.27576268){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}batchNorm\end{tabular}}}}%
-    \put(0.56657207,0.28021502){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.56657207,0.21475935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.72934714,0.21475935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
-    \put(0.72934714,0.28021502){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
-    \put(0.158529,0.08457326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}leaky ReLU\end{tabular}}}}%
-    \put(0.56657207,0.0890256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.56657207,0.02356987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.72934714,0.0890256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
-    \put(0.72934714,0.02356987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
-    \put(0.158529,0.02192473){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha=0.2$\end{tabular}}}}%
-    \put(0.03964382,0.19263547){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$x$: input image size}\end{tabular}}}}}%
-    \put(0.07087764,0.19263547){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$y$: no. of filters}\end{tabular}}}}}%
-    \put(0.10539577,0.19263547){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}}%
-    \put(0.158529,0.21275631){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}optional\end{tabular}}}}%
-    \put(0.32398948,0.46618801){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}kernel (4,4)\end{tabular}}}}%
-    \put(0.32398948,0.40964532){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}strides (2,2)\end{tabular}}}}%
+    \put(0.02554536,0.6123354){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input layer\end{tabular}}}}%
+    \put(0.42229895,0.64416184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.42229895,0.58051708){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.5800206,0.64416184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $x, x, \cdot$)]\end{tabular}}}}%
+    \put(0.5800206,0.58051708){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $x, x, \cdot$)]\end{tabular}}}}%
+    \put(0.02554536,0.42654414){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}conv2D\end{tabular}}}}%
+    \put(0.42229895,0.45836248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.42229895,0.3947177){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.5805706,0.45836248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x, x, \cdot$)\end{tabular}}}}%
+    \put(0.5805706,0.39471773){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2, x/2,y$)\end{tabular}}}}%
+    \put(0.02554536,0.2681333){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}batchNorm\end{tabular}}}}%
+    \put(0.42229895,0.27246246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.42229895,0.20881772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.5805706,0.20881772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
+    \put(0.5805706,0.27246246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
+    \put(0.02554536,0.08223342){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}leaky ReLU\end{tabular}}}}%
+    \put(0.42229895,0.08656258){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.42229895,0.02291778){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.5805706,0.08656258){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
+    \put(0.5805706,0.02291778){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $x/2,x/2,y$)\end{tabular}}}}%
+    \put(0.02554536,0.02131815){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha=0.2$\end{tabular}}}}%
+    \put(0.87658292,0.45691568){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$x$: input image size}\end{tabular}}}}%
+    \put(0.87658292,0.426546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$y$: no. of filters}\end{tabular}}}}%
+    \put(0.87658292,0.39298285){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+    \put(0.02554536,0.2068701){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}optional\end{tabular}}}}%
+    \put(0.1864277,0.45329023){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}kernel (4,4)\end{tabular}}}}%
+    \put(0.1864277,0.39831188){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}strides (2,2)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

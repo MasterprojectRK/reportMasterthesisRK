@@ -54,64 +54,68 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{DNN_basic_model.pdf}}%
-    \put(0.12564412,0.228939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
-    \put(0.35432552,0.25530759){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.20100576){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.25530759){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
-    \put(0.47208244,0.20100576){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
-    \put(0.12564412,0.07462742){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
-    \put(0.35432552,0.07406794){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.01975886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.07406794){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
-    \put(0.47208244,0.01975886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\cdot (w+1)/2$)\end{tabular}}}}%
-    \put(0.35432552,0.62024508){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.56593653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.62024508){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
-    \put(0.47208244,0.56593653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
-    \put(0.35432552,0.43752632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.38321777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.43752632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
-    \put(0.47208244,0.38321777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
-    \put(0.35432552,0.9859579){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.93164909){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.9859579){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
-    \put(0.47208244,0.93164909){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
-    \put(0.35432552,0.80298254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,0.74868044){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,0.80298254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
-    \put(0.47208244,0.74868044){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
-    \put(0.12564412,1.32412859){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Flatten\end{tabular}}}}%
-    \put(0.35886076,1.35127936){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.36015176,1.29697767){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,1.29697767){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$)\end{tabular}}}}%
-    \put(0.35432552,1.16895923){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.35561652,1.11465041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,1.11465041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
-    \put(0.47208244,1.34950854){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$, 1)\end{tabular}}}}%
-    \put(0.47208244,1.1671884){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$)\end{tabular}}}}%
-    \put(0.12564412,1.7120466){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input layer\end{tabular}}}}%
-    \put(0.36476028,1.71717173){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.36605128,1.66286291){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,1.71524019){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3k\cdot w$, $n$)]\end{tabular}}}}%
-    \put(0.12564412,1.52990184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Conv1D\end{tabular}}}}%
-    \put(0.36476028,1.53398858){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.36605128,1.47967976){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.47208244,1.47702359){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$, 1)\end{tabular}}}}%
-    \put(0.47208244,1.6609184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3k\cdot w$, $n$)]\end{tabular}}}}%
-    \put(0.47208244,1.53057658){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3k\cdot w$, $n$)\end{tabular}}}}%
-    \put(0.12564412,0.59372183){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
-    \put(0.12564412,0.95928672){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
-    \put(0.12564412,0.40709103){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
-    \put(0.12564412,0.77239918){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
-    \put(0.12564412,1.13822134){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
-    \put(0.12564412,1.66798105){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chrom. features\end{tabular}}}}%
-    \put(0.12564412,0.02615384){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pred.\,submatrix\end{tabular}}}}%
-    \put(0.02455168,0.522578){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: windowsize,\;$n$: no. of chromatin features, ?: batch size\end{tabular}}}}}%
-    \put(0.77873972,1.41437819){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
-    \put(0.77873972,1.45115709){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider variant: kernel size $4k$}\end{tabular}}}}%
-    \put(0.77873972,1.37912574){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider-longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
-    \put(0.12564412,1.49802456){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{kernel size k}\end{tabular}}}}%
-    \put(0.12564412,1.47158523){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{strides $k$}\end{tabular}}}}%
-    \put(0.77872587,0.06817449){\color[rgb]{0,0.50196078,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}upper triangular part of $(w,w)$-submatrix\end{tabular}}}}}%
+    \put(0.02172972,0.22893901){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
+    \put(0.25041111,0.25530759){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.20100577){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.25530759){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
+    \put(0.3681679,0.20100577){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
+    \put(0.02172972,0.07462742){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
+    \put(0.25041111,0.07406795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.01975886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.07406795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
+    \put(0.3681679,0.01975886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\cdot (w+1)/2$)\end{tabular}}}}%
+    \put(0.25041111,0.62024508){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.56593653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.62024508){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
+    \put(0.3681679,0.56593653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
+    \put(0.25041111,0.43752632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.38321777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.43752632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
+    \put(0.3681679,0.38321777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 1690)\end{tabular}}}}%
+    \put(0.25041111,0.98595791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.93164909){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.98595791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
+    \put(0.3681679,0.93164909){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
+    \put(0.25041111,0.80298254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,0.74868045){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,0.80298254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
+    \put(0.3681679,0.74868045){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 881)\end{tabular}}}}%
+    \put(0.02172972,1.32412859){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Flatten\end{tabular}}}}%
+    \put(0.25494635,1.35127937){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25623735,1.29697768){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,1.29697768){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$)\end{tabular}}}}%
+    \put(0.25041111,1.16895923){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.25170211,1.11465041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,1.11465041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, 460)\end{tabular}}}}%
+    \put(0.3681679,1.34950854){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$, 1)\end{tabular}}}}%
+    \put(0.3681679,1.16718841){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$)\end{tabular}}}}%
+    \put(0.02172972,1.7120466){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input layer\end{tabular}}}}%
+    \put(0.26084588,1.71717173){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.26213688,1.66286292){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.36816779,1.71524019){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3k\cdot w$, $n$)]\end{tabular}}}}%
+    \put(0.02172972,1.52990184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Conv1D\end{tabular}}}}%
+    \put(0.26084588,1.53398858){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.26213688,1.47967976){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.3681679,1.47702359){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3w$, 1)\end{tabular}}}}%
+    \put(0.36816779,1.6609184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3k\cdot w$, $n$)]\end{tabular}}}}%
+    \put(0.36816779,1.53057657){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $3k\cdot w$, $n$)\end{tabular}}}}%
+    \put(0.02172972,0.59372183){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
+    \put(0.02172972,0.95928672){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dropout\end{tabular}}}}%
+    \put(0.02172972,0.40709104){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
+    \put(0.02172972,0.77239918){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
+    \put(0.02172972,1.13822134){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
+    \put(0.02172972,1.66798105){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chrom. features\end{tabular}}}}%
+    \put(0.02172972,0.02615385){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pred.\,submatrix\end{tabular}}}}%
+    \put(0.63195331,1.72240061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: windowsize\end{tabular}}}}%
+    \put(0.67482525,1.41437819){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
+    \put(0.67482525,1.45115709){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider variant: kernel size $4k$}\end{tabular}}}}%
+    \put(0.67482525,1.37912574){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider-longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
+    \put(0.02172972,1.49802456){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{kernel size k}\end{tabular}}}}%
+    \put(0.02172972,1.47158523){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{strides $k$}\end{tabular}}}}%
+    \put(0.67227691,0.0370505){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}upper triangular part\end{tabular}}}}%
+    \put(0.67227691,0.00179805){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}of $(w,w)$-submatrix\end{tabular}}}}%
+    \put(0.63195331,1.69302361){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$k$: binsize relation matrix/features\end{tabular}}}}%
+    \put(0.63195331,1.66364648){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$n$: no. of chromatin features\end{tabular}}}}%
+    \put(0.63195331,1.63426948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}?: batch size\end{tabular}}}}%
   \end{picture}%
 \endgroup%

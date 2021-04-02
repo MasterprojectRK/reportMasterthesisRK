@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{229.23689474bp}%
+    \setlength{\unitlength}{218.26771654bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,35 +50,35 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.6546441)%
+  \begin{picture}(1,0.68754365)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{dnn_embedding.pdf}}%
-    \put(0.14676719,0.60920843){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN\end{tabular}}}}%
-    \put(0.47873199,0.61333815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.47873199,0.55273884){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.62890653,0.61333815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3w,n$)]\end{tabular}}}}%
-    \put(0.62890653,0.55273884){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\,(w+1)/2$)\end{tabular}}}}%
-    \put(0.14676719,0.40613364){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}triu reshape layer\end{tabular}}}}%
-    \put(0.47873199,0.43642945){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.47873199,0.37583013){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.62943022,0.43642945){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\,(w+1)/2$)\end{tabular}}}}%
-    \put(0.62943022,0.37583015){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
-    \put(0.14676719,0.2291291){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}symmetrization\end{tabular}}}}%
-    \put(0.47873199,0.2594249){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.47873199,0.19882561){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.62943022,0.19882561){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
-    \put(0.62943022,0.2594249){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
-    \put(0.14676719,0.07829848){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reshape\end{tabular}}}}%
-    \put(0.47873199,0.08242049){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
-    \put(0.47873199,0.02182114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
-    \put(0.62943022,0.08242049){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
-    \put(0.62943022,0.02182114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w,1$)\end{tabular}}}}%
-    \put(0.14676719,0.55686085){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}cf. \cref{sec:methods:basicSetup}\end{tabular}}}}%
-    \put(0.14676719,0.02029806){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature embedding\end{tabular}}}}%
-    \put(0.0367025,0.17834318){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: windowsize}\end{tabular}}}}}%
-    \put(0.06713925,0.17834318){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$n$: no. of chromatin features}\end{tabular}}}}}%
-    \put(0.0975761,0.17834318){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}}%
-    \put(0.99018898,0.09653754){\color[rgb]{0,0.50196078,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}shape of a square grayscale image\end{tabular}}}}}%
+    \put(0.02516613,0.63982458){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN\end{tabular}}}}%
+    \put(0.37381402,0.64416184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.37381402,0.58051708){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.53153567,0.64416184){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}[(?, $3w,n$)]\end{tabular}}}}%
+    \put(0.53153567,0.58051708){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\,(w+1)/2$)\end{tabular}}}}%
+    \put(0.02516613,0.42654414){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}triu reshape layer\end{tabular}}}}%
+    \put(0.37381402,0.45836248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.37381402,0.3947177){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.53208567,0.45836248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w\,(w+1)/2$)\end{tabular}}}}%
+    \put(0.53208567,0.39471773){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.02516613,0.24064413){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}symmetrization\end{tabular}}}}%
+    \put(0.37381402,0.27246246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.37381402,0.20881772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.53208567,0.20881772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.53208567,0.27246246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.02516613,0.08223342){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reshape\end{tabular}}}}%
+    \put(0.37381402,0.08656258){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}input:\end{tabular}}}}%
+    \put(0.37381402,0.02291778){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output:\end{tabular}}}}%
+    \put(0.53208567,0.08656258){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w$)\end{tabular}}}}%
+    \put(0.53208567,0.02291778){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w,1$)\end{tabular}}}}%
+    \put(0.02516613,0.58484623){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}cf. \cref{sec:methods:basicSetup}\end{tabular}}}}%
+    \put(0.02516613,0.02131815){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature embedding\end{tabular}}}}%
+    \put(0.8379983,0.64166947){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: windowsize}\end{tabular}}}}%
+    \put(0.8379983,0.6097031){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$n$: no. of chromatin features}\end{tabular}}}}%
+    \put(0.8379983,0.57773664){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+    \put(0.90522265,0.02063858){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}shape of a square grayscale image\end{tabular}}}}%
   \end{picture}%
 \endgroup%
