@@ -1412,7 +1412,7 @@ and the intersection point in the Pearson correlation graphs moved further to th
 better than \emph{HiC-Reg} was slightly shifted towards larger distances.
 Interestingly, interacting pairs at distances beyond approximately \SI{1.3}{\kilo\bp} were all predicted zero by Hi-cGAN, 
 likely due to the small number of samples in this setting, maybe in combination with insufficient training. 
-The effect was more pronounced for chromosome 17, which indeed is shorter than chromosome 14 and thus provides less training samples.
+The effect was more pronounced for chromosome 17, which indeed is shorter than chromosome 14 and thus yields less training samples.
 
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
@@ -1503,18 +1503,18 @@ The effect was more pronounced for chromosome 17, which indeed is shorter than c
 
 Next, the \acrshort{dnn} and Hi-cGAN were trained on data from Drosophila Melanogaster embryos
 to allow a comparison with the results from Farr\'e et al \cite{Farre2018a}.
-Obviously, the DNN did not perform well in this setting either.
-Since it is sharing the network architecture with the approach from Farr\'e et al., 
+Obviously, the \acrshort{dnn} did not perform well in this setting either, see \cref{fig:results:farre-vs-ours_dnn-matrix}.
+However, since the \acrlong{dnn} is sharing the network architecture with the approach from Farr\'e et al., 
 this can only mean that the chosen way of data preparation and binning does not work well for this kind of network.
 Interestingly, the Pearson correlation per position still came out better than the one reported by Farr\'e et al.,
-indicating that this quality measure might not be very useful. 
-The Pearson correlations per distance were much worse, \cref{fig:appendix:DNN_drosophila_pearson} (page \pageref{fig:appendix:DNN_drosophila_pearson})
-and thus somehow matched the very low usefulness of the predicted matrices.
+indicating that this quality measure might not be suitable, \cref{fig:results:farre-vs-ours_pearson_3R}. 
+The Pearson correlations \emph{per distance} showed low values for the \acrshort{dnn}, \cref{fig:appendix:DNN_drosophila_pearson} (page \pageref{fig:appendix:DNN_drosophila_pearson})
+and thus matched the very low usefulness of the predicted matrices better than the correlations \emph{per position}.
 
-Hi-cGAN, on the other hand, showed reasonable results for the test chromosomes 3R and X.
+Hi-cGAN, on the other hand, showed reasonable results for the test chromosomes 3R and X, \cref{fig:results:farre-vs-ours_cgan-matrix}.
 While an objective comparison with the results from Farr\'e et al. is difficult due to unavailability of raw data,
-the predicted matrices from Hi-cGAN seem to be less blurry and look more like real Hi-C matrices for the only, 
-maybe because no correction has been applied.
+the predicted matrices from Hi-cGAN seem to be less blurry and look more like real Hi-C matrices,
+maybe in part because no (distance-based) correction has been applied.
 It should be noted, however, that assessing the quality of matrix plots is difficult with only a short 
 cutout from chr3R, 15-\SI{20}{\mega\bp} at hand, which additionally is obviously shown in corrected form
 and not with its original values.
@@ -1532,7 +1532,8 @@ and not with its original values.
  \scriptsize
  \import{figures/DNN_drosophila/}{pred01000_chr3R_015-020.pdf_tex}
  \caption{Matrix from DNN, 1000 epochs} \label{fig:results:farre-vs-ours_dnn-matrix}
-\end{subfigure}\\[5mm]
+\end{subfigure}\\[3mm]
+\centering{\scriptsize{\cref{fig:results:farre-vs-ours_dnn-matrix}, \ref{fig:results:farre-vs-ours_cgan-matrix}: predicted matrices on top, true matrices from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\[2mm]
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
@@ -1548,8 +1549,5 @@ and not with its original values.
 \end{subfigure}\\[5mm]
 \caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}}
 \end{figure}
-
-
-
 
 \clearpage
