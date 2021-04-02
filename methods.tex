@@ -65,15 +65,23 @@ This thesis follows the sliding window approach proposed by Farr\'e et al. \cite
 
 First, all chromatin features were binned to binsize $b_\mathit{feat}$ by splitting each chromosome of size $cs$ into 
 $l_\mathit{feat}=\left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil$ non-overlapping bins of size $b_\mathit{feat}$
-and taking the mean feature value within the genomic region belonging to each bin.
+and taking the mean feature signal value within the genomic region belonging to each bin.
 All $n$ chromatin factors were processed in this way and then stacked into a $(l_\mathit{feat},n)$-shaped array.
-Here, the number of chromatin features was constant for all investigations within this thesis, $n=14$ (cf.~\cref{sec:methods:input_data}). 
+The number of chromatin features was constant for all investigations within this thesis, $n=14$ (cf.~\cref{sec:methods:input_data}),
+except for the comparisons with the method by Farr\'e et al., where 49 chromatin features from D. Melanogaster were used, cf. \cref{sec:methods:comparison}.
+
+It should be noted that the way of feature binning described in the paragraph above constitutes a major difference to the proposal by Farr\'e et al. \cite[p.~9]{Farre2018a}.
+In their work, values are assigned to each bin according to the percentage of basepairs in the respective bin covered by statistically significant enrichments of the respective feature,
+where a value of one means 100\% coverage and a value of zero means the feature is not present in the respective bin at all.
 
 Separate Hi-C matrices for each chromosome were derived from the cooler format as $(l_\mathit{mat}, l_\mathit{mat})$-shaped matrices, 
 $l_\mathit{mat}=\left \lceil{\frac{cs}{b_\mathit{mat}}}\right \rceil$ being the number of bins in the given chromosome. 
 Initially, $b_\mathit{feat} = b_\mathit{mat}$ was used, which leads to $l_\mathit{feat} = l_\mathit{mat}$, because $cs$ is a constant for a given chromosome.
+While this is also a different process compared to the method used by Farr\'e et al. \cite[p.~8f]{Farre2018a}, it should lead to the same outcome --
+apart from the fact that non-normalized matrices have been used here, cf. \cref{sec:methods:input_data}.
 
-A sliding window approach was then applied to generate training samples for the neural networks $G$ described below.
+A sliding window approach was then applied to generate training samples from the chromatin feature array and matrix array 
+for usage with the neural networks $G$ described below.
 Here, subarrays of size $(3w_\mathit{mat}, n)$ were cut out from the feature array 
 such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_\mathit{mat}$ of the full array. 
 Sliding the window along the array with stepsize one obviously yields $N=l-3w_\mathit{mat}+1$ training samples.
