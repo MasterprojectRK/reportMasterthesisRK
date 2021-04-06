@@ -797,6 +797,37 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
 \caption{Further matrix plots, cGAN with DNN embedding, Drosophila Melanogaster} \label{fig:appendix:GAN64_drosophila_matrices}
 \end{figure}
 
+\begin{figure}[htbp]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/DNN_drosophila2/}{pred00c_chr3R_1675-2175.pdf_tex}
+ \caption{Matrix from DNN, 50 epochs} \label{fig:appendix:farre-vs-ours_dnn-matrix}
+\end{subfigure}\\[3mm]
+\centering{\scriptsize{\cref{fig:appendix:farre-vs-ours_dnn-matrix}, \ref{fig:appendix:farre-vs-ours_cgan-matrix}: predicted matrices on top, true matrices from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\[2mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/GAN_64_drosophila/}{pred00c_chr3R_1675-2175.pdf_tex}
+ \caption{Matrix from Hi-cGAN, 100 epochs} \label{fig:appendix:farre-vs-ours_cgan-matrix}
+\end{subfigure}\\[5mm]
+\begin{subfigure}{\textwidth}
+ \centering
+ \scriptsize
+ \import{figures/FarreEtAl_drosophila/}{pred00c_chr3R_1675-2175.pdf_tex}
+ \caption{Reproduced matrix from Farr\'e et al. \cite{Farre2018a}} \label{fig:appendix:farre-vs-ours_farre-matrix_recreated}
+\end{subfigure}\\[5mm]
+\begin{subfigure}{\textwidth}
+ \centering{\tiny{Image courtesy Farr\'e, Heurteau, Cuvier, Emberly \cite{Farre2018a}, licensed under Creative Commons Attribution 4.0 License \cite{ccby4}.\\
+                                Approximated X-axis not part of original image. ICE- and distance-normalized matrix on bottom, predicted matrix on top}}
+ \centering
+ \scriptsize
+ \import{figures/GAN_64_drosophila/}{predFarre_chr3R_168-218.pdf_tex}
+ \caption{Original matrix extracted from Farr\'e et al. \cite{Farre2018a}} \label{fig:appendix:farre-vs-ours_farre-matrix_original}
+\end{subfigure}\\[5mm]
+\caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a} using red/blue color maps}
+\end{figure}
+
 
 
 \clearpage
