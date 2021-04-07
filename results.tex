@@ -1503,52 +1503,74 @@ The effect was more pronounced for chromosome 17, which indeed is shorter than c
 
 Next, the \acrshort{dnn} and Hi-cGAN were trained on data from Drosophila Melanogaster embryos
 to allow a comparison with the results from Farr\'e et al \cite{Farre2018a}.
-Obviously, the \acrshort{dnn} did not perform well in this setting either, see \cref{fig:results:farre-vs-ours_dnn-matrix}.
-However, since the \acrlong{dnn} is sharing the network architecture with the approach from Farr\'e et al., 
-this can only mean that the chosen way of data preparation and binning does not work well for this kind of network.
-Interestingly, the Pearson correlation per position still came out better than the one reported by Farr\'e et al.,
-indicating that this quality measure might not be suitable, \cref{fig:results:farre-vs-ours_pearson_3R}. 
-The Pearson correlations \emph{per distance} showed low values for the \acrshort{dnn}, \cref{fig:appendix:DNN_drosophila_pearson} (page \pageref{fig:appendix:DNN_drosophila_pearson})
-and thus matched the very low usefulness of the predicted matrices better than the correlations \emph{per position}.
+In the Pearson correlation plots for test chromosome 3R, the similarity between the DNN approach and the method by 
+Farrè et al was obvious, both when plotting correlation over distance and position, \cref{fig:results:farre-vs-ours_pearson-pos_3R} 
+and \ref{fig:results:farre-vs-ours_pearson-dist_3R}. 
+Interestingly, the method by Farrè et al. showed better values when plotting Pearson correlations over positions,
+while the \acrshort{dnn} approach showed better values when plotting over distances. However, the values generally remained
+on a comparatively low level.
+Note that the -- comparatively good -- values reported in the paper \cite{Farre2018a} could not be reproduced; 
+they may have been computed in a different way.
+In terms of predicted matrices, the results published in the paper could widely be reproduced using the slightly modified 
+code kindly provided by Pau Farrè, cf. \ref{sec:methods:comparison}, see \cref{fig:results:farre-vs-ours_matrices} and \ref{fig:appendix:farre-vs-ours_matrices} 
+(especially figure \ref{fig:appendix:farre-vs-ours_farre-matrix_recreated} vs. figure \ref{fig:appendix:farre-vs-ours_farre-matrix_original}).
+Although some structures were well predicted, and despite the better distance-stratified Pearson correlations, 
+the matrix plots from the \acrshort{dnn} approach looked clearly worse than the ones due to Farrè et al., \cref{fig:results:farre-vs-ours_matrices}.
+Since the \acrlong{dnn} is sharing the network architecture with the approach from Farr\'e et al., 
+this can only mean that the chosen way of data preparation laid out in \ref{sec:methods:sample_gen} 
+works worse than the approach chosen by Farrè et al. for this type of network.
 
-Hi-cGAN, on the other hand, showed reasonable results for the test chromosomes 3R and X, \cref{fig:results:farre-vs-ours_cgan-matrix}.
-While an objective comparison with the results from Farr\'e et al. is difficult due to unavailability of raw data,
-the predicted matrices from Hi-cGAN seem to be less blurry and look more like real Hi-C matrices,
-maybe in part because no (distance-based) correction has been applied.
-It should be noted, however, that assessing the quality of matrix plots is difficult with only a short 
-cutout from chr3R, 15-\SI{20}{\mega\bp} at hand, which additionally is obviously shown in corrected form
-and not with its original values.
+For Hi-cGAN, on the other hand, the chosen way of data preparation seemed to work well again.
+Here, reasonable results for the test chromosomes 3R and X, \cref{fig:results:farre-vs-ours_cgan-matrix} were obtained,
+both in terms of Pearson correlations and matrix plots, 
+\cref{fig:results:farre-vs-ours_pearson-pos_3R}, \ref{fig:results:farre-vs-ours_pearson-dist_3R} and \ref{fig:results:farre-vs-ours_matrices}.
 
 \begin{figure}[htbp]
- \centering
-  \resizebox{0.65\textwidth}{!}{
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
   \scriptsize
-  \import{figures/GAN_64_drosophila/}{ppp_chr3L_comparison.pdf_tex}}
-  \caption{Comparison Pearson correlations DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}}\label{fig:results:farre-vs-ours_pearson_3R}
+  \import{figures/GAN_64_drosophila/}{ppp_chr3R.pdf_tex}}
+  \caption{Full chromosome 3R}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.45\textwidth}
+  \resizebox{\textwidth}{!}{
+  \scriptsize
+  \import{figures/GAN_64_drosophila/}{ppp_chr3R_restricted.pdf_tex}}
+  \caption{Cutout as in the paper \cite{Farre2018a}}
+ \end{subfigure}
+\caption{Comparison Pearson correlations \emph{per position}\\DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}}\label{fig:results:farre-vs-ours_pearson-pos_3R}
 \end{figure}
 \begin{figure}[htbp]
-\begin{subfigure}{\textwidth}
  \centering
+ \resizebox{0.45\textwidth}{!}{
  \scriptsize
- \import{figures/DNN_drosophila2/}{pred00d_chr3R_1675-2175.pdf_tex}
- \caption{Matrix from DNN, 1000 epochs} \label{fig:results:farre-vs-ours_dnn-matrix}
-\end{subfigure}\\[3mm]
-\centering{\scriptsize{\cref{fig:results:farre-vs-ours_dnn-matrix}, \ref{fig:results:farre-vs-ours_cgan-matrix}: predicted matrices on top, true matrices from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\[2mm]
+ \import{figures/FarreEtAl_drosophila/}{pearson_chr3R_comparison_DNN-Hi-cGAN-Farre.pdf_tex}}
+ \caption{Comparison Pearson correlations \emph{per distance}\\DNN / Hi-cGAN / Farr\'e et al.}\label{fig:results:farre-vs-ours_pearson-dist_3R}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering{\scriptsize{predicted matrix on top, matrix from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
  \import{figures/GAN_64_drosophila/}{pred00d_chr3R_1675-2175.pdf_tex}
  \caption{Matrix from Hi-cGAN, 100 epochs} \label{fig:results:farre-vs-ours_cgan-matrix}
 \end{subfigure}\\[5mm]
+\centering{\scriptsize{predicted matrix on top, ICE-normalized matrix derived from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\
 \begin{subfigure}{\textwidth}
- \centering{\tiny{Image courtesy Farr\'e, Heurteau, Cuvier, Emberly \cite{Farre2018a}, licensed under Creative Commons Attribution 4.0 License \cite{ccby4}.\\
-                                Approximated X-axis not part of original image. ICE- and distance-normalized matrix on bottom, predicted matrix on top}}
+ \centering
+ \scriptsize
+ \import{figures/DNN_drosophila2/}{pred00d_chr3R_1675-2175.pdf_tex}
+ \caption{Matrix from DNN, 40 epochs} \label{fig:results:farre-vs-ours_dnn-matrix}
+\end{subfigure}\\[5mm]
+\centering{\scriptsize{predicted matrix on top, ICE-normalized matrix derived from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\
+\begin{subfigure}{\textwidth}
  \centering
  \scriptsize
  \import{figures/FarreEtAl_drosophila/}{pred00d_chr3R_1675-2175.pdf_tex}
- \caption{Matrix from Farr\'e et al. \cite{Farre2018a}} \label{fig:results:farre-vs-ours_farre-matrix}
+ \caption{Matrix from Farr\'e et al. \cite{Farre2018a}, 70 epochs} \label{fig:results:farre-vs-ours_farre-matrix}
 \end{subfigure}\\[5mm]
-\caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}}
+\caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}} \label{fig:results:farre-vs-ours_matrices}
 \end{figure}
 
 \clearpage

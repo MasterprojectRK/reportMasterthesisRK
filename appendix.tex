@@ -730,28 +730,28 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/DNN_drosophila/}{pearson_chr3L.pdf_tex}}
-        \caption{chr3L (validation)}
+        \import{figures/DNN_drosophila2/}{pearson_chr3L.pdf_tex}}
+        \caption{chr3L (train)}
     \end{subfigure} \hfill
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/DNN_drosophila/}{pearson_chr3R.pdf_tex}}
+        \import{figures/DNN_drosophila2/}{pearson_chr3R.pdf_tex}}
         \caption{chr3R (test)}
     \end{subfigure}\\[5mm]
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/DNN_drosophila/}{pearson_chrX.pdf_tex}}
-        \caption{chrX (test)}
+        \import{figures/DNN_drosophila2/}{pearson_chrX.pdf_tex}}
+        \caption{chrX (validation)}
     \end{subfigure}\hfill
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
         \resizebox{\textwidth}{!}{
-        \import{figures/DNN_drosophila/}{lossOverEpochs.pdf_tex}}
+        \import{figures/DNN_drosophila2/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:appendix:DNN_drosophila_progress}
     \end{subfigure}
-    \caption{Results\,/\,metrics DNN, $w=80$, trained on D. melanogaster chr2L and 2R}   \label{fig:appendix:DNN_drosophila_pearson}
+    \caption{Results\,/\,metrics DNN, $w=80$, trained on D. melanogaster chr2L, 2R, 3L}   \label{fig:appendix:DNN_drosophila_pearson}
 \end{figure}
 
 \begin{figure}[p] %cGAN trained on drosophila 2L, 2R 
@@ -801,31 +801,32 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
- \import{figures/DNN_drosophila2/}{pred00c_chr3R_1675-2175.pdf_tex}
- \caption{Matrix from DNN, 50 epochs} \label{fig:appendix:farre-vs-ours_dnn-matrix}
-\end{subfigure}\\[3mm]
+ \import{figures/GAN_64_drosophila/}{pred00c_chr3R_1675-2175.pdf_tex}
+ \caption{Matrix from Hi-cGAN, 100 epochs} \label{fig:appendix:farre-vs-ours_cgan-matrix}
+\end{subfigure}\\[5mm]
 \centering{\scriptsize{\cref{fig:appendix:farre-vs-ours_dnn-matrix}, \ref{fig:appendix:farre-vs-ours_cgan-matrix}: predicted matrices on top, true matrices from Schuettengruber et al. \cite{Schuettengruber2014} on bottom}}\\[2mm]
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
- \import{figures/GAN_64_drosophila/}{pred00c_chr3R_1675-2175.pdf_tex}
- \caption{Matrix from Hi-cGAN, 100 epochs} \label{fig:appendix:farre-vs-ours_cgan-matrix}
-\end{subfigure}\\[5mm]
+ \import{figures/DNN_drosophila2/}{pred00c_chr3R_1675-2175.pdf_tex}
+ \caption{Matrix from DNN, 40 epochs} \label{fig:appendix:farre-vs-ours_dnn-matrix}
+\end{subfigure}\\[3mm]
 \begin{subfigure}{\textwidth}
  \centering
  \scriptsize
  \import{figures/FarreEtAl_drosophila/}{pred00c_chr3R_1675-2175.pdf_tex}
- \caption{Reproduced matrix from Farr\'e et al. \cite{Farre2018a}} \label{fig:appendix:farre-vs-ours_farre-matrix_recreated}
+ \caption{Reproduced matrix from Farr\'e et al. \cite{Farre2018a}}, 70 epochs \label{fig:appendix:farre-vs-ours_farre-matrix_recreated}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering{\tiny{Image courtesy Farr\'e, Heurteau, Cuvier, Emberly \cite{Farre2018a}, licensed under Creative Commons Attribution 4.0 License \cite{ccby4}.\\
-                                Approximated X-axis not part of original image. ICE- and distance-normalized matrix on bottom, predicted matrix on top}}
+                                Approximated X-axis not part of original image. Scaled to same size as matrices above.\\
+                                predicted matrix on top, target matrix on bottom}}
  \centering
  \scriptsize
  \import{figures/GAN_64_drosophila/}{predFarre_chr3R_168-218.pdf_tex}
  \caption{Original matrix extracted from Farr\'e et al. \cite{Farre2018a}} \label{fig:appendix:farre-vs-ours_farre-matrix_original}
 \end{subfigure}\\[5mm]
-\caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a} using red/blue color maps}
+\caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}\\using red/blue color maps} \label{fig:appendix:farre-vs-ours_matrices}
 \end{figure}
 
 
