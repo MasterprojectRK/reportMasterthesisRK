@@ -1503,22 +1503,23 @@ The effect was more pronounced for chromosome 17, which indeed is shorter than c
 
 Next, the \acrshort{dnn} and Hi-cGAN were trained on data from Drosophila Melanogaster embryos
 to allow a comparison with the results from Farr\'e et al \cite{Farre2018a}.
-In the Pearson correlation plots for test chromosome 3R, the similarity between the DNN approach and the method by 
-Farrè et al was obvious, both when plotting correlation over distance and position, \cref{fig:results:farre-vs-ours_pearson-pos_3R} 
+
+In the Pearson correlation plots for test chromosome 3R, the similarity between the \acrshort{dnn} approach and the method by 
+Farré et al was obvious, both when plotting correlation over distance and position, \cref{fig:results:farre-vs-ours_pearson-pos_3R} 
 and \ref{fig:results:farre-vs-ours_pearson-dist_3R}. 
-Interestingly, the method by Farrè et al. showed better values when plotting Pearson correlations over positions,
-while the \acrshort{dnn} approach showed better values when plotting over distances. However, the values generally remained
-on a comparatively low level.
-Note that the -- comparatively good -- values reported in the paper \cite{Farre2018a} could not be reproduced; 
+Interestingly, the method by Farré et al. showed better values when plotting Pearson correlations over positions,
+while the \acrshort{dnn} approach showed better values when plotting over distances. 
+However, the values generally remained on a comparatively low level.
+Note that the -- comparatively good -- values reported in the paper \cite[fig.~3]{Farre2018a} could not be reproduced; 
 they may have been computed in a different way.
 In terms of predicted matrices, the results published in the paper could widely be reproduced using the slightly modified 
-code kindly provided by Pau Farrè, cf. \ref{sec:methods:comparison}, see \cref{fig:results:farre-vs-ours_matrices} and \ref{fig:appendix:farre-vs-ours_matrices} 
+code kindly provided by Pau Farré, cf. \ref{sec:methods:comparison}, see \cref{fig:results:farre-vs-ours_matrices} and \ref{fig:appendix:farre-vs-ours_matrices} 
 (especially figure \ref{fig:appendix:farre-vs-ours_farre-matrix_recreated} vs. figure \ref{fig:appendix:farre-vs-ours_farre-matrix_original}).
 Although some structures were well predicted, and despite the better distance-stratified Pearson correlations, 
-the matrix plots from the \acrshort{dnn} approach looked clearly worse than the ones due to Farrè et al., \cref{fig:results:farre-vs-ours_matrices}.
+the matrix plots from the \acrshort{dnn} approach looked clearly worse than the ones due to Farré et al., \cref{fig:results:farre-vs-ours_matrices}.
 Since the \acrlong{dnn} is sharing the network architecture with the approach from Farr\'e et al., 
 this can only mean that the chosen way of data preparation laid out in \ref{sec:methods:sample_gen} 
-works worse than the approach chosen by Farrè et al. for this type of network.
+works worse than the approach chosen by Farré et al. for this type of network.
 
 For Hi-cGAN, on the other hand, the chosen way of data preparation seemed to work well again.
 Here, reasonable results for the test chromosomes 3R and X, \cref{fig:results:farre-vs-ours_cgan-matrix} were obtained,
