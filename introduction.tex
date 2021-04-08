@@ -35,7 +35,7 @@ and cell differentiation in Drosophila Melanogaster \cite{Chathoth2019}
 and investigated spatial structure dynamics during phase transitions in murine cells \cite{Zhang2019b}.
 
 While the driving mechanisms behind the formation of spatial chromatin structures are partially still under research, too,
-certain proteins like CTCF or modified histones are already well-known to mediate or prevent DNA-DNA contacts \cite{Phillips2009,PhillipsCremins2013,Dixon2015}.
+certain proteins like CTCF or modified histones are already well-known to mediate or prevent DNA-DNA contacts in human- and other mammalian cell lines \cite{Phillips2009,PhillipsCremins2013,Dixon2015}.
 This relationship can partially be exploited to predict 3D DNA conformation from the 1D binding sites of such proteins, as will be shown below.
 
 In the last two decades, DNA-sequencing-based techniques have increasingly been utilized to capture the spatial structure of DNA experimentally.
@@ -74,7 +74,7 @@ are then selected by pulling down biotin (5), for example using magnetic tags,
 and subjected to paired-end DNA-sequencing (6).
 In the end, the output of the Hi-C lab process is a large number of short genomic ``reads'',
 which are subsequently processed in the bioinformatics part of the Hi-C protocol 
-outlined in the following section.
+outlined in the following paragraphs.
 
 On the software side of the protocol, the reads first need to be mapped 
 to the corresponding reference genome.
@@ -91,8 +91,8 @@ The final outcome of a Hi-C experiment is then a (sparse) square matrix $M$, hen
 which records the interaction count for all possible pairs of regions in the reference genome.
 The individual elements $m_{i,j}$ of the matrices are counts of interactions between the bins with indices $i,j \in \{0,1,...\}$,
 where each bin index $i$ and $j$ uniquely maps to a genomic region with defined start- and end position.
-For example, if region index $i$ corresponded to ``chr1, 25000...49999'' and index $j$ corresponded to ``chr1, 250000...274999'',
-then a matrix entry $m_{i,j}=22$ would mean that 22 interactions have experimentally been measured between the two mentioned genomic positions.
+For example, if region index $i=1$ corresponded to ``chr1, 25000...49999'' and index $j=10$ corresponded to ``chr1, 250000...274999'',
+then a matrix entry $m_{1,10}=22$ would mean that 22 interactions have experimentally been measured between the two mentioned genomic positions.
 Because interactions do not have a ``direction'', Hi-C matrices are always symmetric and it thus holds that $m_{i,j} = m_{j,i}$.
 
 In the bioinformatics part of the Hi-C protocol, often only a small fraction of all reads 
@@ -135,7 +135,7 @@ The number of mapped reads per genomic position can then simply be counted.
 It is common to process reads from the control experiment in the same way as reads from the ChIP-seq experiment
 and then use special software to call ``peaks'', i.\,e. protein binding sites,
 at those genomic positions where the read count from ChIP-seq
-is statistically significant compared to the read count from the control group.
+is statistically significant compared to the read count from the control experiments.
 
 For the thesis at hand, the read counts from the ChIP-seq experiment have been used directly without calling peaks,
 because peak data was found to be too sparse for the machine learning approach used 
@@ -173,8 +173,7 @@ GM23248  & 2   & 13 & 1  & 1 \\ \hline
 \end{wraptable}
 Due to the high effort, Hi-C experiments have been published for comparatively few organisms and cell lines so far.
 For example, as of January 2021, Hi-C assays were available for only 26 of more than 150 human cell lines listed 
-in the Encyclopedia of DNA elements \cite{Encode2012,Davis2017}, \cref{tab:intro:assaysInEncode},
-and these have been produced by only five university labs.
+in the Encyclopedia of DNA elements \cite{Encode2012,Davis2017}, and these have been produced by only five university labs.
 
 However, investigations and experiments with the available Hi-C data have shown correlations
 between the spatial DNA structure and the binding sites of certain transcription factors and histone modifications \cite{Rao2014, Bonev2016}.
@@ -194,8 +193,8 @@ approach for predicting Hi-C interaction matrices from ChIP-seq data,
 using standard in- and output formats with minimal pre- and post-processing.
 
 To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
-sorted by total number of selected assays available.
-Although not necessarily all available experiments to date are included in ENCODE -- 
+sorted by total number of selected assays available, where TF stands for Transcription Factor.
+Although not necessarily all publicly known experiments to date are included in ENCODE -- 
 for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 stem cells are not listed -- 
 it is obvious that the public availability of ChIP-seq data is commonly much better than the one of Hi-C data, 
 even for otherwise well investigated cell lines like HEK293 and MCF-7.
