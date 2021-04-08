@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'explanation_dnn_hic.pdf' (pdf, eps, ps)
 %%
@@ -67,7 +67,8 @@
     \put(0.70424415,0.36197326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output layer\end{tabular}}}}%
     \put(0.16290177,0.53490939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}sliding window\end{tabular}}}}%
     \put(0.69760213,0.45299012){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize matrix diagonal\end{tabular}}}}%
-    \put(0.89117449,0.12995988){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chromatin\end{tabular}}}}%
-    \put(0.90164408,0.10866687){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}features\end{tabular}}}}%
+    \put(0.89117449,0.15260504){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chromatin\end{tabular}}}}%
+    \put(0.90164408,0.13131202){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}features\end{tabular}}}}%
+    \put(0.88606359,0.10851142){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{e.g. ChIP-seq}\end{tabular}}}}%
   \end{picture}%
 \endgroup%
