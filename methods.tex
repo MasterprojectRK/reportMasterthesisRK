@@ -63,7 +63,8 @@ The choice of chromatin features is widely in line with the work by Zhang et al.
 besides structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3, active/passive markers are used as well.
 
 \subsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
-This thesis follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a}.
+With regard to sample generation, this thesis widely follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a},
+yet with an important difference, as will be outlined in the following paragraphs.
 
 First, all chromatin features were binned to bin size $b_\mathit{feat}$ by splitting each chromosome of size $cs$ into 
 $l_\mathit{feat}=\left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil$ non-overlapping bins of size $b_\mathit{feat}$
