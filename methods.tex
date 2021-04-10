@@ -82,8 +82,8 @@ Initially, $b_\mathit{feat} = b_\mathit{mat}$ was used, which leads to $l_\mathi
 While this is also a different process compared to the method used by Farr\'e et al. \cite[p.~8f]{Farre2018a}, it should lead to the same outcome --
 apart from the fact that non-normalized matrices have been used here, cf. \cref{sec:methods:input_data}.
 
-A sliding window approach was then applied to generate training samples from the chromatin feature array and matrix array 
-for usage with the neural networks $G$ described below.
+The same sliding window approach as proposed by Farr\'e et al. \cite{Farre2018a} was then applied to generate training samples 
+from the chromatin feature array and matrix array for usage with the neural networks $G$ described below.
 Here, subarrays of size $(3w_\mathit{mat}, n)$ were cut out from the feature array 
 such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_\mathit{mat}$ of the full array. 
 Sliding the window along the array with stepsize one obviously yields $N=l-3w_\mathit{mat}+1$ training samples.
@@ -161,7 +161,7 @@ This approximately implements a 60:20:20 train:validation:test split, see \cref{
 Reversing training/validation and test cell line, which differ strongly in sequencing depth within the Hi-C experiments, 
 was tested briefly for the cGAN approach and seemed to work, see \cref{sec:appendix:reverseTrainTest}.
 For comparability reasons, two cGANs were additionally trained on single chromosomes 14 and 17 of cell line GM12878,  cf. \cref{sec:methods:comparison}.
-Also for comparability reasons, another cGAN was trained and tested on data from \emph{drosophila melanogaster} embryos, again refer to \cref{sec:methods:comparison}
+Also for comparability reasons, a DNN and a cGAN were trained and tested on data from \emph{Drosophila Melanogaster} embryonal cells, again refer to \cref{sec:methods:comparison}
 for details.
 
 Note that window size $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
@@ -278,7 +278,7 @@ distance stratified Pearson correlation is quite common in the field of Hi-C mat
 
 To compute the correlations, the $w$ bins at the left and right boundaries of the investigated matrices were first removed, because these never contain 
 valid values due to the chosen sample generation approach, 
-cf.~\cref{sec:methods:sample_gen}, \cref{fig:methods:prediction} and \ref{sec:methods:sample_gen_cgan}.
+cf.~\cref{sec:methods:sample_gen}, \cref{fig:methods:prediction} and \cref{sec:methods:sample_gen_cgan}.
 Next, the remaining values were grouped into vectors according to their genomic distance $d$, up to the maximum distance $w$, 
 and then Pearson correlations $\rho$ were computed separately for each vector as usual, \cref{eq:pearson}.
 Here, $\mathit{true}|_d$ and $\mathit{pred}|_d$ are the true and predicted values restricted to bin distance $d$, while
@@ -338,11 +338,11 @@ before they were stored, cf. \cref{sec:methods:sample_gen}.
 
 \subsection{Dense neural network approach} \label{sec:methods:dnn}
 In the following sections, the setup for the Dense Neural network inspired by Farr\'e et al. \cite{Farre2018a}
-and its variations will be discussed in detail.
+and its variations will be discussed in detail, starting with the basic setup that was subsequently modified.
 
 \subsubsection{Basic setup} \label{sec:methods:basicSetup}
 The basic setup for the dense neural network approach closely follows the proposal by Farr\'e et al. \cite{Farre2018a},
-so a windowsize of $w=80$ and $b_\mathit{feat}=b_\mathit{mat} = \SI{10}{\kilo\bp}$ was initially used.
+so a window size of $w=80$ and $b_\mathit{feat}=b_\mathit{mat} = \SI{10}{\kilo\bp}$ was initially used.
 With these parameters, the network has a total of \SI{7486436}{} trainable weights in five trainable layers; 
 one convolutional layer and four densely connected layers, \cref{fig:methods:basic_dnn}.
 For brevity, the sigmoid activation after the 1D convolution and the ReLU activations after the Dense layers are not shown.
@@ -355,16 +355,19 @@ The dense layers all use a ``L2'' kernel regularizer and all dropout layers have
     \label{fig:methods:basic_dnn}
 \end{figure}
 
-The training goal for the neural network $G$ is to find weights $\omega^*$ for its five trainable layers 
-such that the mean squared error $L_2$ between the predicted submatrices $\mathbf{M}_s = G_s(\omega)$ 
+The training goal for the neural network $G$ is to find weights $\bm{\omega}^*$ for its five trainable layers 
+such that the mean squared error $L_2$ between the predicted submatrices $\mathbf{M}_s = G_s(\bm{\omega})$ 
 and the training submatrices $\mathbf{T}_s$ becomes minimal for all $N$ training samples $s \in (1,2,\dots, N)$. 
 Here, $\mathbf{M}_s$ is given by the activations of the last dense layer, which are to be interpreted as the upper triangular 
-part of a symmetric $(w, w)$ Hi-C matrix.
+part of a symmetric $(w, w)$-shaped Hi-C matrix.
 Formally, one needs to optimize
 \begin{equation}
- \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
+ \bm{\omega}^* = \mathit{arg\,min}_{\bm{\omega}} L_2(\bm{\omega}) = 
+        \mathit{arg\,min}_{\bm{\omega}} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
+For the thesis at hand, \acrfull{sgd} with learning rate $10^{-5}$  was used to find $\bm{\omega}^*$,
 except for some of the comparisons with other approaches described in \cref{sec:methods:comparison}.
+Initial values $\bm{\omega}_\mathit{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
 Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
@@ -375,7 +378,7 @@ All computations were performed on virtual machines with different properties, p
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
-where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and feature binsize.
+where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and feature bin size.
 Mirror-type padding was used to maintain the output dimensions of the basic network, which had \SI{7486478}{} trainable weights
 for $k=1$.
 
@@ -598,28 +601,30 @@ In the latter case, again the weights of the DNN were replaced by the ones of th
  before the training process started.
 
 \subsection{Comparison with other approaches} \label{sec:methods:comparison}
+\textbf{Comparison with HiC-Reg}\\
+For comparison with \emph{HiC-Reg}, stored predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
 Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
 while the MULTICELL approach was using chromatin feature data from cell lines GM12878, HMEC, HUVEC, K562(!) and NHEK with training matrices from GM12878, chromosome 14 or 17.
 These results were deemed to offer the best comparability to the \acrshort{cgan}- and DNN approaches of this thesis.
 The downloaded data is in text format and was first converted into cooler format, whereby a surprising sparsity of the data was noted.
 For chromosome 14, only \SI{42.4}{\percent} and for chromosome 17, only \SI{59.9}{\percent} of all possible interacting pairs 
-for the chosen windowsize $w=200$ at binsize $b=5000$ were contained in the datasets, 
+for the chosen window size $w=200$ at bin size $b=5000$ were contained in the datasets, 
 and no interacting pairs with predicted interaction counts below 0.01 were found in the data. 
 Instead, the value range was between 0.36 and 5.10 across all four datasets, with similar values for each dataset alone.
 The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, i.\,e. the Hi-C matrix diagonal, which was not contained in the datasets at all.
 For the conversion to cooler format, the missing values were assumed to be zero.
-Next, the cooler matrices were coarsened to binsize \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and DNN results using cooler coarsen.
+Next, the cooler matrices were coarsened to bin size \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and DNN results, using \texttt{cooler} \texttt{coarsen}.
 
 For the comparison between \emph{HiC-Reg} and Hi-\acrshort{cgan}, two additional \acrshort{cgan} models with CNN embedding were trained on chromosome 14 and 17, respectively,
 using (arbitariliy selected) chromosome 10 for validation. 
-Due to the small number of training samples for in this setting, windowsize was set to $w=64$ and batch size to $bs=2$.
+Due to the small number of training samples for in this setting, window size was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
-Additionally, HiC-Reg was compared to a \acrshort{cgan}-CNN model with windowsize $w=256$ and CNN embedding, trained on the typical training data set, 
+Additionally, \emph{HiC-Reg} was compared to a \acrshort{cgan}-CNN model with window size $w=256$ and CNN embedding, trained on the typical training data set, 
 which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the datasets \cite{ShiluZhang2019,ShiluZhang2019a},
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
-allowing the conclusion that the correlation computations should in principle be comparable between this thesis and the paper.
+allowing the conclusion that the correlation computations should in principle be comparable between this thesis and the paper by Zhang et al.
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
    \resizebox{\textwidth}{!}{
@@ -642,8 +647,8 @@ cf. \cref{list:methods:bam2bedgraph} and \ref{list:methods:bedgraph2hicreg}.
 For simplicity, only replicate 1 was used in all cases.
 With regard to matrix data, cooler files were first prepared as described in \cref{sec:methods:input_data}.
 Next, square root vanilla coverage correction was applied, the matrices were dumped into text files and a custom python script was used
-to convert the text inputs to meet HiC-Reg's requirements, cf. \cref{list:methods:convertForHicReg_bash} and \ref{list:methods:convertForHicReg_python}.
-For the rest of the training- and prediction process, the instructions in HiC-Reg's github repository were followed.
+to convert the text inputs to meet \emph{HiC-Reg}'s requirements, cf. \cref{list:methods:convertForHicReg_bash} and \ref{list:methods:convertForHicReg_python}.
+For the rest of the training- and prediction process, the instructions in \emph{HiC-Reg}'s github repository were followed.
 The resulting text files were converted back to cooler using another custom python script, see \cref{list:methods:hicreg2cool}.
 The sparsity in the results was \SI{59.6}{\percent}, confirming that filtering occurs during the sample generation- or training process of HiC-Reg,
 although it is not explicitly mentioned in the paper.
