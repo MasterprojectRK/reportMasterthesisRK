@@ -494,6 +494,22 @@ to convert the conditional input, i.\,e. the chromatin feature data of shape $(3
 into grayscale images of shape $(w,w,1)$. 
 These networks will be discussed below in \cref{sec:methods:dnn-embedding}
 and \cref{sec:methods:cnn-embedding}.
+\Cref{tab:methods:gen_disc_params} shows the number of trainable parameters
+for the generator and discriminator without considering the embedding networks.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrr}
+\hline
+\multirow{2}{*}{\textbf{windowsize}} & \multicolumn{2}{c}{\textbf{trainable weights}} \\
+                                     & Generator            & Discriminator           \\ \hline
+64                                   & \SI{29237889}{}             & \SI{3164673}{}                 \\
+128                                  & \SI{41822849}{}             & \SI{2765057}{}                 \\
+256                                  & \SI{54407809}{}             & \SI{2765057}{}              \\ \hline
+\end{tabular}
+\caption{Trainable weights for Generator and Discriminator w/o embedding network}
+\label{tab:methods:gen_disc_params}
+\end{table}
 
 The loss functions for the generator and discriminator were implemented as shown in equations (\ref{eq:improve:cGAN_loss}) to (\ref{eq:improve:disc_loss_total})
 with parameters $\lambda_\mathit{adv}=1.0, \lambda_\mathit{MAE}=100.0, \lambda_\mathit{TV}=10^{-12}$ and $\lambda_D=0.5$.
@@ -525,11 +541,6 @@ The choice of batchsizes was partially dictated by memory limitations of the ava
     \caption{Upsampling block} \label{fig:methods:GAN_arch:upsampling}
 \end{figure}
 
-
-\begin{enumerate}
- \item the number of trainable parameters \xxx
-\end{enumerate}
-
 \subsubsection{Using a DNN for feature embedding} \label{sec:methods:dnn-embedding}
 In order to use the DNN described in \cref{sec:methods:basicSetup} as an embedding network
 for the \acrshort{cgan}, only small amendments were required to adjust the input shapes,
@@ -546,7 +557,7 @@ of appropriate shape $(w,w)$ and sets its upper triangular part to the values gi
 Symmetrization was then performed by adding this tensor to its transpose and subtracting the values on the diagonal once,
 because the diagonal was contained both in the upper triangular part of the matrix and its transpose.
 Finally, the required third axis was added to get the shape of a grayscale image.
-The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_network_params}.
+The number of trainable parameters for the DNN embedding is shown in \cref{tab:methods:embedding_network_params}, rightmost column.
 Note that all trainable parameters stem from the DNN here; the reshaping layers do not have any trainable parameters.
 \begin{table}[htbp]
 \centering
@@ -554,14 +565,14 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 \hline
 \multicolumn{1}{c}{\multirow{2}{*}{\textbf{window size}}} & \multicolumn{2}{c}{\textbf{trainable weights}}    \\
 \multicolumn{1}{c}{}                                     & \multicolumn{1}{c}{CNN} & \multicolumn{1}{c}{DNN} \\ \hline
-64                                                       & 4243968                 & 5502796                 \\
-128                                                      & 4260416                 & 16034732                \\
-256                                                      & 4293312                 & 57877612                \\ \hline
+64                                                       & \SI{4243968}{}                 & \SI{5502796}{}                 \\
+128                                                      & \SI{4260416}{}                 & \SI{16034732}{}                \\
+256                                                      & \SI{4293312}{}                 & \SI{57877612}{}                \\ \hline
 \end{tabular}
 \caption{Trainable weights for embedding networks}\label{tab:methods:embedding_network_params}
 \end{table}
 
-For the thesis, the DNN-embedding was used in two ways.
+For this thesis, the DNN-embedding was used in two ways.
 First, it was trained together with the rest of the \acrshort{cgan} with weight initialization as described in 
 \cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
 Second, a DNN was pre-trained as described in \cref{sec:methods:basicSetup} with window size $w=64$
@@ -592,7 +603,7 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
 In the CNN-embedding, the number of trainable parameters was constant for all layers, except for the last convolutional layer, where the number
 of convolutional filters was equal to the window size, cf. \cref{fig:methods:GAN_arch:embedding_network}. 
 For the three window sizes $w=\{64,128,256\}$ used within this thesis, the CNN-embedding network 
-contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
+contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params}, middle column for details.
 
 \subsubsection{Mixed embedding for generator and discriminator} \label{sec:methods:mixed-embedding}
 In the mixed setting, the dense neural network described above in \cref{sec:methods:dnn-embedding} was used as  
