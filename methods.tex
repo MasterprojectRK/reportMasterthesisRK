@@ -5,7 +5,7 @@ of Hi-C matrices made throughout the thesis.
 Next, sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan} will give details with regard to the two 
 different approaches made in this thesis to advance the state of the art in predicting Hi-C matrices.
 Finally, some special methods were employed to compare the results of this thesis to 
-other approaches in the field, which will be described in \ref{sec:methods:comparison}.
+other approaches in the field, which will be described in \cref{sec:methods:comparison}.
 
 \subsection{Input data} \label{sec:methods:input_data}
 For the thesis at hand, data from human cell lines GM12878 and K562 was used.
@@ -17,7 +17,7 @@ in .hic format from Gene Expression Omnibus under accession key GSE63525.
 Here, the quality-filtered ``combined\_30'' matrices were taken, which contain only high-quality reads from 
 both replicates.
 
-Next, matrices at \SI{5}{\kilo\bp} binsize were extracted and converted to cooler format using \texttt{hic2cool}
+Next, matrices at \SI{5}{\kilo\bp} bin size were extracted and converted to cooler format using \texttt{hic2cool}
 and subsequently coarsened to resolutions of 10, 25, 50 and \SI{100}{\kilo\bp} using \texttt{cooler coarsen},
 see \cref{list:methods:hic2cool}.
 Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using ICE plus distance-based normalization,
@@ -60,12 +60,12 @@ one bigwig file by taking the mean, as in the study project \cite{Krauth2020}.
 Pseudocode for the full conversion process is given in \cref{list:methods:bamtobigwig}.
 
 The choice of chromatin features is widely in line with the work by Zhang et al. \cite{Zhang2019}; 
-aside structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3, active/passive markers are used as well.
+besides structural proteins like CTCF and Cohesin subcomponents RAD21 and SMC3, active/passive markers are used as well.
 
 \subsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
 This thesis follows the sliding window approach proposed by Farr\'e et al. \cite{Farre2018a}.
 
-First, all chromatin features were binned to binsize $b_\mathit{feat}$ by splitting each chromosome of size $cs$ into 
+First, all chromatin features were binned to bin size $b_\mathit{feat}$ by splitting each chromosome of size $cs$ into 
 $l_\mathit{feat}=\left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil$ non-overlapping bins of size $b_\mathit{feat}$
 and taking the mean feature signal value within the genomic region belonging to each bin.
 All $n$ chromatin factors were processed in this way and then stacked into a $(l_\mathit{feat},n)$-shaped array.
@@ -125,7 +125,7 @@ except that no matrix window was generated.
 Due to the sliding window approach, the output of the network is a set of overlapping submatrices along the main diagonal of the actual target Hi-C matrix.
 To generate the final submatrix, all submatrices were added up in a position-aware fashion 
 and finally all values were divided by the number of overlaps for their respective position.
-\Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with windowsize $w=4$ for a matrix of shape (16,16).
+\Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with window size $w=4$ for a matrix of shape (16,16).
 Note that the first and last $w$ bins in each row (matrix diagonal) always remain empty due to the flanking regions,
 as do all bins outside the main diagonal and the first $w-1$ side diagonals.
 To improve visualisation, all predicted matrices were scaled to value range 0...1000 after re-assembly and stored in cooler format for further processing.
@@ -164,13 +164,13 @@ For comparability reasons, two cGANs were additionally trained on single chromos
 Also for comparability reasons, another cGAN was trained and tested on data from \emph{drosophila melanogaster} embryos, again refer to \cref{sec:methods:comparison}
 for details.
 
-Note that windowsize $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
+Note that window size $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
 to train a network with more than seven million parameters, cf.~\cref{sec:methods:basicSetup}.
 \begin{table}[hbp]
 \centering
 \begin{tabular}{lrrrrrrr}
 \hline
-\multicolumn{1}{c}{\multirow{2}{*}{\textbf{chrom.}}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{length/bp}}} & \multicolumn{6}{c}{\textbf{samples at $\mathbf{w=80}$ and binsize...}}                                                                                                \\
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{chrom.}}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{length/bp}}} & \multicolumn{6}{c}{\textbf{samples at $\mathbf{w=80}$ and bin size...}}                                                                                                \\
 \multicolumn{1}{c}{}                                     & \multicolumn{1}{c}{}                                    & \multicolumn{1}{c}{5k} & \multicolumn{1}{c}{10k} & \multicolumn{1}{c}{25k} & \multicolumn{1}{c}{50k} & \multicolumn{1}{c}{250k} & \multicolumn{1}{c}{500k} \\ \hline
 1                                                        & 249250621                                               & 49612                  & 24687                   & 9732                    & 4747                    & 759                      & 260                      \\
 2                                                        & 243199373                                               & 48401                  & 24081                   & 9489                    & 4625                    & 734                      & 248                      \\
@@ -214,11 +214,11 @@ Second, for the \acrshort{cgan} approach the input matrices need not only be squ
 but their sizes also needed to be powers of two. 
 This ensured the required shapes for the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
-Within the thesis, windowsizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
+Within the thesis, window sizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
 
 \subsection{Generalization of feature binning} \label{sec:methods:inputBinning}
 Most of the binning- and sample generation procedures described above 
-also work for binsize relations $k=\frac{b_\mathit{mat}}{b_\mathit{feat}} \in \mathbb{N}^{>1}$.
+also work for bin size relations $k=\frac{b_\mathit{mat}}{b_\mathit{feat}} \in \mathbb{N}^{>1}$.
 
 The training matrices remain unchanged, i.\,e. $(l, l)$-shaped arrays, from which training submatrices of size  $(w_\mathit{mat}, w_\mathit{mat})$
 can be extracted. 
@@ -364,8 +364,7 @@ Formally, one needs to optimize
 \begin{equation}
  \omega^* = \mathit{arg\,min}_\omega L_2(\omega) = \mathit{arg\,min}_\omega \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
-For the thesis at hand, stochastic gradient descent (SGD) with learning rate $10^{-5}$  was used to find $\omega^*$.
-Initial values $\omega_\mathit{init}$ were drawn from a Xavier initializer, a uniform distribution with limits depending on the in- and output shapes.
+except for some of the comparisons with other approaches described in \cref{sec:methods:comparison}.
 Following \cite{Farre2018a}, optimization was performed on minibatches of 30 samples, assembled randomly from the $N$ training samples
 to prevent location-dependent effects and improve generalization.
 For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$. 
@@ -380,19 +379,18 @@ where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and fe
 Mirror-type padding was used to maintain the output dimensions of the basic network, which had \SI{7486478}{} trainable weights
 for $k=1$.
 
-For the ``longer'' variant three 1D-convolutional layers with 4, 8 and 16 filters 
+For the ``longer'' variant, three 1D-convolutional layers with 4, 8 and 16 filters 
 were used in place of the basic network's single convolutional layer, cf. \cref{fig:methods:longer_dnn}.
 This replacement was also made for the ``wider-longer''-variant, 
 additionally increasing the respective kernel sizes to $4k$ (with strides $k$), 4 and 4, cf. \cref{fig:methods:longer_dnn} (right).
 In both cases, the dropout rate was increased to 20\%.
-The ``longer'' variant had \SI{9142665}{} trainable weights and the ``wider-longer''
-had \SI{9143313}{} for $k=1$.
+The ``longer'' variant had \SI{9142665}{} trainable weights and the ``wider-longer'' variant had \SI{9143313}{} for $k=1$.
 
-For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix binsize $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
-so the factor for the relation between the two binsizes was $k=25/5=5$.
-This yields input feature arrays of size $(3w\cdot k, n = (3\cdot80\cdot5 , 14) = (1200, 14)$.
-Replacing the first convolutional layer of the basic network by a 1D convolutional filter with kernel size $k=5$ and strides $k=5$ without padding,
-this input was again compressed to a $(3w, 1) = (240, 1)$ tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
+For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix bin size $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
+so the factor for the relation between the two bin sizes was $k=25/5=5$.
+This yields input feature arrays of size $(3w\cdot k, n) = (3\cdot80\cdot5 , 14) = (1200, 14)$.
+Replacing the first convolutional layer of the basic network by a 1D-convolutional filter with kernel size $k=5$ and strides $k=5$ without padding,
+this input was again compressed to a $(3w, 1) = (240, 1)$-shaped tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
 \begin{figure}[p]
     \small
@@ -403,11 +401,11 @@ The rest of the network remained the same so that the number of trainable parame
 \end{figure}
 
 \subsubsection{Combination of mean squared error, perception loss and TV loss} \label{sec:methods:combined_loss}
-For computing the combined MSE, perception- and TV-loss,
+For computing the combined \acrshort{mse}, perception- and TV-loss,
 input features were first passed through the network as normal,
-and mean squared error was computed on the predicted ``upper triangular vectors'' vs. the real vectors.
+and mean squared error was computed on the predicted ``upper triangular'' vectors vs. the real vectors.
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
-$(w, w, 1)$-shaped tensors, where $w$ is again the windowsize.
+$(w, w, 1)$-shaped tensors, where $w$ is again the window size.
 
 For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992}
 \begin{equation}
@@ -430,8 +428,8 @@ The optimization problem for the modified network was then formulated by means o
                                                      + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
 \end{equation}
 Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
-The \emph{VGG16} network and the corresponding weights were taken from the keras implementation pre-trained on \emph{ImageNet} \cite{deng2009}.
-As a side effect, the usage of \emph{VGG16} imposes the restriction $w \geq 32$ on the windowsize $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
+The \emph{VGG-16} network and the corresponding weights were taken from the keras implementation pre-trained on \emph{ImageNet} \cite{deng2009}.
+As a side effect, the usage of \emph{VGG-16} imposes the restriction $w \geq 32$ on the window size $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
 
 The network $G(\bm{\omega})$ could in principle be any of the variants described above in \cref{sec:methods:variants},
 but for the thesis at hand, only the initial network from \cref{sec:methods:basicSetup} was used.
@@ -442,7 +440,7 @@ To optimize both for mean-squared error and a TAD-score-derived loss, the follow
  \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2
                                                     + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(\mathbf{M}^\prime_s,ds) - \mathit{score}(\mathbf{T}^\prime_s,ds))^2 \label{eq:methods:score_loss}
 \end{equation}
-where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\omega)$ for sample $s$ and $\mathbf{T}_s$ is the corresponding true Hi-C submatrix.
+where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\bm{\omega})$ for sample $s$, and $\mathbf{T}_s$ is the corresponding true Hi-C submatrix.
 
 To compute the TAD-score-based loss $\mathit{score}(\cdot,\cdot)$, the predictions and true Hi-C matrices $\mathbf{M}$ and $\mathbf{T}$ in vector form (upper triangular part)
 were first converted back to complete, symmetric Hi-C matrices $\mathbf{M}^\prime,\; \mathbf{T}^\prime$. 
@@ -455,7 +453,7 @@ While it would also have been possible, and probably faster, to slice the output
 this is rather unintuitive and was therefore not implemented for the thesis. 
 
 \subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
-In the following subsection, the setup and training process of the \acrshort{cgan} network developed for this thesis and the respective
+In the following subsection, the setup and training process of the \acrshort{cgan} network developed for this thesis -- \emph{Hi-cGAN} -- and the respective
 embeddings for the conditional input -- the chromatin features -- will be described in more detail.
 First, the basic network setup based on the well-known \emph{pix2pix} \acrshort{cgan} architecture \cite{Isola2017} and the training process
 are explained in \cref{sec:methods:cGAN_initial}, then the respective embedding networks are discussed in subsections \ref{sec:methods:dnn-embedding},
@@ -478,8 +476,8 @@ This empirically showed better results, probably because the training- and test 
 is also the value range of the sigmoid function.
 
 Compared to the original \emph{pix2pix} setup, 
-one downsampling layer was omitted in the discriminator for windowsize $w\in\{128,256,\dots\}$ and another one for $w=64$.
-This made the discriminator patches larger, especially for the smaller windowsizes,
+one downsampling layer was omitted in the discriminator for window size $w\in\{128,256,\dots\}$ and another one for $w=64$.
+This made the discriminator patches larger, especially for the smaller window sizes,
 cf. \cref{fig:methods:GAN_arch:discriminator}, and was empirically found to improve the results
 slightly in the given application.
 Symmetry was enforced after all convolutions in the same way as in the generator.
@@ -494,7 +492,7 @@ and \cref{sec:methods:cnn-embedding}.
 
 The loss functions for the generator and discriminator were implemented as shown in equations (\ref{eq:improve:cGAN_loss}) to (\ref{eq:improve:disc_loss_total})
 with parameters $\lambda_\mathit{adv}=1.0, \lambda_\mathit{MAE}=100.0, \lambda_\mathit{TV}=10^{-12}$ and $\lambda_D=0.5$.
-Optimization was performed on minibatches of size 32, 8 and 2 for windowsizes 64, 128 and 256, respectively, 
+Optimization was performed on minibatches of size 32, 8 and 2 for window sizes 64, 128 and 256, respectively, 
 using Adam optimizers with learning rate $2\cdot10^{-5}$ for the generator, $10^{-6}$ for the discriminator and $\beta_1=0.5$ for both generator and discriminator.
 The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:appendix:hardware}.
 
@@ -549,7 +547,7 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 \centering
 \begin{tabular}{lrr}
 \hline
-\multicolumn{1}{c}{\multirow{2}{*}{\textbf{windowsize}}} & \multicolumn{2}{c}{\textbf{trainable weights}}    \\
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{window size}}} & \multicolumn{2}{c}{\textbf{trainable weights}}    \\
 \multicolumn{1}{c}{}                                     & \multicolumn{1}{c}{CNN} & \multicolumn{1}{c}{DNN} \\ \hline
 64                                                       & 4243968                 & 5502796                 \\
 128                                                      & 4260416                 & 16034732                \\
@@ -561,14 +559,14 @@ Note that all trainable parameters stem from the DNN here; the reshaping layers 
 For the thesis, the DNN-embedding was used in two ways.
 First, it was trained together with the rest of the \acrshort{cgan} with weight initialization as described in 
 \cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
-Second, a DNN was pre-trained as described in \cref{sec:methods:basicSetup} with windowsize $w=64$
+Second, a DNN was pre-trained as described in \cref{sec:methods:basicSetup} with window size $w=64$
 and the learned weights were transferred to the \acrshort{cgan} once before the start of the training process,
 which was then continued as described in \cref{sec:methods:cGAN_initial}.
 The results of the pre-training are visualized in \cref{sec:appendix:pretraining_results} (\cref{fig:results:DNN64_pearson});
 the state after 250 epochs was the one transferred to the \acrshort{cgan}.
 
-DNN embeddings were only used with windowsize $w=64$ due to the large number of parameters
-to be trained at windowsizes 128, 256 and higher.
+DNN embeddings were only used with window size $w=64$ due to the large number of parameters
+to be trained at window sizes 128, 256 and higher.
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:methods:cnn-embedding}
 The convolutional embedding network consists of 8 convolutional blocks and a final 1D convolution layer, 
@@ -586,22 +584,18 @@ All kernel weights of the 1D convolutions in the embedding network were initiali
     \caption{Embedding network, CNN} \label{fig:methods:GAN_arch:embedding_network}
 \end{figure}
 
-In the CNN-embedding, the number of trainable parameters is constant for all layers, except for the last convolutional layer, where the number
-of convolutional filters is equal to the windowsize, cf. \cref{fig:methods:GAN_arch:embedding_network}. 
-For the three windowsizes $w=\{64,128,256\}$ used within this thesis, the CNN-embedding network 
+For the three window sizes $w=\{64,128,256\}$ used within this thesis, the CNN-embedding network 
 contained about 4.2 to 4.3 million trainable weights, see \cref{tab:methods:embedding_network_params} for details.
 
 \subsubsection{Mixed embedding for generator and discriminator} \label{sec:methods:mixed-embedding}
 In the mixed setting, the dense neural network described above in \cref{sec:methods:dnn-embedding} was used as  
 embedding network for the generator and the CNN described in \cref{sec:methods:cnn-embedding} was used as embedding
 network for the discriminator.
-As with the DNN alone, the mixed setting was used both with and without weight transfer.
+The mixed setting was used both without and with weight transfer for its DNN embedding.
 In the latter case, again the weights of the DNN were replaced by the ones of the same pre-trained DNN as in \cref{sec:methods:dnn-embedding}
  before the training process started.
 
-\subsection{Comparsion with other approaches} \label{sec:methods:comparison}
-To compare our results with the ones due to Zhang et al. \cite{Zhang2019},
-the available predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
+\subsection{Comparison with other approaches} \label{sec:methods:comparison}
 Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
 while the MULTICELL approach was using chromatin feature data from cell lines GM12878, HMEC, HUVEC, K562(!) and NHEK with training matrices from GM12878, chromosome 14 or 17.
 These results were deemed to offer the best comparability to the \acrshort{cgan}- and DNN approaches of this thesis.
