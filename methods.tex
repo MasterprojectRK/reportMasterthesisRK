@@ -419,9 +419,9 @@ For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the
 For efficiency, the tensorflow implementation from tf.image.total\_variation was used,
 taking the sum across batches as loss value, as recommended in the tensorflow documentation \cite{TensorflowTV2020}.
 
-For perception loss, the predicted images and the true images were first fed through a pre-trained \emph{VGG-16} network with fixed weights, truncated after the third convolution layer
-in the fourth block (``block4\_conv3''), the last layer used by the influential work of Johnson et al. \cite{Johnson2016}.
-The loss was then computed as mean squared error between the ``predicted'' and ``true'' output activations of the truncated VGG-16 network.
+For perception loss, the predicted images and the true images were first fed through the pre-trained \emph{VGG-16} network \cite{Simonyan2015}.
+Here, the network was truncated after the third convolution layer in the fourth block (``block4\_conv3''), which is the last layer also used by the influential work of Johnson et al. \cite{Johnson2016}.
+The perception loss was then computed as mean squared error between the ``predicted'' and ``true'' output activations of the truncated \emph{VGG-16} network.
 
 Let $\mathbf{M}_s=G_s(\bm{\omega})$ again be the output of the neural network $G$ described above, and $\mathbf{T}_s$ the true matrices for training samples $s$ in vector form,
 and let $\mathbf{M}^\prime_s$ and $\mathbf{T}^\prime_s$ be their grayscale image counterparts as described above.
@@ -485,7 +485,7 @@ one downsampling layer was omitted in the discriminator for window size $w\in\{1
 This made the discriminator patches larger, especially for the smaller window sizes,
 cf. \cref{fig:methods:GAN_arch:discriminator}, and was empirically found to improve the results
 slightly in the given application.
-Symmetry was enforced after all convolutions in the same way as in the generator.
+After each convolution, symmetry was enforced in the same way as for the generator, see above.
 Kernel sizes and initializations for all 2D convolutions also were the same as for the generator,
 and leaky ReLU-activations were used with parameter $\alpha=0.2$, as in all downsampling layers.
 
