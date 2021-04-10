@@ -412,7 +412,7 @@ and mean squared error was computed on the predicted ``upper triangular'' vector
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
 $(w, w, 1)$-shaped tensors, where $w$ is again the window size.
 
-For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992}
+For a pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992, wikiTV2021}
 \begin{equation}
  tv(\mathbf{y}) = \sum_{i,j}\sqrt{|y_{i+1,j} - y_{i,j}|^2 + |y_{i,j+1} - y_{i,j} |^2 } \label{eq:methods:tv}
 \end{equation}
