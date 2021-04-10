@@ -603,6 +603,11 @@ In the latter case, again the weights of the DNN were replaced by the ones of th
  before the training process started.
 
 \subsection{Comparison with other approaches} \label{sec:methods:comparison}
+The results from this thesis were compared to the ones of \emph{HiC-Reg} by Zhang et al \cite{Zhang2019}, 
+who used pretty much the same Hi-C and chromatin feature data
+as described above in \cref{sec:methods:input_data}, 
+and to results from Farr\'e et al., who used data from Drosophila Melanogaster embroynal cells.
+
 \textbf{Comparison with HiC-Reg}\\
 For comparison with \emph{HiC-Reg}, stored predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
 Here, results from the ``WINDOW'' and ``MULTICELL'' approaches were selected, whereby the ``WINDOW'' method was using training data from GM12878, chromosome 14 or 17, 
@@ -662,64 +667,72 @@ Correctly predicted zero-values strongly increase the quality of the output matr
 and should thus be included in the correlation computations.
 Pearson correlations for the predictions in \cref{sec:results:comparison} were thus computed for full chromosomes, including zero-values.
 
-To compare our results with the ones from Farr\'e et al. \cite{Farre2018a},
-the corresponding Hi-C- and chromatin feature data for drosophila melanogaster were downloaded and pre-processed as described in the following paragraphs.
+\textbf{Comparison with dense network from Farr\'e et al.}\\
+Unfortunately, Farr\'e et al have not published raw data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed,
+but Pau Farr\'e kindly provided some of the non-public source code used for the paper \cite{Farre2018a},following private communication.
+After some minor bugfixes and adaptions to make the code work with python version 3, it was usable to recompute the published results.
 
-\emph{Hi-C data} from 16-18 hours old embryos was downloaded in text format from Schuettengruber et al. \cite{Schuettengruber2014} 
-from the gene expression omnibus, accession GSE61471, for binsize \SI{10}{\kilo\bp} and subsequently converted to cooler format using a custom python script \cite[scripts/schuettengruberToCooler.py]{Krauth2021b}.
+To this end, \emph{Hi-C data} from 16-18 hours old Drosophila Melanogaster embryonal cells by Schuettengruber et al. \cite{Schuettengruber2014} 
+was downloaded in text format from  the gene expression omnibus, accession GSE61471, for bin size \SI{10}{\kilo\bp}.
 
-With respect to \emph{chromatin features}, raw reads from modEncode ChIP-seq experiments with 14-16 hours old embryos \cite{Roy2010} 
-were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:appendix:features_farre}.
-Note that while Farr\'e et al. state they have used 50 features, in fact only 49 unique features are specified in their paper, H3k4me1 being listed twice \cite[p.~9]{Farre2018a},
-which explains why table \ref{tab:appendix:features_farre} contains 49 instead of the expected 50 entries.
-After downloading, the reads were mapped to the drosophila melanogaster reference genome BDGP5/dm3 using bowtie2 mostly with default parameters, 
-see \cref{list:methods:map_drosophila} for details,
-and the resulting bam files were converted to bigwig format as described in \cref{sec:methods:input_data} and \cref{list:methods:bamtobigwig}.
-While most experiments feature 2 to 4 replicates, only replicate 2 was considered for each chromatin feature to limit disk space usage and processing time.
-The bigwig files were then used as inputs for the DNN and cGAN as described above in sections \ref{sec:methods:sample_gen}, \ref{sec:methods:sample_gen_cgan}, \ref{sec:methods:dnn}
-and \ref{sec:methods:hicgan}. 
-
-Here, the DNN was used mostly in its initial configuration at windowsize $w=80$,
-but using a larger batchsize of 100, sample flipping as in \cite{Farre2018a} and the RMSprop optimizer with standard parameters, namely a learning rate of 0.001,
-instead of the SGD optimizer used otherwise.
-These changes were made following a comparison with the source code supposedly used for the paper \cite{Farre2018a}, see below.
-Training was performed on samples from chromosome 2L, 2R and 3L, and chromosome X was used for validation.
-All other parameters and settings of the DNN were left unchanged, cf. \cref{sec:methods:dnn}.
-
-Farr\'e et al have not published raw data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed,
-but Pau Farr\'e kindly provided some of the non-public source code used for the paper \cite{Farre2018a},
-following private communication.
-After some minor bugfixes and adaptions to make the code work with python version 3, it was used to recompute the published results.
-To this end, the same Hi-C matrix as mentioned above was dowloaded from GEO under accession GSE61471,
-and the same 49 chromatin features were obtained from GEO, but in this case in *.gff3 file format required by the provided python application.
-Note that in constrast to the bigwig files used for the DNN above, these files contain locations of statistically significant ``peaks''
+Next, 49 \emph{chromatin features} from modEncode ChIP-seq experiments with 14-16 hours old Drosophila Melanogaster embryonal cells \cite{Roy2010}
+were obtained from GEO in the *.gff3 file format required by the provided python application, see \cref{tab:appendix:features_farre}.
+Note that while Farr\'e et al. state they have used 50 features, in fact only 49 unique features are specified in their paper, H3k4me1 being listed twice \cite[p.~9]{Farre2018a}.
+This explains why table \ref{tab:appendix:features_farre} contains 49 instead of the expected 50 entries. 
+Looking at the alphabetical sorting in the table, it is assumed that H3k4me2 is the 50th feature missing in the paper.
+Note that in constrast to the bigwig files used for the \acrshort{dnn} and \emph{Hi-cGAN} so far, these files contain locations of statistically significant enrichments,
 and not mean read counts for the chromatin features at hand.
-Originally, Farrè et al have been using chromosomes 2L, 2R, 3L and the first half of 3R for training, 
+
+Originally, Farrè et al. have been using chromosomes 2L, 2R, 3L and the first half of 3R for training, 
 but after another simple modification to the source code provided, the training set was reduced to samples from chromosomes 2L, 2R and 3L,
-as for the DNN above. This change did not visually impair the results. 
-Validation samples were generated by a 80:20 split of the training/validation set, leaving Pau Farrè's implementation unchanged.
-In disagreement with the publication \cite{Farre2018a}, the provided implementation is not using the SGD optimizer with batch size 30,
+which is easier to match with the implementations of DNN and Hi-cGAN, see below. 
+This change did not visually impair the results compaired to the published results.
+Validation samples were generated by a 80:20 split of the training/validation set, leaving Pau Farrè's implementation unchanged in this respect.
+In disagreement with the publication \cite{Farre2018a}, the provided implementation is not using the \acrshort{sgd} optimizer with batch size 30,
 but instead the RMSprop optimizer with batch size 100.
 
-Hi-cGAN was used with a windowsize $w=64$, which is the largest power of two 
-smaller than the maximum windowsize of $w=80$ given by the data from Schuettengruber et al.
-The batch size was set to 2, and training was performed on samples from chromosomes 2L and 2R, 
+For the \acrshort{dnn} and \emph{Hi-cGAN}, the Hi-C matrix text files were converted to cooler format 
+using a custom python script \cite[scripts/schuettengruberToCooler.py]{Krauth2021b}.
+
+Since the gff3 file format is not useful for the DNN and \emph{Hi-cGAN}, raw reads from the modEncode ChIP-seq experiments \cite{Roy2010} 
+were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:appendix:features_farre}.
+After downloading, the reads were mapped to the drosophila melanogaster reference genome BDGP5/dm3 using bowtie2 \cite{Langmead2012} 
+mostly with default parameters, see \cref{list:methods:map_drosophila} for details.
+The resulting bam alignment files were then converted to bigwig format as described in \cref{sec:methods:input_data} and \cref{list:methods:bamtobigwig}.
+While most experiments feature 2 to 4 replicates, only replicate 2 was considered for each chromatin feature to limit disk space usage and processing time.
+The bigwig files were then used as inputs for the \acrshort{dnn} and \acrshort{cgan} as described above in sections \ref{sec:methods:sample_gen}, \ref{sec:methods:sample_gen_cgan}, \ref{sec:methods:dnn}
+and \ref{sec:methods:hicgan}. 
+
+For the comparisons, the \acrshort{dnn} was used mostly in its initial configuration, with window size $w=80$,
+but using a larger batchsize of 100.
+Additionally, sample flipping was used as described in the paper \cite{Farre2018a} and implemented in the provided code.
+Finally, the \acrshort{sgd} optimizer used so far was replaced by the RMSprop optimizer with standard parameters, namely a learning rate of 0.001. 
+Predicted matrices were not scaled.
+All changes were made following a comparison with the source code supposedly used for the paper \cite{Farre2018a}, see above.
+Training was performed on samples from chromosome 2L, 2R and 3L, and chromosome X was used for validation.
+All other parameters and settings of the \acrshort{dnn} were left unchanged, cf. \cref{sec:methods:dnn}.
+
+\emph{Hi-cGAN} was used with a window size $w=64$, which is the largest power of two 
+smaller than the maximum window size of $w_\mathit{max}=80$ imposed by the given Hi-C data from Schuettengruber et al. \cite{Schuettengruber2014}.
+Here, batch size was set to 2, and training was performed on samples from chromosomes 2L and 2R, 
 using chromosome 3L(!) for validation and 3R and X for testing.
 All other parameters and settings were left unchanged, cf. \cref{sec:methods:hicgan}.
 
-Since Farrè et al have reported Pearson correlations \emph{per position}, a custom python script 
-was employed to compute such correlations also for the cooler matrices resulting from the DNN- and Hi-cGAN approaches \cite[scripts/corr\_per\_pos.py]{Krauth2021b}.
-Additionally, the predicted matrices from Pau Farrè's python program were written out as numpy arrays and converted to cooler, 
-adding a simple one-liner to the provided code. 
-Distance-stratified Pearson correlations \emph{per distance} were then computed from the cooler matrices as usual.
+The predicted matrices from Pau Farrè's python program for chromosome 3R were written out as numpy arrays by adding a simple one-liner to the provided code. 
+These arrays were then converted to cooler and Pearson correlations \emph{per distance} were computed from them as usual.
+Since Farr\'e et al. have reported Pearson correlations \emph{per position}, an additional custom python script 
+was written to compute such correlations \cite[scripts/corr\_per\_pos.py]{Krauth2021b}.
 
-In terms of matrix plots, the same cutout as in the paper \cite{Farre2018a} was used.
-Here, the paper seems to contain an error, since the plotted excerpt does not coincide with Hi-C data from chromosome 3R, 15 to \SI{20}{\mega\bp}, as stated in the caption \cite[fig.~2]{Farre2018a},
-but most likely stems from chromosome 3R, 16.75 to \SI{21.75}{\mega\bp}.
-For comparability reasons, all matrix cutouts were plotted twice, once with the standard colormap of this thesis (``RdYlBu\_r'') and once
-with the blue and red color scheme used in the publication \cite{Farre2018a}.
-Additionally, the trackfile for pygenometracks was setup to obey the minimum and maximum values in the given cutout
+In terms of matrix plots, it was atttempted to use the same cutout as in the paper \cite{Farre2018a}.
+However, the paper seems to contain an error, since the plotted excerpt does not coincide with Hi-C data from chromosome 3R:15-\SI{20}{\mega\bp}, 
+as stated in the caption \cite[fig.~2]{Farre2018a}, but most likely stems from chromosome 3R:16.75-\SI{21.75}{\mega\bp},
+which was thus used for the thesis at hand.
+For comparability reasons, all matrix cutouts were plotted twice, once with the standard color map of this thesis (``RdYlBu\_r'', \cref{fig:results:farre-vs-ours_matrices}) and once
+with the blue and red color maps used in the publication \cite{Farre2018a} (\cref{fig:appendix:farre-vs-ours_matrices}).
+Additionally, the track file for pygenometracks was setup to obey the minimum and maximum values in the given cutout, 
 because the automatic value range adjustment did not work well in this case.
+
+The results for the comparison between the DNN, \emph{Hi-cGAN} and Farr\'e et al. are shown at the end of section \ref{sec:results:comparison}.
 
 
 
