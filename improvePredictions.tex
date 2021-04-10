@@ -54,13 +54,13 @@ For implementation details, please refer to \cref{sec:methods:basicSetup}.
 Training of the network is performed by minimizing the mean squared error of the predicted matrix
 versus the target Hi-C matrix using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
 
-Farr\'e et al. propose a window size of $w=80$ at binsizes $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
+Farr\'e et al. propose a window size of $w=80$ at bin sizes $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
 which comes close to the maximum bin distance available in the Hi-C data by Schuettengruber et al. \cite{Schuettengruber2014} used in their publication \cite{Farre2018a}.
 However, larger bin sizes of $b_{feat} = b_{mat} = \SI{25}{\kilo\bp}$ were found beneficial for 
 most of the (human) data used throughout this master thesis.
 Additionally, larger bin sizes allow for a higher coverage of the target matrix at the same window size,
 because the window size is specified in bins, and obviously $10\, w < 25\, w$.
-Prediction results from the initial network for windowsize $w=80$ and both bin size 10 and \SI{25}{\kilo\bp} are shown in \cref{sec:initialDNNresults}.
+Prediction results from the initial network for window size $w=80$ and both bin size 10 and \SI{25}{\kilo\bp} are shown in \cref{sec:initialDNNresults}.
 
 The network layout shown above is quite simple, and immediately offers some opportunities
 for expansion, partially already proposed in the original paper \cite{Farre2018a}.
