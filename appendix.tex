@@ -117,7 +117,7 @@ H3K79me2         & SRR869884           & GSE47252         &  & Su(var)3         
 H3K79me3         & SRR870191           & GSE47325         &  & ZW5              & SRR870117 & GSE47308 \\
 H3K9acS10P       & SRR870033           & GSE47287         &  &                  &           &          \\ \hline
 \end{tabular}
-\caption[Chromatin features from D. Melanogaster used for the comparison DNN / cGAN / Farre et al. \cite{Farre2018a}]{Chromatin features from D. melanogaster used for the comparison\\DNN / cGAN / Farre et al. \cite{Farre2018a}}
+\caption[Chromatin features from D. Melanogaster used for the comparison DNN / cGAN / Farré et al. \cite{Farre2018a}]{Chromatin features from D. Melanogaster used for the comparison\\DNN / cGAN / Farré et al. \cite{Farre2018a}}
 \label{tab:appendix:features_farre}
 \end{table}
 \clearpage
@@ -414,18 +414,18 @@ done
 \begin{landscape}
 \subsection{Hardware}\label{sec:appendix:hardware}
 For the thesis, three virtual machines were used to train the neural networks, see \cref{tab:appendix:hardware}.
-All training for \cref{sec:results:cgan} with windowsize $w=256$ was done on machine 2, 
-while computations for  \cref{sec:results:cgan} with windowsizes $w \in \{64,128\}$ were done on machine 1.
+All training for \cref{sec:results:cgan} with window size $w=256$ was done on machine 2, 
+while computations for  \cref{sec:results:cgan} with window sizes $w \in \{64,128\}$ were done on machine 1.
 Computations for sections \ref{sec:initialDNNresults}, \ref{sec:results:wider-longer-etc} and \ref{sec:results:binsize_winsize}
 were done on machine 3 without GPU and computations for sections \ref{sec:results:loss_functions} and \ref{sec:results:scorebased} were done on machine 2.
 
 Training the DNN with perception- or score-based losses as well as the \acrshort{cgan} was not reasonably possible without GPU.
 For the \acrshort{cgan}, it was found that GPU memory should not fall short of the given values (\cref{tab:appendix:hardware})
-to avoid undue limitations on batchsizes and/or windowsizes.
-\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the \acrshort{cgan} at windowsize 64 for more than 100 epochs.
+to avoid undue limitations on batch sizes and/or window sizes.
+\SI{20}{\giga\byte} of main memory, as in machine 2, were not enough to train the \acrshort{cgan} at window size 64 for more than about 150 epochs.
 It could not be clarified throughout the thesis whether this was due to a memory leak in tensorflow or due to the chosen implementation.
 
-Training samples were stored as tensorflow tfrecords (on the fly at runtime) and a custom pipeline including a shuffle buffer and prefetching 
+Training samples were stored as tensorflow tfrecords (on the fly at run time) and a custom pipeline including a shuffle buffer and prefetching 
 was employed to balance workload between CPUs and GPU.
 This approach was found to be faster than generator-based approaches by a large margin.
  \begin{table}[hbp]
@@ -449,8 +449,9 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
 \begin{figure}[htbp]
     \centering
     \scriptsize
+    \raggedright{The figure below shows the effect of choosing too large loss weights for the TV loss\\in combined loss functions according to \cref{sec:methods:combined_loss}.\\[2mm]}
     \import{figures/DNN_combiloss/}{pred01000_chr19_030-040_failedTvLoss.pdf_tex}
-    \caption{Combined loss with parametrization $\lambda_\mathit{MSE}=10^{-5}$, $\lambda_\mathit{VGG}=0.0$, $\lambda_\mathit{TV}=1.0$}
+    \caption{Combined loss with parameters $\lambda_\mathit{MSE}=10^{-5}$, $\lambda_\mathit{VGG}=0.0$, $\lambda_\mathit{TV}=1.0$}
     \label{fig:appendix:failed_tv_loss}
 \end{figure}
 \clearpage
@@ -726,7 +727,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
 \end{figure}
 \clearpage
 
-\subsubsection{Further results for D. melanogaster} \label{sec:appendix:cgan_drosophila}
+\subsubsection{Further results for D. Melanogaster} \label{sec:appendix:cgan_drosophila}
 \begin{figure}[h!] %DNN trained on drosophila 2L, 2R 
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -752,7 +753,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \import{figures/DNN_drosophila2/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:appendix:DNN_drosophila_progress}
     \end{subfigure}
-    \caption{Results\,/\,metrics DNN, $w=80$, trained on D. melanogaster chr2L, 2R, 3L}   \label{fig:appendix:DNN_drosophila_pearson}
+    \caption{Results\,/\,metrics DNN, $w=80$, trained on D. Melanogaster chr2L, 2R, 3L}   \label{fig:appendix:DNN_drosophila_pearson}
 \end{figure}
 
 \begin{figure}[p] %cGAN trained on drosophila 2L, 2R 
@@ -780,7 +781,7 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
         \import{figures/GAN_64_drosophila/}{lossOverEpochs.pdf_tex}}
         \caption{learning progress} \label{fig:appendix:GAN64_drosophila_progress}
     \end{subfigure}
-    \caption{Results\,/\,metrics cGAN, $w=64$, trained on D. melanogaster chr2L and 2R}   \label{fig:appendix:GAN64_drosophila_pearson}
+    \caption{Results\,/\,metrics cGAN, $w=64$, trained on D. Lancaster chr2L and 2R}   \label{fig:appendix:GAN64_drosophila_pearson}
 \end{figure}
 \begin{figure}[htbp]
 \begin{subfigure}{\textwidth}
