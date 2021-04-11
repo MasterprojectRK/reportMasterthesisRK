@@ -87,7 +87,7 @@ The same sliding window approach as proposed by Farr\'e et al. \cite{Farre2018a}
 from the chromatin feature array and matrix array for usage with the neural networks $G$ described below.
 Here, subarrays of size $(3w_\mathit{mat}, n)$ were cut out from the feature array 
 such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w_\mathit{mat}$ of the full array. 
-Sliding the window along the array with stepsize one obviously yields $N=l-3w_\mathit{mat}+1$ training samples.
+Sliding the window along the array with step size one obviously yields $N=l-3w_\mathit{mat}+1$ training samples.
 The corresponding Hi-C matrices were then cut out along the diagonal of the original matrix 
 as submatrices with corner indices [$j,\;j$], [$j,\;j+w_\mathit{mat}$], [$j+w_\mathit{mat},\;j+w_\mathit{mat}$], [$j+w_\mathit{mat},\;j$] in clockwise order, where $j=i+w_\mathit{mat}$.
 The idea here is that the first $0,\,1,\,\dots \,w_\mathit{mat}$ columns of each feature sample form the left flanking region of the training matrix, 
@@ -116,7 +116,7 @@ right flanking region hits the feature array boundary.
     \item chromatin feature array
     \item sliding direction for sample generation windows
     \item first 4 diagonals of a $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
-    \item first $(4, 4)$ training matrix, corrsponding to feature window A-B-C
+    \item first $(4, 4)$ training matrix, corresponding to feature window A-B-C
 \end{enumerate}
  \end{minipage}
 \end{figure}
@@ -129,7 +129,7 @@ and finally all values were divided by the number of overlaps for their respecti
 \Cref{fig:methods:prediction} exemplarily shows the prediction process for $N=5$ samples with window size $w=4$ for a matrix of shape (16,16).
 Note that the first and last $w$ bins in each row (matrix diagonal) always remain empty due to the flanking regions,
 as do all bins outside the main diagonal and the first $w-1$ side diagonals.
-To improve visualisation, all predicted matrices were scaled to value range 0...1000 after re-assembly and stored in cooler format for further processing.
+To improve visualization, all predicted matrices were scaled to value range 0...1000 after re-assembly and stored in cooler format for further processing.
 Conveniently, cooler also supports storing only the upper triangular part of symmetric matrices, minimizing conversion effort for the data at hand.
 
 \begin{figure}
@@ -152,7 +152,7 @@ Conveniently, cooler also supports storing only the upper triangular part of sym
     \item first 4 diagonals of a predicted $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
     \item first predicted $(4, 4)$ matrix
 \end{enumerate}
-\raggedright{gray backround colors symbolize number of overlapping predictions at that position (bright = 1, dark = 4)}
+\raggedright{gray background colors symbolize number of overlapping predictions at that position (bright = 1, dark = 4)}
  \end{minipage}
 \end{figure}
 
@@ -162,7 +162,7 @@ This approximately implements a 60:20:20 train:validation:test split, see \cref{
 Reversing training/validation and test cell line, which differ strongly in sequencing depth within the Hi-C experiments, 
 was tested briefly for the cGAN approach and seemed to work, see \cref{sec:appendix:reverseTrainTest}.
 For comparability reasons, two cGANs were additionally trained on single chromosomes 14 and 17 of cell line GM12878,  cf. \cref{sec:methods:comparison}.
-Also for comparability reasons, a DNN and a cGAN were trained and tested on data from \emph{Drosophila Melanogaster} embryonal cells, again refer to \cref{sec:methods:comparison}
+Also for comparability reasons, a DNN and a cGAN were trained and tested on data from \emph{Drosophila Melanogaster} embryonic cells, again refer to \cref{sec:methods:comparison}
 for details.
 
 Note that window size $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
@@ -213,7 +213,7 @@ First, Hi-C (sub-)matrices were not entered as vectors corresponding to their up
 but were instead taken as $(w, w, 1)$-shaped grayscale images with value range [0...1] in 32-bit floating point format.
 Second, for the \acrshort{cgan} approach the input matrices need not only be square,
 but their sizes also need to be powers of two. 
-This requiredment is due to the connected up- and downsampling operations in the generator, 
+This requirement is due to the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
 Within the thesis, window sizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
 
@@ -263,7 +263,7 @@ then the number of bins on the matrix diagonal would be $l_\mathit{mat}=16$, whi
     \item chromatin features array ($k=2$)
     \item sliding direction for sample generation windows
     \item first 4 diagonals of a $(16, 16)$ Hi-C matrix, rotated \SI{45}{\deg} counterclockwise
-    \item last $(4, 4)$ training matrix, corrsponding to feature window A-B-C; to be dropped/padded
+    \item last $(4, 4)$ training matrix, corresponding to feature window A-B-C; to be dropped/padded
 \end{enumerate}
  \end{minipage}
 \end{figure}
@@ -294,7 +294,7 @@ and thus zero standard deviation, e.\,g. $\sigma(\mathit{pred}|_{d^*})=0$ for a 
 
 In addition to the correlations themselves, the \acrfull{auc} was computed for all curves in each plot 
 to obtain a single-valued, albeit very abstract quality metric.
-In line with Zhang et al. \cite{Zhang2019}, trapez integration method was used for numerical area computations
+In line with Zhang et al. \cite{Zhang2019}, trapeze integration method was used for numerical area computations
 and the values were normalized to the interval [-1, 1] by dividing through the maximum distance $d_\mathit{max} = w$ to allow for comparisons across experiments.
 Furthermore, most Pearson correlation plots show the correlation between the ``true'' training matrix and the corresponding target matrix as a baseline,
 i.\,e. the Pearson correlation that is obtained when simply using the training matrix as a ``prediction'' for a given target matrix.
@@ -332,7 +332,7 @@ a simple python script. Finally, eigenvectors and feature sum were written out i
 
 All tracks were plotted with an original resolution of 200\,dpi and a diagram width of \SI{150}{\mm} and then scaled to match the text width.
 For the interaction counts in the Hi-C matrix plots, ``log1p'' transformation was applied and the true matrices were inverted,
-i.\,e. reflected at the diagonal. Wihtin this thesis, true (target) matrices are thus always shown at the bottom, while predicted matrices are always shown at the top
+i.\,e. reflected at the diagonal. Within this thesis, true (target) matrices are thus always shown at the bottom, while predicted matrices are always shown at the top
 of each matrix plot (where applicable).
 Except for comparisons with the approach from Farr\'e et al., see \cref{sec:methods:comparison},
 no minimum or maximum values were set for plotting, but note that predicted matrices were scaled to value range 0...1000 
@@ -380,7 +380,7 @@ All computations were performed on virtual machines with different properties, p
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$,
-where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation beetween matrix- and feature bin size.
+where $k=b_\mathit{mat}/b_\mathit{feat}$ is the relation between matrix- and feature bin size.
 Mirror-type padding was used to maintain the output dimensions of the basic network, which had \SI{7486478}{} trainable weights
 for $k=1$.
 
@@ -455,7 +455,7 @@ After computing the latter for both predicted- and real Hi-C submatrices, the me
 a user-selected loss weight $\lambda_\mathit{score}$, see \cref{eq:methods:score_loss}.
 
 While it would also have been possible, and probably faster, to slice the outputs of the networks directly in vector form, 
-this is rather unintuitive and was therefore not implemented for the thesis. 
+this is rather counterintuitive and was therefore not implemented for the thesis. 
 
 \subsection{Hi-cGAN approach} \label{sec:methods:hicgan}
 In the following subsection, the setup and training process of the \acrshort{cgan} network developed for this thesis -- \emph{Hi-cGAN} -- and the respective
@@ -501,7 +501,7 @@ for the generator and discriminator without considering the embedding networks.
 \centering
 \begin{tabular}{lrr}
 \hline
-\multirow{2}{*}{\textbf{windowsize}} & \multicolumn{2}{c}{\textbf{trainable weights}} \\
+\multirow{2}{*}{\textbf{window size}} & \multicolumn{2}{c}{\textbf{trainable weights}} \\
                                      & Generator            & Discriminator           \\ \hline
 64                                   & \SI{29237889}{}             & \SI{3164673}{}                 \\
 128                                  & \SI{41822849}{}             & \SI{2765057}{}                 \\
@@ -515,7 +515,7 @@ The loss functions for the generator and discriminator were implemented as shown
 with parameters $\lambda_\mathit{adv}=1.0, \lambda_\mathit{MAE}=100.0, \lambda_\mathit{TV}=10^{-12}$ and $\lambda_D=0.5$.
 Optimization was performed on minibatches of size 32, 8 and 2 for window sizes 64, 128 and 256, respectively, 
 using Adam optimizers with learning rate $2\cdot10^{-5}$ for the generator, $10^{-6}$ for the discriminator and $\beta_1=0.5$ for both generator and discriminator.
-The choice of batchsizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:appendix:hardware}.
+The choice of batch sizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:appendix:hardware}.
 
 \begin{figure}[p]
     \tiny
@@ -612,12 +612,13 @@ network for the discriminator.
 The mixed setting was used both without and with weight transfer for its DNN embedding.
 In the latter case, again the weights of the DNN were replaced by the ones of the same pre-trained DNN as in \cref{sec:methods:dnn-embedding}
  before the training process started.
-
+\clearpage
+ 
 \subsection{Comparison with other approaches} \label{sec:methods:comparison}
 The results from this thesis were compared to the ones of \emph{HiC-Reg} by Zhang et al \cite{Zhang2019}, 
 who used pretty much the same Hi-C and chromatin feature data
 as described above in \cref{sec:methods:input_data}, 
-and to results from Farr\'e et al., who used data from Drosophila Melanogaster embroynal cells.
+and to results from Farr\'e et al., who used data from Drosophila Melanogaster embryonic cells.
 
 \textbf{Comparison with HiC-Reg}\\
 For comparison with \emph{HiC-Reg}, stored predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
@@ -629,12 +630,12 @@ For chromosome 14, only \SI{42.4}{\percent} and for chromosome 17, only \SI{59.9
 for the chosen window size $w=200$ at bin size $b=5000$ were contained in the datasets, 
 and no interacting pairs with predicted interaction counts below 0.01 were found in the data. 
 Instead, the value range was between 0.36 and 5.10 across all four datasets, with similar values for each dataset alone.
-The missing pairs were found to be distributed all across the chromosome and all distance ranges, exept for distance zero, i.\,e. the Hi-C matrix diagonal, which was not contained in the datasets at all.
+The missing pairs were found to be distributed all across the chromosome and all distance ranges, except for distance zero, i.\,e. the Hi-C matrix diagonal, which was not contained in the datasets at all.
 For the conversion to cooler format, the missing values were assumed to be zero.
 Next, the cooler matrices were coarsened to bin size \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and DNN results, using \texttt{cooler} \texttt{coarsen}.
 
 For the comparison between \emph{HiC-Reg} and Hi-\acrshort{cgan}, two additional \acrshort{cgan} models with CNN embedding were trained on chromosome 14 and 17, respectively,
-using (arbitariliy selected) chromosome 10 for validation. 
+using (arbitrarily selected) chromosome 10 for validation. 
 Due to the small number of training samples for in this setting, window size was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
 Additionally, \emph{HiC-Reg} was compared to a \acrshort{cgan}-CNN model with window size $w=256$ and CNN embedding, trained on the typical training data set, 
@@ -681,24 +682,24 @@ Pearson correlations for the predictions in \cref{sec:results:comparison} were t
 \textbf{Comparison with dense network from Farr\'e et al.}\\
 Unfortunately, Farr\'e et al have not published raw data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed,
 but Pau Farr\'e kindly provided some of the non-public source code used for the paper \cite{Farre2018a},following private communication.
-After some minor bugfixes and adaptions to make the code work with python version 3, it was usable to recompute the published results.
+After some minor bug fixes and adaptions to make the code work with python version 3, it was usable to recompute the published results.
 
-To this end, \emph{Hi-C data} from 16-18 hours old Drosophila Melanogaster embryonal cells by Schuettengruber et al. \cite{Schuettengruber2014} 
+To this end, \emph{Hi-C data} from 16-18 hours old Drosophila Melanogaster embryonic cells by Schuettengruber et al. \cite{Schuettengruber2014} 
 was downloaded in text format from  the gene expression omnibus, accession GSE61471, for bin size \SI{10}{\kilo\bp}.
 
-Next, 49 \emph{chromatin features} from modEncode ChIP-seq experiments with 14-16 hours old Drosophila Melanogaster embryonal cells \cite{Roy2010}
-were obtained from GEO in the *.gff3 file format required by the provided python application, see \cref{tab:appendix:features_farre}.
+Next, 49 \emph{chromatin features} from modEncode ChIP-seq experiments with 14-16 hours old Drosophila Melanogaster embryonic cells \cite{Roy2010}
+were obtained from GEO in the gff3 file format required by the provided python application, see \cref{tab:appendix:features_farre}.
 Note that while Farr\'e et al. state they have used 50 features, in fact only 49 unique features are specified in their paper, H3k4me1 being listed twice \cite[p.~9]{Farre2018a}.
 This explains why table \ref{tab:appendix:features_farre} contains 49 instead of the expected 50 entries. 
 Looking at the alphabetical sorting in the table, it is assumed that H3k4me2 is the 50th feature missing in the paper.
-Note that in constrast to the bigwig files used for the \acrshort{dnn} and \emph{Hi-cGAN} so far, these files contain locations of statistically significant enrichments,
+Note that in contrast to the bigwig files used for the \acrshort{dnn} and \emph{Hi-cGAN} so far, these files contain locations of statistically significant enrichments,
 and not mean read counts for the chromatin features at hand.
 
-Originally, Farrè et al. have been using chromosomes 2L, 2R, 3L and the first half of 3R for training, 
+Originally, Farré et al. have been using chromosomes 2L, 2R, 3L and the first half of 3R for training, 
 but after another simple modification to the source code provided, the training set was reduced to samples from chromosomes 2L, 2R and 3L,
 which is easier to match with the implementations of DNN and Hi-cGAN, see below. 
-This change did not visually impair the results compaired to the published results.
-Validation samples were generated by a 80:20 split of the training/validation set, leaving Pau Farrè's implementation unchanged in this respect.
+This change did not visually impair the results compared to the published results.
+Validation samples were generated by a 80:20 split of the training/validation set, leaving Pau Farr\'e's implementation unchanged in this respect.
 In disagreement with the publication \cite{Farre2018a}, the provided implementation is not using the \acrshort{sgd} optimizer with batch size 30,
 but instead the RMSprop optimizer with batch size 100.
 
@@ -707,7 +708,7 @@ using a custom python script \cite[scripts/schuettengruberToCooler.py]{Krauth202
 
 Since the gff3 file format is not useful for the DNN and \emph{Hi-cGAN}, raw reads from the modEncode ChIP-seq experiments \cite{Roy2010} 
 were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:appendix:features_farre}.
-After downloading, the reads were mapped to the drosophila melanogaster reference genome BDGP5/dm3 using bowtie2 \cite{Langmead2012} 
+After downloading, the reads were mapped to the Drosophila Melanogaster reference genome BDGP5/dm3 using bowtie2 \cite{Langmead2012} 
 mostly with default parameters, see \cref{list:methods:map_drosophila} for details.
 The resulting bam alignment files were then converted to bigwig format as described in \cref{sec:methods:input_data} and \cref{list:methods:bamtobigwig}.
 While most experiments feature 2 to 4 replicates, only replicate 2 was considered for each chromatin feature to limit disk space usage and processing time.
@@ -715,7 +716,7 @@ The bigwig files were then used as inputs for the \acrshort{dnn} and \acrshort{c
 and \ref{sec:methods:hicgan}. 
 
 For the comparisons, the \acrshort{dnn} was used mostly in its initial configuration, with window size $w=80$,
-but using a larger batchsize of 100.
+but using a larger batch size of 100.
 Additionally, sample flipping was used as described in the paper \cite{Farre2018a} and implemented in the provided code.
 Finally, the \acrshort{sgd} optimizer used so far was replaced by the RMSprop optimizer with standard parameters, namely a learning rate of 0.001. 
 Predicted matrices were not scaled.
@@ -729,12 +730,12 @@ Here, batch size was set to 2, and training was performed on samples from chromo
 using chromosome 3L(!) for validation and 3R and X for testing.
 All other parameters and settings were left unchanged, cf. \cref{sec:methods:hicgan}.
 
-The predicted matrices from Pau Farrè's python program for chromosome 3R were written out as numpy arrays by adding a simple one-liner to the provided code. 
+The predicted matrices from Pau Farr\'e's python program for chromosome 3R were written out as numpy arrays by adding a simple one-liner to the provided code. 
 These arrays were then converted to cooler and Pearson correlations \emph{per distance} were computed from them as usual.
 Since Farr\'e et al. have reported Pearson correlations \emph{per position}, an additional custom python script 
 was written to compute such correlations \cite[scripts/corr\_per\_pos.py]{Krauth2021b}.
 
-In terms of matrix plots, it was atttempted to use the same cutout as in the paper \cite{Farre2018a}.
+In terms of matrix plots, it was attempted to use the same cutout as in the paper \cite{Farre2018a}.
 However, the paper seems to contain an error, since the plotted excerpt does not coincide with Hi-C data from chromosome 3R:15-\SI{20}{\mega\bp}, 
 as stated in the caption \cite[fig.~2]{Farre2018a}, but most likely stems from chromosome 3R:16.75-\SI{21.75}{\mega\bp},
 which was thus used for the thesis at hand.
@@ -744,7 +745,5 @@ Additionally, the track file for pygenometracks was setup to obey the minimum an
 because the automatic value range adjustment did not work well in this case.
 
 The results for the comparison between the DNN, \emph{Hi-cGAN} and Farr\'e et al. are shown at the end of section \ref{sec:results:comparison}.
-
-
 
 \clearpage
