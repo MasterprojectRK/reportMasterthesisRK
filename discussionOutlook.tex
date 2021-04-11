@@ -1,33 +1,35 @@
 \section{Discussion and Outlook}
-In this thesis, two methods have been considered for predicting Hi-C interaction matrices,
-one based on a \acrlong{dnn} proposed by Farr\'e et al. \cite{Farre2018a} and the other one based on a \acrlong{cgan}
-inspired by \emph{pix2pix} \cite{Isola2017}, an image transformation network.
+In this thesis, two methods for predicting Hi-C interaction matrices have been investigated.
+Here, the first one was based on a \acrlong{dnn} proposed by Farr\'e et al. \cite{Farre2018a} and the second one, \emph{Hi-cGAN}, 
+was based on a \acrlong{cgan} inspired by \emph{pix2pix} \cite{Isola2017}, an image transformation network.
 
 Despite all amendments to the original network setup,
 the results of the \acrlong{dnn} approach remained modest.
-Improvements, if at all visible, could only be achieved for a small part of the test set.
-However, the comparison with the results from Farr\'e et al. \cite{Farre2018a} -- who have used the same network with different kinds of input data --
+Improvements, if at all visible, could only be achieved for small parts or regions of the test set.
+However, the comparison with the results from Farr\'e et al. \cite{Farre2018a} (\cref{sec:results:comparison}) -- who have used the same network with different kinds of input data --
 shows that the failure of the \acrshort{dnn} might be due to the chosen way of sample preparation 
 and not necessarily be founded in an unsuitability of the network setup itself.
 Retrospectively, it would have been better to test the \acrshort{dnn} in its original setup first and reproduce the results from Farr\'e et al. \cite{Farre2018a} 
-before porting it to different organisms with different cell lines and chromosome folding principles.
+before moving on to different organisms with different cell lines and chromatin folding principles.
 
-Independent from the \acrshort{dnn}, the newly developed \acrlong{cgan} method, Hi-cGAN, seems promising.
+Independent from the \acrshort{dnn}, the newly developed \acrlong{cgan} method, \emph{Hi-cGAN}, seems promising.
 Especially the variant with \acrshort{cnn} embedding showed widely satisfying results for genomic distances up to about \SI{5}{\mega\bp}
 and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019} for data from human cell lines, 
-especially with regard to predicting nested interacting regions.
+particularly with regard to predicting nested interacting regions.
 Interestingly, the approach worked not only for human cell lines like GM12878 and K562, where comparatively many training samples are available,
-but also for Drosophila melanogaster embryos, where much fewer samples can be extracted from the relatively short genome.
+but also for Drosophila Melanogaster embryos, where much fewer samples can be extracted from the relatively short genome.
+Here, \emph{Hi-cGAN} showed better results than the method from Farr\'e et al. \cite{Farre2018a}.
+
 However, there is still room for improvement -- for example, even the best predictions for human cell lines were not or not much better 
 than simply taking data from the training cell line as a ``prediction'' for the target cell line.
+Throughout the thesis, a few starting points for further improving \emph{Hi-cGAN}'s predictions were identified.
 
-Throughout the thesis, a few starting points for further improving Hi-cGAN's predictions were identified.
 In the current implementation, the discriminator is trained on two kinds of inputs:
 it is supposed to classify pairs of true chromatin feature arrays and true Hi-C submatrices as real, 
 and pairs of true chromatin feature arrays and artificial Hi-C submatrices produced by the generator as fake, cf. \cref{eq:improve:disc_loss_total}.
 For text-to-image synthesis tasks, a third kind of input has been introduced; here the discriminator is additionally trained 
 to classify pairs of true output and \emph{mismatching input data} as fake \cite{Reed2016}.
-Training the discriminator on such samples might help the \acrshort{cgan} to avoid situations 
+Training the discriminator on such samples might help the \acrshort{cgan} avoid situations 
 where the generator produces matrices which ``look real'', 
 but have insufficient correlations with the chromatin feature input data.
 It is unclear how strong the effect of this change would be in the given application, 
@@ -48,6 +50,8 @@ it remains a network designed for converting \emph{input images} to output image
 However, the task at hand essentially requires transforming \emph{one-dimensional input} data into very special symmetric output images.
 Although surprisingly good results were obtained, it is difficult to imagine that \emph{pix2pix} -- amended by the simplistic and rather ad-hoc \acrshort{cnn} embedding network 
 described in \cref{sec:improve:CNN_embedding} and \ref{sec:methods:cnn-embedding} -- is the optimal \acrshort{cgan} for suchlike 1D\,$\rightarrow$\,2D conversions.
+For example, in the current implementation, the \acrshort{cnn}-embedding network of the discriminator has more weights than the discriminator itself, 
+cf. \cref{tab:methods:gen_disc_params} and \ref{tab:methods:embedding_network_params}, which is likely not optimal.
 
 Nevertheless, the \acrshort{cgan} approach developed within this thesis can hopefully serve as a helpful starting point and baseline
 for further development of improved Hi-C contact matrix prediction methods.
