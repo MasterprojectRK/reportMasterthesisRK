@@ -5,7 +5,7 @@ While the first approach is a dense neural network based on work by Farr\'e et a
 the second is a novel method based on conditional generative adversarial networks (\acrshort{cgan}s).
 
 \subsection{Dense Neural Network approach}\label{sec:improve:DNNapproach}
-In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurtau, Olivier Cuvier and Eldon Emberly
+In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurteau, Olivier Cuvier and Eldon Emberly
 proposed a combination of a 1D convolutional filter with a three-layer dense neural network 
 which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing, 
 cf. \cref{sec:prior:predictingInteractions} and \ref{sec:prior:discussion}.
@@ -382,7 +382,7 @@ stays within 4.24...4.29 million parameters for the investigated window sizes 64
 The results of the \acrshort{cgan} with CNN embedding are shown in \cref{sec:results:cgan_cnn} 
 and were indeed better than all other results obtained within this thesis.
 
-\subsubsection{Using mixed DNN- and CNN-embedding for feature embedding}
+\subsubsection{Using mixed DNN- and CNN-embedding for feature embedding} \label{sec:improve:mixed-embedding}
 Besides using a DNN- or CNN-embedding for \emph{both} generator and discriminator, it is obviously also possible
 to use different embedding network types.
 To investigate the influences of the embedding network on the general performance,
