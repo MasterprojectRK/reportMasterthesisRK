@@ -66,7 +66,7 @@
     \put(0,0){\includegraphics[width=\unitlength,page=6]{lossOverEpochs.pdf}}%
     \put(0.70986117,0.45198614){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train real}\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{lossOverEpochs.pdf}}%
-    \put(0.70986117,0.41458788){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train gen.}\end{tabular}}}}%
+    \put(0.70986117,0.41458788){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{train fake}\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{lossOverEpochs.pdf}}%
     \put(0.70986117,0.37718948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{valid. total}\end{tabular}}}}%
     \put(-0.00405078,0.13874857){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$10^0$\end{tabular}}}}%
