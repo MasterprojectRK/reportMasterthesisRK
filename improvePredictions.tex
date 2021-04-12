@@ -7,7 +7,7 @@ the second is a novel method based on conditional generative adversarial network
 \subsection{Dense neural network approach}\label{sec:improve:DNNapproach}
 In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurteau, Olivier Cuvier and Eldon Emberly
 proposed a combination of a 1D convolutional filter with a three-layer dense neural network 
-which already fulfills most goals of this thesis with some exceptions regarding data formats and preprocessing, 
+which already fulfills most goals of this thesis with minor exceptions regarding data formats and preprocessing, 
 cf. \cref{sec:prior:predictingInteractions} and \ref{sec:prior:discussion}.
 This thesis attempts to build on the success of their method by extending the comparatively simple neural network
 in various ways, changing the learning process and the loss functions in use.
@@ -87,7 +87,9 @@ However, the results were not as expected, cf. \cref{sec:results:wider-longer-et
 Of course, increasing filter width and using more filters can also be combined,
 hopefully allowing the  ``wider-longer'' network to capture both correlations
 spanning more than one bin and more than one chromatin feature.
-The results for this combined approach are shown in \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:wider-longerDNN_pearson} and \ref{fig:results:wider-longer_matrices}.
+The results for this combined approach are shown in \cref{sec:results:wider-longer-etc}, 
+especially figures \ref{fig:results:wider-longerDNN_pearson} and \ref{fig:results:wider-longer_matrices},
+and were again not convincing.
 
 Another approach to potentially improve the predictions that goes somewhat into
 the direction of the ``wider'' network has been proposed, but not implemented by Farr\'e et al. 
@@ -111,7 +113,7 @@ In image regression tasks, optimizing for \acrfull{mse} is known to produce blur
 because \acrshort{mse} is treating each image pixel individually, ignoring spatial proximity and structures in images \cite{Isola2017,Lu2019}.
 And indeed, both the predictions from the initial and the extended network according to sections \ref{sec:improve:basicNetwork} and \ref{sec:improve:convolution_extensions} 
 suffered from blurriness. 
-To improve on this, investigations with modified loss functions were made. 
+To improve on this, modified loss functions were investigated. 
 
 It has been shown that loss functions based on the (multiscale-)\acrfull{ssim} \cite{Wang2003}
 can outperform mean squared error (L2) and mean absolute error (L1) in image regression tasks.
@@ -136,7 +138,7 @@ The process is shown in more detail in \cref{fig:improve:perceptual_loss}.
 As usual, training samples are fed into the network to be trained, and an output -- here, the predicted Hi-C submatrix -- is generated,
 \cref{fig:improve:perceptual_loss}, orange path.
 However, the loss function is then not computed on the predicted versus the true matrix. 
-Instead, the activations of a selected layer in the perception network are generated for both the predicted Hi-C submatrix (orange path)
+Instead, the activations of a selected layer in the perception network are determined for both the predicted Hi-C submatrix (orange path)
 and the true Hi-C submatrix (gray path), and the loss function is computed on these activations (or perceptions).
 The optimization of the target network's trainable weights can then be performed as usual, for example with stochastic gradient descent and backpropagation, 
 simply keeping the weights of the perception network constant while optimizing the trainable weights for minimum perceptual loss.
@@ -151,7 +153,7 @@ consisting of mean squared error $L_\mathit{MSE}$ between true- and predicted ma
 and total variation loss $L_\mathit{TV}$ on predicted matrices to reduce noise in the output while preserving edges \cite{Rudin1992}. 
 This choice was inspired by the custom loss function used by Hong et al. in their successful Hi-C super-resolution network \emph{DeepHiC} \cite{Hong2020},
 which is otherwise not similar to the network used here.
-In short, the combined loss function $L$ is shown in \cref{eq:combined_loss_short}. 
+In short, the combined loss function $L_\mathit{combined}$ is shown in \cref{eq:combined_loss_short}. 
 Here, the $\lambda$ are individual loss weights, see \cref{sec:methods:combined_loss} for details.
 \begin{equation}
  L_\mathit{combined} = \lambda_\mathit{MSE} \; L_\mathit{MSE} + \lambda_\mathit{VGG} \; L_\mathit{VGG} + \lambda_\mathit{TV} \; L_\mathit{TV} \label{eq:combined_loss_short}
@@ -165,23 +167,24 @@ which should not be considered optimal, are shown in \cref{sec:results:loss_func
 
 \subsubsection{Using a TAD-based loss function} \label{sec:improve:TAD_loss}
 Looking at the results obtained from the networks discussed in the previous sections, see e.\,g. \cref{fig:results:basic500}, 
-it seemed that highly interacting regions, especially topologically interacting domains (TADs), were not well predicted and either absent
+it seemed that highly interacting regions, especially \acrlong{tad}s (\acrshort{tad}s), were not well predicted and either absent
 in the matrix plots or blurred.
-Assuming availability of a TAD scoring function $\mathit{tad}(\mathbf{z}_\mathit{pred})$, where $\mathbf{z}_\mathit{pred}$ is a predicted submatrix,
+Assuming availability of a \acrshort{tad} scoring function $\mathit{tad}(\mathbf{z}_\mathit{pred})$, where $\mathbf{z}_\mathit{pred}$ is a predicted submatrix,
 this might be improved by directly optimizing a loss function as shown in \cref{eq:combined_loss_tad}.
 \begin{equation}
  L_\mathit{combined} = \lambda_\mathit{MSE}\;L_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(\mathbf{z}_\mathit{true}) - \mathit{tad}(\mathbf{z}_\mathit{pred}))^2 \label{eq:combined_loss_tad}
 \end{equation}
 However, this approach suffers from several restrictions.
-First and foremost, there seems no consensus on the exact definition of TADs, 
-and no less than 22 algorithms for TAD detection existed as of 2018 \cite{Dali2017,Zufferey2018}.
+First and foremost, there seems no consensus on the exact definition of \acrshort{tad}s, 
+and no less than 22 algorithms for \acrshort{tad} detection existed as of 2018 \cite{Dali2017,Zufferey2018}.
 Additionally, many of these algorithms have several tuning parameters, are notoriously parameter-dependent
 and may not even yield any results if parametrized in an unfavorable way \cite{Zufferey2018}. 
 A further restriction results from the context -- since the loss function needs to be optimized,
 one needs to be able to compute gradients of it with respect to the network's weights.
-Due to their complexity, this is generally very difficult to implement in a computationally efficient way for all known TAD calling algorithms.
+This is generally very difficult to implement in a computationally efficient way for most known \acrshort{tad} calling algorithms
+due to their complexity.
 
-To overcome the limitations, a novel loss function based on TAD scores \cite{Crane2015} was developed.
+To overcome the restrictions, a novel loss function based on \acrshort{tad} scores \cite{Crane2015} was developed.
 \Cref{fig:improve:tad_score_loss_function} exemplarily shows its basic idea for a $(16,16)$-shaped submatrix
 with window size 4.
 \begin{figure}[hbt]
@@ -205,24 +208,26 @@ with window size 4.
 \end{enumerate}
  \end{minipage}
 \end{figure}
-First, the mean is taken from diamond-shaped (or rhombus-shaped) matrix cutouts along the diagonal, \cref{fig:improve:tad_score_loss_function}\,(A, C),
+First, the mean is taken from diamond-shaped (or rhombus-shaped) matrix cutouts along the diagonal in a sliding window fashion, \cref{fig:improve:tad_score_loss_function}\,(A, C),
 and stored in a score vector, \cref{fig:improve:tad_score_loss_function}\,(D / E). 
-The size of the diamonds, 2 in the figure, is configurable, but a reasonable balance with the submatrix size, i.\,e. the size of the sliding window $w$,
-and the expected size of TADs in the matrix must be maintained.
+The size of the diamonds, $ds=2$ in the figure, is configurable, but a reasonable balance with the submatrix size, i.\,e. the window size  $w$ of the submatrices,
+and the expected size of \acrshort{tad}s in the submatrices must be maintained.
 Loss can then be computed by taking the mean squared error between the score vectors of the ``real'' submatrices and the ``predicted'' submatrices
 as already shown in \cref{eq:combined_loss_tad}.
 
 The idea behind the score-based approach is visualized in \cref{fig:improve:tad_score_loss_function}\,(E).
 Local minima, i.\,e. dents in the line plot of the score values, \cref{fig:improve:tad_score_loss_function}\,(F),
-often correspond with highly interacting regions in the matrix, since the mean of diamonds from \emph{inside} TADs is normally significantly higher than the mean of diamonds \emph{outside} TADs.
-Indeed, some TAD calling algorithms like \emph{TopDom} \cite{Shin2015} and \emph{hicFindTADs} \cite[W12f.]{Wolff2018} do compute insulation scores -- usually for more than one diamond size -- 
+often correspond with highly interacting regions in the matrix, since the mean of diamonds from \emph{inside} \acrshort{tad}s
+is normally significantly higher than the mean of diamonds \emph{outside} \acrshort{tad}s.
+Indeed, some \acrshort{tad} calling algorithms like \emph{TopDom} \cite{Shin2015} and \emph{hicFindTADs} \cite[W12f.]{Wolff2018} 
+do compute so-called insulation scores in a similar way as shown above -- usually for more than one diamond size -- 
 and then use diverse techniques to detect meaningful local minima in the score values.
-However, finding meaningful local minima in the given context is still computationally involved,
-so it was left to the network to make sense out of the score vectors.
+However, finding meaningful local minima in the given context is computationally involved,
+so it was left to the network to make sense out of the score vectors themselves.
 This way, the loss function was well defined, efficiently computable and tensorflow standard functionality could be used to compute gradients with respect to weights.
 
-For the thesis at hand, window size $w=80$ and diamond size $ds={12}$ were used at bin sizes of \SI{25}{\kilo\bp}.
-For technical details please refer to \cref{sec:methods:score_loss}.
+For the thesis at hand, window size $w=80$ and diamond size $ds=12$ were used at bin sizes of \SI{25}{\kilo\bp}.
+Further technical details are to be found in \cref{sec:methods:score_loss}.
 
 \subsubsection{Modifying bin size and window size}\label{sec:improve:binsize_winsize}
 In the results presented so far, larger structures were often absent.
@@ -241,7 +246,7 @@ This might also be one of the causes why predictions at \SI{50}{\kilo\bp} proved
 For this reason, a second approach was made -- using training samples at $b_\mathit{feat} = b_\mathit{mat} = \SI{25}{\kilo\bp},\;w=80$
 and $b_\mathit{feat} = b_\mathit{mat} = \SI{50}{\kilo\bp},\;w=80$ at the same time.
 This is easily possible, since the neural network topology only depends on the window size \emph{in bins} and the relation $k=b_\mathit{mat}/b_\mathit{feat}$
-between the bin sizes of features and matrices.
+between the bin sizes of matrices and features.
 This approach obviously increases the number of training samples,
 with the idea of allowing the network itself to figure out how to combine predictions at smaller and larger bin sizes.
 Unfortunately, this did not work well, as shown in \cref{sec:results:binsize_winsize}.
@@ -257,33 +262,35 @@ Among their strengths is image synthesis from textual descriptions \cite{Reed201
 and from an abstract point of view, this task is not very different from the goal of the thesis at hand.
 Considering the chromatin features on the input side as a ``description'' of how the target Hi-C (sub-)matrices should look like,
 formulating the goal of the thesis as a \acrshort{cgan}-problem should be possible.
-In the following sections, such an approach will be explored.
+In the following sections, such an approach will be explored, henceforth referred to as \emph{Hi-cGAN}.
 
-\subsubsection{General setup of the cGAN approach}
+\subsubsection{General setup for Hi-cGAN}
 Although numerous variants exist, conditional \acrshort{gan}s generally comprise at least two neural networks -- 
-a generator $G(x,z)$, which tries to generate realistic outputs from its inputs $x$ and random noise $z$, and a discriminator $D(x,y)$,
-which tries to discern true inputs $y$, e.\,g. experimentally derived Hi-C matrices, from generated inputs $G(x,z)$.
+a generator $G(\bm{x},\bm{z})$, which tries to generate realistic outputs from its inputs $\bm{x}$ and random noise $\bm{z}$, 
+and a discriminator $D(\bm{x},\bm{y})$, which tries to discern true inputs $\bm{y}$, e.\,g. experimentally derived Hi-C matrices, 
+from generated inputs $G(\bm{x},\bm{z})$.
 The optimal weights for the networks can then be found by searching an equilibrium in a two-player minimax game:
 The generator tries to fool the discriminator, while the discriminator tries to detect the generator's fakes, 
 see equations \ref{eq:improve:cGAN-simple-loss} and \ref{eq:improve:cGAN-simple-opt} \cite{Isola2017}, where $\mathbb{E}$ is the expected value for each ``player''.
 \begin{align}
- L_\mathit{cGAN}(G, D) &= \mathbb{E}_{x,y}[\log D(x,y)] + \mathbb{E}_{x,z}[\log(1-D(x, G(x,z)))] \label{eq:improve:cGAN-simple-loss} \\
+ L_\mathit{cGAN}(G, D) &= \mathbb{E}_{\bm{x},\bm{y}}[\log D(\bm{x},\bm{y})] + \mathbb{E}_{\bm{x},\bm{z}}[\log(\bm{1}-D(\bm{x}, G(\bm{x},\bm{z})))] \label{eq:improve:cGAN-simple-loss} \\
  G^* &=  \mathit{arg\,min}_G \mathit{max}_D \; L_\mathit{cGAN}(G, D) \label{eq:improve:cGAN-simple-opt}
 \end{align}
 
-Many different layouts and training processes for the Generator and Discriminator networks have been proposed.
+Many different layouts and training processes for the generator and discriminator networks have been proposed.
 For the thesis at hand, the well-known \emph{pix2pix} proposal by Isola et al. from 2017 was followed \cite{Isola2017}, 
-amended by a convolutional embedding network for the chromatin features, which serve as the conditional input $x$ here.
+amended by two kinds of embedding networks for the chromatin features, which serve as the conditional input $x$ here.
 The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be explained in more detail below.
 \begin{figure}[htbp]
  \import{figures/}{Hi-cGAN.pdf_tex}
  \caption{\acrshort{cgan} approach} \label{fig:improve:cGAN-approach}
 \end{figure}
 
-The generator architecture is based the well known U-Net architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
+The generator architecture is based the well known \emph{U-Net} architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
 while the discriminator is implemented as a patchGAN-discriminator developed by Isola et al. especially for \emph{pix2pix} \cite{Isola2017}.
 This type of discriminator splits the images into patches and tries to decide which of them are real and which are fake, using convolutions.
-Note that \emph{pix2pix} does not explicitly add noise $z$, but by design only relies on dropout layers for that purpose. 
+Note that \emph{pix2pix} does not explicitly add noise $\bm{z}$, 
+but by design only relies on dropout layers in the generator for that purpose, \cref{fig:improve:cGAN-approach} upper left. 
 
 For the thesis at hand, few modifications were made to the actual \emph{pix2pix} network.
 Since Hi-C matrices are symmetric by definition, symmetry of the outputs was enforced
@@ -299,11 +306,12 @@ Unfortunately, this task seems to be without examples in literature, so two diff
 which will be discussed below in sections \ref{sec:improve:DNN_embedding} and \ref{sec:improve:CNN_embedding}.
 Both approaches are distantly related to the text-encoders used by text-to-image synthesis networks 
 \cite{Reed2016b,Xu2018}, but much less sophisticated. 
-However, a complex encoding is not needed here, since -- contrary to image captions -- the chromatin features are already in a format that can be processed directly by neural networks.
+Since the chromatin features -- in contrast to textual image captions -- are already in a format that can be processed directly by neural networks,
+a complex encoding is not needed here; a (trainable) 2D-embedding should suffice.
 
-Many ways for training a \acrshort{cgan} exist, and achieving a stable, converging training process can be tricky.
+Many ways for training a \acrshort{cgan} exist, and establishing a stable, convergent training process can be tricky.
 For the thesis at hand, the generator loss function proposed by Isola et al. \cite{Isola2017} was used, 
-amended by a TV loss function for noise reduction, \cref{eq:improve:cGAN_loss}.
+amended by a \acrshort{tv} loss function for noise reduction, \cref{eq:improve:cGAN_loss}.
 \begin{align}
  L_G(\mathbf{x}, \mathbf{y}, \mathbf{z}) &=\lambda_\mathit{MAE}L_\mathit{MAE}(\,G(\mathbf{x},\mathbf{z}), \mathbf{y}\,) 
     + \lambda_\mathit{adv} \; L_d(\, \mathbf{1}, D(\mathbf{x}, G(\mathbf{x},\mathbf{z})) \,) 
@@ -312,7 +320,7 @@ amended by a TV loss function for noise reduction, \cref{eq:improve:cGAN_loss}.
     \left(\, -\log(\mathrm{sigmoid}(\mathbf{s})) \cdot \mathbf{r} - \log(\mathbf{1} - \mathrm{sigmoid}(\mathbf{s})) \cdot (\mathbf{1} - \mathbf{r}) \,\right) \label{eq:improve:disc_loss1}\\
  \mathrm{sigmoid(m_{i,j,k})} &= \frac{e^{m_{i,j,k}}}{1+e^{m_{i,j,k}}} \quad \mathrm{for}\; i \in (0, 1, \dots, bs)\; \textrm{and}\; j,k \in (0, 1, \dots, n) \label{eq:sigmoid}
 \end{align}
-Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between artificially generated output $G(x,z)$ and true Hi-C submatrices $y$ (as grayscale images), 
+Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between artificially generated output $G(\bm{x},\bm{z})$ and true Hi-C submatrices $\bm{y}$ (as grayscale images), 
 $L_d$ is the discriminator loss according to \cref{eq:improve:disc_loss1}, in this case with respect to artificially generated matrices, and 
 $l_\mathit{TV}$ is a total variation loss as in \cref{eq:combined_loss_short} and \cref{eq:methods:tv}.
 Since the discriminator is a patchGAN discriminator, it is working on batches which contain $bs$ image patches of shape $(n,n)$, and $\mathbf{1}$ is also a tensor of shape $(n,n)$, populated with ones.
@@ -323,35 +331,35 @@ Finally, individual scalar factors $\lambda$ were used to balance the influence 
 As already indicated in \cref{fig:improve:cGAN-approach}, the discriminator was trained as proposed by Isola et al.,
 meaning that the binary cross entropy loss was optimized with respect to true- and fake samples, \cref{eq:improve:disc_loss_total} .
 \begin{align}
- L_D(\mathbf{x,y,z}) = \lambda_D * \left[ L_d(\mathbf{1}, D(\mathbf{x,y})) + L_d(\mathbf{0}, D(\mathbf{x},G(\mathbf{x, z})) \right] \label{eq:improve:disc_loss_total}
+ L_D(\mathbf{x,y,z}) = \lambda_D \cdot \left[ L_d(\mathbf{1}, D(\mathbf{x,y})) + L_d(\mathbf{0}, D(\mathbf{x},G(\mathbf{x, z})) \right] \label{eq:improve:disc_loss_total}
 \end{align}
-In \cref{eq:improve:disc_loss_total}, $L_d$ is again the PatchGAN loss defined above in \cref{eq:improve:disc_loss1}, $y$ are true Hi-C submatrices, 
-$G(x,z)$ are Hi-C submatrices artificially generated by the generator $G$
-from chromatin feature data $x$ and random noise $z$, and $\mathbf{1}, \mathbf{0}$ are tensors of the appropriate shape populated with all ones and all zeros, respectively.
+In \cref{eq:improve:disc_loss_total}, $L_d$ is again the PatchGAN loss defined above in \cref{eq:improve:disc_loss1}, $\bm{y}$ are true Hi-C submatrices, 
+$G(\bm{x},\bm{z})$ are Hi-C submatrices artificially generated by the generator $G$
+from chromatin feature data $\bm{x}$ and random noise $\bm{z}$, and $\mathbf{1}, \mathbf{0}$ are tensors of the appropriate shape populated with all ones and all zeros, respectively.
 $\lambda_D$ is a scalar factor proposed by Isola et al. to slow down the learning process of the discriminator compared to the generator.
 
-The original idea behind combining mean absolute error $L_\mathit{MAE}$ and PatchGAN adversarial loss $L_d$ is that optimizing MAE 
+The original idea behind combining mean absolute error $L_\mathit{MAE}$ and PatchGAN adversarial loss $L_d$ is that optimizing \acrshort{mae}
 mainly minimizes low-frequency errors, while optimizing the PatchGAN-loss with its small patches helps reducing high-frequency errors \cite{Isola2017}.
-The TV loss has been added for edge-aware noise removal, in line with other works in the field \cite{Hong2020}, cf.~\cref{sec:improve:combined_loss}.
+The \acrshort{tv} loss has been added for edge-aware noise removal, in line with other works in the field \cite{Hong2020}, cf.~\cref{sec:improve:combined_loss}.
 
 Both the generator- and discriminator loss functions were optimized with the Adam optimizer,
 alternately training discriminator and generator, see \cref{sec:methods:cGAN_initial} for details.
 
 Compared to other \acrshort{cgan} architectures, \emph{pix2pix} is rather simple, but well studied for different applications like label-to-image transfer,
 sketch-to-image transfer, grayscale-to-color transformations or image infill tasks \cite{Isola2017}.
-Since the problem at hand has likely not been tackled by a tailor-made GAN yet, 
+Since the problem at hand has likely not been tackled by a tailor-made \acrshort{cgan} yet, 
 choosing a ``general-purpose'' \acrshort{cgan} as a starting point seemed reasonable.
-Another advantage of \emph{pix2pix}, and U-Net architectures in general, 
+Another advantage of \emph{pix2pix}, and \emph{U-Net} architectures in general, 
 is that they can achieve good performance even with comparatively few training samples \cite{Isola2017, Ronneberger2015}.
 
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
 The embedding network required for processing the conditional inputs
-has on obvious mandatory property: it must be capable of embedding the input of shape $(3w,n)$ 
+has one obvious mandatory property: it must be capable of embedding the input of shape $(3w,n)$ 
 into a 2D grayscale image of shape $(w,w,1)$ which can then be processed by a \emph{pix2pix}-like network.
 Naturally, this can be achieved by using the dense neural network explored above
 and reshaping its ``upper triangular'' output vector back into a symmetric ``image''-tensor of the required shape.
 
-The rationale here was to first use the DNN to get a coarse estimate of the predicted matrix,
+The rationale here was to first use the \acrshort{dnn} to get a coarse estimate of the predicted matrix,
 and then the \acrshort{cgan} to refine the results, somewhat similar to the two-stage approach by Zhang et al. \cite{Zhang2019c},
 albeit much less sophisticated. 
 Obviously, it is possible to pre-train the dense (embedding) network as discussed above in \cref{sec:improve:DNNapproach}, 
@@ -363,31 +371,33 @@ cf. \cref{sec:improve:basicNetwork} and \ref{sec:methods:basicSetup}.
 Taken together with the three fully connected layers underneath, this leads to a superlinear increase in the number of parameters along with $w$,
 further aggravated by the fact that the \acrshort{cgan} requires $w$ to be powers of two, cf. \cref{sec:methods:cGAN_initial} and  
 \ref{sec:methods:dnn-embedding} (\cref{tab:methods:embedding_network_params}, p.~\pageref{tab:methods:embedding_network_params}).
-The DNN embedding has thus only been explored for $w=64$, both with and without pre-training the DNN embedding network. 
+Therefore the \acrshort{dnn} embedding has only been explored for $w=64$, both with and without pre-trained weights. 
 The results are to be found in \cref{sec:results:cgan_dnn} and some more technical details are given in \cref{sec:methods:dnn-embedding}.
+Predictions from the pre-trained embedding network alone are shown in \cref{sec:appendix:pretraining_results}.
 
 \subsubsection{Using a CNN for feature embedding} \label{sec:improve:CNN_embedding}
-Since the results from the \acrshort{cgan} with DNN embedding were not convincing, another embedding network was designed, based on convolutional layers.
+Since the results from the \acrshort{cgan} with \acrshort{dnn} embedding were interesting, but not really convincing, 
+another embedding network was designed, based on convolutional layers.
 Here, the idea was to have a trainable embedding that keeps the localization information contained in the chromatin feature data,
 has less parameters than a dense embedding and can efficiently be trained along with the rest of the network even at window sizes up to 256 bins.
 
-Since no example for such an embedding was found in literature, a first attempt was made with a simple convolutional neural network (CNN).
-This network essentially featured 8 building blocks, each consisting of 1D convolution, batch normalization layer to avoid overfitting and leaky ReLU activation \cite{Maas2013}
-to avoid the so-called ``dying ReLU'' problem. 
+Since no example for such an embedding was found in literature, a first attempt was made with a simple \acrfull{cnn}.
+This network essentially featured 8 building blocks, each consisting of a 1D convolution layer, a batch normalization layer to avoid overfitting
+and leaky \acrshort{relu} activation \cite{Maas2013} to avoid the so-called ``dying \acrshort{relu}'' problem. 
 A final 9th convolution layer was added to ensure the required output shape. 
 The complete setup is shown in \cref{sec:methods:cnn-embedding} (\cref{fig:methods:GAN_arch:embedding_network}, p.~\pageref{fig:methods:GAN_arch:embedding_network}).
-Compared to the dense approach, the number of trainable parameters in the CNN embedding is widely independent of the window size and 
+Compared to the dense approach, the number of trainable parameters in the \acrshort{cnn} embedding is widely independent of the window size and 
 stays within 4.24...4.29 million parameters for the investigated window sizes 64, 128 and 256, cf. \cref{tab:methods:embedding_network_params} (p.~\pageref{tab:methods:embedding_network_params}).
 
-The results of the \acrshort{cgan} with CNN embedding are shown in \cref{sec:results:cgan_cnn} 
+The results of the \acrshort{cgan} with \acrshort{cnn} embedding are shown in \cref{sec:results:cgan_cnn} 
 and were indeed better than all other results obtained within this thesis.
 
 \subsubsection{Using mixed DNN- and CNN-embedding for feature embedding} \label{sec:improve:mixed-embedding}
-Besides using a DNN- or CNN-embedding for \emph{both} generator and discriminator, it is obviously also possible
+Besides using a \acrshort{dnn}- or \acrshort{cnn}-embedding for \emph{both} generator and discriminator, it is obviously also possible
 to use different embedding network types.
 To investigate the influences of the embedding network on the general performance,
-a ``mixed'' embedding, i.\,e. a DNN-embedding for the generator and a CNN-embedding for the discriminator was tested,
-using the same DNN and CNN as above.
+a ``mixed'' embedding, i.\,e. a \acrshort{dnn}-embedding for the generator and a \acrshort{cnn}-embedding for the discriminator was tested,
+using the same \acrshort{dnn} and \acrshort{cnn} as above.
 However, the results were not convincing, see \cref{sec:results:cgan-mixed}.
 
 
