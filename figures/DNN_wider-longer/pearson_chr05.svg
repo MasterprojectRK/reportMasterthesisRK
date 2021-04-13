@@ -17,7 +17,7 @@
    inkscape:version="1.0.2 (1.0.2+r75+1)"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6"><clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath22"><path
@@ -118,7 +118,8 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" /><g
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="pearson_chr05"
@@ -323,9 +324,9 @@
      transform="translate(-28.023958,-17.206424)"><text
        style="font-variant:normal;font-weight:normal;font-size:7.67154px;font-family:'DejaVu Sans';-inkscape-font-specification:DejaVuSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.767154"
        id="text32"
-       x="47.547432"
+       x="53.547432"
        y="253.52548"><tspan
-         x="47.547432 52.426537 54.866089 59.74519"
+         x="53.547432 58.426537 60.866089 65.745193"
          y="253.52548"
          sodipodi:role="line"
          id="tspan30"

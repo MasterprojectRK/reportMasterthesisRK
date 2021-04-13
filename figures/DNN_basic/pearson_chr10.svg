@@ -103,9 +103,9 @@
      inkscape:window-height="1020"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="14.878473"
-     inkscape:cx="170.73635"
-     inkscape:cy="236.24584"
+     inkscape:zoom="2.6301673"
+     inkscape:cx="162.15159"
+     inkscape:cy="249.43153"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -115,7 +115,8 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     units="mm" /><g
+     units="mm"
+     inkscape:document-rotation="0" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="pearson_chr10"
@@ -318,9 +319,9 @@
      transform="translate(-28.023958,-17.206424)"><text
        style="font-variant:normal;font-weight:normal;font-size:7.6696px;font-family:'DejaVu Sans';-inkscape-font-specification:DejaVuSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.76696"
        id="text32"
-       x="47.542507"
+       x="53.542507"
        y="253.60005"><tspan
-         x="47.542507 52.42038 54.859318 59.737186"
+         x="53.542507 58.42038 60.859318 65.737183"
          y="253.60005"
          sodipodi:role="line"
          id="tspan30"

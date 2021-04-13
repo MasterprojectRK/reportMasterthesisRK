@@ -13,11 +13,11 @@
    width="80mm"
    height="65.300003mm"
    viewBox="0 0 302.36218 246.80316"
-   sodipodi:docname="pearson_chr03_50k.svg"
+   sodipodi:docname="pearson_chr03.svg"
    inkscape:version="1.0.2 (1.0.2+r75+1)"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6"><clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath22"><path
@@ -118,7 +118,8 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" /><g
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="pearson_chr03_50k"
@@ -316,9 +317,9 @@
      transform="translate(-28.023958,-17.206424)"><text
        style="font-variant:normal;font-weight:normal;font-size:7.67035px;font-family:'DejaVu Sans';-inkscape-font-specification:DejaVuSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.767035"
        id="text32"
-       x="49.983311"
+       x="53.983311"
        y="253.5556"><tspan
-         x="49.983311 54.861652 57.300819"
+         x="53.983311 58.861652 61.300819"
          y="253.5556"
          sodipodi:role="line"
          id="tspan30"

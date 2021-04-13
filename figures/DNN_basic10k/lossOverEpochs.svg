@@ -122,7 +122,8 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" /><g
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="lossOverEpochs"
@@ -534,10 +535,10 @@
        transform="rotate(-90)"
        style="font-variant:normal;font-weight:normal;font-size:8.01789px;font-family:'DejaVu Sans';-inkscape-font-specification:DejaVuSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.80179"
        id="text368"
-       x="-239.38869"
-       y="35.103256"><tspan
-         x="-239.38869 -237.15971 -232.25273 -228.07542"
-         y="35.103256"
+       x="-249.38869"
+       y="25.103256"><tspan
+         x="-249.38869 -247.15971 -242.25273 -238.07542"
+         y="25.103256"
          sodipodi:role="line"
          id="tspan366"
          style="stroke-width:0.80179">loss (MSE)</tspan></text><text
