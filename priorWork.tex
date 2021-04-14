@@ -9,7 +9,7 @@ Finally, \cref{sec:prior:relatedWork} is concluded by a short discussion of the 
 As of 2020, there is quite a body of existing work in the field of predicting DNA-DNA interactions, 
 using various approaches and different types of input data.
 
-Two conceptually similar methods have been proposed by Brackley et al. in 2016 and MacPherson et al. in 2018 \cite{Brackley2016, MacPherson2018}.
+Two conceptually similar methods have been proposed by Brackley et al. in 2016 \cite{Brackley2016} and MacPherson et al. in 2018 \cite{MacPherson2018}.
 In both approaches, DNA is modeled as a ``beads-on-a-string'' polymer, and simulation techniques are employed to
 find energy-optimal spatial structures of these polymers.
 Apart from constraints derived from the molecule's DNA sequence itself, the models also consider spatial contact constraints derived from \acrshort{cs} experiments
@@ -86,7 +86,7 @@ The predicted matrices often hardly look like experimental Hi-C matrices, but mo
 A further method by Schwessinger et al. \cite{Schwessinger2019} also makes use of DNA sequence and additional epigenetic data for its predictions,
 but is conceptually different from the ones presented so far.
 Here, \acrshort{cs} tracks are initially used to train a \acrshort{cnn} on the relationship between sequence and 
-the corresponding chromatin factors. The weights of this first network are then used to seed another \acrlong{cnn},
+the corresponding chromatin factors. The weights of this first network are then re-used to seed another \acrlong{cnn},
 which is responsible for predicting DNA-DNA interactions from DNA sequence.
 The results are blurry, but generally in good accordance with experimental Hi-C data.
 
@@ -122,7 +122,7 @@ The method by Dimmick et al. outperformed the others for most test cases, but it
 \subsection{Discussion of existing work} \label{sec:prior:discussion}
 Independent of chosen techniques, several of the methods shown above only allow predictions restricted to certain loci (e.\,g. promoters and enhancers)
 or yield binary predictions in the sense of ``interaction'' or ``no interaction'' between certain loci \cite{Bkhetan2018, Kai2018,Martens2020,Singh2019}.
-These methods are thus not directly suitable for the task at hand, but would require further development.
+Thus, these methods are not directly suitable for the task at hand, but would require further development.
 
 The chromatin-modeling based approaches \cite{Brackley2016, MacPherson2018, Pierro2017, Qi2019} allow indirect derivation of Hi-C matrices
 by performing sufficient simulation passes and estimating contact counts from the resulting model ensembles.
@@ -142,7 +142,7 @@ where the network is seeded by training on exactly such binding sites.
 While the methods by Schreiber and Schwessinger use secondary inputs and therefore can -- at least partially -- 
 adapt to cell lines sharing the same DNA, the method by Fudenberg focuses on DNA and is thus 
 expected to produce the same outputs for all cell lines of a given organism.
-All three methods require comparatively deep networks which are expensive to train.
+All three methods feature comparatively deep networks which are expensive to train.
 The fourth sequence-based method by Nikumbh et al. \cite{Nikumbh2017} is using a support vector machine, which is generally easier to train,
 but the adaptability to different cell lines is expected to remain problematic due to the chosen concept.
 

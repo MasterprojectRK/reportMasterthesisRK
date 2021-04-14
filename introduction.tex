@@ -11,7 +11,7 @@ However, most current in-silico approaches have disadvantages and shortcomings,
 and the current thesis attempts to improve on these.
 
 \subsection{Spatial structure of DNA}
-In the late 1970s, Watson and Crick discovered the now well-known double helix structure of DNA molecules \cite{Watson1953}.
+In 1953, Watson and Crick discovered the now well-known double helix structure of DNA molecules \cite{Watson1953}.
 However, this is not the only relevant spatial structure of chromatin. 
 At larger scales, DNA molecules can be wound around certain proteins, so-called histones, forming DNA-protein complexes named nucleosomes.
 Several of these can further be compacted into fibers, which in turn can be ``supercoiled'' into the also well-known chromosomes, \cref{fig:intro:spatial_chrom_structures}.
@@ -25,7 +25,7 @@ Several of these can further be compacted into fibers, which in turn can be ``su
 While the spatial structure of chromatin outlined above brings along compaction, 
 e.\,g. to make chromosomes fit into eukaryotic cell nuclei (\cref{fig:intro:spatial_chrom_structures} from left to right), 
 it also has other functional implications.
-One well-known effect of spatial structure is the regulation of gene transcription by establishing or releasing contacts
+One well-known example is the regulation of gene transcription by establishing or releasing contacts
 between certain DNA-regions, the so-called gene enhancers and promoters \cite{Smallwood2013,Gorkin2014}.
 Since enhancers can be up to a million basepairs away from the corresponding promoters, 
 the two can usually only interact by means of spatial DNA structure.
@@ -85,7 +85,7 @@ between the two genomic positions (a) and (b) to which the two ends belong.
 However, at reasonable read coverages, interactions cannot be counted per base pair. 
 Instead, the reference genome is split into equally sized bins (or regions), 
 and the reads are counted for those bins where they belong. 
-Common bin size values $b$ include $b \in \{1, 5, 10, 25, 50, 100, 1000\}$\,kbp.
+Common bin sizes are 1, 5, 10, 25, 50, 100 and \SI{1000}{\kilo\bp}.
 
 The final outcome of a Hi-C experiment is then a (sparse) square matrix $M$, henceforth referred to as ``Hi-C matrix'', 
 which records the interaction count for all possible pairs of regions in the reference genome.
@@ -173,14 +173,14 @@ GM23248  & 2   & 13 & 1  & 1 \\ \hline
 \end{wraptable}
 Due to the high effort, Hi-C experiments have been published for comparatively few organisms and cell lines so far.
 For example, as of January 2021, Hi-C assays were available for only 26 of more than 150 human cell lines listed 
-in the Encyclopedia of DNA elements (ENCODE) \cite{Encode2012,Davis2017}, and these have been produced by only five university labs.
+in the \acrfull{encode} \cite{Encode2012,Davis2017}, and these have been produced by only five university labs.
 
 However, investigations and experiments with the available Hi-C data have shown correlations
 between the spatial DNA structure and the binding sites of certain transcription factors and histone modifications \cite{Rao2014, Bonev2016}.
 Since these binding sites can be detected with the less costly ChIP-seq method, 
 a computational method able to predict contact matrices from DNA-protein bindings \emph{in silico} would be very helpful.
 
-The goal of this master thesis is thus to predict missing Hi-C data from existing ChIP-seq data,
+Thus, the goal of this master thesis is to predict missing Hi-C data from existing ChIP-seq data,
 making use of the known correlations between the binding sites of transcription factors and histone modifications on the one hand 
 and Hi-C interaction counts on the other hand. 
 Because this is a wide field and lead time for a master thesis is limited, 
@@ -192,9 +192,9 @@ More specifically, the goal of this thesis is to develop an easy-to-use machine 
 approach for predicting Hi-C interaction matrices from ChIP-seq data, 
 using standard in- and output formats with minimal pre- and post-processing.
 
-To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in ENCODE, 
-sorted by total number of selected assays available, where \acrshort{tf} stands for Transcription Factor.
-Although not necessarily all publicly known experiments to date are included in ENCODE -- 
+To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in \acrshort{encode}, 
+sorted by total number of selected assays available, where \acrshort{tf} stands for transcription factor.
+Although not necessarily all publicly known experiments to date are included in \acrshort{encode} -- 
 for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 stem cells are not listed -- 
 it is obvious that the public availability of ChIP-seq data is commonly much better than the one of Hi-C data, 
 even for otherwise well investigated cell lines like HEK293 and MCF-7.
