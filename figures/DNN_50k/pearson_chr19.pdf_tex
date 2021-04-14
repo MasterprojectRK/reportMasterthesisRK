@@ -72,10 +72,10 @@
     \put(0.01928073,0.28672755){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
     \put(0.23258176,0.79634824){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
     \put(0.10929307,0.76221608){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GM12878, 1,2,4,7,9,11,13,14,16,17,18,20,22 on K562, 19\end{tabular}}}}%
-    \put(0.21645289,0.25181528){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}25k+50k$\rightarrow$50k, 500ep / AUC: 0.455\end{tabular}}}}%
-    \put(0.21645289,0.21458215){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}initial 25k$\rightarrow$50k, 500ep / AUC: 0.507\end{tabular}}}}%
-    \put(0.21645289,0.17734858){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}initial 25k coarsened, 500ep / AUC: 0.556\end{tabular}}}}%
-    \put(0.21645289,0.14011546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50k direct, 250ep / AUC: 0.461\end{tabular}}}}%
+    \put(0.21645289,0.25181528){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}d) 25k+50k$\rightarrow$50k, 500ep / AUC: 0.455\end{tabular}}}}%
+    \put(0.21645289,0.21458215){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}c) initial 25k$\rightarrow$50k, 500ep / AUC: 0.507\end{tabular}}}}%
+    \put(0.21645289,0.17734858){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}b) initial 25k coarsened, 500ep / AUC: 0.556\end{tabular}}}}%
+    \put(0.21645289,0.14011546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}a) 50k direct, 250ep / AUC: 0.461\end{tabular}}}}%
     \put(0.21645289,0.10288234){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}transfer GM12878 / AUC: 0.805\end{tabular}}}}%
   \end{picture}%
 \endgroup%

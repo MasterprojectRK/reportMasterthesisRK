@@ -72,7 +72,7 @@
     \put(0.23247833,0.79610987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
     \put(0.42040427,0.76199277){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chromosome 14\end{tabular}}}}%
     \put(0.24495431,0.26189632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN80, 25k / AUC: 0.632\end{tabular}}}}%
-    \put(0.24495431,0.22467965){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GAN256, 25k / AUC: 0.586\end{tabular}}}}%
+    \put(0.24495431,0.22467965){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hi-cGAN256, 25k / AUC: 0.586\end{tabular}}}}%
     \put(0.24495431,0.18746313){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MULTICELL, 0-padded, 25k / AUC: 0.876\end{tabular}}}}%
     \put(0.24495431,0.15024656){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}WINDOW, 0-padded, 25k / AUC: 0.752\end{tabular}}}}%
   \end{picture}%
