@@ -1,0 +1,1342 @@
+% Encoding: UTF-8
+
+@Article{Liu2019b,
+  author     = {Tong Liu and Zheng Wang},
+  title      = {{HiCNN}2: Enhancing the Resolution of Hi-C Data Using an Ensemble of Convolutional Neural Networks},
+  doi        = {10.3390/genes10110862},
+  number     = {11},
+  pages      = {862},
+  volume     = {10},
+  comment    = {Approach to increase resolution of downsampled Hi-C matrices using ensembles of up to 3 convolutional networks, CNN. The networks are partially based on image super resolution networks (VDSR). The networks are really deep with multiple layers and filters.
+Interestingly, the optimization is distance-stratified MSE.
+Results quite good, but not useful for predicting interaction matrices ChIP-seq or sequence.},
+  file       = {:liu2019b_Hicnn2.pdf:PDF},
+  groups     = {GAN-superresolution},
+  journal    = {Genes},
+  keywords   = {skimmed},
+  month      = {oct},
+  owner      = {ralf},
+  publisher  = {{MDPI} {AG}},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.22},
+  year       = {2019},
+}
+
+@TechReport{peng2017,
+  author      = {Rui Peng},
+  institution = {Carnegie Mellon University},
+  title       = {{P}redicting {H}igh-order {C}hromatin {I}nteractions from {H}uman {G}enomic {S}equence using {D}eep {N}eural {N}etworks},
+  url         = {https://www.ml.cmu.edu/research/dap-papers/F17/dap-peng-rui.pdf},
+  comment     = {extension of SPEID by Singh using middle sequence, CTCF and distance},
+  file        = {:peng2017_SpeidExtension.pdf:PDF},
+  groups      = {fullyRelevant},
+  owner       = {ralf},
+  timestamp   = {2020.08.24},
+  year        = {2017},
+}
+
+@InProceedings{deng2009,
+  author    = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and Li, K. and Fei-Fei, L.},
+  booktitle = {CVPR09},
+  title     = {{ImageNet: A Large-Scale Hierarchical Image Database}},
+  bibsource = {http://www.image-net.org/papers/imagenet_cvpr09.bib},
+  year      = {2009},
+}
+
+@InProceedings{Goodfellow2014,
+  author    = {Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+  booktitle = {Advances in Neural Information Processing Systems},
+  title     = {{G}enerative {A}dversarial {N}ets},
+  editor    = {Z. Ghahramani and M. Welling and C. Cortes and N. Lawrence and K. Q. Weinberger},
+  pages     = {2672--2680},
+  publisher = {Curran Associates, Inc.},
+  url       = {https://proceedings.neurips.cc/paper/2014/file/5ca3e9b122f61f8f06494c97b1afccf3-Paper.pdf},
+  volume    = {27},
+  groups    = {GAN-superresolution},
+  year      = {2014},
+}
+
+@Article{Belaghzal2017,
+  author    = {Houda Belaghzal and Job Dekker and Johan H. Gibcus},
+  title     = {Hi-C 2.0: An optimized Hi-C procedure for high-resolution genome-wide mapping of chromosome conformation},
+  doi       = {10.1016/j.ymeth.2017.04.004},
+  pages     = {56--65},
+  volume    = {123},
+  abstract  = {Hi-C 2.0 is an advancement of the original Hi-C / in situ Hi-C processes
+proposed by Lieberman-Aiden et al. and Rao et al.},
+  journal   = {Methods},
+  month     = {jul},
+  publisher = {Elsevier {BV}},
+  year      = {2017},
+}
+
+@Article{Zhang2019b,
+  author    = {Haoyue Zhang and Daniel J. Emerson and Thomas G. Gilgenast and Katelyn R. Titus and Yemin Lan and Peng Huang and Di Zhang and Hongxin Wang and Cheryl A. Keller and Belinda Giardine and Ross C. Hardison and Jennifer E. Phillips-Cremins and Gerd A. Blobel},
+  title     = {Chromatin structure dynamics during the mitosis-to-G1 phase transition},
+  doi       = {10.1038/s41586-019-1778-y},
+  number    = {7785},
+  pages     = {158--162},
+  volume    = {576},
+  groups    = {overviewGeneral, foundations},
+  journal   = {Nature},
+  month     = {nov},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2019},
+}
+
+@Article{Dali2017,
+  author     = {Rola Dali and Mathieu Blanchette},
+  title      = {A critical assessment of topologically associating domain prediction tools},
+  doi        = {10.1093/nar/gkx145},
+  number     = {6},
+  pages      = {2994--3005},
+  volume     = {45},
+  comment    = {Compares results of 7 TAD calling algorithms with each other and manually created TADs.
+Predicted TADs vary considerably among these algorithms, and were found to depend on sequencing depth and Hi-C matrix resolution more or less strongly. 
+TAD domain boundaries were more or less enriched in CTCF, depending on the algorithm used.
+TADs may overlap or have a hierarchy. As of 2017, no generally accepted definition of TADs (let alone TAD hierarchy) exists.
+
+Probably not super important for the thesis.},
+  file       = {:dali2017_assessmentTADalgos.pdf:PDF},
+  groups     = {overviewGeneral},
+  journal    = {Nucleic Acids Research},
+  keywords   = {read},
+  month      = {mar},
+  owner      = {ralf},
+  publisher  = {Oxford University Press ({OUP})},
+  readstatus = {read},
+  timestamp  = {2020.07.14},
+  year       = {2017},
+}
+
+@Article{Qi2019,
+  author     = {Yifeng Qi and Bin Zhang},
+  title      = {Predicting three-dimensional genome organization with chromatin states},
+  doi        = {10.1371/journal.pcbi.1007024},
+  editor     = {Jian Ma},
+  number     = {6},
+  pages      = {e1007024},
+  volume     = {15},
+  comment    = {Authors predict chromatin structure using a molecular simulation (force-based, max. entropy model). The model is quite sophisticated and comprises more than 1000 parameters. It considers energies for CTCF/Cohesin driven loops (incl. directional information) and energies computed from one of 15 possible chromatin states derived from epigenomics data (same as with HiC-Rep plus H2A.Z). 
+
+Pearson correlations all above 0.88.
+Multiple methods to validate results against Hi-C data etc.},
+  file       = {:qi2019_predicting3DgenomeOrganization.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {{PLOS} Computational Biology},
+  keywords   = {skimmed},
+  month      = {jun},
+  owner      = {ralf},
+  publisher  = {Public Library of Science ({PLoS})},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.14},
+  year       = {2019},
+}
+
+@Article{Zhang2019c,
+  author    = {Han Zhang and Tao Xu and Hongsheng Li and Shaoting Zhang and Xiaogang Wang and Xiaolei Huang and Dimitris N. Metaxas},
+  title     = {{StackGAN}++: {R}ealistic {I}mage {S}ynthesis with {S}tacked {G}enerative {A}dversarial {N}etworks},
+  doi       = {10.1109/tpami.2018.2856256},
+  number    = {8},
+  pages     = {1947--1962},
+  volume    = {41},
+  file      = {fulltext:Zhang2019_StackGANpp.pdf:PDF},
+  groups    = {GAN-superresolution},
+  journal   = {{IEEE} Transactions on Pattern Analysis and Machine Intelligence},
+  month     = {aug},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+  year      = {2019},
+}
+
+@Article{Zhao2017,
+  author    = {Hang Zhao and Orazio Gallo and Iuri Frosio and Jan Kautz},
+  title     = {Loss Functions for Image Restoration With Neural Networks},
+  doi       = {10.1109/tci.2016.2644865},
+  number    = {1},
+  pages     = {47--57},
+  volume    = {3},
+  comment   = {Authors investigate different loss functions for use with neural networks.
+They conclude that a combination of L1 and MS-SSIM based losses outperforms L1, L2 and SSIM losses.},
+  file      = {fulltext:zhao2017_alternativeLossFunctions.pdf:PDF},
+  groups    = {LossFunctions},
+  journal   = {{IEEE} Transactions on Computational Imaging},
+  month     = {mar},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+  year      = {2017},
+}
+
+@Article{Crane2015,
+  author    = {Emily Crane and Qian Bian and Rachel Patton McCord and Bryan R. Lajoie and Bayly S. Wheeler and Edward J. Ralston and Satoru Uzawa and Job Dekker and Barbara J. Meyer},
+  title     = {{C}ondensin-driven remodelling of {X} chromosome topology during dosage compensation},
+  doi       = {10.1038/nature14450},
+  number    = {7559},
+  pages     = {240--244},
+  volume    = {523},
+  comment   = {this article contains the computation of tad insulation score},
+  groups    = {overviewGeneral},
+  journal   = {Nature},
+  month     = {jun},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2015},
+}
+
+@Article{Brackley2016,
+  author     = {Chris A. Brackley and Jill M. Brown and Dominic Waithe and Christian Babbs and James Davies and Jim R. Hughes and Veronica J. Buckle and Davide Marenduzzo},
+  title      = {Predicting the three-dimensional folding of cis-regulatory regions in mammalian genomes using bioinformatic data and polymer models},
+  doi        = {10.1186/s13059-016-0909-0},
+  number     = {1},
+  volume     = {17},
+  comment    = {The authors present a method to predict 3D conformations (Hi-C matrices) from DNase, CTCF, DHS and H3K4me1 ChIP-seq data. Their approach is based on simulating a polymer model (beads on springs, Langevin) multiple times and taking the ensemble average.
+There is no matrix-matrix comparison published, but the predicted matrices look interesting.
+Results are published only for two distinct loci in mouse genomes, but should be extensible to 
+other species and loci quite easily.},
+  file       = {:brackley2016_Article_PredictingTheThree-dimensional.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {Genome Biology},
+  keywords   = {skimmed},
+  month      = {mar},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.22},
+  year       = {2016},
+}
+
+@Article{Farre2018a,
+  author     = {Pau Farr{\'{e}} and Alexandre Heurteau and Olivier Cuvier and Eldon Emberly},
+  title      = {Dense neural networks for predicting chromatin conformation},
+  doi        = {10.1186/s12859-018-2286-z},
+  number     = {1},
+  volume     = {19},
+  comment    = {Authors propose a combination of CNN / DNN to predict interaction counts (Hi-C matrices) from
+ChIP-seq data in a two step process.
+First step is a convolutional network that converts the ChIP-seq tracks to a single 1D representation.
+Second step is a dense network that converts the 1D rep into interaction counts, i. e. Hi-C matrices.
+A window approach is followed for training, with a central window and left/right flanking windows of adjustable width (but  a fixed setting of w=80kbp was used in the paper). 
+
+The predicted matrices have a Pearson correlation of 0.6...0.7 and look somewhat mediocre when compared to real matrices.
+
+Additionally, the paper presents the so called backward approach to predict the 1D rep from Hi-C data and then compares the predicted 1D rep with the one derived from ChIP-seq. This is extensively used to draw conclusion on the importance of certain factors on 3D conformation.
+
+The CNN / DNN are quite well described in the paper and are both not really deep, i. e. have relatively few layers. Seems more adapted to running on a personal computer than a computing cluster, also considering a statement in the report that estimates the training time to be around 30min on a notebook computer.
+
+The network can only be trained on (80 x bin_size) submatrices and the predictions of larger matrices must thus be ensembles of multiple overlapping windows. The network this way limits the max. distance inherently to 80x bin size, here 800kbp. Each bin/bin interacting pair in the matrix is represented by one neuron of the final DNN layer (which comprises 80x81\2=3240 neurons). The correspondence Hi-C matrix pair - neuron is not stated, but should be arbitrary, as long as it is not mixed up during training and test phase. It is not clear how boundary handling has been done (left/right sequences do not exist at start/end of chromosomes). The given number of training pairs has not yet been understood. 
+
+At least two of the graphs in the report seem buggy and one is also low resolution.},
+  file       = {:farre2018_denseNeuralNetworksPredictingCC.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {{BMC} Bioinformatics},
+  keywords   = {read},
+  month      = {oct},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {read},
+  timestamp  = {2020.07.14},
+  year       = {2018},
+}
+
+@Article{LopezDelisle2020,
+  author    = {Lucille Lopez-Delisle and Leily Rabbani and Joachim Wolff and Vivek Bhardwaj and Rolf Backofen and Björn Grüning and Fidel Ram{\'{\i}}rez and Thomas Manke},
+  title     = {{pyGenomeTracks}: reproducible plots for multivariate genomic datasets},
+  doi       = {10.1093/bioinformatics/btaa692},
+  editor    = {Robinson Peter},
+  comment   = {For pygenometracks},
+  groups    = {foundations},
+  journal   = {Bioinformatics},
+  month     = {aug},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2020},
+}
+
+@Misc{TensorflowTV2020,
+  author       = {{Tensorflow authors}},
+  title        = {{tf.image.total\_variation}},
+  howpublished = {Online},
+  url          = {https://www.tensorflow.org/api_docs/python/tf/image/total_variation},
+  urldate      = {2021-02-25},
+  groups       = {LossFunctions},
+}
+
+@Article{Zhang2019,
+  author     = {Shilu Zhang and Deborah Chasman and Sara Knaack and Sushmita Roy},
+  title      = {In silico prediction of high-resolution {Hi-C} interaction matrices},
+  doi        = {10.1038/s41467-019-13423-8},
+  number     = {1},
+  url        = {https://github.com/Roy-lab/HiC-Reg},
+  volume     = {10},
+  file       = {fulltext:zhang2020_inSilicoPrediction.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {Nature Communications},
+  keywords   = {read},
+  month      = {dec},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {read},
+  timestamp  = {2020.08.12},
+  year       = {2019},
+}
+
+@Article{Rudin1992,
+  author    = {Leonid I. Rudin and Stanley Osher and Emad Fatemi},
+  title     = {Nonlinear total variation based noise removal algorithms},
+  doi       = {10.1016/0167-2789(92)90242-f},
+  number    = {1-4},
+  pages     = {259--268},
+  volume    = {60},
+  file      = {fulltext:Rudin1992_TV.pdf:PDF},
+  groups    = {foundations},
+  journal   = {Physica D: Nonlinear Phenomena},
+  month     = {nov},
+  publisher = {Elsevier {BV}},
+  year      = {1992},
+}
+
+@InProceedings{Johnson2016,
+  author    = {Justin Johnson and Alexandre Alahi and Li Fei-Fei},
+  booktitle = {Computer Vision {\textendash} {ECCV} 2016},
+  date      = {2016-03-27},
+  title     = {{P}erceptual {L}osses for {Real-Time} {S}tyle {T}ransfer and {Super-Resolution}},
+  doi       = {10.1007/978-3-319-46475-6_43},
+  pages     = {694--711},
+  publisher = {Springer International Publishing},
+  abstract  = {We consider image transformation problems, where an input image is transformed into an output image. Recent methods for such problems typically train feed-forward convolutional neural networks using a \emph{per-pixel} loss between the output and ground-truth images. Parallel work has shown that high-quality images can be generated by defining and optimizing \emph{perceptual} loss functions based on high-level features extracted from pretrained networks. We combine the benefits of both approaches, and propose the use of perceptual loss functions for training feed-forward networks for image transformation tasks. We show results on image style transfer, where a feed-forward network is trained to solve the optimization problem proposed by Gatys et al in real-time. Compared to the optimization-based method, our network gives similar qualitative results but is three orders of magnitude faster. We also experiment with single-image super-resolution, where replacing a per-pixel loss with a perceptual loss gives visually pleasing results.},
+  comment   = {partially relevant perception loss},
+  file      = {:Johnson2016 - Perceptual Losses for Real Time Style Transfer and Super Resolution.pdf:PDF},
+  groups    = {GAN-superresolution},
+  keywords  = {cs.CV, cs.LG},
+  year      = {2016},
+}
+
+@Article{Schreiber2017,
+  author     = {Jacob Schreiber and Maxwell Libbrecht and Jeffrey Bilmes and William Stafford Noble},
+  title      = {Nucleotide sequence and {DNaseI} sensitivity are predictive of 3D chromatin architecture},
+  doi        = {10.1101/103614},
+  comment    = {Authors propose Rambutan, a deep learning method to predict statistically significant DNA-DNA interactions from DNA sequence and DNase-seq data.
+Inputs are one-hot encoded DNA sequence, binary coded log-fold change in DNase-seq over control and binary coded distance with certain resolution (seems bit weird). The target labels for training are interactions called by Fit-Hi-C with certain q-values. Outputs are binary classifications into statistically significant interaction / no interaction.
+The idea behind using Fit-Hi-C significant contacts versus real Hi-C data is to avoid e.g. sequencing bias and distance dependency in experimental Hi-C data.
+
+For each potentially interacting pair, Rambutan uses combinations of CNN and max pooling layers and then concatenates the results again in a CNN-max pooling combination. The layers from the two branches of the interacting pair are then joined in a dense neural network, which also considers the binary coded distance. 
+
+Results are ok, but not better than just using the cell line on which Rambutan has been trained
+as a predictor for other cell lines. In this regard, the paper also contains a logical error which the
+authors noted just before publication. Not yet appeared in a scientific journal in corrected form.},
+  file       = {:schreiber2018_rambutanSequenceDNasePredict.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {bioRxiv},
+  keywords   = {skimmed},
+  month      = {jan},
+  owner      = {ralf},
+  publisher  = {Cold Spring Harbor Laboratory},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.27},
+  year       = {2017},
+}
+
+@Misc{Krauth2021b,
+  author       = {Ralf Krauth},
+  title        = {{DNN-pCC} github repository},
+  howpublished = {Online},
+  url          = {https://github.com/MasterprojectRK/DNN-pCC},
+}
+
+@Article{Rao2014,
+  author     = {Suhas~S.P. Rao and Miriam~H. Huntley and Neva~C. Durand and Elena~K. Stamenova and Ivan~D. Bochkov and James~T. Robinson and Adrian~L. Sanborn and Ido Machol and Arina~D. Omer and Eric~S. Lander and Erez~Lieberman Aiden},
+  title      = {A 3D Map of the Human Genome at Kilobase Resolution Reveals Principles of Chromatin Looping},
+  doi        = {10.1016/j.cell.2014.11.021},
+  number     = {7},
+  pages      = {1665--1680},
+  volume     = {159},
+  abstract   = {relevant as a data source and wrt arrowhead algorithm},
+  file       = {ft and supplementary:rao2014.pdf:PDF},
+  groups     = {overviewGeneral, partially relevant},
+  journal    = {Cell},
+  keywords   = {skimmed},
+  month      = {dec},
+  publisher  = {Elsevier {BV}},
+  readstatus = {skimmed},
+  year       = {2014},
+}
+
+@Article{Zufferey2018,
+  author     = {Marie Zufferey and Daniele Tavernari and Elisa Oricchio and Giovanni Ciriello},
+  title      = {Comparison of computational methods for the identification of topologically associating domains},
+  doi        = {10.1186/s13059-018-1596-9},
+  number     = {1},
+  volume     = {19},
+  abstract   = {Overview and extensive comparison of 22 TAD detection tools, including Hi-C explorer.
+This is insofar relevant for the thesis, as we try to penalize structural mismatches, which could be done by using a custom loss function based on TAD detection algorithms.
+Supplementary material 1 has nice short descriptions how the different algorithms work. 
+The tools can be grouped into four general approaches: Binning and linear score, clustering, statistical and graph-based. Most seem too difficult to implement on tensors and/or might take too long to compute. Some also have a large number of parameters, up to 13, making them difficult to tune.
+One of the assessment features was concordance with biological features, given here by CTCF and Cohesin subcomponents enrichment. In this regard, and combined with computational efficiency, TopDom, arrowhead and GMAP performed well.
+TopDom computes mean interaction frequencies within diamonds and then evaluates minima in the statistics for TAD boundary or not.
+Arrowhead uses a special transformation of the Hi-C matrix (should be possible with Tensors, see Rao2014) and then computes three scores on that using DP, taking bins with max. score as boundaries. GMAP is a statistical approach based on a 2-component Gaussian modeling interaction frequencies. It has several parameters.},
+  file       = {fulltext:zufferey2018_comparisonTadDetection.pdf:PDF;descriptionOfTools:zufferey2018_supp1.pdf:PDF},
+  groups     = {partially relevant, LossFunctions},
+  journal    = {Genome Biology},
+  keywords   = {read},
+  month      = {dec},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {read},
+  year       = {2018},
+}
+
+@Misc{Krauth2021a,
+  author       = {Ralf Krauth},
+  title        = {{Hi-cGAN} github repository},
+  howpublished = {Online},
+  url          = {https://github.com/MasterprojectRK/Hi-cGAN},
+}
+
+@Article{MacPherson2018,
+  author     = {Quinn MacPherson and Bruno Beltran and Andrew J. Spakowitz},
+  title      = {Bottom{\textendash}up modeling of chromatin segregation due to epigenetic modifications},
+  doi        = {10.1073/pnas.1812268115},
+  number     = {50},
+  pages      = {12739--12744},
+  volume     = {115},
+  comment    = {String-of-beads model considering H3K9me3 / HP1 induced contact patterns.
+Beads correspond to nucleosomes (147bp). Energy minimization by Monte Carlo sampling.
+
+Comparison real vs. predicted Hi-C matrix less shows convincing results than other approaches,
+but method also allows predicting interactions of very distant regions (much further apart
+than 1 Mb, whole chromosome).
+
+Focus of the work seems more on understanding how the HP1\H3K9me3 interplay influences spatial organisation of chromosomes.},
+  file       = {:macPherson2018_bottomUpModeling.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {Proceedings of the National Academy of Sciences},
+  keywords   = {read},
+  month      = {nov},
+  owner      = {ralf},
+  publisher  = {Proceedings of the National Academy of Sciences},
+  readstatus = {read},
+  timestamp  = {2020.07.14},
+  year       = {2018},
+}
+
+@Misc{brownlee2019,
+  author       = {Jason Brownlee},
+  title        = {{How to Implement Pix2Pix GAN Models From Scratch With Keras}},
+  howpublished = {Online},
+  url          = {https://machinelearningmastery.com/how-to-implement-pix2pix-gan-models-from-scratch-with-keras/},
+  urldate      = {2021-12-01},
+  groups       = {GAN-superresolution},
+}
+
+@Article{Phillips2009,
+  author    = {Jennifer E. Phillips and Victor G. Corces},
+  title     = {{CTCF}: {M}aster {W}eaver of the {G}enome},
+  doi       = {10.1016/j.cell.2009.06.001},
+  number    = {7},
+  pages     = {1194--1211},
+  volume    = {137},
+  journal   = {Cell},
+  month     = {jun},
+  publisher = {Elsevier {BV}},
+  year      = {2009},
+}
+
+@InProceedings{Simonyan2015,
+  author    = {Karen Simonyan and Andrew Zisserman},
+  booktitle = {3rd International Conference on Learning Representations ({ICLR}), San Diego, Conference Track Proceedings},
+  title     = {{V}ery {D}eep {C}onvolutional {N}etworks for {L}arge-{S}cale {I}mage {R}ecognition},
+  editor    = {Yoshua Bengio and Yann LeCun},
+  url       = {http://arxiv.org/abs/1409.1556},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  biburl    = {https://dblp.org/rec/journals/corr/SimonyanZ14a.bib},
+  comment   = {CNN 16 used for perceptual loss},
+  file      = {:simonyan2015_CNN16.pdf:PDF},
+  groups    = {partially relevant, machineLearning},
+  timestamp = {Wed, 17 Jul 2019 10:40:54 +0200},
+  year      = {2015},
+}
+
+@Article{Martens2020,
+  author     = {Laura D. Martens and Ois{\'{\i}}n Faust and Liviu Pirvan and D{\'{o}}ra Bihary and Shamith A. Samarajiwa},
+  title      = {Identifying regulatory and spatial genomic architectural elements using cell type independent machine and deep learning models},
+  doi        = {10.1101/2020.04.19.049585},
+  comment    = {Skimmed only very briefly!
+Authors predict highly interacting chromatin regions and TAD domain boundaries using
+ChIP-seq data from histone marks fed into boosted gradient trees and a neural network. Training is on Hi-C matrix derived data.
+Results are evaluated mathematically and look quite good, but no global interaction matrix can be 
+derived with the method.
+Might be interesting in terms of network topology, which is quite well explained, and has many references (about 100).},
+  file       = {:martens2020_tadBoundariesAndInteractionsNeuralNetworks.pdf:PDF},
+  groups     = {partially relevant},
+  journal    = {bioRxiv},
+  keywords   = {skimmed},
+  month      = {apr},
+  owner      = {ralf},
+  publisher  = {Cold Spring Harbor Laboratory},
+  readstatus = {skimmed},
+  timestamp  = {2020.08.19},
+  year       = {2020},
+}
+
+@Article{Wang2020,
+  author     = {Lei Wang and Wei Chen and Wenjia Yang and Fangming Bi and Fei Richard Yu},
+  title      = {A {State-of-the-Art} {R}eview on {I}mage {S}ynthesis with {G}enerative {A}dversarial {N}etworks},
+  doi        = {10.1109/access.2020.2982224},
+  pages      = {63514--63537},
+  volume     = {8},
+  file       = {fulltext:Wang2020_GAN-image-synthesis.pdf:PDF},
+  groups     = {GAN-superresolution},
+  journal    = {{IEEE} Access},
+  keywords   = {skimmed},
+  publisher  = {Institute of Electrical and Electronics Engineers ({IEEE})},
+  readstatus = {skimmed},
+  year       = {2020},
+}
+
+@Misc{ShiluZhang2019a,
+  author    = {{Shilu Zhang} and Chasman, Deborah and Knaack, Sara and {Sushmita Roy}},
+  title     = {In silico prediction of high-resolution Hi-C interaction matrices (part II)},
+  doi       = {10.5281/ZENODO.3525510},
+  copyright = {Creative Commons Attribution 4.0 International},
+  keywords  = {Hi-C, genomics, machine learning, 3D genome configuration, gene regulation},
+  publisher = {Zenodo},
+  year      = {2019},
+}
+
+@Article{Watson1953,
+  author    = {J. D. Watson and F. H. C. Crick},
+  title     = {{M}olecular {S}tructure of {N}ucleic {A}cids: {A} {S}tructure for {D}eoxyribose {N}ucleic {A}cid},
+  doi       = {10.1038/171737a0},
+  number    = {4356},
+  pages     = {737--738},
+  volume    = {171},
+  file      = {fulltext:watson1953_molecularstructureofDNAswatsoncrick.pdf:PDF},
+  groups    = {foundations},
+  journal   = {Nature},
+  month     = {apr},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {1953},
+}
+
+@Article{Schwessinger2019,
+  author     = {Ron Schwessinger and Matthew Gosden and Damien Downes and Richard Brown and Jelena Telenius and Yee Whye Teh and Gerton Lunter and Jim R. Hughes},
+  title      = {{DeepC}: Predicting chromatin interactions using megabase scaled deep neural networks and transfer learning},
+  doi        = {10.1101/724005},
+  comment    = {Authors present DeepC, a CNN to predict 3D interactions from DNA sequence.
+
+Approach consists of two CNNs, first train a CNN to predict chromatin features from DNA sequence,
+then predict interactions from sequence with a CNN followed by a dilated CNN.
+The CNN for phase 2 is seeded with the weights from phase 1 CNN, p. 14.
+
+Results are fairly blurry but otherwise capture main structures quite well, Pearson's R around 0.5 across all distances. 
+
+Interesting pyramidal quantile normalization of Hi-C matrices.},
+  file       = {:schwessinger2019_deepC.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {bioRxiv},
+  keywords   = {read},
+  month      = {aug},
+  owner      = {ralf},
+  publisher  = {Cold Spring Harbor Laboratory},
+  readstatus = {read},
+  timestamp  = {2020.07.22},
+  year       = {2019},
+}
+
+@Article{Huang2018,
+  author     = {Kai Huang and Vadim Backman and Igal Szleifer},
+  title      = {Interphase chromatin as a self-returning random walk: Can {DNA} fold into liquid trees?},
+  doi        = {10.1101/413872},
+  comment    = {Authors present an alternative model for DNA folding, liquid-tree-like, using a self-returning random walk. Cell line specific epigenetic factors are not considered.
+This paper is an example for DNA models different from the often used fractal polymer model.},
+  file       = {:huang2018_interphaseChromatinRandomWalk.pdf:PDF},
+  journal    = {bioRxiv},
+  keywords   = {skimmed},
+  month      = {sep},
+  owner      = {ralf},
+  publisher  = {Cold Spring Harbor Laboratory},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.15},
+  year       = {2018},
+}
+
+@InProceedings{Maas2013,
+  author    = {Andrew L. Maas and Awni Y. Hannun and Andrew Y. Ng},
+  booktitle = {ICML Workshop on Deep Learning for Audio, Speech and Language Processing},
+  title     = {Rectifier {N}onlinearities {I}mprove {N}eural {N}etwork {A}coustic {M}odels},
+  year      = {2013},
+}
+
+@InProceedings{Xu2018,
+  author    = {Tao Xu and Pengchuan Zhang and Qiuyuan Huang and Han Zhang and Zhe Gan and Xiaolei Huang and Xiaodong He},
+  booktitle = {2018 {IEEE}/{CVF} Conference on Computer Vision and Pattern Recognition},
+  title     = {{AttnGAN}: Fine-Grained Text to Image Generation with Attentional Generative Adversarial Networks},
+  doi       = {10.1109/cvpr.2018.00143},
+  publisher = {{IEEE}},
+  comment   = {Text encoder used by Zhu et al. and Tao et al.},
+  month     = {jun},
+  year      = {2018},
+}
+
+@Article{Johnson2007,
+  author    = {D. S. Johnson and A. Mortazavi and R. M. Myers and B. Wold},
+  title     = {Genome-Wide Mapping of in Vivo Protein-{DNA} Interactions},
+  doi       = {10.1126/science.1141319},
+  number    = {5830},
+  pages     = {1497--1502},
+  volume    = {316},
+  groups    = {foundations},
+  journal   = {Science},
+  month     = {6},
+  owner     = {ralf},
+  publisher = {American Association for the Advancement of Science ({AAAS})},
+  timestamp = {2019.10.29},
+  year      = {2007},
+}
+
+@Article{Zhou2016,
+  author    = {Jian Zhou and Olga G. Troyanskaya},
+  title     = {Probabilistic modelling of chromatin code landscape reveals functional diversity of enhancer-like chromatin states},
+  doi       = {10.1038/ncomms10528},
+  number    = {1},
+  volume    = {7},
+  abstract  = {Belongs to Farre and Emberly; they use this method to estimate chromatin states in drosophila (reduced to open/closed) from DAMID signals of 53 chromatin features.},
+  file      = {fulltext:zhou2016_probabilisticModelingChromStates.pdf:PDF},
+  groups    = {partially relevant},
+  journal   = {Nature Communications},
+  month     = {feb},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2016},
+}
+
+@Article{Lu2019,
+  author      = {Yingjing Lu},
+  date        = {2019-04-30},
+  title       = {{T}he {L}evel {W}eighted {S}tructural {S}imilarity {L}oss: {A} {S}tep {A}way from the {MSE}},
+  eprint      = {1904.13362},
+  eprintclass = {cs.CV},
+  eprinttype  = {arXiv},
+  abstract    = {The Mean Square Error (MSE) has shown its strength when applied in deep generative models such as Auto-Encoders to model reconstruction loss. However, in image domain especially, the limitation of MSE is obvious: it assumes pixel independence and ignores spatial relationships of samples. This contradicts most architectures of Auto-Encoders which use convolutional layers to extract spatial dependent features. We base on the structural similarity metric (SSIM) and propose a novel level weighted structural similarity (LWSSIM) loss for convolutional Auto-Encoders. Experiments on common datasets on various Auto-Encoder variants show that our loss is able to outperform the MSE loss and the Vanilla SSIM loss. We also provide reasons why our model is able to succeed in cases where the standard SSIM loss fails.},
+  comment     = {short and comprehensive paper on SSIM and its shortcomings as a loss functions.
+Proposing an enhanced version, Level-weighted SSIM, which uses weighted average over multiple window sizes and sums luminance and the product of contrast and structure instead of all multiplications.
+Results are better than SSIM and MSE, albeit not always much, depending on the model used (AE, VAE, MMD AE)},
+  file        = {:Lu2019 - The Level Weighted Structural Similarity Loss_ a Step Away from the MSE.pdf:PDF},
+  groups      = {LossFunctions},
+  keywords    = {cs.CV, cs.LG},
+}
+
+@Article{Yang2017,
+  author    = {Tao Yang and Feipeng Zhang and Galip Gürkan Yard{\i}mc{\i} and Fan Song and Ross C. Hardison and William Stafford Noble and Feng Yue and Qunhua Li},
+  title     = {{HiCRep}: assessing the reproducibility of {Hi-C} data using a stratum-adjusted correlation coefficient},
+  doi       = {10.1101/gr.220640.117},
+  number    = {11},
+  pages     = {1939--1949},
+  volume    = {27},
+  groups    = {foundations},
+  journal   = {Genome Research},
+  month     = {aug},
+  publisher = {Cold Spring Harbor Laboratory},
+  year      = {2017},
+}
+
+@Article{Pierro2017,
+  author     = {Michele Di Pierro and Ryan R. Cheng and Erez Lieberman Aiden and Peter G. Wolynes and Jos{\'{e}} N. Onuchic},
+  title      = {De novo prediction of human chromosome structures: {E}pigenetic marking patterns encode genome architecture},
+  doi        = {10.1073/pnas.1714980114},
+  number     = {46},
+  pages      = {12126--12131},
+  volume     = {114},
+  comment    = {Two-step procedure. First step is a neural network to determine one of five compartments (A1, A2, B1, B2, B3) from 11 ChIP-seq tracks, this is called MEGABASE. Second step is energy minimization 
+in a beads-on-a-string type model called MiChroM using energy values derived from the compartment types. 
+
+Results are good mathematically (Pearson, FISH comparisons) and available for full chromosomes,
+but resolution is only 50kbp.
+
+Conceptually a predecessor to Qi and Zhang (Qi2019).},
+  file       = {:diPierro2017_deNovoPrediction.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {Proceedings of the National Academy of Sciences},
+  keywords   = {read},
+  month      = {oct},
+  owner      = {ralf},
+  publisher  = {Proceedings of the National Academy of Sciences},
+  readstatus = {read},
+  timestamp  = {2020.07.14},
+  year       = {2017},
+}
+
+@Article{Tao2020,
+  author  = {M. Tao and Hao Tang and Songsong Wu and N. Sebe and F. Wu and Xiaoyuan Jing},
+  title   = {{DF-GAN}: {D}eep {F}usion {G}enerative {A}dversarial {N}etworks for {Text-to-Image} {S}ynthesis},
+  volume  = {abs/2008.05865},
+  file    = {fulltext:tao2020_df-gan.pdf:PDF},
+  journal = {ArXiv},
+  year    = {2020},
+}
+
+@Article{Hong2020,
+  author     = {Hao Hong and Shuai Jiang and Hao Li and Guifang Du and Yu Sun and Huan Tao and Cheng Quan and Chenghui Zhao and Ruijiang Li and Wanying Li and Xiaoyao Yin and Yangchen Huang and Cheng Li and Hebing Chen and Xiaochen Bo},
+  title      = {{DeepHiC}: A generative adversarial network for enhancing {Hi-C} data resolution},
+  doi        = {10.1371/journal.pcbi.1007287},
+  editor     = {Ferhat Ay},
+  number     = {2},
+  pages      = {e1007287},
+  volume     = {16},
+  abstract   = {Authors describe DeepHiC, a cGAN network to increase resolution of downsampled Hi-C matrices.
+While this is not so relevant for the thesis, several sub-aspects are (p16 ff.):
+- SSIM structural similarity index as a metric, but could also be chosen as custom loss
+- perceptual loss
+- TV total variation loss to get sharp images
+Network is quite well described, including many parameters, and sources available on github.
+Valuable source for references (perceptual loss, TV loss).},
+  file       = {:hong2020_DeepHiC.pdf:PDF;network:hong2020_figS1.png:PNG},
+  groups     = {partially relevant, GAN-superresolution, LossFunctions},
+  journal    = {{PLOS} Computational Biology},
+  keywords   = {skimmed},
+  month      = {feb},
+  owner      = {ralf},
+  publisher  = {Public Library of Science ({PLoS})},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.15},
+  year       = {2020},
+}
+
+@InProceedings{Zhu2019,
+  author    = {Minfeng Zhu and Pingbo Pan and Wei Chen and Yi Yang},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  title     = {{DM-GAN}: {D}ynamic {M}emory {G}enerative {A}dversarial {N}etworks for {Text-To-Image} {S}ynthesis},
+  pages     = {5802--5810},
+  file      = {fulltext:minfeng2019_dmgan.pdf:PDF},
+  groups    = {GAN-superresolution},
+  month     = {June},
+  year      = {2019},
+}
+
+@Article{Kai2018,
+  author     = {Yan Kai and Jaclyn Andricovich and Zhouhao Zeng and Jun Zhu and Alexandros Tzatsos and Weiqun Peng},
+  title      = {Predicting {CTCF}-mediated chromatin interactions by integrating genomic and epigenomic features},
+  doi        = {10.1038/s41467-018-06664-6},
+  number     = {1},
+  volume     = {9},
+  comment    = {Authors present Lollipop, a random forest classifier for predicting DNA-DNA interactions
+from various data source.
+Inputs are real loops derived from ChIA-PET data, CTCF motif orientation and signal strength, loop length, epigenomic factors (ChIP-seq), gene expression (RNA-seq) and DNase-seq data.
+Output is a binary prediction: interacting or not.
+The random forest also considers neighboring and window features, similar to Zhang et al.},
+  file       = {:kai2018_PredictingCTCFmediatedInteractions.pdf:PDF},
+  groups     = {partially relevant},
+  journal    = {Nature Communications},
+  keywords   = {skimmed},
+  month      = {oct},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {skimmed},
+  timestamp  = {2020.07.22},
+  year       = {2018},
+}
+
+@Article{PhillipsCremins2013,
+  author    = {Jennifer E. Phillips-Cremins and Michael E. G. Sauria and Amartya Sanyal and Tatiana I. Gerasimova and Bryan R. Lajoie and Joshua S. K. Bell and Chin-Tong Ong and Tracy A. Hookway and Changying Guo and Yuhua Sun and Michael J. Bland and William Wagstaff and Stephen Dalton and Todd C. McDevitt and Ranjan Sen and Job Dekker and James Taylor and Victor G. Corces},
+  title     = {{A}rchitectural {P}rotein {S}ubclasses {S}hape {3D} {O}rganization of {G}enomes during {L}ineage {C}ommitment},
+  doi       = {10.1016/j.cell.2013.04.053},
+  number    = {6},
+  pages     = {1281--1295},
+  volume    = {153},
+  groups    = {foundations},
+  journal   = {Cell},
+  month     = {jun},
+  publisher = {Elsevier {BV}},
+  year      = {2013},
+}
+
+@Misc{wikiTV2021,
+  title        = {Wikipedia entry on total variation denoising},
+  howpublished = {Online},
+  url          = {https://en.wikipedia.org/wiki/Total_variation_denoising},
+  urldate      = {2021-04-10},
+}
+
+@InProceedings{Isola2017,
+  author    = {Phillip Isola and Jun-Yan Zhu and Tinghui Zhou and Alexei A. Efros},
+  booktitle = {2017 {IEEE} Conference on Computer Vision and Pattern Recognition ({CVPR})},
+  title     = {{Image-to-Image} {T}ranslation with {C}onditional {A}dversarial {N}etworks},
+  doi       = {10.1109/CVPR.2017.632},
+  pages     = {5967-5976},
+  comment   = {This is the basic paper for pix2pix.
+Source for MSE and MAE producing blurry results in image regression tasks},
+  file      = {:isola2017.pdf:PDF},
+  groups    = {GAN-superresolution},
+  month     = {jul},
+  year      = {2017},
+}
+
+@Misc{Chollet2015,
+  author = {Chollet, Fran\c{c}ois and others},
+  title  = {Keras},
+  url    = {https://keras.io},
+  groups = {foundations},
+  year   = {2015},
+}
+
+@Article{Liu2019,
+  author    = {Qiao Liu and Hairong Lv and Rui Jiang},
+  title     = {{hicGAN} infers super resolution Hi-C data with generative adversarial networks},
+  doi       = {10.1093/bioinformatics/btz317},
+  number    = {14},
+  pages     = {i99--i107},
+  volume    = {35},
+  file      = {:liu2019_hicGAN.pdf:PDF},
+  groups    = {GAN-superresolution},
+  journal   = {Bioinformatics},
+  month     = {jul},
+  owner     = {ralf},
+  publisher = {Oxford University Press ({OUP})},
+  timestamp = {2020.07.15},
+  year      = {2019},
+}
+
+@Article{Bonev2016,
+  author    = {Boyan Bonev and Giacomo Cavalli},
+  title     = {Organization and function of the {3D} genome},
+  doi       = {10.1038/nrg.2016.112},
+  number    = {11},
+  pages     = {661--678},
+  volume    = {17},
+  groups    = {foundations},
+  journal   = {Nature Reviews Genetics},
+  month     = {oct},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2016},
+}
+
+@Article{Wolff2018,
+  author    = {Joachim Wolff and Vivek Bhardwaj and Stephan Nothjunge and Gautier Richard and Gina Renschler and Ralf Gilsbach and Thomas Manke and Rolf Backofen and Fidel Ram{\'{\i}}rez and Björn A. Grüning},
+  title     = {{G}alaxy {HiCExplorer}: a web server for reproducible {Hi-C} data analysis, quality control and visualization},
+  doi       = {10.1093/nar/gky504},
+  number    = {W1},
+  pages     = {W11--W16},
+  volume    = {46},
+  comment   = {for hicFindTADs},
+  journal   = {Nucleic Acids Research},
+  month     = {jun},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2018},
+}
+
+@Article{Fudenberg2019,
+  author     = {Geoff Fudenberg and David R. Kelley and Katherine S. Pollard},
+  title      = {Predicting 3D genome folding from {DNA} sequence},
+  doi        = {10.1101/800060},
+  comment    = {Authors present Akita, a CNN to predict genome folding from DNA sequence alone.
+Results look ok for predictions in same species, transfer from human to mouse less so. 
+Differences in various cell lines rather minor.
+
+CNN takes 1hot encoded DNA as input, uses trunk and head networks to predict 2D Hi-C map.
+Trunk works on 1D vectors using various layers of convolution filters. Head converts 1D representations to 2D by averaging and including distance information followed by convolutional filters and additionally enforcing symmetry.
+Training is on Hi-C matrices from Rao 2014 and Micro-C datasets from Krietstein 2019.
+Various measures have been taken to improve learning, including data augmentation and parameter optimization with Dragonfly Bayesian optimization toolkit.
+
+Resolution is fixed at 2048bp and matrices have been cut into about 1Mb chunks for training and prediction.
+
+Main focus of the work are determining influences of SNPs and other DNA variants on 3D structure.},
+  file       = {:fudenberg2019_predicting3DfromDNAalone.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {bioRxiv},
+  keywords   = {read},
+  month      = {oct},
+  owner      = {ralf},
+  publisher  = {Cold Spring Harbor Laboratory},
+  readstatus = {read},
+  timestamp  = {2020.07.22},
+  year       = {2019},
+}
+
+@Article{Dimmick2020,
+  author    = {Michael C. Dimmick and Leo J. Lee and Brendan J. Frey},
+  title     = {{HiCSR}: a {Hi-C} super-resolution framework for producing highly realistic contact maps},
+  doi       = {10.1101/2020.02.24.961714},
+  file      = {:dimmick2020_HicsrSuperResolution.pdf:PDF},
+  groups    = {GAN-superresolution},
+  journal   = {bioRxiv},
+  month     = {feb},
+  owner     = {ralf},
+  publisher = {Cold Spring Harbor Laboratory},
+  timestamp = {2020.07.22},
+  year      = {2020},
+}
+
+@Article{Bendandi2020,
+  author    = {Artemi Bendandi and Silvia Dante and Syeda Rehana Zia and Alberto Diaspro and Walter Rocchia},
+  title     = {{C}hromatin {C}ompaction {M}ultiscale {M}odeling: {A} {C}omplex {S}ynergy {B}etween {T}heory, {S}imulation, and {E}xperiment},
+  doi       = {10.3389/fmolb.2020.00015},
+  volume    = {7},
+  abstract  = {Different approaches for chromatin modeling are presented},
+  journal   = {Frontiers in Molecular Biosciences},
+  month     = {feb},
+  publisher = {Frontiers Media {SA}},
+  year      = {2020},
+}
+
+@Article{Smallwood2013,
+  author    = {Andrea Smallwood and Bing Ren},
+  title     = {Genome organization and long-range regulation of gene expression by enhancers},
+  doi       = {10.1016/j.ceb.2013.02.005},
+  number    = {3},
+  pages     = {387--394},
+  volume    = {25},
+  groups    = {foundations},
+  journal   = {Current Opinion in Cell Biology},
+  month     = {jun},
+  publisher = {Elsevier {BV}},
+  year      = {2013},
+}
+
+@Article{Nikumbh2017,
+  author     = {Sarvesh Nikumbh and Nico Pfeifer},
+  title      = {Genetic sequence-based prediction of long-range chromatin interactions suggests a potential role of short tandem repeat sequences in genome organization},
+  doi        = {10.1186/s12859-017-1624-x},
+  number     = {1},
+  volume     = {18},
+  comment    = {Authors present a support vector machine (SVM) which learns to classify interacting / non-interacting pairs of DNA sequences from 5C data.
+Main focus is on predicting long-range interactions, and based on sequence alone, using the so-called oligomer-distance-histogram representation for DNA to get vectors of the same length for all loci (otherwise not the case for 5C data).
+This approach is not intended for full interaction matrix prediction but might be useful in TAD boundary prediction or prediction of 3D structure from Hi-C data etc.
+It is shown that 3- and 5-mer repeats are among the driving factors for interactions.
+Since the SVM is used as a classifier, only binary output, i.e. interaction / no interaction, however, for training, there is also a third class, none of the two, if there is interaction at certain resolution / in a certain replicate but not in all of them.},
+  file       = {:nikumbh2017_sequenceBasedLongRangePrediction.pdf:PDF;supplementary material:nikumbh2017_supplementary.pdf:PDF},
+  groups     = {partially relevant},
+  journal    = {{BMC} Bioinformatics},
+  keywords   = {read},
+  month      = {apr},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {read},
+  timestamp  = {2020.07.30},
+  year       = {2017},
+}
+
+@Misc{pandasPearson,
+  author       = {{pandas development team}},
+  title        = {Pearson correlation in pandas},
+  howpublished = {Online},
+  url          = {https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html},
+}
+
+@Article{Chathoth2019,
+  author    = {Keerthi T. Chathoth and Nicolae Radu Zabet},
+  title     = {Chromatin architecture reorganization during neuronal cell differentiation in Drosophila genome},
+  doi       = {10.1101/gr.246710.118},
+  number    = {4},
+  pages     = {613--625},
+  volume    = {29},
+  abstract  = {Article showing  changes in 3D spatial structure of chromatin during cell differentiation},
+  groups    = {overviewGeneral, foundations},
+  journal   = {Genome Research},
+  month     = {feb},
+  publisher = {Cold Spring Harbor Laboratory},
+  year      = {2019},
+}
+
+@Article{Gorkin2014,
+  author    = {David U. Gorkin and Danny Leung and Bing Ren},
+  title     = {The 3D Genome in Transcriptional Regulation and Pluripotency},
+  doi       = {10.1016/j.stem.2014.05.017},
+  number    = {6},
+  pages     = {762--775},
+  volume    = {14},
+  groups    = {foundations},
+  journal   = {Cell Stem Cell},
+  month     = {jun},
+  publisher = {Elsevier {BV}},
+  year      = {2014},
+}
+
+@Article{Tsirikoglou2020,
+  author    = {A. Tsirikoglou and G. Eilertsen and J. Unger},
+  title     = {{A} {S}urvey of {I}mage {S}ynthesis {M}ethods for {V}isual {M}achine {L}earning},
+  doi       = {10.1111/cgf.14047},
+  number    = {6},
+  pages     = {426--451},
+  volume    = {39},
+  file      = {fulltext:tsirikoglou2020_surveyImageSynthesisCV.pdf:PDF},
+  groups    = {machineLearning},
+  journal   = {Computer Graphics Forum},
+  month     = {sep},
+  publisher = {Wiley},
+  year      = {2020},
+}
+
+@InProceedings{Wang2003,
+  author    = {Z. Wang and E. P. Simoncelli and A. C. Bovik},
+  booktitle = {The Thrity-Seventh Asilomar Conference on Signals, Systems {\&} Computers, 2003},
+  title     = {Multiscale structural similarity for image quality assessment},
+  doi       = {10.1109/acssc.2003.1292216},
+  publisher = {{IEEE}},
+  comment   = {The paper specifying MS-SSIM},
+  file      = {fulltext:wang2003_MS-SSIM.pdf:PDF},
+  groups    = {LossFunctions},
+}
+
+@Article{Schuettengruber2014,
+  author    = {Bernd Schuettengruber and Noa Oded Elkayam and Tom Sexton and Marianne Entrevan and Shani Stern and Aubin Thomas and Eitan Yaffe and Hugues Parrinello and Amos Tanay and Giacomo Cavalli},
+  title     = {{C}ooperativity, {S}pecificity, and {E}volutionary {S}tability of {P}olycomb {T}argeting in {D}rosophila},
+  doi       = {10.1016/j.celrep.2014.08.072},
+  number    = {1},
+  pages     = {219--233},
+  volume    = {9},
+  comment   = {Hi-C data for Farre et al},
+  file      = {ft:schuettengruber2014_drosophila.pdf:PDF},
+  groups    = {foundations},
+  journal   = {Cell Reports},
+  month     = {oct},
+  publisher = {Elsevier {BV}},
+  year      = {2014},
+}
+
+@TechReport{Krauth2020,
+  author      = {Ralf Krauth},
+  institution = {Albert-Ludwigs Universität Freiburg},
+  title       = {Improving predictions of {Hi-C} matrices from {ChIP-seq} data},
+  url         = {https://github.com/MasterprojectRK/HiCPrediction},
+  groups      = {fullyRelevant},
+  keywords    = {read},
+  owner       = {ralf},
+  readstatus  = {read},
+  timestamp   = {2020.08.17},
+  year        = {2020},
+}
+
+@Article{Shin2015,
+  author    = {Hanjun Shin and Yi Shi and Chao Dai and Harianto Tjong and Ke Gong and Frank Alber and Xianghong Jasmine Zhou},
+  title     = {{TopDom}: an efficient and deterministic method for identifying topological domains in genomes},
+  doi       = {10.1093/nar/gkv1505},
+  number    = {7},
+  pages     = {e70},
+  volume    = {44},
+  abstract  = {Partially relevant for the TopDOM algorithm to find TAD boundaries},
+  file      = {:shin2015_topdom.pdf:PDF},
+  groups    = {partially relevant},
+  journal   = {Nucleic Acids Research},
+  month     = {dec},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2015},
+}
+
+@InCollection{Ronneberger2015,
+  author    = {Olaf Ronneberger and Philipp Fischer and Thomas Brox},
+  booktitle = {Lecture Notes in Computer Science},
+  title     = {{U-Net}: {C}onvolutional {N}etworks for {B}iomedical {I}mage {S}egmentation},
+  doi       = {10.1007/978-3-319-24574-4_28},
+  editor    = {Nassir Navab and Joachim Hornegger and William M. Fells and Alejandro F. Frangi},
+  isbn      = {978-3-319-24574-4},
+  pages     = {234--241},
+  publisher = {Springer International Publishing},
+  abstract  = {There is large consent that successful training of deep networks requires many thousand annotated training samples. In this paper, we present a network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently. The architecture consists of a contracting path to capture context and a symmetric expanding path that enables precise localization. We show that such a network can be trained end-to-end from very few images and outperforms the prior best method (a sliding-window convolutional network) on the ISBI challenge for segmentation of neuronal structures in electron microscopic stacks. Using the same network trained on transmitted light microscopy images (phase contrast and DIC) we won the ISBI cell tracking challenge 2015 in these categories by a large margin. Moreover, the network is fast. Segmentation of a 512x512 image takes less than a second on a recent GPU. The full implementation (based on Caffe) and the trained networks are available at http://lmb.informatik.uni-freiburg.de/people/ronneber/u-net},
+  address   = {Cham},
+  groups    = {foundations},
+  year      = {2015},
+}
+
+@Article{Bkhetan2018,
+  author     = {Ziad Al Bkhetan and Dariusz Plewczynski},
+  title      = {Three-dimensional Epigenome Statistical Model: Genome-wide Chromatin Looping Prediction},
+  doi        = {10.1038/s41598-018-23276-8},
+  number     = {1},
+  volume     = {8},
+  comment    = {Authors present 3DEpiLoop to predict loops within TADs from ChIP-seq peaks (MACS2) using random forests.
+Results look ok, but are of course not dense, since there are not that many peaks and some were
+filtered out by additional measures described in the paper.},
+  file       = {:bkhetan2018_genomeWideChromatinLoopingPrediction.pdf:PDF},
+  groups     = {partially relevant},
+  journal    = {Scientific Reports},
+  keywords   = {read},
+  month      = {mar},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {read},
+  timestamp  = {2020.07.22},
+  year       = {2018},
+}
+
+@Misc{tfpix2pix2020,
+  author       = {{Tensorflow authors}},
+  title        = {{Pix2Pix Tutorial}},
+  howpublished = {Online},
+  url          = {https://www.tensorflow.org/tutorials/generative/pix2pix},
+  urldate      = {2020-12-01},
+  groups       = {GAN-superresolution},
+}
+
+@InProceedings{Szegedy2016,
+  author    = {Christian Szegedy and Vincent Vanhoucke and Sergey Ioffe and Jon Shlens and Zbigniew Wojna},
+  booktitle = {2016 {IEEE} Conference on Computer Vision and Pattern Recognition ({CVPR})},
+  title     = {{R}ethinking the {I}nception {A}rchitecture for {C}omputer {V}ision},
+  doi       = {10.1109/cvpr.2016.308},
+  publisher = {{IEEE}},
+  month     = {jun},
+  year      = {2016},
+}
+
+@TechReport{Bajorat2019,
+  author      = {Andre Bajorat},
+  institution = {Albert-Ludwigs Universität Freiburg},
+  title       = {{Hi-C} {P}redictions based on protein levels},
+  url         = {https://www.bioinf.uni-freiburg.de/Lehre/Theses/TP_Andre_Bajorat.pdf},
+  urldate     = {2020-11-01},
+  groups      = {fullyRelevant},
+  keywords    = {read},
+  owner       = {ralf},
+  readstatus  = {read},
+  timestamp   = {2020.08.17},
+  year        = {2019},
+}
+
+@Article{Dixon2015,
+  author    = {Jesse R. Dixon and Inkyung Jung and Siddarth Selvaraj and Yin Shen and Jessica E. Antosiewicz-Bourget and Ah Young Lee and Zhen Ye and Audrey Kim and Nisha Rajagopal and Wei Xie and Yarui Diao and Jing Liang and Huimin Zhao and Victor V. Lobanenkov and Joseph R. Ecker and James A. Thomson and Bing Ren},
+  title     = {Chromatin architecture reorganization during stem cell differentiation},
+  doi       = {10.1038/nature14222},
+  number    = {7539},
+  pages     = {331--336},
+  volume    = {518},
+  groups    = {foundations},
+  journal   = {Nature},
+  month     = {feb},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2015},
+}
+
+@Article{Davis2017,
+  author    = {Carrie A. Davis and Benjamin C. Hitz and Cricket A. Sloan and Esther T. Chan and Jean M. Davidson and Idan Gabdank and Jason A. Hilton and Kriti Jain and Ulugbek K. Baymuradov and Aditi K. Narayanan and Kathrina C. Onate and Keenan Graham and Stuart R. Miyasato and Timothy R. Dreszer and J. Seth Strattan and Otto Jolanki and Forrest Y. Tanaka and J. Michael Cherry},
+  title     = {{T}he {E}ncyclopedia of {DNA} elements ({ENCODE}): data portal update},
+  doi       = {10.1093/nar/gkx1081},
+  number    = {D1},
+  pages     = {D794--D801},
+  volume    = {46},
+  groups    = {foundations},
+  journal   = {Nucleic Acids Research},
+  month     = {nov},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2017},
+}
+
+@Article{Roy2010,
+  author    = {S. Roy and J. Ernst and P. V. Kharchenko and P. Kheradpour and N. Negre and M. L. Eaton and J. M. Landolin and C. A. Bristow and L. Ma and M. F. Lin and S. Washietl and B. I. Arshinoff and F. Ay and P. E. Meyer and N. Robine and N. L. Washington and L. Di Stefano and E. Berezikov and C. D. Brown and R. Candeias and J. W. Carlson and A. Carr and I. Jungreis and D. Marbach and R. Sealfon and M. Y. Tolstorukov and S. Will and A. A. Alekseyenko and C. Artieri and B. W. Booth and A. N. Brooks and Q. Dai and C. A. Davis and M. O. Duff and X. Feng and A. A. Gorchakov and T. Gu and J. G. Henikoff and P. Kapranov and R. Li and H. K. MacAlpine and J. Malone and A. Minoda and J. Nordman and K. Okamura and M. Perry and S. K. Powell and N. C. Riddle and A. Sakai and A. Samsonova and J. E. Sandler and Y. B. Schwartz and N. Sher and R. Spokony and D. Sturgill and M. van Baren and K. H. Wan and L. Yang and C. Yu and E. Feingold and P. Good and M. Guyer and R. Lowdon and K. Ahmad and J. Andrews and B. Berger and S. E. Brenner and M. R. Brent and L. Cherbas and S. C. R. Elgin and T. R. Gingeras and R. Grossman and R. A. Hoskins and T. C. Kaufman and W. Kent and M. I. Kuroda and T. Orr-Weaver and N. Perrimon and V. Pirrotta and J. W. Posakony and B. Ren and S. Russell and P. Cherbas and B. R. Graveley and S. Lewis and G. Micklem and B. Oliver and P. J. Park and S. E. Celniker and S. Henikoff and G. H. Karpen and E. C. Lai and D. M. MacAlpine and L. D. Stein and K. P. White and M. Kellis and D. Acevedo and R. Auburn and G. Barber and H. J. Bellen and E. P. Bishop and T. D. Bryson and A. Chateigner and J. Chen and H. Clawson and C. L. G. Comstock and S. Contrino and L. C. DeNapoli and Q. Ding and A. Dobin and M. H. Domanus and J. Drenkow and S. Dudoit and J. Dumais and T. Eng and D. Fagegaltier and S. E. Gadel and S. Ghosh and F. Guillier and D. Hanley and G. J. Hannon and K. D. Hansen and E. Heinz and A. S. Hinrichs and M. Hirst and S. Jha and L. Jiang and Y. L. Jung and H. Kashevsky and C. D. Kennedy and E. T. Kephart and L. Langton and O.-K. Lee and S. Li and Z. Li and W. Lin and D. Linder-Basso and P. Lloyd and R. Lyne and S. E. Marchetti and M. Marra and N. R. Mattiuzzo and S. McKay and F. Meyer and D. Miller and S. W. Miller and R. A. Moore and C. A. Morrison and J. A. Prinz and M. Rooks and R. Moore and K. M. Rutherford and P. Ruzanov and D. A. Scheftner and L. Senderowicz and P. K. Shah and G. Shanower and R. Smith and E. O. Stinson and S. Suchy and A. E. Tenney and F. Tian and K. J. T. Venken and H. Wang and R. White and J. Wilkening and A. T. Willingham and C. Zaleski and Z. Zha and D. Zhang and Y. Zhao and J. Zieba},
+  title     = {Identification of {F}unctional {E}lements and {R}egulatory {C}ircuits by {D}rosophila {modENCODE}},
+  doi       = {10.1126/science.1198374},
+  number    = {6012},
+  pages     = {1787--1797},
+  volume    = {330},
+  comment   = {the ChIP-seq data for Farre et al},
+  groups    = {foundations},
+  journal   = {Science},
+  month     = {dec},
+  publisher = {American Association for the Advancement of Science ({AAAS})},
+  year      = {2010},
+}
+
+@Article{Singh2016,
+  author    = {Shashank Singh and Yang Yang and Barnab{\'{a}}s P{\'{o}}czos and Jian Ma},
+  title     = {Predicting Enhancer-Promoter Interaction from Genomic Sequence with Deep Neural Networks},
+  doi       = {10.1101/085241},
+  comment   = {preprint of SPEID by Singh et al. finally published in 2019},
+  groups    = {partially relevant},
+  journal   = {bioRxiv},
+  month     = {nov},
+  owner     = {ralf},
+  publisher = {Cold Spring Harbor Laboratory},
+  timestamp = {2020.08.24},
+  year      = {2016},
+}
+
+@InCollection{Lee2001,
+  author    = {J. Y. Lee and T. L. Orr-Weaver},
+  booktitle = {Encyclopedia of Genetics},
+  title     = {Chromatin},
+  doi       = {10.1006/rwgn.2001.0199},
+  pages     = {340--343},
+  publisher = {Elsevier},
+  groups    = {foundations},
+  year      = {2001},
+}
+
+@Article{Farre2018,
+  author     = {Pau Farr{\'{e}} and Eldon Emberly},
+  title      = {A maximum-entropy model for predicting chromatin contacts},
+  doi        = {10.1371/journal.pcbi.1005956},
+  editor     = {Alexandre V. Morozov},
+  number     = {2},
+  pages      = {e1005956},
+  volume     = {14},
+  comment    = {Authors predict Hi-C matrices from binary chromatin states (open/closed) using a simple statistical
+model based on Bayes Rule and entropy maximization.
+The chromatin states are derived from 53 DamID signals from Drosophila.
+The chromatin is split into 10kbp bins, thus the results are quite coarse, but look interesting, especially for such a simple model.
+The method should work with ChIP-seq data and in other species, too.},
+  file       = {:farre2018_maxEntropyModel.pdf:PDF},
+  groups     = {fullyRelevant},
+  journal    = {{PLOS} Computational Biology},
+  keywords   = {read},
+  month      = {feb},
+  owner      = {ralf},
+  publisher  = {Public Library of Science ({PLoS})},
+  readstatus = {read},
+  timestamp  = {2020.07.14},
+  year       = {2018},
+}
+
+@Article{Singh2019,
+  author     = {Shashank Singh and Yang Yang and Barnab{\'{a}}s P{\'{o}}czos and Jian Ma},
+  title      = {Predicting enhancer-promoter interaction from genomic sequence with deep neural networks},
+  doi        = {10.1007/s40484-019-0154-0},
+  number     = {2},
+  pages      = {122--137},
+  volume     = {7},
+  comment    = {The authors present SPEID, a computational approach to identify promoter-enhancer interactions from DNA sequence alone.
+Interestingly, the published results seem better than with TargetFinder by Whalen et al. 2016, who used many genomic features instead.
+Not really intended for chromosome-wide interaction prediction, although this should be possible by sliding windows along the DNA sequence, since the output of SPEID is an interaction probability.
+The method comprises convolutional networks (CNN), a recurrent network (long-short term memory, LSTM) and a dense network.},
+  file       = {:singh2019_PredictingEnhancerPromoterInteractionsSpeid.pdf:PDF},
+  groups     = {partially relevant},
+  journal    = {Quantitative Biology},
+  keywords   = {skimmed},
+  month      = {jun},
+  owner      = {ralf},
+  publisher  = {Springer Science and Business Media {LLC}},
+  readstatus = {skimmed},
+  timestamp  = {2020.08.03},
+  year       = {2019},
+}
+
+@InProceedings{Reed2016,
+  author    = {Reed, Scott and Akata, Zeynep and Yan, Xinchen and Logeswaran, Lajanugen and Schiele, Bernt and Lee, Honglak},
+  booktitle = {Proceedings of the 33rd International Conference on Machine Learning (ICML)},
+  title     = {{G}enerative {A}dversarial {T}ext to {I}mage {S}ynthesis},
+  pages     = {1060--1069},
+  volume    = {48},
+  abstract  = {Automatic synthesis of realistic images from text would be interesting and useful, but current AI systems are still far from this goal. However, in recent years generic and powerful recurrent neural network architectures have been developed to learn discriminative text feature representations. Meanwhile, deep convolutional generative adversarial networks (GANs) have begun to generate highly compelling images of specific categories, such as faces, album covers, and room interiors. In this work, we develop a novel deep architecture and GAN formulation to effectively bridge these advances in text and image modeling, translating visual concepts from characters to pixels. We demonstrate the capability of our model to generate plausible images of birds and flowers from detailed text descriptions.},
+  file      = {fulltext:reed16_imageFromText.pdf:PDF},
+  groups    = {GAN-superresolution},
+  numpages  = {10},
+  year      = {2016},
+}
+
+@Article{Encode2012,
+  author    = {{ENCODE Project Consortium}},
+  title     = {An integrated encyclopedia of {DNA} elements in the human genome},
+  doi       = {10.1038/nature11247},
+  number    = {7414},
+  pages     = {57--74},
+  url       = {https://www.encodeproject.org},
+  volume    = {489},
+  groups    = {foundations},
+  journal   = {Nature},
+  month     = {sep},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2012},
+}
+
+@Misc{Abadi2015,
+  author = {Martin Abadi and Ashish Agarwal and Paul Barham and Eugene Brevdo and Zhifeng Chen and Craig Citro and Greg S. Corrado and Andy Davis and Jeffrey Dean and Matthieu Devin and Sanjay Ghemawat and Ian Goodfellow and Andrew Harp and Geoffrey Irving and Michael Isard and Yangqing Jia and Rafal Jozefowicz and Lukasz Kaiser and Manjunath Kudlur and Josh Levenberg and Dandelion Man\'{e} and Rajat Monga and Sherry Moore and Derek Murray and Chris Olah and Mike Schuster and Jonathon Shlens and Benoit Steiner and Ilya Sutskever and Kunal Talwar and Paul Tucker and Vincent Vanhoucke and Vijay Vasudevan and Fernanda Vi\'{e}gas and Oriol Vinyals and Pete Warden and Martin Wattenberg and Martin Wicke and Yuan Yu and Xiaoqiang Zheng},
+  title  = {{TensorFlow}: {L}arge-{S}cale {M}achine {L}earning on {H}eterogeneous {S}ystems},
+  note   = {Software available from tensorflow.org},
+  url    = {https://www.tensorflow.org/},
+  groups = {foundations},
+  year   = {2015},
+}
+
+@Article{Robertson2007,
+  author    = {Gordon Robertson and Martin Hirst and Matthew Bainbridge and Misha Bilenky and Yongjun Zhao and Thomas Zeng and Ghia Euskirchen and Bridget Bernier and Richard Varhol and Allen Delaney and Nina Thiessen and Obi L. Griffith and Ann He and Marco Marra and Michael Snyder and Steven Jones},
+  title     = {Genome-wide profiles of {STAT}1 {DNA} association using chromatin immunoprecipitation and massively parallel sequencing},
+  doi       = {10.1038/nmeth1068},
+  number    = {8},
+  pages     = {651--657},
+  volume    = {4},
+  groups    = {foundations},
+  journal   = {Nature Methods},
+  month     = jun,
+  owner     = {ralf},
+  publisher = {Springer Nature},
+  timestamp = {2019.10.29},
+  year      = {2007},
+}
+
+@Article{Langmead2012,
+  author    = {Ben Langmead and Steven L. Salzberg},
+  title     = {Fast gapped-read alignment with {Bowtie 2}},
+  doi       = {10.1038/nmeth.1923},
+  number    = {4},
+  pages     = {357--359},
+  volume    = {9},
+  journal   = {Nature Methods},
+  month     = {mar},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2012},
+}
+
+@Article{LiebermanAiden2009,
+  author    = {E. Lieberman-Aiden and N. L. van Berkum and L. Williams and M. Imakaev and T. Ragoczy and A. Telling and I. Amit and B. R. Lajoie and P. J. Sabo and M. O. Dorschner and R. Sandstrom and B. Bernstein and M. A. Bender and M. Groudine and A. Gnirke and J. Stamatoyannopoulos and L. A. Mirny and E. S. Lander and J. Dekker},
+  title     = {Comprehensive Mapping of Long-Range Interactions Reveals Folding Principles of the Human Genome},
+  doi       = {10.1126/science.1181369},
+  number    = {5950},
+  pages     = {289--293},
+  volume    = {326},
+  abstract  = {The basic paper on Hi-C},
+  groups    = {overviewGeneral},
+  journal   = {Science},
+  month     = {oct},
+  publisher = {American Association for the Advancement of Science ({AAAS})},
+  year      = {2009},
+}
+
+@Misc{mirza2014,
+  author        = {Mehdi Mirza and Simon Osindero},
+  title         = {Conditional Generative Adversarial Nets},
+  eprint        = {1411.1784},
+  abstract      = {Authors present first cGANs to produce MNIST numbers and tags for existing images.
+For the MNIST net, Generator and Discriminator are multilayer perceptrons. Discriminator architecture is described as not being too critical, just needs enough power.
+The results in this paper were not better than those of best performing specialized nets.
+
+This is the basic reference for cGANs and probably the first description of them},
+  archiveprefix = {arXiv},
+  file          = {fulltext:mirza2014_cGAN.pdf:PDF},
+  groups        = {GAN-superresolution, machineLearning},
+  primaryclass  = {cs.LG},
+  year          = {2014},
+}
+
+@Misc{ShiluZhang2019,
+  author    = {{Shilu Zhang} and Chasman, Deborah and Knaack, Sara and {Sushmita Roy}},
+  title     = {In silico prediction of high-resolution Hi-C interaction matrices (part I)},
+  doi       = {10.5281/ZENODO.3525432},
+  copyright = {Creative Commons Attribution 4.0 International},
+  keywords  = {Hi-C, genomics, machine learning, 3D genome configuration, gene regulation},
+  publisher = {Zenodo},
+  year      = {2019},
+}
+
+@Misc{ccby4,
+  title        = {{Creative Commons Attribution 4.0 International Public License}},
+  howpublished = {Online},
+  url          = {https://creativecommons.org/licenses/by/4.0/legalcode},
+}
+
+@Article{Fudenberg2020,
+  author    = {Geoff Fudenberg and David R. Kelley and Katherine S. Pollard},
+  title     = {Predicting 3D genome folding from {DNA} sequence with Akita},
+  doi       = {10.1038/s41592-020-0958-x},
+  number    = {11},
+  pages     = {1111--1117},
+  volume    = {17},
+  abstract  = {This is the published final paper from Fudenberg 2019
+
+The symmetrize layer is just about the same as used in HiC-GAN},
+  file      = {fulltext:Fudenberg2020_Article_Predicting3DGenomeFoldingFromD.pdf:PDF;supplementary:Fudenberg2020_41592_2020_958_MOESM3_ESM.zip:},
+  groups    = {fullyRelevant},
+  journal   = {Nature Methods},
+  month     = {oct},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2020},
+}
+
+@InProceedings{Reed2016b,
+  author    = {Scott Reed and Zeynep Akata and Honglak Lee and Bernt Schiele},
+  booktitle = {IEEE Computer Vision and Pattern Recognition (CVPR)},
+  title     = {Learning Deep Representations of Fine-Grained Visual Descriptions},
+  comment   = {Used as text encoder by Reed et al. and StackGAN for text to image synthesis},
+  file      = {:reed2016b_learningRepsOfVisualDescriptions.pdf:PDF},
+  year      = {2016},
+}
