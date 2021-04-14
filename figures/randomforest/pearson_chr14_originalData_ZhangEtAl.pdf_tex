@@ -70,8 +70,8 @@
     \put(0.01927166,0.28680448){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
     \put(0.23247223,0.79618588){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
     \put(0.42039312,0.76206957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chromosome 14\end{tabular}}}}%
-    \put(0.27044782,0.70475993){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MULTICELL orig., 5k / AUC: 0.353\end{tabular}}}}%
-    \put(0.27044782,0.66754434){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}WINDOW, orig., 5k / AUC: 0.417\end{tabular}}}}%
+    \put(0.27044782,0.70475993){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MULTICELL, 5k / AUC: 0.353\end{tabular}}}}%
+    \put(0.27044782,0.66754434){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}WINDOW, 5k / AUC: 0.417\end{tabular}}}}%
     \put(0.27044782,0.63032873){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Transfer GM12878, 5k / AUC: 0.524\end{tabular}}}}%
   \end{picture}%
 \endgroup%
