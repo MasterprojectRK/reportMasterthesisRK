@@ -18,10 +18,10 @@ Note that the thesis at hand is generally using data from human cell lines, cf.~
 while the work by Farr\'e et al. is using data from Drosophila Melanogaster embryonic cells. 
 For a direct comparison, see \cref{sec:results:comparison}.
 
-\subsubsection{Initial DNN-results for comparison} \label{sec:initialDNNresults}
+\subsubsection{Initial DNN results for comparison} \label{sec:initialDNNresults}
 The basic dense neural network was setup and trained as explained in \cref{sec:methods:basicSetup}.
 Here, the validation error (\acrshort{mse}) reached its minimum of about \SI{150000}{} 
-after approximately 500 epochs for \SI{25}{\kilo\bp} bin size and around 400 epochs for \SI{10}{\kilo\bp} bin size, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
+after approximately 500 epochs for bin size \SI{25}{\kilo\bp} and around \SI{24000}{} after 400 epochs for bin size \SI{10}{\kilo\bp}, \cref{fig:results:basicDNN_lossEpochs_25} and \ref{fig:results:basicDNN_lossEpochs_10}.
 Beyond that, the learning curve indicated overfitting, but the resulting test matrices often did not change much with increasing number of epochs, 
 compare e.\,g. the matrix plots after 500 and 1000 epochs in figures \ref{fig:results:basic500} and \ref{fig:results:basic1000}.
 
@@ -214,81 +214,9 @@ Furthermore, even if suchlike correlations existed, exploiting them for improvin
     \caption{Example predictions GM12878 $\rightarrow$ K562, basic \acrshort{dnn} \SI{10}{\kilo\bp}, 1000~epochs}
     \label{fig:results:basic10k_matrices}
 \end{figure}
+\clearpage
 
 \subsubsection{Results for variations of the convolutional part} \label{sec:results:wider-longer-etc}
-The results for the ``wider'' network, which featured a wider convolutional filter in the first network layer, 
-cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, 
-were generally similar to the initial results, both in terms of Pearson correlations and in terms of matrix plots, 
-\cref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
-Given the small increase in the number of trainable parameters and overall similar network topology, this is not surprising.
-Overfitting was less obvious than with the initial setup and the training process looked more smooth, 
-but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
-\begin{figure}[p] %wider variant Pearson
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/DNN_wider/}{pearson_chr03.pdf_tex}}
-        \caption{chr3}
-    \end{subfigure} \hfill
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/DNN_wider/}{pearson_chr05.pdf_tex}}
-        \caption{chr5}
-    \end{subfigure}\\[5mm]
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/DNN_wider/}{pearson_chr10.pdf_tex}}
-        \caption{chr10}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/DNN_wider/}{pearson_chr19.pdf_tex}}
-        \caption{chr19}
-    \end{subfigure}\\[3mm]
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \scriptsize
-        \resizebox{\textwidth}{!}{
-        \import{figures/DNN_wider/}{pearson_chr21.pdf_tex}}
-        \caption{chr21}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.45\textwidth}
-        \resizebox{\textwidth}{!}{
-        \scriptsize
-        \import{figures/DNN_wider/}{lossOverEpochs.pdf_tex}}
-        \caption{Learning progress for wider \acrshort{dnn}} \label{fig:results:widerDNN_lossEpochs}
-    \end{subfigure}
-    \caption{Pearson correlations, ``wider'' variant of \acrshort{dnn},  test chromosomes}
-    \label{fig:results:widerDNN_pearson}
-\end{figure}
-%wider variant matrices
-\begin{figure}[p]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/DNN_wider/}{pred01000_chr21_030-040.pdf_tex}
-        \caption{Example  region 1} \label{fig:results:wider_r1}
-    \end{subfigure}\\[2mm]
-    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/DNN_wider/}{pred01000_chr19_030-040.pdf_tex}
-        \caption{Example region 2} \label{fig:results:wider_r2}
-    \end{subfigure}\\[2mm]
-    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \scriptsize
-        \import{figures/DNN_wider/}{pred01000_chr3_030-040.pdf_tex}
-        \caption{Example region 3} \label{fig:results:wider_r3}
-    \end{subfigure}
-    \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider'' variant of \acrshort{dnn},\\bin size \SI{25}{\kilo\bp}, 1000~epochs}\label{fig:results:wider_matrices}
-\end{figure}
-
 The predictions from the ``longer'' variant with three convolutional filter layers instead of a single one, 
 cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, 
 were better than the initial predictions in terms of Pearson correlations for test chromosomes 10, 19 and 21, but worse for test chromosomes 3 and 5, 
@@ -302,6 +230,31 @@ it is assumed that 500 epochs might not have been enough to activate some of the
 Slow training can occur when \acrshort{relu} activations are used (as in the given case) and the gradients are close to zero \cite{Maas2013}.
 Apart from that, the learning process for the ``longer'' variant in general looked more smooth and reached a lower validation error than before, \cref{fig:results:longerDNN_lossEpochs},
 but the matrix plots did not show any obvious improvement over the initial ones, \cref{fig:results:longer_matrices}.
+
+The results for the ``wider'' network, which featured a wider convolutional filter in the first network layer, 
+cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, 
+were generally similar to the initial results, both in terms of Pearson correlations and in terms of matrix plots, 
+\cref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
+Given the small increase in the number of trainable parameters and overall similar network topology, this is not surprising.
+Overfitting was less obvious than with the initial setup and the training process looked more smooth, 
+but the remaining validation error was slightly higher than for the initial approach, \cref{fig:results:widerDNN_lossEpochs}.
+
+Combining the ``longer'' and ``wider'' variants in the ``wider-longer'' setup with more convolutional layers and wider 
+filter kernels,  cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, also did not perform as expected.
+While improvements in the Pearson correlations could again be seen for 3 of 5 test chromosomes compared to the initial network, \cref{fig:results:wider-longerDNN_pearson},
+the observed correlations were worse than the ones from the highly similar ``longer''-variant alone. 
+Like with the similar ``longer''-approach, predictions at longer distances were partially missing. 
+Compared to the other variants, the validation error was generally higher and stopped decreasing after very few epochs, \cref{fig:results:wider-longerDNN_lossEpochs}.
+In terms of matrix plots, the predictions surprisingly were still quite similar to the initial ones, but seemed a bit more blurry, \cref{fig:results:wider-longer_matrices}.
+
+Predictions and metrics from the generalized \acrshort{dnn}-approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
+according to sections \ref{sec:improve:convolution_extensions}, \ref{sec:methods:inputBinning} and \ref{sec:methods:variants} 
+are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
+Unfortunately, the results did again not improve compared to the initial predictions.
+While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
+the matrix plots seemed worse than the initial ones, \cref{fig:results:25k5_matrices}. 
+For example, the large structure at chr3:34-\SI{36.7}{\mega\bp}, which had been detected by the previous approaches, was completely missing.
+
 \begin{figure}[p] %longer variant pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -367,14 +320,71 @@ but the matrix plots did not show any obvious improvement over the initial ones,
     \end{subfigure}
     \caption{Example predictions GM12878 $\rightarrow$ K562, ``longer'' variant of \acrshort{dnn},\\bin size \SI{25}{\kilo\bp}, 1000~epochs} \label{fig:results:longer_matrices}
 \end{figure}
-
-Combining the ``longer'' and ``wider'' variants in the ``wider-longer'' setup with more convolutional layers and wider 
-filter kernels,  cf. \cref{sec:improve:convolution_extensions} and \ref{sec:methods:variants}, also did not perform as expected.
-While improvements in the Pearson correlations could again be seen for 3 of 5 test chromosomes compared to the initial network, \cref{fig:results:wider-longerDNN_pearson},
-the observed correlations were worse than the ones from the highly similar ``longer''-variant alone. 
-Like with the similar ``longer''-approach, predictions at longer distances were partially missing. 
-Compared to the other variants, the validation error was generally higher and stopped decreasing after very few epochs, \cref{fig:results:wider-longerDNN_lossEpochs}.
-In terms of matrix plots, the predictions surprisingly were still quite similar to the initial ones, but seemed a bit more blurry, \cref{fig:results:wider-longer_matrices}.
+\begin{figure}[p] %wider variant Pearson
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_wider/}{pearson_chr03.pdf_tex}}
+        \caption{chr3}
+    \end{subfigure} \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_wider/}{pearson_chr05.pdf_tex}}
+        \caption{chr5}
+    \end{subfigure}\\[5mm]
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_wider/}{pearson_chr10.pdf_tex}}
+        \caption{chr10}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_wider/}{pearson_chr19.pdf_tex}}
+        \caption{chr19}
+    \end{subfigure}\\[3mm]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \scriptsize
+        \resizebox{\textwidth}{!}{
+        \import{figures/DNN_wider/}{pearson_chr21.pdf_tex}}
+        \caption{chr21}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.45\textwidth}
+        \resizebox{\textwidth}{!}{
+        \scriptsize
+        \import{figures/DNN_wider/}{lossOverEpochs.pdf_tex}}
+        \caption{Learning progress for wider \acrshort{dnn}} \label{fig:results:widerDNN_lossEpochs}
+    \end{subfigure}
+    \caption{Pearson correlations, ``wider'' variant of \acrshort{dnn},  test chromosomes}
+    \label{fig:results:widerDNN_pearson}
+\end{figure}
+%wider variant matrices
+\begin{figure}[p]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/DNN_wider/}{pred01000_chr21_030-040.pdf_tex}
+        \caption{Example  region 1} \label{fig:results:wider_r1}
+    \end{subfigure}\\[2mm]
+    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/DNN_wider/}{pred01000_chr19_030-040.pdf_tex}
+        \caption{Example region 2} \label{fig:results:wider_r2}
+    \end{subfigure}\\[2mm]
+    \centering{\scriptsize{see \cref{sec:methods:matrix_plots} for track explanations}}\\[3mm]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \scriptsize
+        \import{figures/DNN_wider/}{pred01000_chr3_030-040.pdf_tex}
+        \caption{Example region 3} \label{fig:results:wider_r3}
+    \end{subfigure}
+    \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider'' variant of \acrshort{dnn},\\bin size \SI{25}{\kilo\bp}, 1000~epochs}\label{fig:results:wider_matrices}
+\end{figure}
 \begin{figure}[p]%wider-longer Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -440,14 +450,6 @@ In terms of matrix plots, the predictions surprisingly were still quite similar 
     \end{subfigure}
     \caption{Example predictions GM12878 $\rightarrow$ K562, ``wider-longer'' variant of \acrshort{dnn}, \SI{25}{\kilo\bp}, 1000~epochs} \label{fig:results:wider-longer_matrices}
 \end{figure}
-
-Predictions and metrics from the generalized \acrshort{dnn}-approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
-according to sections \ref{sec:improve:convolution_extensions}, \ref{sec:methods:inputBinning} and \ref{sec:methods:variants} 
-are shown in \cref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
-Unfortunately, the results did again not improve compared to the initial predictions.
-While the learning curve was smooth and showed signs of slight overfitting beyond 300 epochs, \cref{fig:results:25k5DNN_lossEpochs},
-the matrix plots seemed worse than the initial ones, \cref{fig:results:25k5_matrices}. 
-For example, the large structure at chr3:34-\SI{36.7}{\mega\bp}, which had been detected by the previous approaches, was completely missing.
 \begin{figure}[p]%25k5 Pearson
     \begin{subfigure}{0.45\textwidth}
         \scriptsize
@@ -513,6 +515,7 @@ For example, the large structure at chr3:34-\SI{36.7}{\mega\bp}, which had been 
     \end{subfigure}
     \caption{Example predictions GM12878 $\rightarrow$ K562, ``5k -- 25k'' variant of \acrshort{dnn}, 1000~epochs} \label{fig:results:25k5_matrices}
 \end{figure}
+\clearpage
 
 \subsubsection{Results for combined loss function} \label{sec:results:loss_functions}
 Exchanging the mean squared error for a combined loss function consisting of \acrshort{mse}, \acrshort{tv} loss and perceptual loss did not improve the results in the chosen setting
@@ -521,7 +524,7 @@ The results are shown in \cref{fig:results:combilossDNN_pearson} and \ref{fig:re
 
 For all test chromosomes, the correlations were highly similar to the initial network's, \cref{fig:results:combilossDNN_pearson},
 and the matrix plots also looked similar, chromosome 21 probably being the most different, \cref{fig:results:combiloss_matrices}.
-The results show here are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$ in \cref{eq:methods:combined_loss}. 
+The results shown here are the best ones obtained by manual tuning of the multiplicative parameters $\lambda$ in \cref{eq:methods:combined_loss}. 
 Guided parameter tuning was unfortunately infeasible within the thesis at hand due to the training times required for optimizing the combined loss function.
 Other options which where not explored for the same reason include truncating the \emph{VGG-16} network at a different layer, using a loss function based on
 more than one of the intermediate \emph{VGG-16} layers \cite{Johnson2016} or taking another loss network.
@@ -609,7 +612,7 @@ While a slight improvement was achieved for test chromosome 21, the correlations
 The matrix plots also looked fairly similar to the initial ones, \cref{fig:results:scoreloss_matrices}, chromosome 21 again being the 
 most different compared to the initial predictions.
 
-In the matrix plots from \cref{fig:results:scoreloss_matrices}, the true- and predicted scores have been added as a second track, replacing the \acrshort{pca} track. 
+In \cref{fig:results:scoreloss_matrices}, the true- and predicted scores are shown the second track, replacing the \acrshort{pca} track. 
 Indeed, the score curve computed from the true matrices showed local minima at putative \acrshort{tad} boundaries, as set forth in \cref{sec:improve:TAD_loss},
 so score computation with the chosen diamond size seemed sound.
 However, despite the optimization term in the loss function, the score curve of the predicted matrices compared to the true curve 
@@ -687,7 +690,7 @@ To assess predictions at larger bin sizes, five different approaches were compar
 \begin{enumerate}
  \item ``50k direct'': \\directly training a network at bin size \SI{50}{\kilo\bp} and predicting at that same bin size
  \item ``initial 25k coarsened'': \\coarsening the results of the initial network discussed above (\cref{sec:initialDNNresults})
-                    by summarizing bins via \texttt{cooler coarsen}, cf. \cref{sec:methods:input_data}
+                    by summarizing bins via \texttt{cooler coarsen}
  \item ``initial 25k$\rightarrow$50k'': \\using the initial network trained at \SI{25}{\kilo\bp} (cf. \cref{sec:initialDNNresults}) to predict at \SI{50}{\kilo\bp}
  \item ``25k+50k$\rightarrow$50k'': \\predicting at \SI{50}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
  \item ``25k+50k$\rightarrow$25k'': \\predicting at \SI{25}{\kilo\bp} from a network \emph{simultaneously} trained with bin sizes 25 and \SI{50}{\kilo\bp}
@@ -704,8 +707,8 @@ figures \ref{fig:results:50k_from25k_r2} and \ref{fig:results:50k_from25k_r1}.
 
 Direct predictions at bin size \SI{50}{\kilo\bp} (method a) were worse than indirect methods derived from networks
 trained at \SI{25}{\kilo\bp}. 
-Both the Pearson correlations and the matrix plots were clearly better for method b) and c),
-figures \ref{fig:results:DNN50k_pearson}, \ref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}.
+Both the Pearson correlations and the matrix plots seemed better for method b) and c),
+figures \ref{fig:results:DNN50k_pearson}, \ref{fig:results:50k_matrices} and \ref{fig:results:50k_from25k_matrices}, but on a generally low level.
 It is not known why the direct predictions turned out worse. 
 Potential reasons include the reduced number of samples (cf. \cref{tab:methods:samples}, p. \pageref{tab:methods:samples})
 and the binning process, or a combination of both.
@@ -718,6 +721,16 @@ However, no further investigations were made into the case, because the divergen
 The minimum validation error was reached after about 150 epochs, about 100 epochs earlier than in the initial setup at \SI{25}{\kilo\bp}. 
 This is not surprising, since there are only about half as many training samples at \SI{50}{\kilo\bp} compared to \SI{25}{\kilo\bp}, 
 cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
+
+Simultaneously training a network with matrix- and feature bin sizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
+turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
+but the Pearson correlations when predicting at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
+than the initial predictions at the respective bin size, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
+Looking into the matrix plots shown in \cref{fig:results:25plus50_matrices}, 
+all predictions also seemed much worse than the results obtained by the other approaches investigated thus far.
+It could not be clarified what caused the improvement in Pearson correlations for chromosome 21 compared to the initial predictions at \SI{25}{\kilo\bp}, 
+\cref{fig:results:DNN_25_pearson_21}, but it is interesting that even predictions with such a high degree of blurriness as in \cref{fig:results:25plus50_r1}
+can reach an \acrshort{auc} of around 0.65.
 
 \begin{figure}[p]%50k direct AND from 25k, pearson and progress
     \begin{subfigure}{0.45\textwidth}
@@ -810,17 +823,6 @@ cf. \cref{tab:methods:samples} (p. \pageref{tab:methods:samples}).
     \end{subfigure}
     \caption{Example predictions GM12878 $\rightarrow$ K562,  \acrshort{dnn} trained at \SI{25}{\kilo\bp} predicting at \SI{50}{\kilo\bp}, 500~epochs} \label{fig:results:50k_from25k_matrices}
 \end{figure}
-
-Simultaneously training a network with matrix- and feature bin sizes of \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} (methods d, e)
-turned out unproblematic with regard to convergence, \cref{fig:results:25plus50_lossEpochs}, 
-but the Pearson correlations when predicting at both \SI{25}{\kilo\bp} and \SI{50}{\kilo\bp} were -- often significantly -- worse
-than the initial predictions at the respective bin size, \cref{fig:results:DNN50k_pearson} (``25k+50k$\rightarrow$50k'') and \cref{fig:results:DNN25plus50_pearson} (``25k+50k$\rightarrow$25k'').
-Looking into the matrix plots shown in \cref{fig:results:25plus50_matrices}, 
-all predictions also seemed much worse than the results obtained by the other approaches investigated thus far.
-It could not be clarified what caused the improvement in Pearson correlations for chromosome 21 compared to the initial predictions at \SI{25}{\kilo\bp}, 
-\cref{fig:results:DNN_25_pearson_21}, but it is interesting that even predictions with such a high degree of blurriness as in \cref{fig:results:25plus50_r1}
-can reach an \acrshort{auc} of around 0.65.
-
 \begin{figure}[p]%trained at 25k and 50k simultaneously, pearson and progress for 25k
     \begin{subfigure}{0.45\textwidth}
         \scriptsize 
@@ -895,8 +897,8 @@ All in all, the training process was smooth and converged after around 60 epochs
 by Isola et al. \cite{Isola2017}, cf. \cref{sec:methods:cGAN_initial} and \ref{sec:methods:dnn-embedding}. 
 Although \emph{pix2pix} has shown fast convergence in other applications, 
 it was surprising that this still held after the changes made to the original network, especially adding the embedding network. 
-While the Pearson correlations were mostly worse than the ones of the \acrshort{dnn} presented above, compare figures \ref{fig:results:DNN64_pearson} and \ref{fig:results:GAN64-dnn_pearson},
-the matrices mostly looked visually better, showing more distinct boundaries between interacting and non-interacting regions, compare figures \ref{fig:results:DNN_matrices} and \ref{fig:results:cGAN64-dnn_matrices}.
+While the Pearson correlations were mostly worse than the ones of the \acrshort{dnn}, compare e.\,g. figures \ref{fig:results:GAN64-dnn_pearson} and \ref{fig:results:DNN64_pearson} (p.~\pageref{fig:results:DNN64_pearson}),
+the matrices mostly looked visually better, showing slightly  more distinct boundaries between interacting and non-interacting regions, compare figures \ref{fig:results:cGAN64-dnn_matrices} and \ref{fig:results:DNN_matrices}.
 
 Using weight transfer from a pre-trained \acrshort{dnn} for the embedding networks further stabilized the training process 
 and made the discriminator reach a stable value of around 0.693 ($\approx -\log0.5$) on epoch average after only 2 epochs, 
@@ -1401,7 +1403,7 @@ However, the results were still not better than the ones from \emph{Hi-cGAN} wit
 \clearpage
 \subsection{Comparison with other approaches}\label{sec:results:comparison}
 To conclude the investigations on the \acrshort{dnn}-approach and \emph{Hi-cGAN},
-the best of the respective variants were compared to the methods by Zhang et al. \cite{Zhang2019}and Farr\'e et al. \cite{Farre2018a},
+the best of the respective variants were compared to the methods by Zhang et al. \cite{Zhang2019} and Farr\'e et al. \cite{Farre2018a},
 using the same input data as in the respective papers.
 To this end, the initial \acrshort{dnn} and \emph{Hi-cGAN} with \acrshort{cnn} embedding 
 were fed with the corresponding input data, cf. \cref{sec:methods:comparison}.
@@ -1465,38 +1467,37 @@ The effect was more pronounced for chromosome 17, which is indeed shorter than c
     \resizebox{\textwidth}{!}{
     \scriptsize
     \import{figures/randomforest/}{pearson_chr14_detail_25k_singleChrom.pdf_tex}}
-    \caption{chr14 \acrshort{cgan} single chrom}\label{fig:results:zhang-vs-ours_pearson_14singlechrom}
+    \caption{Hi-cGAN single chrom: chr14}\label{fig:results:zhang-vs-ours_pearson_14singlechrom}
  \end{subfigure}\hfill
  \begin{subfigure}{0.45\textwidth}
     \resizebox{\textwidth}{!}{
     \scriptsize
     \import{figures/randomforest/}{pearson_chr17_detail_25k_singleChrom.pdf_tex}}
-    \caption{chr17 \acrshort{cgan} single chrom}\label{fig:results:zhang-vs-ours_pearson_17singlechrom}
+    \caption{Hi-\acrshort{cgan} single chrom: chr17}\label{fig:results:zhang-vs-ours_pearson_17singlechrom}
  \end{subfigure}
-  \caption{Pearson correlation comparison Hi-cGAN / \acrshort{dnn} and HiC-Reg \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_pearson}
+  \caption[Pearson correlation comparison Hi-cGAN / \acrshort{dnn} / HiC-Reg MULTICELL and WINDOW \cite{Zhang2019}]{Pearson correlation comparison\\Hi-cGAN / \acrshort{dnn} / HiC-Reg MULTICELL and WINDOW \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_pearson}
 \end{figure}
-
 \begin{figure}[htbp]
 \begin{subfigure}{\textwidth}
  \centering
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred0014_multicell_chr14_030-040.pdf_tex}}
- \caption{Hic-Reg (random forest), MULTICELL, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-14}
+ \caption{HiC-Reg (random forest), MULTICELL, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-14}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred00100_restriced_chr14_030-040.pdf_tex}}
- \caption{Hi-cGAN with window size $w=256$; plot restricted to first \SI{1}{\mega\bp}} \label{fig:results:zhang-vs-ours_matrices_ours-full-14}
+ \caption{Hi-cGAN, window size $w=256$; plot restricted to first \SI{1}{\mega\bp}} \label{fig:results:zhang-vs-ours_matrices_ours-full-14}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred00100_chr14_030-040.pdf_tex}}
- \caption{Hi-cGAN with window size $w=64$, trained on chr14 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-14}
+ \caption{Hi-cGAN, window size $w=64$, trained on chr14 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-14}
 \end{subfigure}\\[4mm]
     \centering{\scriptsize{\Cref{fig:results:zhang-vs-ours_matrices} a-f: Predicted matrices on top, true matrices from Rao et al. \cite{Rao2014} on bottom}}\\[5mm]
     \begin{subfigure}{\textwidth}
@@ -1504,24 +1505,25 @@ The effect was more pronounced for chromosome 17, which is indeed shorter than c
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred0017_multicell_chr17_030-040.pdf_tex}}
- \caption{HiC-Reg (random forest), MULTICELL, chr17, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-17}
+ \caption{HiC-Reg (random forest), MULTICELL, reconstructed from \cite{Zhang2019}} \label{fig:results:zhang-vs-ours_matrices_multicell-17}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred00100_restriced_chr17_030-040.pdf_tex}}
- \caption{Hi-cGAN with window size $w=256$, chr17, plot restricted to first \SI{1}{\mega\bp}}\label{fig:results:zhang-vs-ours_matrices_ours-full-17}
+ \caption{Hi-cGAN, window size $w=256$, plot restricted to first \SI{1}{\mega\bp}}\label{fig:results:zhang-vs-ours_matrices_ours-full-17}
 \end{subfigure}\\[5mm]
 \begin{subfigure}{\textwidth}
  \centering
  \resizebox{0.92\textwidth}{!}{
  \scriptsize
  \import{figures/randomforest/}{pred00160_chr17_030-040.pdf_tex}}
- \caption{Hi-cGAN with window size $w=64$, trained on chr17 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-17}
+ \caption{Hi-cGAN, window size $w=64$, trained on chr17 only} \label{fig:results:zhang-vs-ours_matrices_ours-only-17}
 \end{subfigure}
 \caption{Comparison HiC-Reg \cite{Zhang2019} and Hi-cGAN (\acrshort{cnn} embedding)} \label{fig:results:zhang-vs-ours_matrices}
 \end{figure}
+\clearpage 
 
 \textbf{Comparison \acrshort{dnn} / Hi-cGAN / Neural network approach by Farr\'e  et al.}\\
 Next, the \acrshort{dnn} and \emph{Hi-cGAN} were trained on data from Drosophila Melanogaster embryonic cells
@@ -1533,7 +1535,7 @@ and \ref{fig:results:farre-vs-ours_pearson-dist_3R}.
 Given the similarity of the two methods, which share the network topology but use a different sample generation process,
 this is not very surprising.
 Interestingly, the method by Farré et al. showed better values when plotting Pearson correlations over positions,
-while the \acrshort{dnn} approach showed better values when plotting over distances. 
+while the \acrshort{dnn}-approach showed better values when plotting over distances. 
 However, the values generally remained on a comparatively low level.
 Note that the -- comparatively good -- values reported in the paper \cite[fig.~3]{Farre2018a} for Pearson correlations over positions could not be reproduced; 
 they may have been computed in a different way.
@@ -1549,9 +1551,10 @@ this can only mean that the chosen way of data preparation laid out in \cref{sec
 works worse than the approach chosen by Farré et al. for this type of network and/or input data.
 
 For \emph{Hi-cGAN}, on the other hand, the chosen way of data preparation seemed to work well again.
-Here, reasonable results for the test chromosomes 3R and X, \cref{fig:results:farre-vs-ours_cgan-matrix} were obtained,
+Here, reasonable results for the test chromosomes 3R and X were obtained, 
 generally outperforming the \acrshort{dnn}-approach and the method by Farr\'e et al., both in terms of Pearson correlations and matrix plots. 
-\cref{fig:results:farre-vs-ours_pearson-pos_3R}, \ref{fig:results:farre-vs-ours_pearson-dist_3R} and \ref{fig:results:farre-vs-ours_matrices}.
+\cref{fig:results:farre-vs-ours_pearson-pos_3R} to \ref{fig:results:farre-vs-ours_matrices}, 
+\ref{fig:appendix:GAN64_drosophila_pearson} and \ref{fig:appendix:GAN64_drosophila_matrices} (p.~\pageref{fig:appendix:GAN64_drosophila_pearson} f.).
 
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
