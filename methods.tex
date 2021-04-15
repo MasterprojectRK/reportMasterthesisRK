@@ -84,7 +84,8 @@ and thus zero standard deviation, e.\,g. $\sigma(\mathit{pred}|_{d^*})=0$ for a 
 In addition to the correlations themselves, the \acrfull{auc} was computed for all curves in each plot 
 to obtain a single-valued, albeit very abstract quality metric.
 In line with Zhang et al. \cite{Zhang2019}, trapeze integration method was used for numerical area computations
-and the values were normalized to the interval [-1, 1] by dividing through the maximum distance $d_\mathit{max} = w$ to allow for comparisons across experiments.
+and the values were divided by the maximum distance $d_\mathit{max} = w$ to normalize them to value range [-1...1],
+allowing for comparisons across experiments.
 Furthermore, most Pearson correlation plots show the correlation between the ``true'' training matrix and the corresponding target matrix as a baseline,
 i.\,e. the Pearson correlation that is obtained when simply using the training matrix as a ``prediction'' for a given target matrix.
 

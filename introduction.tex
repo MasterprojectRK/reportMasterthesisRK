@@ -171,7 +171,7 @@ GM23248  & 2   & 13 & 1  & 1 \\ \hline
 \caption{availability of selected assays in ENCODE (extract)} \label{tab:intro:assaysInEncode}
 \vspace{-10mm}
 \end{wraptable}
-Due to the high effort, Hi-C experiments have been published for comparatively few organisms and cell lines so far.
+Due to the major effort, Hi-C experiments have been published for comparatively few organisms and cell lines so far.
 For example, as of January 2021, Hi-C assays were available for only 26 of more than 150 human cell lines listed 
 in the \acrfull{encode} \cite{Encode2012,Davis2017}, and these have been produced by only five university labs.
 
@@ -182,9 +182,8 @@ a computational method able to predict contact matrices from DNA-protein binding
 
 Thus, the goal of this master thesis is to predict missing Hi-C data from existing ChIP-seq data,
 making use of the known correlations between the binding sites of transcription factors and histone modifications on the one hand 
-and Hi-C interaction counts on the other hand. 
-Because this is a wide field and lead time for a master thesis is limited, 
-the present work will focus on machine learning techniques,
+and Hi\mbox{-}C interaction counts on the other hand. 
+Here, the present work will focus on machine learning techniques,
 which have proven a good choice for exploiting complex patterns
 and relationships, especially when it comes to the synthesis of 
 2D data from various kinds of input data \cite{Tsirikoglou2020}.
@@ -192,7 +191,7 @@ More specifically, the goal of this thesis is to develop an easy-to-use machine 
 approach for predicting Hi-C interaction matrices from ChIP-seq data, 
 using standard in- and output formats with minimal pre- and post-processing.
 
-To underscore the usefulness of such an approach, \cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in \acrshort{encode}, 
+To underscore the usefulness of such an approach, \Cref{tab:intro:assaysInEncode} to the side shows the first 16 human cell lines in \acrshort{encode}, 
 sorted by total number of selected assays available, where \acrshort{tf} stands for transcription factor.
 Although not necessarily all publicly known experiments to date are included in \acrshort{encode} -- 
 for example, the experiments by Dixon et al. \cite{Dixon2015} for H1 stem cells are not listed -- 

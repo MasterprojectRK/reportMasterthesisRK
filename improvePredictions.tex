@@ -51,8 +51,8 @@ in the upper triangular part of the target submatrix, i.\,e. it consists of $(w 
 exploiting the symmetry of Hi-C matrices. 
 For implementation details, please refer to \cref{sec:methods:basicSetup}.
 
-Training of the network is performed by minimizing the mean squared error of the predicted matrix
-versus the target Hi-C matrix using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
+Training of the network is performed by minimizing the mean squared error between the predicted-
+and the target Hi-C matrix using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
 
 Farr\'e et al. propose a window size of $w=80$ at bin sizes $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
 which comes close to the maximum bin distance available in the Hi-C data by Schuettengruber et al. \cite{Schuettengruber2014} used in their publication \cite{Farre2018a}.
@@ -74,8 +74,8 @@ between Hi-C interaction counts and more than one of the chromatin features.
 For this reason, an extended ``longer'' network was created, 
 comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respectively, replacing the single
 1D-convolution in \cref{fig:improve:priciple_basic_dnn}, lower left, cf. \cref{sec:methods:variants}.
-This is still a comparatively low number of layers and filters,
-but the choice seemed justified in order to avoid overfitting to the low-dimensional input.
+This is still a low number of layers and filters compared to networks that operate directly on DNA sequence \cite{Fudenberg2020}, 
+but the choice seemed justified in order to avoid overfitting to the low-dimensional input, cf. \cite[fig.~S9]{Martens2020}. 
 The results are shown in \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:longerDNN_pearson} and \ref{fig:results:longer_matrices}.
 
 Next, a ``wider'' network was created, featuring the same setup as the basic network
@@ -115,7 +115,7 @@ And indeed, both the predictions from the initial and the extended network accor
 suffered from blurriness. 
 To improve on this, modified loss functions were investigated. 
 
-It has been shown that loss functions based on the (multiscale-)\acrfull{ssim} \cite{Wang2003}
+It has been shown that loss functions based on the (multiscale-) \acrfull{ssim} \cite{Wang2003}
 can outperform mean squared error (L2) and mean absolute error (L1) in image regression tasks.
 While Zhao et al. used a combination of L1- and multiscale \acrshort{ssim} loss \cite{Zhao2017},
 Lu proposed a custom level-weighted \acrshort{ssim} loss \cite{Lu2019}.
@@ -160,7 +160,7 @@ Here, the $\lambda$ are individual loss weights, see \cref{sec:methods:combined_
 \end{equation}
 
 Unfortunately, there is no straightforward way for determining the optimal parameters $\lambda$,
-and an exhaustive parameter search was infeasible due to the computation time requirements of about 4:30\,min per epoch.
+and an exhaustive parameter search was infeasible due to the computation time requirements of about 4:30\,minutes per epoch.
 Therefore, only few runs were conducted with different sets of parameters,
 and the results for $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$,
 which should not be considered optimal, are shown in \cref{sec:results:loss_functions}, especially figures \ref{fig:results:combilossDNN_pearson} and \ref{fig:results:combiloss_matrices}.
@@ -175,7 +175,7 @@ this might be improved by directly optimizing a loss function as shown in \cref{
  L_\mathit{combined} = \lambda_\mathit{MSE}\;L_\mathit{MSE} + \lambda_\mathit{TAD} \, (\mathit{tad}(\mathbf{z}_\mathit{true}) - \mathit{tad}(\mathbf{z}_\mathit{pred}))^2 \label{eq:combined_loss_tad}
 \end{equation}
 However, this approach suffers from several restrictions.
-First and foremost, there seems no consensus on the exact definition of \acrshort{tad}s, 
+First and foremost, there is no consensus on the exact definition of \acrshort{tad}s, 
 and no less than 22 algorithms for \acrshort{tad} detection existed as of 2018 \cite{Dali2017,Zufferey2018}.
 Additionally, many of these algorithms have several tuning parameters, are notoriously parameter-dependent
 and may not even yield any results if parametrized in an unfavorable way \cite{Zufferey2018}. 
@@ -286,7 +286,7 @@ The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be expla
  \caption{\acrshort{cgan} approach} \label{fig:improve:cGAN-approach}
 \end{figure}
 
-The \emph{generator} architecture is based the well known \emph{U-Net} architecture due to Ronneberger, Fischer and Brox \cite{Ronneberger2015},
+The \emph{generator} architecture is based the well known \emph{U-Net} architecture developed by Ronneberger, Fischer and Brox \cite{Ronneberger2015},
 while the \emph{discriminator} is implemented as a patchGAN-discriminator developed by Isola et al. especially for \emph{pix2pix} \cite{Isola2017}.
 This type of discriminator splits the images into patches and tries to decide which of them are real and which are fake, using convolutions.
 Note that \emph{pix2pix} does not explicitly add noise $\bm{z}$, 
