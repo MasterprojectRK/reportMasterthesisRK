@@ -6,8 +6,8 @@ the second is a novel method based on conditional generative adversarial network
 
 \subsection{Dense neural network approach}\label{sec:improve:DNNapproach}
 In their 2018 paper \cite{Farre2018a}, Pau Farr\'e, Alexandre Heurteau, Olivier Cuvier and Eldon Emberly
-proposed a combination of a 1D convolutional filter with a three-layer dense neural network 
-which already fulfills most goals of this thesis with minor exceptions regarding data formats and preprocessing, 
+proposed a combination of a 1D convolutional filter with a four-layer dense neural network 
+which already fulfills most goals of this thesis, with minor exceptions regarding data formats and preprocessing, 
 cf. \cref{sec:prior:predictingInteractions} and \ref{sec:prior:discussion}.
 This thesis attempts to build on the success of their method by extending the comparatively simple neural network
 in various ways, changing the learning process and the loss functions in use.
@@ -52,7 +52,7 @@ exploiting the symmetry of Hi-C matrices.
 For implementation details, please refer to \cref{sec:methods:basicSetup}.
 
 Training of the network is performed by minimizing the mean squared error between the predicted-
-and the target Hi-C matrix using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
+and the target Hi-C submatrices using stochastic gradient descent, cf. \cref{sec:methods:basicSetup}.
 
 Farr\'e et al. propose a window size of $w=80$ at bin sizes $b_{feat} = b_{mat} = \SI{10}{\kilo\bp}$,
 which comes close to the maximum bin distance available in the Hi-C data by Schuettengruber et al. \cite{Schuettengruber2014} used in their publication \cite{Farre2018a}.
@@ -100,7 +100,7 @@ This can be exploited to capture finer details in the ChIP-seq data without a ne
 To this end, the initial network can be generalized by binning the ChIP-seq data at $k$ times the bin size of the matrices, 
 whereby $k \in \mathbb{N}^{\geq1}$, cf.~\cref{sec:methods:inputBinning} for the technical details.
 This yields an input data size of $(k \cdot 3w, n)$, which is then again compressed to a vector of length $3w$ 
-by a 1D convolutional filter with kernel size $n$ and strides $k$. 
+by a 1D convolutional filter with kernel size $(k, n)$ and strides $k$. 
 To match given matrix bin sizes, $k=5$ was chosen for the thesis at hand, 
 and the results for bin sizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \cref{sec:results:wider-longer-etc},
 especially figures \ref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
@@ -279,7 +279,7 @@ see equations \ref{eq:improve:cGAN-simple-loss} and \ref{eq:improve:cGAN-simple-
 
 Many different layouts and training processes for the generator and discriminator networks have been proposed.
 For the thesis at hand, the well-known \emph{pix2pix} proposal by Isola et al. from 2017 was followed \cite{Isola2017}, 
-amended by two kinds of embedding networks for the chromatin features, which serve as the conditional input $x$ here.
+amended by two kinds of embedding networks for the chromatin features, which serve as the conditional input $\bm{x}$ here.
 The overall setup is shown in \cref{fig:improve:cGAN-approach} and will be explained in more detail below.
 \begin{figure}[htbp]
  \import{figures/}{Hi-cGAN.pdf_tex}
