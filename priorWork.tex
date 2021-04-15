@@ -92,9 +92,9 @@ The results are blurry, but generally in good accordance with experimental Hi-C 
 
 Yet another machine-learning concept based on sequence data, \emph{Samarth}, has been proposed by Nikumbh and Pfeifer in 2017 \cite{Nikumbh2017}.
 Here, a support vector machine is trained on 5C data, using a specific representation for DNA sequence called oligomer distance histograms.
-The results showed acceptable consensus with experimental Hi-C data and allowed some interesting conclusions
+The results showed acceptable correlations with experimental Hi-C data and allowed some interesting conclusions
 about the importance of certain k-mers for DNA folding. However, the applicability for the task at hand is hard to assess, 
-because none of the predicted matrices used for statistical evaluation has been published alongside the paper.
+because none of the matrices used for statistical evaluation have been published alongside the paper.
 
 
 \subsection{Image synthesis techniques from computer vision} \label{sec:prior:generativeCV}
@@ -125,7 +125,7 @@ or yield binary predictions in the sense of ``interaction'' or ``no interaction'
 Thus, these methods are not directly suitable for the task at hand, but would require further development.
 
 The chromatin-modeling based approaches \cite{Brackley2016, MacPherson2018, Pierro2017, Qi2019} allow indirect derivation of Hi-C matrices
-by performing sufficient simulation passes and estimating contact counts from the resulting model ensembles.
+by performing sufficient numbers of simulation passes and estimating contact counts from the resulting model ensembles.
 Depending on the chromatin model choice -- which seems not straightforward \cite{Huang2018, Bendandi2020} -- and the number of constraints involved,
 the required computations can be expensive.
 However, the results still seem slightly inferior compared to other methods mentioned in \cref{sec:prior:predictingInteractions} --
@@ -139,8 +139,8 @@ On the other hand, the chosen artificial networks might be able to figure out bi
 which \emph{do} have a correlation with spatial structure. 
 This is especially true for the method by Schwessinger \cite{Schwessinger2019},
 where the network is seeded by training on exactly such binding sites.
-While the methods by Schreiber and Schwessinger use secondary inputs and therefore can -- at least partially -- 
-adapt to cell lines sharing the same DNA, the method by Fudenberg focuses on DNA and is thus 
+While the methods by Schreiber \cite{Schreiber2017} and Schwessinger \cite{Schwessinger2019} use secondary inputs and therefore can -- at least partially -- 
+adapt to cell lines sharing the same DNA, the method by Fudenberg \cite{Fudenberg2020} focuses on DNA and is thus 
 expected to produce the same outputs for all cell lines of a given organism.
 All three methods feature comparatively deep networks which are expensive to train.
 The fourth sequence-based method by Nikumbh et al. \cite{Nikumbh2017} is using a support vector machine, which is generally easier to train,
