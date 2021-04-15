@@ -18,11 +18,12 @@ The interaction matrices derived from the simulations look interesting,
 but the paper from Brackley et al. \cite{Brackley2016} is unfortunately lacking a comparison with ``true'' experimentally measured Hi-C matrices, 
 and the results from MacPherson et al. \cite{MacPherson2018} seem inferior to most other ones presented in this section.
 
-Another simulation-based method has been developed by di Pierro et al. in 2017 \cite{Pierro2017} and later extended by Qi and Zhang \cite{Qi2019}. 
-In both cases, a \acrfull{cnn} is trained to learn different ``open'' and ``closed'' chromatin states from 11 chromatin factors, 
-and the predicted chromatin states are then taken as constraints for beads-on-a-string models.
-The difference between \cite{Pierro2017} and \cite{Qi2019} lies mainly in the number of states considered and the simulation methods applied;
-the results are mathematically convincing in both cases.
+Two other simulation-based methods have been developed by Di Pierro et al. in 2017 \cite{Pierro2017} and by Qi and Zhang in 2019 \cite{Qi2019}. 
+In both cases, chromatin states are derived from 11 chromatin factors, and the estimated states are then taken as constraints for beads-on-a-string models.
+The differences between \cite{Pierro2017} and \cite{Qi2019} lie mainly in the way how the states are derived from the chromatin features, 
+in the number of states considered and the simulation methods applied. 
+Additionally, Qi and Zhang consider DNase as a 12th feature for state estimation \cite{Qi2019}. 
+The results are mathematically convincing in both publications.
 
 A further approach using chromatin states is due to Farr\'e and Emberly \cite{Farre2018}.
 Here, the conditional probability of two genomic regions being in contact, given their distance and the chromatin state around them,
