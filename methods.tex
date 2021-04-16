@@ -679,14 +679,14 @@ although it is not explicitly mentioned in the paper.
 In terms of Pearson correlations -- here, including zero-values -- the recomputed results from replicate 1 were slightly better,
 but overall very similar to the ones restored from the published datasets \cite{ShiluZhang2019,ShiluZhang2019a}. 
 
-It seems strange that zero-values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
+It is surprising that zero-values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
 Correctly predicted zero-values strongly increase the quality of the output matrices 
 and should thus be included in the correlation computations.
 Pearson correlations for the predictions in \cref{sec:results:comparison} were thus computed for full chromosomes, including zero-values.
 
 \textbf{Comparison with dense network from Farr\'e et al.}\\
 Unfortunately, Farr\'e et al. have not published any data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed,
-but Pau Farr\'e kindly provided some of the non-public source code used for the paper \cite{Farre2018a} following private communication.
+but Pau Farr\'e provided some of the non-public source code used for the paper \cite{Farre2018a} following private communication.
 After some minor bug fixes and adaptions to make the code work with python version 3, it was usable to recompute the published results.
 
 To this end, \emph{Hi-C data} from 16-18 hours old Drosophila Melanogaster embryonic cells by Schuettengruber et al. \cite{Schuettengruber2014} 
