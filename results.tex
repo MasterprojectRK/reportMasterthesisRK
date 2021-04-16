@@ -244,7 +244,9 @@ filter kernels,  cf. \cref{sec:improve:convolution_extensions} and \ref{sec:meth
 While improvements in the Pearson correlations could again be seen for 3 of 5 test chromosomes compared to the initial network, \cref{fig:results:wider-longerDNN_pearson},
 the observed correlations were worse than the ones from the highly similar ``longer''-variant alone. 
 Like with the similar ``longer''-approach, predictions at longer distances were partially missing. 
-Compared to the other variants, the validation error was generally higher and stopped decreasing after very few epochs, \cref{fig:results:wider-longerDNN_lossEpochs}.
+Compared to the other variants, the validation error was generally higher and stopped decreasing after very few epochs, \cref{fig:results:wider-longerDNN_lossEpochs},
+while the training loss continued decreasing for at least \SI{1000} epochs. 
+This generally indicates lack of generalization and overfitting to the training data.
 In terms of matrix plots, the predictions surprisingly were still quite similar to the initial ones, but seemed a bit more blurry, \cref{fig:results:wider-longer_matrices}.
 
 Predictions and metrics from the generalized \acrshort{dnn}-approach with feature bin size \SI{5}{\kilo\bp} and matrix bin size \SI{25}{\kilo\bp}
