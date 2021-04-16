@@ -372,6 +372,12 @@ for fqfile in ${fqdir}*.fastq; do
 done
 \end{lstlisting}
 
+\begin{lstlisting}[language=bash, caption=ICE-normalization of predicted D. Melanogaster Hi-C matrix from Hi-cGAN, label=list:appendix:ice-norm]
+ #matrix from Hi-cGAN w. predictions for chr3L, 3R, X; 100 ep
+ matrix="predMatrix00100_chr3L-3R-X.cool"
+ hicNormalize -m ${matrix} -o ${matrix%.cool}_normalized.cool -n smallest
+ hicCorrectMatrix correct -m ${matrix%.cool}_normalized.cool -o ${matrix%.cool}_ICE.cool --correctionMethod ICE --filterThreshold -3.0 3.0 
+\end{lstlisting}
 
 
 \clearpage
@@ -797,8 +803,26 @@ Note: CPU frequency in GHz; L1,L2,L3 cache in KB; GPU memory in MiB; RAM (main m
 \end{subfigure}\\[5mm]
 \caption{Comparison between matrix plots from DNN / Hi-cGAN / Farr\'e et al. \cite{Farre2018a}\\using red/blue color maps} \label{fig:appendix:farre-vs-ours_matrices}
 \end{figure}
-
-
+\begin{figure}[ptb]%ICE-normalized predicted matrix vs. ICE normalized target matrix
+ \begin{subfigure}{\textwidth}
+  \centering\scriptsize{predicted and ICE-normalized matrix on top, ICE-normalized matrix derived from Schuettengruber et al. \cite{Schuettengruber2014} on bottom;\\
+                                        predicted matrix normalized according to \cref{list:appendix:ice-norm}}
+  \centering
+  \scriptsize
+  \import{figures/GAN_64_drosophila/}{pred00100_ICE_chr3R_1675-2175.pdf_tex}
+  \caption{Standard color map}
+ \end{subfigure}\\[6mm]
+\begin{subfigure}{\textwidth}
+ \centering\scriptsize{predicted and ICE-normalized matrix on top, ICE-normalized matrix derived from Schuettengruber et al. \cite{Schuettengruber2014} on bottom;\\
+                                        predicted matrix normalized according to \cref{list:appendix:ice-norm}}
+  \centering
+  \scriptsize
+  \import{figures/GAN_64_drosophila/}{pred00100_ICE_chr3R_1675-2175_rb.pdf_tex}
+  \caption{Red / blue color map}
+ \end{subfigure}
+ \caption[Example cutout, D. Melanogaster, predicted matrix from Hi-cGAN after ICE-normalization]{Example cutout, D. Melanogaster,\\predicted matrix from Hi-cGAN after ICE-normalization}
+ \label{fig:appendix:farre-vs-ours_ours-ice-normalized}
+\end{figure}
 
 \clearpage
 
