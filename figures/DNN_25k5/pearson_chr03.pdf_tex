@@ -72,9 +72,9 @@
     \put(0.01928029,0.28680441){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation\end{tabular}}}}}%
     \put(0.23257631,0.79641461){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pearson correlation vs. genomic distance\end{tabular}}}}%
     \put(0.11898518,0.76228278){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GM12878, 1,2,4,7,9,11,13,14,16,17,18,20,22 on K562, 3\end{tabular}}}}%
-    \put(0.21567734,0.25435782){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}25k5, 250ep / AUC: 0.477\end{tabular}}}}%
-    \put(0.21567734,0.21712555){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}25k5, 500ep / AUC: 0.481\end{tabular}}}}%
-    \put(0.21567734,0.17989379){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}25k5, 1000ep / AUC: 0.495\end{tabular}}}}%
+    \put(0.21567734,0.25435782){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5k25, 250ep / AUC: 0.477\end{tabular}}}}%
+    \put(0.21567734,0.21712555){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5k25, 500ep / AUC: 0.481\end{tabular}}}}%
+    \put(0.21567734,0.17989379){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5k25, 1000ep / AUC: 0.495\end{tabular}}}}%
     \put(0.21567734,0.14266153){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}initial, 500ep / AUC: 0.562\end{tabular}}}}%
     \put(0.21567734,0.10542932){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}transfer GM12878 / AUC: 0.652\end{tabular}}}}%
   \end{picture}%
