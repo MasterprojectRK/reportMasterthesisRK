@@ -288,8 +288,9 @@ To this end, the training matrices remained unchanged, i.\,e. $(l, l)$-shaped ar
 were extracted. 
 With $k \in \mathbb{N}^{>1}$, one bin on the matrix diagonal corresponded to $k$ bins of the feature array,
 so the feature window size needed to be $k$ times the submatrix window size, $w_\mathit{feat} = k \cdot w_\mathit{mat}$.
-Since the first layer of all neural networks used in this thesis was a 1D convolution,
-this was achieved by setting the filter width and strides parameters of the (first) convolutional layer to $k$, leaving the rest of the network unchanged.
+Since the first layer of all dense neural networks used in this thesis was a 1D convolution, cf. \cref{sec:methods:basicSetup}  (\cref{fig:methods:basic_dnn}),
+this was achieved by setting the filter width and strides parameters of the (first) convolutional layer to $k$, leaving the rest of the network unchanged,
+cf. \cref{sec:methods:variants}.
 However, the number of bins along the matrix diagonal is generally not $k$ times the number of bins in the feature array,
 see \cref{eq:methods:binning}.
 \begin{equation}
@@ -306,7 +307,7 @@ This procedure ensured that no errors were introduced into the \emph{training} p
 but kept the size of the \emph{predicted} matrix consistent with the actual chromosome size.
 
 \Cref{fig:methods:sample_gen_generalized} shows the generalized training process with a $(16, 16)$-training matrix and $k=2$. 
-If  $15\cdot b_\mathit{mat} + 1 \leq cs < 15\cdot b_\mathit{mat} + b_\mathit{feat}$ held for the chromosome size $cs$ in the example,
+If  $15\cdot b_\mathit{mat} + 1 \leq cs < 15\cdot b_\mathit{mat} + b_\mathit{feat}$ holds for the chromosome size $cs$, as in the example,
 then the number of bins on the matrix diagonal would be $l_\mathit{mat}=16$, while the number of chromatin feature bins would be $l_\mathit{feat}=31 \not = 2 \cdot l_\mathit{mat}$.
 \begin{figure}
  \begin{minipage}{0.65\textwidth}
@@ -368,7 +369,7 @@ For training, the last batch was dropped, if $N/30 \not \in \mathbb{N}$.
 
 The network and its learning algorithm were implemented in python using tensorflow deep learning framework, partially with keras frontend \cite{Abadi2015,Chollet2015}.
 All code is available under an open source license, see github repository \cite{Krauth2021b}. 
-All computations were performed on virtual machines with different properties, partially with GPU assistance; see \ref{sec:appendix:hardware} for details.
+All computations were performed on virtual machines with different properties, partially with GPU assistance; see \cref{sec:appendix:hardware} for details.
 
 \subsubsection{Modifying kernel size, number of filter layers and filters} \label{sec:methods:variants}
 For the ``wider'' variant, the kernel size of the of the 1D convolutional layer was increased to $4k$ with strides $k$, \cref{fig:methods:basic_dnn},
@@ -400,7 +401,7 @@ The rest of the network remained the same so that the number of trainable parame
 \subsubsection{Combination of mean squared error, perception loss and TV loss} \label{sec:methods:combined_loss}
 For computing the combined \acrshort{mse}, perception- and \acrshort{tv}-loss,
 input features were first passed through the network as normal,
-and mean squared error was computed on the predicted ``upper triangular'' vectors vs. the real vectors.
+and mean squared error was computed between the predicted ``upper triangular'' vectors and the real vectors.
 Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
 $(w, w, 1)$-shaped tensors, where $w$ is again the window size.
 
@@ -417,7 +418,7 @@ The perception loss was then computed as mean squared error between the ``predic
 
 Let $\mathbf{M}_s=G_s(\bm{\omega})$ again be the output of the neural network $G$ described above, and $\mathbf{T}_s$ the true matrices for training samples $s$ in vector form,
 and let $\mathbf{M}^\prime_s$ and $\mathbf{T}^\prime_s$ be their grayscale image counterparts as described above.
-Furthermore, let $\mathit{tv}(\mathbf{x})$ be the total variation of image $\mathbf{x}$ and $\mathit{vgg}(\mathbf{x})$ the output of the perception loss network for image $\mathbf{x}$.
+Furthermore, let $\mathit{tv}(\bm{y})$ be the total variation of image $\bm{y}$ and $\mathit{vgg}(\bm{y})$ the output of the perception loss network for image $\bm{y}$.
 The optimization problem for the modified network was then formulated by means of \cref{eq:methods:combined_loss} to find weights $\bm{\omega}^*$ such that
 \begin{equation}
  \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
@@ -463,10 +464,10 @@ The samples for \emph{Hi-\acrshort{cgan}} were generated the same way as the sam
 in \cref{sec:methods:sample_gen}, with two exceptions.
 First, Hi-C (sub-)matrices were not entered as vectors corresponding to their upper triangular part, 
 but were instead taken as $(w, w, 1)$-shaped grayscale images with value range [0...1] in 32-bit floating point format.
-Second, for the \acrshort{cgan} approach the input matrices need not only be square,
+Second, for the \acrshort{cgan} approach, the input matrices need not only be square,
 but their sizes also need to be powers of two. 
 This requirement is due to the connected up- and downsampling operations in the generator, 
-which essentially are 2D-convolutions and transposed 2D-convolutions with strides two.
+which essentially are 2D-convolutions and transposed 2D-convolutions with strides two, see below.
 Within the thesis, window sizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
 
 \subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
@@ -551,13 +552,8 @@ In order to use the \acrshort{dnn} described in \cref{sec:methods:basicSetup} as
 for the \acrshort{cgan}, only small amendments were required to adjust the input shapes,
 i.\,e. to provide symmetric Hi-C matrices as grayscale images instead of the upper-triangular-vector representation
 native to the \acrshort{dnn}, see \cref{fig:methods:dnn-embedding}.
-\begin{figure}[p]
-    \scriptsize
-    \centering
-    \import{figures/GAN_arch/}{dnn_embedding.pdf_tex}
-    \caption{Embedding network, \acrshort{dnn}} \label{fig:methods:dnn-embedding}
-\end{figure}
-The triu-reshape layer was a custom tensorflow network layer which generates an output tensor
+
+The triu-reshape layer in \cref{fig:methods:dnn-embedding} was a custom tensorflow network layer which generates an output tensor
 of appropriate shape $(w,w)$ and sets its upper triangular part to the values given by the input vector.
 Symmetrization was then performed by adding this tensor to its transpose and subtracting the values on the diagonal once,
 because the diagonal was contained both in the upper triangular part of the matrix and its transpose.
@@ -648,7 +644,7 @@ which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:metho
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the datasets \cite{ShiluZhang2019,ShiluZhang2019a},
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
-allowing the conclusion that the correlation computations should in principle be comparable between this thesis and the paper by Zhang et al., cf. \cref{eq:pearson}.
+allowing the conclusion that the correlation computations according to \cref{eq:pearson} should in principle be comparable between this thesis and the paper by Zhang et al.
 \begin{figure}[htbp]
  \begin{subfigure}{0.45\textwidth}
    \resizebox{\textwidth}{!}{
@@ -758,7 +754,7 @@ and \ref{sec:methods:hicgan}.
 For the comparisons, the \acrshort{dnn} was used with window size $w=80$,
 but a larger batch size of 100.
 Additionally, sample flipping was used as described in the paper \cite{Farre2018a} and implemented in the provided code.
-Furthermore, the \acrshort{sgd} optimizer used so far was replaced by the RMSprop optimizer with standard parameters, namely a learning rate of 0.001,
+Furthermore, the \acrshort{sgd} optimizer used so far was replaced by the RMS\-prop optimizer with standard parameters, namely a learning rate of 0.001;
 training matrices were ICE-normalized and predicted matrices were not scaled.
 All changes were made following a comparison with the source code supposedly used for the paper \cite{Farre2018a}, see above.
 Training was performed on samples from chromosome 2L, 2R and 3L, and chromosome X was used for validation.
@@ -769,9 +765,8 @@ smaller than the maximum window size of $w_\mathit{max}=80$ imposed by the given
 Here, batch size was set to 2, and training was performed on samples from chromosomes 2L and 2R, 
 using chromosome 3L(!) for validation and 3R and X for testing. 
 All other parameters and settings were left unchanged, cf. \cref{sec:methods:hicgan}.
-For \emph{Hi-cGAN}, the training matrix was not ICE-normalized. 
-For additional comparability, the target matrix was ICE-normalized according to \cref{list:appendix:ice-norm} 
-(\cref{fig:appendix:farre-vs-ours_ours-ice-normalized})
+For \emph{Hi-cGAN}, the training matrices were not ICE-normalized, 
+but the \emph{predicted} matrices were ICE-normalized according to \cref{list:appendix:ice-norm} for better comparability (\cref{fig:appendix:farre-vs-ours_ours-ice-normalized}).
 
 The predicted matrices from Pau Farr\'e's python program for chromosome 3R were written out as numpy arrays by adding a simple one-liner to the provided code. 
 These arrays were then converted to cooler and Pearson correlations \emph{per distance} were computed from them as usual.
