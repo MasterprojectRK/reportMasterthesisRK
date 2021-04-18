@@ -523,30 +523,6 @@ Optimization was performed on minibatches of size 32, 8 and 2 for window sizes 6
 using Adam optimizers with learning rate $2\cdot10^{-5}$ for the generator, $10^{-6}$ for the discriminator and $\beta_1=0.5$ for both generator and discriminator.
 The choice of batch sizes was partially dictated by memory limitations of the available GPUs, cf. \cref{sec:appendix:hardware}.
 
-\begin{figure}[p]
-    \tiny
-    \import{figures/GAN_arch/}{generatorModel.pdf_tex}
-    \caption{Adapted generator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:generator}
-\end{figure}
-\begin{figure}[p]
-    \scriptsize
-    \centering
-    \import{figures/GAN_arch/}{discriminatorModel.pdf_tex}
-    \caption{Adapted discriminator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:discriminator}
-\end{figure}
-\begin{figure}[p]
-    \scriptsize
-    \centering
-    \import{figures/GAN_arch/}{downsampling_block.pdf_tex}
-    \caption{Downsampling block} \label{fig:methods:GAN_arch:downsampling}
-\end{figure}
-\begin{figure}[p]
-    \scriptsize
-    \centering
-    \import{figures/GAN_arch/}{upsampling_block.pdf_tex}
-    \caption{Upsampling block} \label{fig:methods:GAN_arch:upsampling}
-\end{figure}
-
 \subsubsection{Using a DNN for feature embedding} \label{sec:methods:dnn-embedding}
 In order to use the \acrshort{dnn} described in \cref{sec:methods:basicSetup} as an embedding network
 for the \acrshort{cgan}, only small amendments were required to adjust the input shapes,
@@ -594,12 +570,6 @@ with parameter $\alpha=0.2$.
 The last 1D convolution consisted of $w$ filters with kernel size 4, strides 3 and padding ``same'',
 followed by sigmoid activation; this last convolution layer was not using kernel regularization.
 All kernel weights of the 1D convolutions in the embedding network were initialized by a Xavier initializer.
-\begin{figure}[p]
-    \scriptsize
-    \centering
-    \import{figures/GAN_arch/}{embedding_network.pdf_tex}
-    \caption{Embedding network, \acrshort{cnn}} \label{fig:methods:GAN_arch:embedding_network}
-\end{figure}
 
 In the \acrshort{cnn} embedding, the number of trainable parameters was constant for all layers, except for the last convolutional layer, where the number
 of convolutional filters was equal to the window size, cf. \cref{fig:methods:GAN_arch:embedding_network}. 
@@ -613,10 +583,48 @@ network for the discriminator.
 The mixed setting was used both without and with weight transfer for its \acrshort{dnn} embedding.
 In the latter case, again the weights of the \acrshort{dnn} were replaced by the ones of the same pre-trained \acrshort{dnn} as in \cref{sec:methods:dnn-embedding}
  before the training process started.
+ 
+ \begin{figure}[p] %generator
+    \tiny
+    \import{figures/GAN_arch/}{generatorModel.pdf_tex}
+    \caption{Adapted generator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:generator}
+\end{figure}
+\begin{figure}[p] %discriminator
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{discriminatorModel.pdf_tex}
+    \caption{Adapted discriminator model from \emph{pix2pix}} \label{fig:methods:GAN_arch:discriminator}
+\end{figure}
+\begin{figure}[p]%downsampling blocks
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{downsampling_block.pdf_tex}
+    \caption{Downsampling block} \label{fig:methods:GAN_arch:downsampling}
+\end{figure}
+\begin{figure}[p] %upsampling blocks
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{upsampling_block.pdf_tex}
+    \caption{Upsampling block} \label{fig:methods:GAN_arch:upsampling}
+\end{figure}
+\begin{figure}[p] %DNN-embedding
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{dnn_embedding.pdf_tex}
+    \caption{Embedding network, \acrshort{dnn}} \label{fig:methods:dnn-embedding}
+\end{figure}
+\begin{figure}[p] %CNN-embedding
+    \scriptsize
+    \centering
+    \import{figures/GAN_arch/}{embedding_network.pdf_tex}
+    \caption{Embedding network, \acrshort{cnn}} \label{fig:methods:GAN_arch:embedding_network}
+\end{figure}
+ 
 \clearpage
+
  
 \subsection{Comparison with other approaches} \label{sec:methods:comparison}
-The results from this thesis were compared to the ones of \emph{HiC-Reg} by Zhang et al. \cite{Zhang2019}, 
+The results of this thesis were compared to the ones from \emph{HiC-Reg} by Zhang et al. \cite{Zhang2019}, 
 who used pretty much the same Hi-C and chromatin feature data
 as described above in \cref{sec:methods:input_data}, 
 and to results from Farr\'e et al. \cite{Farre2018a}, who used data from Drosophila Melanogaster embryonic cells.
