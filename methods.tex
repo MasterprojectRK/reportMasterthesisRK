@@ -160,12 +160,12 @@ apart from the fact that non-normalized matrices have been used here, cf. \cref{
 The same sliding window approach as proposed by Farr\'e et al. \cite{Farre2018a} was then applied to generate training samples 
 from the chromatin feature array and the Hi-C matrices for usage with the neural networks $G$ described below.
 Here, subarrays of size $(3w, n)$ were cut out from the feature array 
-such that the $i$-th training sample corresponded to the subarray containing the columns $i,\,i+1,\,i+2,\,\dots,\,i+3w$ of the full array. 
+such that the $i$-th training sample corresponded to the subarray containing the rows $i,\,i+1,\,i+2,\,\dots,\,i+3w$ of the full array. 
 Sliding the window along the array with step size one obviously yields $N=l-3w+1$ training samples.
 The corresponding Hi-C matrices were then cut out along the diagonal of the original matrix 
 as submatrices with corner indices [$j,\;j$], [$j,\;j+w$], [$j+w,\;j+w$], [$j+w,\;j$] in clockwise order, where $j=i+w$.
-The idea here is that the first $0,\,1,\,\dots, \,w$ columns of each feature sample form the left flanking region of the training matrix, 
-the next $w+1,\,w+2,\,\dots, \,2w$ correspond to the matrix' region and the last $2w+1,\,2w+2,\,\dots, \,3w$ columns form the right flanking region.
+The idea here is that the first $0,\,1,\,\dots, \,w$ rows of each feature sample form the left flanking region of the training matrix, 
+the next $w+1,\,w+2,\,\dots, \,2w$ correspond to the matrix' region and the last $2w+1,\,2w+2,\,\dots, \,3w$ rows form the right flanking region.
 Since Hi-C matrices are symmetric by definition, only the upper triangular part of the submatrices was used, 
 flattened into a $w\cdot (w+1)/2$ vector.
 
