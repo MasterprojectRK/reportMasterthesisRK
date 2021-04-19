@@ -316,16 +316,18 @@ amended by a \acrshort{tv} loss function for noise reduction, \cref{eq:improve:c
  L_G(\mathbf{x}, \mathbf{y}, \mathbf{z}) &=\lambda_\mathit{MAE}L_\mathit{MAE}(\,G(\mathbf{x},\mathbf{z}), \mathbf{y}\,) 
     + \lambda_\mathit{adv} \; L_d(\, \mathbf{1}, D(\mathbf{x}, G(\mathbf{x},\mathbf{z})) \,) 
     +  \lambda_\mathit{TV}L_\mathit{TV}(G(\mathbf{x},\mathbf{z})) \label{eq:improve:cGAN_loss}\\
- L_d(\mathbf{r, s}) &= \frac{1}{bs}\sum^{bs} \frac{1}{n^2}\sum^{n^2}
-    \left(\, -\log(\mathrm{sigmoid}(\mathbf{s})) \cdot \mathbf{r} - \log(\mathbf{1} - \mathrm{sigmoid}(\mathbf{s})) \cdot (\mathbf{1} - \mathbf{r}) \,\right) \label{eq:improve:disc_loss1}\\
- \mathrm{sigmoid(m_{i,j,k})} &= \frac{e^{m_{i,j,k}}}{1+e^{m_{i,j,k}}} \quad \mathrm{for}\; i \in (0, 1, \dots, bs)\; \textrm{and}\; j,k \in (0, 1, \dots, n) \label{eq:sigmoid}
+ L_d(\mathbf{r, s}) &= \frac{1}{bs}\sum_{i=0}^{bs-1} \frac{1}{n^2}\sum_{j,k=0}^{n-1}
+    \left(\, -\log(\mathrm{sigmoid}(\bm{s})) \cdot \bm{r} - \log(\bm{1} - \mathrm{sigmoid}(\bm{s})) \cdot (\bm{1} - \bm{r}) \,\right) \label{eq:improve:disc_loss1}\\
+ \mathrm{sigmoid(s_{i,j,k,1})} &= \frac{e^{s_{i,j,k,1}}}{1+e^{s_{i,j,k,1}}} \quad \mathrm{for}\; i \in (0, 1, \dots, bs-1)\; \textrm{and}\; j,k \in (0, 1, \dots, n-1) \label{eq:sigmoid}
 \end{align}
 Here, $L_\mathit{MAE}$ is the mean absolute error (L1 error) between artificially generated output $G(\bm{x},\bm{z})$ and true Hi-C submatrices $\bm{y}$ (as grayscale images), 
-$L_d$ is the discriminator loss according to \cref{eq:improve:disc_loss1}, in this case with respect to artificially generated matrices, and 
+$L_d$ is the ``binary cross entropy'' discriminator loss according to \cref{eq:improve:disc_loss1}, in this case with respect to artificially generated matrices, and 
 $l_\mathit{TV}$ is a total variation loss as in \cref{eq:combined_loss_short} and \cref{eq:methods:tv}, see page \pageref{eq:methods:tv}.
-Since the discriminator is a patchGAN discriminator, it is working on batches which contain $bs$ image patches of shape $(n,n)$, and $\mathbf{1}$ is also a tensor of shape $(n,n)$, populated with ones.
-To obtain a scalar loss value, the mean was taken across both batches and patches. 
-The sigmoid function was computed individually for all elements $m_{i,j,k}$ in the $(bs,n,n)$-shaped tensors as shown in \cref{eq:sigmoid}, transforming them into value range [0...1].
+Since the discriminator is a patchGAN discriminator, it is working on batches which contain $bs$ image patches of shape $(n,n)$, i.\,e. on tensors of shape $(bs,n,n,1)$, 
+and $\mathbf{1}$ is also a tensor of shape $(bs,n,n,1)$, populated with ones.
+To obtain a scalar loss value, the mean was taken first across patches and then across batches, \cref{eq:improve:disc_loss1}. 
+To this end, the sigmoid function was computed individually for all elements $s_{i,j,k,1}$ in the $(bs,n,n,1)$-shaped tensors as shown in \cref{eq:sigmoid}, 
+transforming them into value range [0...1].
 Finally, individual scalar factors $\lambda$ were used to balance the influence of the individual loss portions on the joint loss function, cf. \cref{sec:methods:cGAN_initial}.
 
 As already indicated in \cref{fig:improve:cGAN-approach}, the discriminator was trained as proposed by Isola et al.,
