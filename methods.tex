@@ -297,7 +297,8 @@ see \cref{eq:methods:binning}.
  l_\mathit{feat} = \left \lceil{\frac{cs}{b_\mathit{feat}}}\right \rceil
                 = \left \lceil{\frac{cs}{k \cdot b_\mathit{mat}}}\right \rceil 
                 \not = k \cdot \left \lceil{\frac{cs}{ b_\mathit{mat}}}\right \rceil
-                = k \cdot l_\mathit{mat} \label{eq:methods:binning}
+                = k \cdot l_\mathit{mat} 
+                \mathrm{\quad for\;most\;} b_{feat}, b_{mat}, cs \in \mathbb{N} \label{eq:methods:binning}
 \end{equation}
 
 For the training process, this discrepancy was resolved by simply dropping the last training sample, 
@@ -358,7 +359,7 @@ part of a symmetric $(w, w)$-shaped Hi-C matrix.
 Formally, one needs to optimize
 \begin{equation}
  \bm{\omega}^* = \mathit{arg\,min}_{\bm{\omega}} L_2(\bm{\omega}) = 
-        \mathit{arg\,min}_{\bm{\omega}} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
+        \mathit{arg\,min}_{\bm{\omega}} \frac{1}{N} \sum_{s=1}^N (\mathbf{M}_s - \mathbf{T}_s)^2 \label{eq:methods:nn-mse}
 \end{equation} 
 For the thesis at hand, \acrfull{sgd} with learning rate $10^{-5}$  was used to find $\bm{\omega}^*$,
 except for some of the comparisons with other approaches described in \cref{sec:methods:comparison}.
@@ -421,10 +422,12 @@ and let $\mathbf{M}^\prime_s$ and $\mathbf{T}^\prime_s$ be their grayscale image
 Furthermore, let $\mathit{tv}(\bm{y})$ be the total variation of image $\bm{y}$ and $\mathit{vgg}(\bm{y})$ the output of the perception loss network for image $\bm{y}$.
 The optimization problem for the modified network was then formulated by means of \cref{eq:methods:combined_loss} to find weights $\bm{\omega}^*$ such that
 \begin{equation}
- \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
-                                                     + \lambda_\mathit{TV} \sum_{s=0}^N \mathit{tv}( \mathbf{M}^\prime_s) 
-                                                     + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=0}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
+ \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=1}^N (\mathbf{M}_s - \mathbf{T}_s)^2 
+                                                     + \lambda_\mathit{TV} \sum_{s=1}^N \mathit{tv}( \mathbf{M}^\prime_s) 
+                                                     + \lambda_\mathit{VGG} \frac{1}{N} \sum_{s=1}^N (\mathit{vgg}(\mathbf{M}^\prime_s) - \mathit{vgg}(\mathbf{T}^\prime_s))^2 ) \label{eq:methods:combined_loss}
 \end{equation}
+where $N$ is again the number of samples. 
+
 Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
 The \emph{VGG-16} network and the corresponding weights were taken from the keras \cite{Chollet2015} implementation pre-trained on \emph{ImageNet} \cite{deng2009}.
 As a side effect, the usage of \emph{VGG-16} imposes the restriction $w \geq 32$ on the window size $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
@@ -435,10 +438,11 @@ but for the thesis at hand, only the initial network from \cref{sec:methods:basi
 \subsubsection{Combination of mean squared error and TAD-score-based loss} \label{sec:methods:score_loss}
 To optimize both for mean-squared error and a TAD-score-derived loss, the following optimization task was defined to find weights $\bm{\omega}^*$ such that
 \begin{equation}
- \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=0}^N (\mathbf{M}_s - \mathbf{T}_s)^2
-                                                    + \lambda_\mathit{score} \frac{1}{N} \sum_{s=0}^N (\mathit{score}(\mathbf{M}^\prime_s,ds) - \mathit{score}(\mathbf{T}^\prime_s,ds))^2 \label{eq:methods:score_loss}
+ \bm{\omega}^* = \mathit{arg\,min}_\omega (  \lambda_\mathit{MSE} \frac{1}{N} \sum_{s=1}^N (\mathbf{M}_s - \mathbf{T}_s)^2
+                                                    + \lambda_\mathit{score} \frac{1}{N} \sum_{s=1}^N (\mathit{score}(\mathbf{M}^\prime_s,ds) - \mathit{score}(\mathbf{T}^\prime_s,ds))^2 \label{eq:methods:score_loss}
 \end{equation}
-where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\bm{\omega})$ for sample $s$, and $\mathbf{T}_s$ is the corresponding true Hi-C submatrix.
+where $\mathbf{M}_s$ is again the Hi-C submatrix predicted by the network $G(\bm{\omega})$ for sample $s$, $\mathbf{T}_s$ is the corresponding true Hi-C submatrix
+and $N$ is the number of samples.
 
 To compute the TAD-score-based loss $\mathit{score}(\cdot,\cdot)$, the predictions and true Hi-C matrices $\mathbf{M}$ and $\mathbf{T}$ in vector form (upper triangular part)
 were first converted back to complete, symmetric Hi-C matrices $\mathbf{M}^\prime,\; \mathbf{T}^\prime$. 
