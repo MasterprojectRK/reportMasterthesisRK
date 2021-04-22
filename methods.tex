@@ -11,7 +11,7 @@
 In the following sections, the technical details for the methods used within the thesis will be discussed.
 First, input data and data preprocessing will be described, followed by an explanation of the quality metrics used to assess the predictions
 of Hi-C matrices made throughout the thesis.
-Next, sections \ref{sec:methods:dnn} and \ref{sec:methods:hicgan} will give details with regard to the two 
+Next, \cref{sec:methods:dnn,sec:methods:hicgan} will give details with regard to the two 
 different approaches made in this thesis to advance the state of the art in predicting Hi-C matrices.
 Finally, some special methods were employed to compare the results of this thesis to 
 other approaches in the field, which will be described in \cref{sec:methods:comparison}.
@@ -141,7 +141,7 @@ before they were stored, cf. \cref{sec:methods:sample_gen}.
 \subsection{Dense neural network approach} \label{sec:methods:dnn}
 In the following sections, the Dense Neural network approach inspired by Farr\'e et al. \cite{Farre2018a}
 will be discussed in detail.
-First, the sample generation process will be explained in sections \ref{sec:methods:sample_gen} and \ref{sec:methods:inputBinning}, 
+First, the sample generation process will be explained in \cref{sec:methods:sample_gen,sec:methods:inputBinning}, 
 followed by the basic network setup and its subsequent modifications in sections \ref{sec:methods:basicSetup} to \ref{sec:methods:score_loss}.
 
 \subsubsection{Sample generation process for the dense neural network} \label{sec:methods:sample_gen}
@@ -249,7 +249,7 @@ Also for comparability reasons, a \acrshort{dnn} and a cGAN were trained and tes
 for details.
 
 Note that window size $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
-to train a network with more than seven million parameters, cf.~\cref{tab:methods:samples} and \cref{sec:methods:basicSetup}.
+to train a network with more than seven million parameters, cf.~\cref{tab:methods:samples,sec:methods:basicSetup}.
 \begin{table}[hbp]
 \centering
 \begin{tabular}{lrrrrrrr}
@@ -468,9 +468,8 @@ this is rather counterintuitive and was therefore not implemented for the thesis
 In the following subsection, the setup and training process of the \acrshort{cgan} network developed for this thesis -- \emph{Hi-cGAN} -- and the respective
 embeddings for the conditional input -- the chromatin features -- will be described in more detail.
 First, the sample generation process and the basic network setup based on the well-known \emph{pix2pix} \acrshort{cgan} architecture \cite{Isola2017} 
-are explained in sections \ref{sec:methods:sample_gen_cgan} and \ref{sec:methods:cGAN_initial}, 
-then the respective embedding networks are discussed in subsections \ref{sec:methods:dnn-embedding},
-\ref{sec:methods:cnn-embedding} and \ref{sec:methods:mixed-embedding}.
+are explained in \cref{sec:methods:sample_gen_cgan,sec:methods:cGAN_initial}, 
+then the respective embedding networks are discussed in \cref{sec:methods:dnn-embedding,sec:methods:cnn-embedding,sec:methods:mixed-embedding}.
 
 \subsubsection{Sample generation process for Hi-cGAN} \label{sec:methods:sample_gen_cgan}
 The samples for \emph{Hi-\acrshort{cgan}} were generated the same way as the samples for the dense neural network described 
@@ -492,12 +491,12 @@ to allow processing smaller images of sizes $64\times64$ and $128\times128$, see
 Note that the generator (still) only supports square images with edge lengths that are powers of two and at least $2^6=64$.
 Furthermore, symmetry of the output images was enforced by adding their transpose and multiplying by 0.5, cf. \cite{Fudenberg2020}.
 The down- and upsampling layers shown in  \cref{fig:methods:GAN_arch:generator} are custom blocks 
-detailed in \cref{fig:methods:GAN_arch:downsampling} and \ref{fig:methods:GAN_arch:upsampling}. 
+detailed in \cref{fig:methods:GAN_arch:downsampling,fig:methods:GAN_arch:upsampling}. 
 All 2D-convolutions and 2D-deconvolutions had kernel size $(4,4)$ and were initialized with values drawn from a normal distribution with mean $\mu=0$ and
 standard deviation $\sigma=0.02$.
 Finally, the output layer of the generator was changed from tanh- to sigmoid activation.
 This empirically showed better results, probably because the training- and test matrices were scaled to 0...1, which 
-is also the value range of the sigmoid function, cf. \cref{sec:methods:sample_gen_cgan} and \cref{eq:sigmoid} on page \pageref{eq:sigmoid}.
+is also the value range of the sigmoid function, cf. \cref{sec:methods:sample_gen_cgan,eq:sigmoid} on page \pageref{eq:sigmoid}.
 
 Compared to the original \emph{pix2pix} setup, 
 one downsampling layer was omitted in the discriminator for window size $w\in\{128,256,\dots\}$ and another one for $w=64$.
@@ -511,8 +510,7 @@ and leaky \acrshort{relu}-activations were used with parameter $\alpha=0.2$, as 
 Both the discriminator and the generator featured their own, trainable embedding network
 to convert the conditional input, i.\,e. the chromatin feature data of shape $(3w, n)$,
 into grayscale images of shape $(w,w,1)$. 
-These networks will be discussed below in \cref{sec:methods:dnn-embedding}
-and \cref{sec:methods:cnn-embedding}.
+These networks will be discussed below in \cref{sec:methods:dnn-embedding,sec:methods:cnn-embedding}.
 \Cref{tab:methods:gen_disc_params} shows the number of trainable parameters
 for the generator and discriminator without considering the embedding networks.
 
@@ -564,7 +562,7 @@ Note that all trainable parameters stem from the \acrshort{dnn} here; the reshap
 
 For this thesis, the \acrshort{dnn} embedding was used in two ways.
 First, it was trained together with the rest of the \acrshort{cgan} with weight initialization as described in 
-\cref{sec:methods:basicSetup} and \ref{sec:methods:cGAN_initial}.
+\cref{sec:methods:basicSetup,sec:methods:cGAN_initial}.
 Second, a \acrshort{dnn} was pre-trained as described in \cref{sec:methods:basicSetup} with window size $w=64$
 and the learned weights were transferred to the \acrshort{cgan} once before the start of the training process,
 which was then continued as described in \cref{sec:methods:cGAN_initial}.
@@ -661,7 +659,7 @@ using (arbitrarily selected) chromosome 10 for validation.
 Due to the small number of training samples in this setting, window size was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
 Additionally, \emph{HiC-Reg} was compared to a \acrshort{cgan} model with window size $w=256$ and \acrshort{cnn} embedding, trained on the typical training data set, 
-which includes chromosomes 14 and 17 besides others, cf. sections \ref{sec:methods:cGAN_initial}, \ref{sec:methods:sample_gen} and \ref{sec:methods:sample_gen_cgan}.
+which includes chromosomes 14 and 17 besides others, cf. \cref{sec:methods:cGAN_initial,sec:methods:sample_gen,sec:methods:sample_gen_cgan}.
 
 When computing the distance-stratified Pearson correlations only from the available (non-zero) predicted values in the datasets \cite{ShiluZhang2019,ShiluZhang2019a},
 the results for chromosome 17 showed very good accordance with the data published in the paper \cite[fig.\,10]{Zhang2019}, \cref{fig:methods:zhang_correlations_reconstructed},
@@ -682,13 +680,13 @@ allowing the conclusion that the correlation computations according to \cref{eq:
 
 For reference, training and prediction were re-done for the WINDOW approach and cell lines GM12878 $\rightarrow$ K562, chromosome 17.
 With regard to chromatin features, the same bam files were taken as in \cref{sec:methods:input_data}, except for SMC3, which was replaced by TBP,
-in line with the paper by Zhang et al. \cite{Zhang2019}. 
+in line with the publication by Zhang et al. \cite{Zhang2019}. 
 The bam files were then converted to text files using custom bash scripts and the \texttt{aggregateSignal} application provided by \emph{HiC-Reg}, 
-cf. \cref{list:methods:bam2bedgraph} and \ref{list:methods:bedgraph2hicreg}. 
+cf. \cref{list:methods:bam2bedgraph,list:methods:bedgraph2hicreg}. 
 For simplicity, only replicate 1 was used in all cases.
 With regard to matrix data, cooler files were first prepared as described in \cref{sec:methods:input_data}.
 Next, square root vanilla coverage correction was applied, the matrices were dumped into text files and a custom python script was used
-to convert the text inputs to meet \emph{HiC-Reg}'s requirements, cf. \cref{list:methods:convertForHicReg_bash} and \ref{list:methods:convertForHicReg_python}.
+to convert the text inputs to meet \emph{HiC-Reg}'s requirements, cf. \cref{list:methods:convertForHicReg_bash,list:methods:convertForHicReg_python}.
 For the rest of the training- and prediction process, the instructions in \emph{HiC-Reg}'s github repository were followed \cite{Zhang2019}.
 The resulting text files were converted back to cooler using another custom python script, see \cref{list:methods:hicreg2cool}.
 The sparsity in the results was \SI{59.6}{\percent}, confirming that filtering occurs during the sample generation- or training process of \emph{HiC-Reg},
@@ -696,7 +694,7 @@ although it is not explicitly mentioned in the paper.
 In terms of Pearson correlations -- here, including zero-values -- the recomputed results from replicate 1 were slightly better,
 but overall very similar to the ones restored from the published datasets \cite{ShiluZhang2019,ShiluZhang2019a}. 
 
-It is surprising that zero-values have not been considered when computing the correlations for the publication \cite{Zhang2019}.
+It is surprising that zero-values have not been considered by Zhang et al. when computing the correlations for their publication \cite{Zhang2019}.
 Correctly predicted zero-values strongly increase the quality of the output matrices 
 and should thus be included in the correlation computations.
 Pearson correlations for the predictions in \cref{sec:results:comparison} were thus computed for full chromosomes, including zero-values.
@@ -757,7 +755,7 @@ but after another simple modification to the source code provided, the training 
 which is easier to match with the implementations of \acrshort{dnn} and \emph{Hi-cGAN}, see below. 
 This change did not visually impair the results compared to the published results.
 Validation samples were generated by a 80:20 split of the training/validation set, leaving Pau Farr\'e's implementation unchanged in this respect.
-In disagreement with the publication \cite{Farre2018a}, the provided implementation is not using the \acrshort{sgd} optimizer with batch size 30,
+In disagreement with \cite{Farre2018a}, the provided implementation is not using the \acrshort{sgd} optimizer with batch size 30,
 but instead the RMSprop optimizer with batch size 100.
 
 For the \acrshort{dnn} and \emph{Hi-cGAN}, the Hi-C matrix text files were converted to cooler format 
@@ -767,10 +765,9 @@ Since the gff3 file format is not useful for the \acrshort{dnn} and \emph{Hi-cGA
 were obtained from sequence read archive (SRA) for 49 features in fastqsanger format, using the accession keys given in \cref{tab:methods:features_farre}.
 After downloading, the reads were mapped to the Drosophila Melanogaster reference genome BDGP5/dm3 using bowtie2 \cite{Langmead2012} 
 mostly with default parameters, see \cref{list:methods:map_drosophila} for details.
-The resulting bam alignment files were then converted to bigwig format as described in \cref{sec:methods:input_data} and \cref{list:methods:bamtobigwig}.
+The resulting bam alignment files were then converted to bigwig format as described in \cref{sec:methods:input_data,list:methods:bamtobigwig}.
 While most experiments feature 2 to 4 replicates, only replicate 2 was considered for each chromatin feature to limit disk space usage and processing time.
-The bigwig files were then used as inputs for the \acrshort{dnn} and \acrshort{cgan} as described above in sections \ref{sec:methods:sample_gen}, \ref{sec:methods:sample_gen_cgan}, \ref{sec:methods:dnn}
-and \ref{sec:methods:hicgan}. 
+The bigwig files were then used as inputs for the \acrshort{dnn} and \acrshort{cgan} as described above in \cref{sec:methods:sample_gen,sec:methods:sample_gen_cgan,sec:methods:dnn,sec:methods:hicgan}. 
 
 For the comparisons, the \acrshort{dnn} was used with window size $w=80$,
 but a larger batch size of 100.

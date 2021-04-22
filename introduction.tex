@@ -11,8 +11,7 @@
 In recent years, the three-dimensional organization of DNA has been shown to 
 be a key factor for important processes in molecular biology.
 However, even with the most advanced experimental methods, 
-it remains comparatively expensive to determine the spatial folding of DNA directly,
-so that current knowledge of three-dimensional DNA organization is still sketchy.
+it remains comparatively expensive to determine the spatial folding of DNA directly.
 In the last five years, several methods have been proposed to improve on this situation
 by determining DNA-DNA interactions \emph{in-silico}.
 All of these are using certain types of experimental data which is easier to obtain than spatial data, but correlates with 3D chromatin structure in certain ways.
@@ -66,7 +65,7 @@ The original Hi-C workflow has been developed by Lieberman-Aiden et al. in 2009 
 and is depicted in simplified form in \cref{fig:intro:HiC}.
 
 The typical input (In) to Hi-C consists of several millions of cells,
-which are treated chemically to fix existing DNA-DNA contacts, 
+which are treated chemically to fix spatially close DNA regions, 
 commonly using formaldehyde, before they are lysed.
 Next, the DNA is extracted and cut into fragments by certain restriction enzymes (1),
 usually HindIII or DpnII, 
@@ -91,10 +90,9 @@ Here, only reads are kept where the ``left'' sequence (6)(a)
 uniquely maps to a different region of the reference genome than the ``right'' sequence (6)(b).
 These so-called chimeric reads are subjected to quality control, and those passing are counted as an interaction
 between the two genomic positions (a) and (b) to which the two ends belong.
-However, at reasonable read coverages, interactions cannot be counted per base pair. 
-Instead, the reference genome is split into equally sized bins (or regions), 
+To this end, it is common to split the reference genome into equally sized bins (or regions), 
 and the reads are counted for those bins where they belong. 
-Common bin sizes are 1, 5, 10, 25, 50, 100 and \SI{1000}{\kilo\bp}.
+Often used bin sizes are 1, 5, 10, 25, 50, 100 and \SI{1000}{\kilo\bp}.
 
 The final outcome of a Hi-C experiment is then a (sparse) square matrix $M$, henceforth referred to as ``Hi-C matrix'', 
 which records the interaction count for all possible pairs of regions in the reference genome.

@@ -21,13 +21,16 @@ and not necessarily be founded in an unsuitability of the network setup itself.
 Retrospectively, it would have been better to test the \acrshort{dnn} in its original setup first and reproduce the results from Farr\'e et al. \cite{Farre2018a} 
 before moving on to different organisms with different cell lines and chromatin folding principles.
 
-Independent from the \acrshort{dnn}, the newly developed \acrlong{cgan} method, \emph{Hi-cGAN}, seems promising.
+Independent from the \acrshort{dnn}, the newly developed \acrlong{cgan} method, \emph{Hi-cGAN}, seemed promising.
 Especially the variant with \acrshort{cnn} embedding showed widely satisfying results for genomic distances up to about \SI{5}{\mega\bp}
-and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019} for data from human cell lines, 
-particularly with regard to predicting nested interacting regions.
-Interestingly, the approach worked not only for human cell lines like GM12878 and K562, where comparatively many training samples are available,
+and partially outperformed existing methods like \emph{HiC-Reg} \cite{Zhang2019} for data from human cell lines 
+and Farré et al. \cite{Farre2018a} for data from Drosophila Melanogaster.
+While \emph{HiC-Reg} was superior for distances in the range 200 to \SI{1000}{\kilo\bp}, \emph{Hi-cGAN} often performed better for regions close to the matrix diagonal
+and with regard to predicting nested interacting regions. Furthermore, it showed acceptable predictions for distances beyond \SI{1}{\mega\bp}, where \emph{HiC-Reg} has no data.
+Interestingly, \emph{Hi-cGAN} worked not only for human cell lines like GM12878 and K562, where comparatively many training samples are available,
 but also for Drosophila Melanogaster embryonic cells, where much fewer samples can be extracted from the relatively short genome.
-Here, \emph{Hi-cGAN} showed better results than the method from Farr\'e et al. \cite{Farre2018a}.
+Here, \emph{Hi-cGAN} showed better results with fewer training data compared to the method by Farr\'e et al. \cite{Farre2018a}.
+In this case, the results were superior across all available distances.
 
 However, there is still room for improvement -- for example, even the best predictions for human cell lines were not or not much better 
 than simply taking data from the training cell line as a ``prediction'' for the target cell line.
