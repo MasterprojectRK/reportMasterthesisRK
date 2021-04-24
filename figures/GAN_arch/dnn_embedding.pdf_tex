@@ -76,9 +76,9 @@
     \put(0.53208567,0.02291778){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w,w,1$)\end{tabular}}}}%
     \put(0.02516613,0.58484623){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}cf. \cref{sec:methods:basicSetup}\end{tabular}}}}%
     \put(0.02516613,0.02131815){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}feature embedding\end{tabular}}}}%
-    \put(0.8379983,0.64166947){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: windowsize}\end{tabular}}}}%
+    \put(0.8379983,0.64166947){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: window size}\end{tabular}}}}%
     \put(0.8379983,0.6097031){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$n$: no. of chromatin features}\end{tabular}}}}%
-    \put(0.8379983,0.57773664){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+    \put(0.8379983,0.57773664){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batch size}\end{tabular}}}}%
     \put(0.90522265,0.02063858){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}shape of a square grayscale image\end{tabular}}}}%
   \end{picture}%
 \endgroup%

@@ -153,12 +153,12 @@
     \put(0.66351346,0.01214227){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(?, $w/4,w/4,1$)\end{tabular}}}}%
     \put(0.19070494,1.21892799){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{$w\in\{128,256,...\}$}\end{tabular}}}}%
     \put(0.75474688,1.10337911){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{$w=64$}\end{tabular}}}}%
-    \put(0.47067279,1.41177197){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: windowsize\end{tabular}}}}%
+    \put(0.47067279,1.41177197){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: window size\end{tabular}}}}%
     \put(0.12470913,0.93930814){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+ batchNorm\end{tabular}}}}%
     \put(0.12470913,0.73369179){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+ batchNorm\end{tabular}}}}%
     \put(0.76039317,1.0409798){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}downsampling blocks:\end{tabular}}}}%
     \put(0.76039317,1.02196814){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}see \cref{fig:methods:GAN_arch:downsampling}\end{tabular}}}}%
-    \put(0.47067279,1.39085914){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$n$: no. of chrom. features\end{tabular}}}}%
-    \put(0.47067279,1.36994631){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}?: batchsize\end{tabular}}}}%
+    \put(0.47067279,1.39085914){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$n$: no. of chromatin features\end{tabular}}}}%
+    \put(0.47067279,1.36994631){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}?: batch size\end{tabular}}}}%
   \end{picture}%
 \endgroup%

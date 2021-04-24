@@ -106,7 +106,7 @@
     \put(0.02172972,1.13822134){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dense\end{tabular}}}}%
     \put(0.02172972,1.66798105){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}chrom. features\end{tabular}}}}%
     \put(0.02172972,0.02615384){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pred.\,submatrix\end{tabular}}}}%
-    \put(0.63195331,1.72240061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: windowsize\end{tabular}}}}%
+    \put(0.63195331,1.72240061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$w$: window size\end{tabular}}}}%
     \put(0.67482525,1.41503686){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
     \put(0.67482525,1.45049829){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider variant: kernel size $4k$}\end{tabular}}}}%
     \put(0.67482525,1.37912574){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{wider-longer variant: cf. \cref{fig:methods:longer_dnn}}\end{tabular}}}}%
@@ -114,7 +114,7 @@
     \put(0.02172972,1.47158523){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{strides $k$}\end{tabular}}}}%
     \put(0.67227691,0.0370505){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}upper triangular part\end{tabular}}}}%
     \put(0.67227691,0.00179805){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}of $(w,w)$-submatrix\end{tabular}}}}%
-    \put(0.63195331,1.69302361){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$k$: binsize relation matrix/features\end{tabular}}}}%
+    \put(0.63195331,1.69302361){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$k$: bin size relation features/matrix\end{tabular}}}}%
     \put(0.63195331,1.66364648){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$n$: no. of chromatin features\end{tabular}}}}%
     \put(0.63195331,1.63426948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}?: batch size\end{tabular}}}}%
     \put(0.67482525,1.48640954){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize{basic network \cite{Farre2018a}: $k=1$}\end{tabular}}}}%

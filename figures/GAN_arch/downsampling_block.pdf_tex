@@ -77,7 +77,7 @@
     \put(0.02554536,0.02131815){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha=0.2$\end{tabular}}}}%
     \put(0.87658292,0.45691568){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$x$: input image size}\end{tabular}}}}%
     \put(0.87658292,0.426546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$y$: no. of filters}\end{tabular}}}}%
-    \put(0.87658292,0.39298285){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+    \put(0.87658292,0.39298285){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batch size}\end{tabular}}}}%
     \put(0.02554536,0.2068701){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}optional\end{tabular}}}}%
     \put(0.1864277,0.45329023){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}kernel (4,4)\end{tabular}}}}%
     \put(0.1864277,0.39831188){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}strides (2,2)\end{tabular}}}}%

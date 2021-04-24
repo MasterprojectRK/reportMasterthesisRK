@@ -137,8 +137,8 @@
     \put(0.55315586,0.61041701){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{for convBlocks 1...8}\end{tabular}}}}%
     \put(0.01457025,0.24424513){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{kernel size 4}\end{tabular}}}}%
     \put(0.5338999,0.03901441){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}shape of a square grayscale image\end{tabular}}}}%
-    \put(0.55315586,1.3127891){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: windowsize}\end{tabular}}}}%
+    \put(0.55315586,1.3127891){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$w$: window size}\end{tabular}}}}%
     \put(0.55315586,1.2829915){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$n$: no. of chromatin features}\end{tabular}}}}%
-    \put(0.55315586,1.2531939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batchsize}\end{tabular}}}}%
+    \put(0.55315586,1.2531939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny{$?$: batch size}\end{tabular}}}}%
   \end{picture}%
 \endgroup%

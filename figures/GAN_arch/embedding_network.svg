@@ -34,7 +34,7 @@
      units="mm"
      inkscape:zoom="1.0760411"
      inkscape:cx="224.70086"
-     inkscape:cy="383.87969"
+     inkscape:cy="309.53309"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -1353,7 +1353,7 @@
          sodipodi:role="line"
          id="tspan4076"
          x="271.97366"
-         y="37.363953">\tiny{$w$: windowsize}</tspan></text><text
+         y="37.363953">\tiny{$w$: window size}</tspan></text><text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:14.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="271.97366"
@@ -1371,4 +1371,4 @@
          sodipodi:role="line"
          id="tspan4084"
          x="271.97366"
-         y="65.363953">\tiny{$?$: batchsize}</tspan></text></g></svg>
+         y="65.363953">\tiny{$?$: batch size}</tspan></text></g></svg>
