@@ -226,7 +226,7 @@ as already shown in \cref{eq:combined_loss_tad}.
 
 The idea behind the score-based approach is visualized in \cref{fig:improve:tad_score_loss_function}\,(E).
 Local minima, i.\,e. dents in the line plot of the score values, \cref{fig:improve:tad_score_loss_function}\,(F),
-often correspond with highly interacting regions in the matrix, since the mean of diamonds from \emph{inside} \acrshort{tad}s
+often correspond with boundaries of interacting regions in the matrix, since the mean of diamonds from \emph{inside} \acrshort{tad}s
 is normally significantly higher than the mean of diamonds \emph{outside} \acrshort{tad}s.
 Indeed, some \acrshort{tad} calling algorithms like \emph{TopDom} \cite{Shin2015} and \emph{hicFindTADs} \cite[W12f.]{Wolff2018} 
 do compute so-called insulation scores in a similar way as shown above -- usually for more than one diamond size -- 
@@ -276,7 +276,7 @@ In the following sections, such an approach will be explored, henceforth referre
 \subsubsection{General setup for Hi-cGAN}
 Although numerous variants exist, conditional \acrshort{gan}s generally comprise at least two neural networks -- 
 a generator $G(\bm{x},\bm{z})$, which tries to generate realistic outputs from its inputs $\bm{x}$ and random noise $\bm{z}$, 
-and a discriminator $D(\bm{x},\bm{y})$, which tries to discern true inputs $\bm{y}$, e.\,g. experimentally derived Hi-C matrices, 
+and a discriminator $D$, which tries to discern true inputs $\bm{y}$, e.\,g. experimentally derived Hi-C matrices, 
 from generated inputs $G(\bm{x},\bm{z})$.
 The optimal weights for the networks can then be found by searching an equilibrium in a two-player minimax game:
 The generator tries to fool the discriminator, while the discriminator tries to detect the generator's fakes, 
@@ -340,7 +340,7 @@ transforming them into value range [0...1].
 Finally, individual scalar factors $\lambda$ were used to balance the influence of the individual loss portions on the joint loss function, cf. \cref{sec:methods:cGAN_initial}.
 
 As already indicated in \cref{fig:improve:cGAN-approach}, the discriminator was trained as proposed by Isola et al.,
-meaning that the binary cross entropy loss was optimized with respect to true- and fake samples, \cref{eq:improve:disc_loss_total} .
+meaning that the binary cross entropy loss was optimized with respect to true- and fake samples, \cref{eq:improve:disc_loss_total}.
 \begin{align}
  L_D(\mathbf{x,y,z}) = \lambda_D \cdot \left[ L_d(\mathbf{1}, D(\mathbf{x,y})) + L_d(\mathbf{0}, D(\mathbf{x},G(\mathbf{x, z})) \right] \label{eq:improve:disc_loss_total}
 \end{align}
@@ -366,7 +366,7 @@ is that they can achieve good performance even with comparatively few training s
 \subsubsection{Using a DNN for feature embedding} \label{sec:improve:DNN_embedding}
 The embedding network required for processing the conditional inputs
 has one obvious mandatory property: it must be capable of embedding the input of shape $(3w,n)$ 
-into a 2D grayscale image of shape $(w,w,1)$ which can then be processed by a \emph{pix2pix}-like network.
+into a grayscale image of shape $(w,w,1)$, which can then be processed by a \emph{pix2pix}-like network.
 Naturally, this can be achieved by using the dense neural network explored above in \cref{sec:improve:DNNapproach},
 simply reshaping its ``upper triangular'' output vector back into a symmetric ``image''-tensor of the required shape.
 
