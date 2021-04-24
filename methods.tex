@@ -29,7 +29,7 @@ both replicates.
 Next, matrices at \SI{5}{\kilo\bp} bin size were extracted and converted to cooler format using \texttt{hic2cool}
 and subsequently coarsened to resolutions of 10, 25 and \SI{50}{\kilo\bp} using \texttt{cooler coarsen},
 see \cref{list:methods:hic2cool} (p.~\pageref{list:methods:hic2cool}).
-Contrary to the work from Farr\'e et al. \cite{Farre2018a}, which is using ICE- plus distance-based normalization,
+Contrary to the work by Farr\'e et al. \cite{Farre2018a}, which is using ICE- plus distance-based normalization,
 and many others in the field which are using ICE- or KR-normalization, 
 these matrices have not been normalized for the thesis at hand
 because no benefit of doing so was found during the study project \cite{Krauth2020}.
@@ -134,7 +134,7 @@ All tracks were plotted with an original resolution of 200\,dpi and a diagram wi
 For the interaction counts in the Hi-C matrix plots, ``log1p'' transformation was applied and the true matrices were inverted,
 i.\,e. reflected at the diagonal. Within this thesis, true (target) matrices are thus always shown at the bottom, while predicted matrices are always shown at the top
 of each matrix plot (where applicable).
-Except for comparisons with the approach from Farr\'e et al., see \cref{sec:methods:comparison},
+Except for comparisons with the approach by Farr\'e et al., see \cref{sec:methods:comparison},
 no minimum or maximum values were set for plotting, but note that predicted matrices were scaled to value range 0...1000 
 before they were stored, cf. \cref{sec:methods:sample_gen}.
 
@@ -638,7 +638,7 @@ In the latter case, again the weights of the \acrshort{dnn} were replaced by the
 The results of this thesis were compared to the ones from \emph{HiC-Reg} by Zhang et al. \cite{Zhang2019}, 
 who used pretty much the same Hi-C and chromatin feature data
 as described above in \cref{sec:methods:input_data}, 
-and to results from Farr\'e et al. \cite{Farre2018a}, who used data from Drosophila Melanogaster embryonic cells.
+and to results by Farr\'e et al. \cite{Farre2018a}, who used data from Drosophila Melanogaster embryonic cells.
 
 \textbf{Comparison with HiC-Reg}\\
 For comparison with \emph{HiC-Reg}, stored predictions for cell line K562, chromosomes 14 and 17 were downloaded from Zenodo \cite{ShiluZhang2019,ShiluZhang2019a}.
@@ -699,7 +699,7 @@ Correctly predicted zero-values strongly increase the quality of the output matr
 and should thus be included in the correlation computations.
 Pearson correlations for the predictions in \cref{sec:results:comparison} were thus computed for full chromosomes, including zero-values.
 
-\textbf{Comparison with dense network from Farr\'e et al.}\\
+\textbf{Comparison with dense network by Farr\'e et al.}\\
 Unfortunately, Farr\'e et al. have not published any data from which (predicted) Hi-C matrices and Pearson correlations could have been reconstructed,
 but Pau Farr\'e provided some of the non-public source code used for the paper \cite{Farre2018a} following private communication.
 After some minor bug fixes and adaptions to make the code work with python version 3, it was usable to recompute the published results.
