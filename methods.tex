@@ -242,10 +242,9 @@ Conveniently, cooler also supports storing only the upper triangular part of sym
 Generally, training samples were drawn from chromosomes 1, 2, 4, 7, 9, 11, 13, 14, 16, 17, 18, 20 and 22 of cell line GM12878, 
 validation samples from chromosomes 6, 8, 12 and 15 of cell line GM12878 and test samples from chromosomes 3, 5, 10, 19 and 21 of cell line K562.
 This approximately implements a 60:20:20 train:validation:test split, see \cref{tab:methods:samples} for details.
-Reversing training/validation and test cell lines, which differ strongly in sequencing depth within the Hi-C experiments, 
-was tested briefly for the cGAN approach and seemed to work, see \cref{sec:appendix:reverseTrainTest}.
-For comparability reasons, two cGANs were additionally trained on single chromosomes 14 and 17 of cell line GM12878,  cf. \cref{sec:methods:comparison}.
-Also for comparability reasons, a \acrshort{dnn} and a cGAN were trained and tested on data from \emph{Drosophila Melanogaster} embryonic cells, again refer to \cref{sec:methods:comparison}
+Reversing training/validation and test cell lines, which differ strongly in sequencing depth within the \mbox{Hi-C} experiments, 
+was not tested for the \acrshort{dnn}, but briefly for the \acrshort{cgan} approach and seemed to work, see \cref{sec:appendix:reverseTrainTest}.
+For comparability reasons, a \acrshort{dnn} and a \acrshort{cgan} were also trained and tested on data from \emph{Drosophila Melanogaster} embryonic cells, refer to \cref{sec:methods:comparison}
 for details.
 
 Note that window size $w=80$ is likely not suitable for resolutions beyond \SI{50}{\kilo\bp}, because the number of training samples becomes too small
@@ -481,6 +480,8 @@ but their sizes also need to be powers of two.
 This requirement is due to the connected up- and downsampling operations in the generator, 
 which essentially are 2D-convolutions and transposed 2D-convolutions with strides two, see below.
 Within the thesis, window sizes of $w=\{64,128,256\}$ were used, see \cref{sec:results:cgan}.
+Training, validation and test chromosomes were generally the same as for the \acrshort{dnn} approach.
+For comparability with \emph{HiC-Reg}, two \acrshort{cgan}s were additionally trained on single chromosomes 14 and 17 of cell line GM12878,  cf. \cref{sec:methods:comparison}.
 
 \subsubsection{Modified pix2pix network}\label{sec:methods:cGAN_initial}
 Several implementations of the original \emph{pix2pix} network \cite{Isola2017} are publicly available, usually for the original image size of $256\times256$.
