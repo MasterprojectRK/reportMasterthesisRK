@@ -85,19 +85,19 @@ comprising three 1D convolutional filter layers with 16, 8 and 4 filters, respec
 1D-convolution in \cref{fig:improve:priciple_basic_dnn}, lower left, cf. \cref{sec:methods:variants}.
 This is still a low number of layers and filters compared to networks that operate directly on DNA sequence \cite{Fudenberg2020}, 
 but the choice seemed justified in order to avoid overfitting to the low-dimensional input, cf. \cite[fig.~S9]{Martens2020}. 
-The results are shown in \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:longerDNN_pearson} and \ref{fig:results:longer_matrices}.
+The results are shown in \cref{sec:results:wider-longer-etc}, especially \cref{fig:results:longerDNN_pearson,fig:results:longer_matrices}.
 
 Next, a ``wider'' network was created, featuring the same setup as the basic network
 except the width of the filter kernel, which was set to 4 instead of 1.
 The idea here was to allow the network to capture correlations between Hi-C interaction counts
 and chromatin features which span more than one bin. 
 The actual number has been kept low, since at bin size $b=\SI{25}{\kilo\bp}$, 4~bins already correspond to \SI{100}{\kilo\bp}.
-However, the results were not as expected, cf. \cref{sec:results:wider-longer-etc}, especially figures \ref{fig:results:widerDNN_pearson} and \ref{fig:results:wider_matrices}.
+However, the results were not as expected, cf. \cref{sec:results:wider-longer-etc}, especially \cref{fig:results:widerDNN_pearson,fig:results:wider_matrices}.
 Of course, increasing filter width and using more filters can also be combined,
 hopefully allowing the  ``wider-longer'' network to capture both correlations
 spanning more than one bin and more than one chromatin feature.
 The results for this combined approach are shown in \cref{sec:results:wider-longer-etc}, 
-especially figures \ref{fig:results:wider-longerDNN_pearson} and \ref{fig:results:wider-longer_matrices},
+especially \cref{fig:results:wider-longerDNN_pearson,fig:results:wider-longer_matrices},
 and were again not convincing.
 
 Another approach to potentially improve the predictions that goes somewhat into
@@ -112,7 +112,7 @@ This yields an input data size of $(k \cdot 3w, n)$, which is then again compres
 by a 1D convolutional filter with kernel size $(k, n)$ and strides $k$. 
 To match given matrix bin sizes, $k=5$ was chosen for the thesis at hand, 
 and the results for bin sizes $b_{mat}=\SI{25}{\kilo\bp}$, $b_{feat}=\SI{5}{\kilo\bp}$ are shown in \cref{sec:results:wider-longer-etc},
-especially figures \ref{fig:results:25k5DNN_pearson} and \ref{fig:results:25k5_matrices}.
+especially \cref{fig:results:25k5DNN_pearson,fig:results:25k5_matrices}.
 
 Since hardly any improvements were recorded for the modifications of the convolutional network part described above, 
 see \cref{sec:results:wider-longer-etc}, advanced loss functions were investigated next.
@@ -172,7 +172,7 @@ Unfortunately, there is no straightforward way for determining the optimal param
 and an exhaustive parameter search was infeasible due to the computation time requirements of about 4:30\,minutes per epoch.
 Therefore, only few runs were conducted with different sets of parameters,
 and the results for $\lambda_\mathit{MSE} = 0.8999, \lambda_\mathit{VGG}=0.1, \lambda_\mathit{TV}=0.0001$,
-which should not be considered optimal, are shown in \cref{sec:results:loss_functions}, especially figures \ref{fig:results:combilossDNN_pearson} and \ref{fig:results:combiloss_matrices}.
+which should not be considered optimal, are shown in \cref{sec:results:loss_functions}, especially \cref{fig:results:combilossDNN_pearson,fig:results:combiloss_matrices}.
 
 \subsubsection{Using a TAD-based loss function} \label{sec:improve:TAD_loss}
 Looking at the results obtained from the networks discussed in the previous sections, see e.\,g. \cref{fig:results:basic500}, 
