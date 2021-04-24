@@ -396,7 +396,7 @@ The ``longer'' variant had \SI{9142665}{} trainable weights and the ``wider-long
 For the variant with generalized binning, features were binned at $b_\textrm{feat} = \SI{5}{\kilo\bp}$ while keeping the matrix bin size $b_\textrm{mat} = \SI{25}{\kilo\bp}$,
 so the factor for the relation between the two bin sizes was $k=25/5=5$.
 This yields input feature arrays of size $(3w\cdot k, n) = (3\cdot80\cdot5 , 14) = (1200, 14)$.
-Replacing the first convolutional layer of the basic network by a 1D-convolutional filter with kernel size $k=5$ and strides $k=5$ without padding,
+Replacing the first convolutional layer of the basic network by a 1D-convolutional filter with kernel size $5$ and strides $5$ without padding,
 this input was again compressed to a $(3w, 1) = (240, 1)$-shaped tensor and fed into the flatten layer, cf~\cref{fig:methods:basic_dnn}. 
 The rest of the network remained the same so that the number of trainable parameters increased only slightly to \SI{7486492}{}.
 \begin{figure}[p]
@@ -411,7 +411,7 @@ The rest of the network remained the same so that the number of trainable parame
 For computing the combined \acrshort{mse}, perception- and \acrshort{tv}-loss,
 input features were first passed through the network as normal,
 and mean squared error was computed between the predicted ``upper triangular'' vectors and the real vectors.
-Next, both the output- and target vectors were converted to symmetric grayscale images by embedding them into 
+Next, both the output- and target vectors were converted to symmetric grayscale images by reshaping them into 
 $(w, w, 1)$-shaped tensors, where $w$ is again the window size.
 
 For a grayscale pixel-image $\mathbf{y}$, total variation can be defined as the sum of the absolute differences for neighboring pixel-values, \cref{eq:methods:tv} \cite{Rudin1992, wikiTV2021}.
@@ -436,7 +436,7 @@ The optimization problem for the modified network was then formulated by means o
 \end{equation}
 where $N$ is again the number of samples. 
 
-Weight initialization for network $G$ and minibatching was done as described in \cref{sec:methods:basicSetup}.
+Weight initialization for network $G$ and minibatching were done as described in \cref{sec:methods:basicSetup}.
 The \emph{VGG-16} network and the corresponding weights were taken from the keras \cite{Chollet2015} implementation pre-trained on \emph{ImageNet} \cite{deng2009}.
 As a side effect, the usage of \emph{VGG-16} imposes the restriction $w \geq 32$ on the window size $w$, which is not problematic, since again $w=80$ was chosen for all experiments.
 
@@ -655,7 +655,7 @@ The missing pairs were found to be distributed all across the chromosome and all
 For the conversion to cooler format, the missing values were assumed to be zero.
 Next, the cooler matrices were coarsened to bin size \SI{25}{\kilo\bp} to allow comparisons with the \acrshort{cgan}- and \acrshort{dnn} results, using \texttt{cooler} \texttt{coarsen}.
 
-For the comparison between \emph{HiC-Reg} and Hi-\acrshort{cgan}, two additional \acrshort{cgan} models with \acrshort{cnn} embedding were trained on chromosome 14 and 17, respectively,
+For the comparison between \emph{HiC-Reg} and \emph{Hi-\acrshort{cgan}}, two additional \acrshort{cgan} models with \acrshort{cnn} embedding were trained on chromosome 14 and 17, respectively,
 using (arbitrarily selected) chromosome 10 for validation. 
 Due to the small number of training samples in this setting, window size was set to $w=64$ and batch size to $bs=2$.
 The rest of the training process remained the same, cf. \cref{sec:methods:cGAN_initial}.
@@ -772,7 +772,7 @@ The bigwig files were then used as inputs for the \acrshort{dnn} and \acrshort{c
 
 For the comparisons, the \acrshort{dnn} was used with window size $w=80$,
 but a larger batch size of 100.
-Additionally, sample flipping was used as described in the paper \cite{Farre2018a} and implemented in the provided code.
+Additionally, sample flipping was used as described in \cite{Farre2018a} and implemented in the provided code.
 Furthermore, the \acrshort{sgd} optimizer used so far was replaced by the RMS\-prop optimizer with standard parameters, namely a learning rate of 0.001;
 training matrices were ICE-normalized and predicted matrices were not scaled.
 All changes were made following a comparison with the source code supposedly used for the paper \cite{Farre2018a}, see above.
