@@ -54,7 +54,7 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pearson_chr3R_comparison_DNN-Hi-cGAN-Farre.pdf}}%
-    \put(0.27712992,0.53586969){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Farre et al. \cite{Farre2018a}, 70ep / AUC: 0.188\end{tabular}}}}%
+    \put(0.27712992,0.53586969){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Farré et al. \cite{Farre2018a}, 70ep / AUC: 0.188\end{tabular}}}}%
     \put(0.07300268,0.0295465){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.0\end{tabular}}}}%
     \put(0.15801868,0.0295465){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.1\end{tabular}}}}%
     \put(0.25429353,0.0295465){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
@@ -77,7 +77,7 @@
     \put(0.27712992,0.59915535){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN, 50ep / AUC: 0.250\end{tabular}}}}%
     \put(0.27712992,0.5675126){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hi-cGAN, 100ep / AUC: 0.645\end{tabular}}}}%
     \put(0.87094648,0.43971115){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Note:\end{tabular}}}}%
-    \put(0.87094648,0.39421188){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hi-cGAN -- windowsize 64 (0.64\,Mbp)\end{tabular}}}}%
-    \put(0.87094648,0.34871259){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN, Farre et al. -- windowsize 80 (0.80\,Mbp)\end{tabular}}}}%
+    \put(0.87094648,0.39421188){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hi-cGAN -- window size 64 (0.64\,Mbp)\end{tabular}}}}%
+    \put(0.87094648,0.34871259){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DNN, Farré et al. -- window size 80 (0.80\,Mbp)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

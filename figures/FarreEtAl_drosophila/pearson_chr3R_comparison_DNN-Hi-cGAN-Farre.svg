@@ -17,7 +17,7 @@
    inkscape:version="1.0.2 (1.0.2+r75+1)"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6"><clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath22"><path
@@ -108,9 +108,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="2.6301672"
-     inkscape:cx="402.07296"
-     inkscape:cy="130.5628"
+     inkscape:zoom="5.2603344"
+     inkscape:cx="168.96602"
+     inkscape:cy="89.167611"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -343,7 +343,7 @@
          id="tspan356"
          style="stroke-width:0.766222"
          x="126.48145"
-         y="73.628166">Farre et al. \cite{Farre2018a}, 70ep / AUC: 0.188</tspan></text><text
+         y="73.628166">Farré et al. \cite{Farre2018a}, 70ep / AUC: 0.188</tspan></text><text
        style="font-variant:normal;font-weight:normal;font-size:7.66222px;font-family:'DejaVu Sans';-inkscape-font-specification:DejaVuSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.766222"
        id="text32"
        x="53.96003"
@@ -551,7 +551,7 @@
          sodipodi:role="line"
          id="tspan1009"
          x="337.44998"
-         y="123.95573">Hi-cGAN -- windowsize 64 (0.64\,Mbp)</tspan></text><text
+         y="123.95573">Hi-cGAN -- window size 64 (0.64\,Mbp)</tspan></text><text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:14.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="337.44998"
@@ -560,4 +560,4 @@
          sodipodi:role="line"
          id="tspan1013"
          x="337.44998"
-         y="140.12051">DNN, Farre et al. -- windowsize 80 (0.80\,Mbp)</tspan></text></g></svg>
+         y="140.12051">DNN, Farré et al. -- window size 80 (0.80\,Mbp)</tspan></text></g></svg>
